@@ -16,12 +16,24 @@ setup(
     zip_safe=True,
     python_requires=">=3.7",
     install_requires=[
-        "numpy==1.17.3",
-        "grpcio==1.24.3",
-        "xgboost==0.90",
-        "protobuf==3.10.0"
+        "numpy~=1.17.3",
+        "grpcio~=1.24.3",
+        "xgboost~=0.90",
+        "protobuf~=3.10.0",
     ],
-    scripts=["bin/run.py"],
+    extras_require={
+        'dev': [
+            'coverage',
+            'flake8',
+            'flake8-mutable',
+            'mypy',
+        ]
+    },
+    entry_points={
+        "console_scripts": [
+            "pythie-serving=pythie_serving.run:run",
+        ]
+    },
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3 :: Only",
