@@ -1,11 +1,12 @@
 from concurrent import futures
-import os
 import logging
 
 import grpc
 
+from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 from .tensorflow_proto.tensorflow_serving.apis import prediction_service_pb2_grpc
 from .xgboost_wrapper import XGBoostPredictionServiceServicer
+from .exceptions import PythieServingException
 
 
 def servicer_decorator(_logger, servicer):
@@ -24,24 +25,22 @@ def servicer_decorator(_logger, servicer):
     return servicer
 
 
-def serve(*, models_root_path: str, model_type: str, worker_count: int, port: int, _logger: logging.Logger):
-    if model_type == 'xgboost':
+def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, worker_count: int,
+          port: int, _logger: logging.Logger):
+    model_platforms = set(c.model_platform for c in model_server_config.model_config_list.config)
+    if len(model_platforms) > 1:
+        raise PythieServingException('Only one model_plateform can be served at a time')
+
+    model_platform = model_platforms.pop()
+    if model_platform == 'xgboost':
         servicer_cls = XGBoostPredictionServiceServicer
     else:
-        raise ValueError(f'Unsupported model_type {model_type}')
+        raise ValueError(f'Unsupported model_platform {model_platform}')
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=worker_count))
     server.add_insecure_port(f'[::]:{port}')
 
-    model_paths = []
-    for dirpath, _, filenames in os.walk(models_root_path):
-        for filename in filenames:
-            model_name, extension = os.path.splitext(filename)
-            if extension == '.model':
-                model_paths.append((model_name, os.path.join(dirpath, filename)))
-        break
-
-    servicer = servicer_decorator(_logger, servicer_cls(logger=_logger, model_paths=model_paths))
+    servicer = servicer_decorator(_logger, servicer_cls(logger=_logger, model_server_config=model_server_config))
     prediction_service_pb2_grpc.add_PredictionServiceServicer_to_server(servicer, server)
 
     server.start()
