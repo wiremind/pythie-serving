@@ -16,10 +16,10 @@ setup(
     zip_safe=True,
     python_requires=">=3.7",
     install_requires=[
-        "numpy==1.17.3",
-        "grpcio==1.24.3",
-        "xgboost==0.90",
-        "protobuf==3.10.0"
+        "numpy~=1.17.3",
+        "grpcio~=1.24.3",
+        "xgboost~=0.90",
+        "protobuf~=3.10.0"
     ],
     scripts=["bin/run.py"],
     classifiers=[
