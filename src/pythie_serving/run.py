@@ -1,15 +1,16 @@
-import sys
 import logging
 import os
+import sys
 from argparse import ArgumentParser
 from logging.config import dictConfig
 
 from google.protobuf import text_format
-
 from pythie_serving import serve
-from pythie_serving.tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
+from pythie_serving.tensorflow_proto.tensorflow_serving.config import \
+    model_server_config_pb2
 
-if __name__ == '__main__':
+
+def run():
     model_choice_set = {'xgboost'}
     model_choice_str = ','.join(model_choice_set)
 
@@ -52,3 +53,6 @@ if __name__ == '__main__':
         text_format.Parse(opened_config_file.read(), model_server_config)
 
     serve(model_server_config=model_server_config, worker_count=ns.worker_count, port=ns.port, _logger=logger)
+
+if __name__ == '__main__':
+    run()
