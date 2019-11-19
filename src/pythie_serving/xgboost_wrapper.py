@@ -32,12 +32,16 @@ class XGBoostPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSer
         for feature_name in features_names:
             if feature_name not in request.inputs:
                 raise PythieServingException(f'{feature_name} not set in the predict request')
-            zip_components.append(make_ndarray_from_tensor(request.inputs[feature_name]))
+            nd_array = make_ndarray_from_tensor(request.inputs[feature_name])
+            if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
+                PythieServingException('All input vectors should be 1D tensor')
+            zip_components.append(nd_array.reshape(nd_array.size))
 
         if len(set(len(z) for z in zip_components)) != 1:
             raise PythieServingException('All input vectors should have the same length')
 
         outputs = model_dict['model'].predict(DMatrix(list(zip(*zip_components)), feature_names=features_names))
+        outputs = outputs.reshape((outputs.size, 1))  # return 1D tensor
 
         tf_response = predict_pb2.PredictResponse(
             model_spec=request.model_spec, outputs={'predictions': make_tensor_proto(outputs)}

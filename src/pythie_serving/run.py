@@ -54,5 +54,6 @@ def run():
 
     serve(model_server_config=model_server_config, worker_count=ns.worker_count, port=ns.port, _logger=logger)
 
+
 if __name__ == '__main__':
     run()
