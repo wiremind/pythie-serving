@@ -14,7 +14,7 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=True,
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     install_requires=[
         "numpy~=1.17.3",
         "grpcio~=1.24.3",
