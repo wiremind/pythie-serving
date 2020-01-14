@@ -1,11 +1,12 @@
 from concurrent import futures
 import logging
+import time
 
 import grpc
 
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
-from .tensorflow_proto.tensorflow_serving.apis import prediction_service_pb2_grpc
-from .xgboost_wrapper import XGBoostPredictionServiceServicer
+from .tensorflow_proto.tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
+from .utils import make_tensor_proto
 from .exceptions import PythieServingException
 
 
@@ -13,12 +14,22 @@ def servicer_decorator(_logger, servicer):
     for fn_name in ['Predict']:
         def fn_decorator(fn):
             def wrapper(request, context):
-                _logger.info(f'Serving model {request.model_spec.name}/{request.model_spec.signature_name}')
+                start = time.time()
                 try:
-                    return fn(request, context)
+                    pred = fn(request, context)
+                    predict_response = predict_pb2.PredictResponse(
+                        model_spec=request.model_spec, outputs={'predictions': make_tensor_proto(pred)}
+                    )
                 except Exception as e:
-                    _logger.error(f'Failed to serve {request} because: {e}')
+                    _logger.error(f'Failed to serve because: {e}')
                     raise
+                else:
+                    duration = time.time() - start
+                    _logger.info(
+                        f'Served model {request.model_spec.name}/{request.model_spec.signature_name}: '
+                        f'{len(pred)} predictions in {duration:.2f} seconds ({len(pred) / duration:.2f} pred/sec) '
+                    )
+                    return predict_response
             return wrapper
 
         setattr(servicer, fn_name, fn_decorator(getattr(servicer, fn_name)))
@@ -32,8 +43,13 @@ def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, wor
         raise PythieServingException('Only one model_plateform can be served at a time')
 
     model_platform = model_platforms.pop()
+    # import in code to avoid loading too many python libraries in memory
     if model_platform == 'xgboost':
+        from .xgboost_wrapper import XGBoostPredictionServiceServicer
         servicer_cls = XGBoostPredictionServiceServicer
+    elif model_platform == 'lightgbm':
+        from .lightgbm_wrapper import LightGBMPredictionServiceServicer
+        servicer_cls = LightGBMPredictionServiceServicer
     else:
         raise ValueError(f'Unsupported model_platform {model_platform}')
 
