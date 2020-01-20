@@ -18,8 +18,9 @@ setup(
     install_requires=[
         "numpy~=1.17.3",
         "grpcio~=1.24.3",
-        "xgboost~=0.90",
         "protobuf~=3.10.0",
+        "xgboost~=0.90",
+        "lightgbm~=2.3.1"
     ],
     extras_require={
         'dev': [
@@ -27,6 +28,7 @@ setup(
             'flake8',
             'flake8-mutable',
             'mypy',
+            'pip-tools'
         ]
     },
     entry_points={
