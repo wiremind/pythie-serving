@@ -6,7 +6,7 @@ from .tensorflow_proto.tensorflow.core.framework import tensor_pb2, tensor_shape
 
 _types_map = (
     (np.int32, types_pb2.DT_INT32), (np.int64, types_pb2.DT_INT64), (np.float32, types_pb2.DT_FLOAT),
-    (np.float64, types_pb2.DT_DOUBLE), (np.bool, types_pb2.DT_BOOL)
+    (np.float64, types_pb2.DT_DOUBLE), (np.bool, types_pb2.DT_BOOL), (np.bytes_, types_pb2.DT_STRING)
 )
 
 _TF_TYPE_MAP = {tf_type: np_type for np_type, tf_type in _types_map}
@@ -53,10 +53,21 @@ def make_tensor_proto(values: List[Any]):
     dims = [tensor_shape_pb2.TensorShapeProto.Dim(size=size) for size in np_array.shape]
     tensor_shape_proto = tensor_shape_pb2.TensorShapeProto(dim=dims)
 
+    tensor_kwargs = {}
+    if dtype == types_pb2.DT_STRING:
+        string_val = []
+        for vector in np_array:
+            for s in vector:
+                if not isinstance(s, bytes):
+                    raise TypeError(f'{values} expect a list of bytes when working with DT_STRING types')
+            string_val.append(s)
+        tensor_kwargs['string_val'] = string_val
+    else:
+        tensor_kwargs['tensor_content'] = np_array.tobytes()
     return tensor_pb2.TensorProto(
         dtype=dtype,
         tensor_shape=tensor_shape_proto,
-        tensor_content=np_array.tobytes()
+        **tensor_kwargs
     )
 
 
