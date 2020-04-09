@@ -16,11 +16,11 @@ setup(
     zip_safe=True,
     python_requires=">=3.6",
     install_requires=[
-        "numpy~=1.17.3",
-        "grpcio~=1.24.3",
-        "protobuf~=3.10.0",
+        "numpy~=1.17",
+        "grpcio~=1.24",
+        "protobuf~=3.10",
         "xgboost~=0.90",
-        "lightgbm~=2.3.1"
+        "lightgbm~=2.3"
     ],
     extras_require={
         'dev': [
