@@ -43,7 +43,7 @@ class XGBoostPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSer
         if len(set(len(l) for l in feature_rows)) != 1:
             raise PythieServingException('All input vectors should have the same length')
 
-        model = model_dict['model']
+        model = model_dict['model'].copy()
         d_matrix = DMatrix(np.concatenate(feature_rows, axis=1), feature_names=features_names)
         outputs = model.predict(d_matrix, ntree_limit=model.best_ntree_limit)
         outputs = outputs.reshape((outputs.size, 1))  # return 1D tensor
