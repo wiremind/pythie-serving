@@ -45,13 +45,15 @@ def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, wor
     model_platform = model_platforms.pop()
     # import in code to avoid loading too many python libraries in memory
     if model_platform == 'xgboost':
+        if worker_count > 1:
+            raise ValueError(f'Model platform {model_platform} is not thread safe')
         from .xgboost_wrapper import XGBoostPredictionServiceServicer
         servicer_cls = XGBoostPredictionServiceServicer
     elif model_platform == 'lightgbm':
         from .lightgbm_wrapper import LightGBMPredictionServiceServicer
         servicer_cls = LightGBMPredictionServiceServicer
     else:
-        raise ValueError(f'Unsupported model_platform {model_platform}')
+        raise ValueError(f'Unsupported model platform {model_platform}')
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=worker_count))
     server.add_insecure_port(f'[::]:{port}')
