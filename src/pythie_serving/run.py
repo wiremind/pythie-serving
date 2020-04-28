@@ -6,19 +6,20 @@ from logging.config import dictConfig
 
 from google.protobuf import text_format
 from pythie_serving import serve
-from pythie_serving.tensorflow_proto.tensorflow_serving.config import \
-    model_server_config_pb2
+from pythie_serving.tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 
 
 def run():
-    model_choice_set = {'xgboost'}
+    model_choice_set = {'xgboost', 'lightgbm'}
     model_choice_str = ','.join(model_choice_set)
 
     parser = ArgumentParser(description=f'A GRPC server to serve different kind of model amongst: {model_choice_str}')
     parser.add_argument('model_config_file_path', type=str,
                         help='Path to a model config file of the format '
                              'https://www.tensorflow.org/tfx/serving/serving_config#model_server_configuration')
-    parser.add_argument('--worker-count', default=10, type=int, help='Number of concurrent threads for the GRPC server')
+    parser.add_argument('--worker-count', default=1, type=int,
+                        help='Number of concurrent threads for the GRPC server. '
+                             'Make sure the chosen model_platform is thread safe before increasing this number')
     parser.add_argument('--port', default=9090, type=int, help='Port number to listen to')
 
     dictConfig({
