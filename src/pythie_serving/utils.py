@@ -6,7 +6,7 @@ from .tensorflow_proto.tensorflow.core.framework import tensor_pb2, tensor_shape
 
 _types_map = (
     (np.int32, types_pb2.DT_INT32), (np.int64, types_pb2.DT_INT64), (np.float32, types_pb2.DT_FLOAT),
-    (np.float64, types_pb2.DT_DOUBLE), (np.bool, types_pb2.DT_BOOL), (np.bytes_, types_pb2.DT_STRING)
+    (np.float64, types_pb2.DT_DOUBLE), (np.bool_, types_pb2.DT_BOOL), (np.bytes_, types_pb2.DT_STRING)
 )
 
 _TF_TYPE_MAP = {tf_type: np_type for np_type, tf_type in _types_map}
