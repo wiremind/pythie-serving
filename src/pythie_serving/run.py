@@ -9,26 +9,6 @@ from pythie_serving import serve
 from pythie_serving.tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 
 
-class LgbEnsemble:
-    """
-    Average LightGBM models
-    """
-    def __init__(self, lgb_models):
-        """
-        :param lgb_models: list of LightGBM boosters
-        """
-        self.sub_models = lgb_models
-        self.feature_names = lgb_models[0].feature_name()
-
-    def predict(self, X):
-        reg = self.sub_models[0]
-        preds = reg.predict(X, num_iteration=reg.best_iteration)
-        for reg in self.sub_models[1:]:
-            preds += reg.predict(X, num_iteration=reg.best_iteration)
-        preds /= len(self.sub_models)
-        return preds
-
-
 def run():
     model_choice_set = {'xgboost', 'lightgbm'}
     model_choice_str = ','.join(model_choice_set)
