@@ -12,12 +12,23 @@ from .exceptions import PythieServingException
 class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionServiceServicer):
 
     def __init__(self, *, logger: logging.Logger, model_server_config: model_server_config_pb2.ModelServerConfig):
+        from lightgbm import Booster
+
         self.logger = logger
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
             with open(model_config.base_path, 'rb') as opened_model:
                 model = pickle.load(opened_model)
-                self.model_map[model_config.name] = {'model': model, 'feature_names': model.feature_names}
+
+                if isinstance(model, Booster):
+                    feature_names = model.feature_name()
+                    best_iteration = model.best_iteration
+                else:
+                    feature_names = model.feature_names
+                    best_iteration = getattr(model, 'best_iteration', None)
+
+                self.model_map[model_config.name] = {'model': model, 'feature_names': feature_names,
+                                                     'best_iteration': best_iteration}
 
     def Predict(self, request: predict_pb2.PredictRequest, context: grpc.RpcContext):
         model_name = request.model_spec.name
@@ -44,4 +55,7 @@ class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSe
                 samples[sample_index].append(value[0])
 
         model = model_dict['model']
-        return model.predict(samples)
+        kwargs = {}
+        if model_dict['best_iteration']:
+            kwargs['best_iteration'] = model_dict['best_iteration']
+        return model.predict(samples, **kwargs)
