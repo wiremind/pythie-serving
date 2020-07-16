@@ -15,8 +15,8 @@ https://github.com/tensorflow/serving/tree/master/tensorflow_serving/apis
 
 To do this,
 
-run generate_pbs.sh (you should have an already created pew virtualenv using python3.7 called 'grpc-build'),
-this will generate a working python package in ./tensorflow_proto
+run "sh generate_pbs.sh X.Y.Z" (you should have an already created pew virtualenv using python3.7 called 'grpc-build'),
+this will generate a working python package in ./tensorflow_proto from the tag version X.Y.Z of tensorflow repo
 you can then copy/paste this package inside src/pythie-serving/ and import it as you need
 
 ## How to run

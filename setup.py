@@ -17,8 +17,8 @@ setup(
     python_requires=">=3.6",
     install_requires=[
         "numpy~=1.17",
-        "grpcio~=1.24",
-        "protobuf~=3.10",
+        "grpcio~=1.30",
+        "protobuf~=3.12",
         "xgboost~=0.90",
         "lightgbm~=2.3"
     ],

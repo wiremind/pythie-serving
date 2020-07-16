@@ -4,14 +4,15 @@
 #
 #    pip-compile --no-index setup.py
 #
-grpcio==1.28.1
-joblib==0.14.1            # via scikit-learn
+grpcio==1.30.0
+joblib==0.16.0            # via scikit-learn
 lightgbm==2.3.1
-numpy==1.18.2
-protobuf==3.11.3
-scikit-learn==0.22.2.post1  # via lightgbm
-scipy==1.4.1              # via lightgbm, scikit-learn, xgboost
-six==1.14.0               # via grpcio, protobuf
+numpy==1.19.0
+protobuf==3.12.2
+scikit-learn==0.23.1      # via lightgbm
+scipy==1.5.1              # via lightgbm, scikit-learn, xgboost
+six==1.15.0               # via grpcio, protobuf
+threadpoolctl==2.1.0      # via scikit-learn
 xgboost==0.90
 
 # The following packages are considered to be unsafe in a requirements file:
