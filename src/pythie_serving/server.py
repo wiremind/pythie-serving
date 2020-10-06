@@ -1,6 +1,7 @@
 from concurrent import futures
 import logging
 import time
+from typing import Optional
 
 import grpc
 
@@ -37,7 +38,7 @@ def servicer_decorator(_logger, servicer):
 
 
 def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, worker_count: int,
-          port: int, _logger: logging.Logger):
+          port: int, maximum_concurrent_rpcs: Optional[int], _logger: logging.Logger):
     model_platforms = set(c.model_platform for c in model_server_config.model_config_list.config)
     if len(model_platforms) > 1:
         raise PythieServingException('Only one model_plateform can be served at a time')
@@ -55,7 +56,9 @@ def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, wor
     else:
         raise ValueError(f'Unsupported model platform {model_platform}')
 
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=worker_count))
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=worker_count), maximum_concurrent_rpcs=maximum_concurrent_rpcs
+    )
     server.add_insecure_port(f'[::]:{port}')
 
     servicer = servicer_decorator(_logger, servicer_cls(logger=_logger, model_server_config=model_server_config))
