@@ -20,6 +20,9 @@ def run():
     parser.add_argument('--worker-count', default=1, type=int,
                         help='Number of concurrent threads for the GRPC server. '
                              'Make sure the chosen model_platform is thread safe before increasing this number')
+    parser.add_argument('--maximum-concurrent-rpcs', default=1, type=int,
+                        help='The maximum number of concurrent RPCs this server '
+                             'will service before returning RESOURCE_EXHAUSTED status, or -1 to indicate no limit.')
     parser.add_argument('--port', default=9090, type=int, help='Port number to listen to')
 
     dictConfig({
@@ -53,7 +56,12 @@ def run():
     with open(ns.model_config_file_path, 'r') as opened_config_file:
         text_format.Parse(opened_config_file.read(), model_server_config)
 
-    serve(model_server_config=model_server_config, worker_count=ns.worker_count, port=ns.port, _logger=logger)
+    maximum_concurrent_rpcs = ns.maximum_concurrent_rpcs
+    if maximum_concurrent_rpcs < 0:
+        maximum_concurrent_rpcs = None  # grpc.server takes None to accept unlimited amount of connections
+
+    serve(model_server_config=model_server_config, worker_count=ns.worker_count,
+          maximum_concurrent_rpcs=maximum_concurrent_rpcs, port=ns.port, _logger=logger)
 
 
 if __name__ == '__main__':
