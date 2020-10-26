@@ -123,6 +123,7 @@ class CloudTpuDriver(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -131,7 +132,7 @@ class CloudTpuDriver(object):
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.OpenRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.OpenResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Close(request,
@@ -139,6 +140,7 @@ class CloudTpuDriver(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -147,7 +149,7 @@ class CloudTpuDriver(object):
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.CloseRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.CloseResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Reset(request,
@@ -155,6 +157,7 @@ class CloudTpuDriver(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -163,7 +166,7 @@ class CloudTpuDriver(object):
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.ResetRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.ResetResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def QuerySystemInfo(request,
@@ -171,6 +174,7 @@ class CloudTpuDriver(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -179,7 +183,7 @@ class CloudTpuDriver(object):
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.QuerySystemInfoRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.QuerySystemInfoResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def StreamExecute(request_iterator,
@@ -187,6 +191,7 @@ class CloudTpuDriver(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -195,4 +200,4 @@ class CloudTpuDriver(object):
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.StreamRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_python_dot_tpu__driver_dot_tpu__service__pb2.StreamResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

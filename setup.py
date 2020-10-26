@@ -19,10 +19,15 @@ setup(
         "numpy~=1.17",
         "grpcio~=1.30",
         "protobuf~=3.12",
-        "xgboost~=0.90",
-        "lightgbm~=2.3"
     ],
+    # pip-compile setup.py --no-index --upgrade --rebuild --verbose
+    # echo ".[serving]" | pip-compile - --no-index --upgrade --rebuild --verbose -o pythie-serving-requirements.txt \
+    # && sed -i '/file:/d' pythie-serving-requirements.txt
     extras_require={
+        'serving': [
+            "lightgbm~=2.3",
+            "xgboost~=0.90"
+        ],
         'dev': [
             'coverage',
             'flake8',

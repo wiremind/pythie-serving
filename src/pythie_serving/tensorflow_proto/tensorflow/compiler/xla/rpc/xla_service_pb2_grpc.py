@@ -368,6 +368,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -376,7 +377,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.UnregisterRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.UnregisterResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeconstructTuple(request,
@@ -384,6 +385,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -392,7 +394,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.DeconstructTupleRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.DeconstructTupleResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Unpack(request,
@@ -400,6 +402,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -408,7 +411,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.UnpackRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.UnpackResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetShape(request,
@@ -416,6 +419,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -424,7 +428,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.GetShapeRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.GetShapeResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetComputationGraphStats(request,
@@ -432,6 +436,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -440,7 +445,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ComputationGraphStatsRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ComputationStatsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def LoadData(request,
@@ -448,6 +453,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -456,7 +462,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.LoadDataRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.LoadDataResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TransferToClient(request,
@@ -464,6 +470,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -472,7 +479,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToClientRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToClientResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TransferToServer(request,
@@ -480,6 +487,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -488,7 +496,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToServerRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToServerResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TransferToInfeed(request,
@@ -496,6 +504,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -504,7 +513,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToInfeedRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferToInfeedResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TransferFromOutfeed(request,
@@ -512,6 +521,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -520,7 +530,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferFromOutfeedRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.TransferFromOutfeedResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ResetDevice(request,
@@ -528,6 +538,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -536,7 +547,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ResetDeviceRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ResetDeviceResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ComputeConstantGraph(request,
@@ -544,6 +555,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -552,7 +564,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ComputeConstantGraphRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ComputeConstantResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetDeviceHandles(request,
@@ -560,6 +572,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -568,7 +581,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.GetDeviceHandlesRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.GetDeviceHandlesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateChannelHandle(request,
@@ -576,6 +589,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -584,7 +598,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.CreateChannelHandleRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.CreateChannelHandleResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Compile(request,
@@ -592,6 +606,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -600,7 +615,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.CompileRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.CompileResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Execute(request,
@@ -608,6 +623,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -616,7 +632,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ExecuteRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ExecuteResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ExecuteGraphParallel(request,
@@ -624,6 +640,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -632,7 +649,7 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ExecuteGraphParallelRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.ExecuteParallelResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def WaitForExecution(request,
@@ -640,6 +657,7 @@ class XlaService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -648,4 +666,4 @@ class XlaService(object):
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.WaitForExecutionRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_xla__pb2.WaitForExecutionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

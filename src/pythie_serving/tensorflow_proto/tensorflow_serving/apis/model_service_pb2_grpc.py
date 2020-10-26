@@ -84,6 +84,7 @@ class ModelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -92,7 +93,7 @@ class ModelService(object):
             tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def HandleReloadConfigRequest(request,
@@ -100,6 +101,7 @@ class ModelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -108,4 +110,4 @@ class ModelService(object):
             tensorflow__serving_dot_apis_dot_model__management__pb2.ReloadConfigRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_model__management__pb2.ReloadConfigResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

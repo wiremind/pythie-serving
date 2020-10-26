@@ -103,6 +103,7 @@ class EventListener(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -111,7 +112,7 @@ class EventListener(object):
             tensorflow_dot_core_dot_util_dot_event__pb2.Event.SerializeToString,
             tensorflow_dot_core_dot_debug_dot_debug__service__pb2.EventReply.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SendTracebacks(request,
@@ -119,6 +120,7 @@ class EventListener(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -127,7 +129,7 @@ class EventListener(object):
             tensorflow_dot_core_dot_debug_dot_debug__service__pb2.CallTraceback.SerializeToString,
             tensorflow_dot_core_dot_debug_dot_debug__service__pb2.EventReply.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SendSourceFiles(request,
@@ -135,6 +137,7 @@ class EventListener(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -143,4 +146,4 @@ class EventListener(object):
             tensorflow_dot_core_dot_protobuf_dot_debug__pb2.DebuggedSourceFiles.SerializeToString,
             tensorflow_dot_core_dot_debug_dot_debug__service__pb2.EventReply.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

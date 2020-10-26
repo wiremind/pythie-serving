@@ -103,6 +103,7 @@ class ProfileAnalysis(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -111,7 +112,7 @@ class ProfileAnalysis(object):
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.NewProfileSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.NewProfileSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def EnumSessions(request,
@@ -119,6 +120,7 @@ class ProfileAnalysis(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -127,7 +129,7 @@ class ProfileAnalysis(object):
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.EnumProfileSessionsAndToolsRequest.SerializeToString,
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.EnumProfileSessionsAndToolsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetSessionToolData(request,
@@ -135,6 +137,7 @@ class ProfileAnalysis(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -143,4 +146,4 @@ class ProfileAnalysis(object):
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.ProfileSessionDataRequest.SerializeToString,
             tensorflow_dot_core_dot_profiler_dot_profiler__analysis__pb2.ProfileSessionDataResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

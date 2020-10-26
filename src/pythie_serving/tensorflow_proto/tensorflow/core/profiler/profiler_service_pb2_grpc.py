@@ -21,6 +21,11 @@ class ProfilerServiceStub(object):
                 request_serializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileResponse.FromString,
                 )
+        self.Terminate = channel.unary_unary(
+                '/tensorflow.ProfilerService/Terminate',
+                request_serializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateResponse.FromString,
+                )
         self.Monitor = channel.unary_unary(
                 '/tensorflow.ProfilerService/Monitor',
                 request_serializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.MonitorRequest.SerializeToString,
@@ -40,6 +45,15 @@ class ProfilerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Terminate(self, request, context):
+        """Signal to terminate the Profile rpc for a on-going profiling session,
+        The Profile rpc will return successfully and prematurely without timeout.
+        This is used by programmatic mode to end the session in workers.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def Monitor(self, request, context):
         """Collects profiling data and returns user-friendly metrics.
         """
@@ -54,6 +68,11 @@ def add_ProfilerServiceServicer_to_server(servicer, server):
                     servicer.Profile,
                     request_deserializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileResponse.SerializeToString,
+            ),
+            'Terminate': grpc.unary_unary_rpc_method_handler(
+                    servicer.Terminate,
+                    request_deserializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateResponse.SerializeToString,
             ),
             'Monitor': grpc.unary_unary_rpc_method_handler(
                     servicer.Monitor,
@@ -78,6 +97,7 @@ class ProfilerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -86,7 +106,24 @@ class ProfilerService(object):
             tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileRequest.SerializeToString,
             tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.ProfileResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Terminate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.ProfilerService/Terminate',
+            tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateRequest.SerializeToString,
+            tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.TerminateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Monitor(request,
@@ -94,6 +131,7 @@ class ProfilerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -102,4 +140,4 @@ class ProfilerService(object):
             tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.MonitorRequest.SerializeToString,
             tensorflow_dot_core_dot_profiler_dot_profiler__service__pb2.MonitorResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

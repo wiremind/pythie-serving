@@ -396,6 +396,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -404,7 +405,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.CreateSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.CreateSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ExtendSession(request,
@@ -412,6 +413,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -420,7 +422,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ExtendSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ExtendSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def PartialRunSetup(request,
@@ -428,6 +430,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -436,7 +439,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.PartialRunSetupRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.PartialRunSetupResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RunStep(request,
@@ -444,6 +447,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -452,7 +456,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.RunStepRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.RunStepResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CloseSession(request,
@@ -460,6 +464,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -468,7 +473,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.CloseSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.CloseSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListDevices(request,
@@ -476,6 +481,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -484,7 +490,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ListDevicesRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ListDevicesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Reset(request,
@@ -492,6 +498,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -500,7 +507,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ResetRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ResetResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MakeCallable(request,
@@ -508,6 +515,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -516,7 +524,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.MakeCallableRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.MakeCallableResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RunCallable(request,
@@ -524,6 +532,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -532,7 +541,7 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.RunCallableRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.RunCallableResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ReleaseCallable(request,
@@ -540,6 +549,7 @@ class MasterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -548,4 +558,4 @@ class MasterService(object):
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ReleaseCallableRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_master__pb2.ReleaseCallableResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
