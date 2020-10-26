@@ -67,6 +67,7 @@ class SessionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -75,4 +76,4 @@ class SessionService(object):
             tensorflow__serving_dot_apis_dot_session__service__pb2.SessionRunRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_session__service__pb2.SessionRunResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -56,6 +56,11 @@ class EagerServiceStub(object):
                 request_serializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneResponse.FromString,
                 )
+        self.RunComponentFunction = channel.unary_unary(
+                '/tensorflow.eager.EagerService/RunComponentFunction',
+                request_serializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionResponse.FromString,
+                )
         self.KeepAlive = channel.unary_unary(
                 '/tensorflow.eager.EagerService/KeepAlive',
                 request_serializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.KeepAliveRequest.SerializeToString,
@@ -136,6 +141,25 @@ class EagerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RunComponentFunction(self, request, context):
+        """This takes an Eager operation and executes it in async mode on the remote
+        server. Different from EnqueueRequest, ops/functions sent through this
+        type of requests are allowed to execute in parallel and no ordering is
+        preserved by RPC stream or executor.
+        This request type should only be used for executing component functions.
+        Ordering of component functions should be enforced by their corresponding
+        main functions. The runtime ensures the following invarients for component
+        functions (CFs) and their main functions (MFs):
+        (1) MF1 -> MF2 ==> CF1 -> CF2 ("->" indicates order of execution);
+        (2) MF1 || MF2 ==> CF1 || CF2 ("||" indicates possible parallel execution);
+        (3) For CF1 and CF2 that come from the same MF, CF1 || CF2
+        For executing ops/main functions, use Enqueue or StreamingEnqueue instead
+        for correct ordering.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def KeepAlive(self, request, context):
         """Contexts are always created with a deadline and no RPCs within a deadline
         will trigger a context garbage collection. KeepAlive calls can be used to
@@ -185,6 +209,11 @@ def add_EagerServiceServicer_to_server(servicer, server):
                     request_deserializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneResponse.SerializeToString,
             ),
+            'RunComponentFunction': grpc.unary_unary_rpc_method_handler(
+                    servicer.RunComponentFunction,
+                    request_deserializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionResponse.SerializeToString,
+            ),
             'KeepAlive': grpc.unary_unary_rpc_method_handler(
                     servicer.KeepAlive,
                     request_deserializer=tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.KeepAliveRequest.FromString,
@@ -228,6 +257,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -236,7 +266,7 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.CreateContextRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.CreateContextResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UpdateContext(request,
@@ -244,6 +274,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -252,7 +283,7 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.UpdateContextRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.UpdateContextResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Enqueue(request,
@@ -260,6 +291,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -268,7 +300,7 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.EnqueueRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.EnqueueResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def StreamingEnqueue(request_iterator,
@@ -276,6 +308,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -284,7 +317,7 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.EnqueueRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.EnqueueResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def WaitQueueDone(request,
@@ -292,6 +325,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -300,7 +334,24 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.WaitQueueDoneResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RunComponentFunction(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.eager.EagerService/RunComponentFunction',
+            tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionRequest.SerializeToString,
+            tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.RunComponentFunctionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def KeepAlive(request,
@@ -308,6 +359,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -316,7 +368,7 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.KeepAliveRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.KeepAliveResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CloseContext(request,
@@ -324,6 +376,7 @@ class EagerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -332,4 +385,4 @@ class EagerService(object):
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.CloseContextRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_eager__service__pb2.CloseContextResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

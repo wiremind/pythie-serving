@@ -3,6 +3,7 @@ import logging
 
 import grpc
 import numpy as np
+
 from xgboost import DMatrix
 
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2

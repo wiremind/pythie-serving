@@ -3,6 +3,8 @@ import logging
 
 import grpc
 
+from lightgbm import Booster
+
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 from .tensorflow_proto.tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
 from .utils import make_ndarray_from_tensor
@@ -12,8 +14,6 @@ from .exceptions import PythieServingException
 class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionServiceServicer):
 
     def __init__(self, *, logger: logging.Logger, model_server_config: model_server_config_pb2.ModelServerConfig):
-        from lightgbm import Booster
-
         self.logger = logger
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:

@@ -333,6 +333,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -341,7 +342,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.GetStatusRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.GetStatusResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateWorkerSession(request,
@@ -349,6 +350,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -357,7 +359,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CreateWorkerSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CreateWorkerSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteWorkerSession(request,
@@ -365,6 +367,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -373,7 +376,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.DeleteWorkerSessionRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.DeleteWorkerSessionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RegisterGraph(request,
@@ -381,6 +384,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -389,7 +393,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RegisterGraphRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RegisterGraphResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeregisterGraph(request,
@@ -397,6 +401,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -405,7 +410,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.DeregisterGraphRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.DeregisterGraphResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RunGraph(request,
@@ -413,6 +418,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -421,7 +427,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RunGraphRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RunGraphResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanupGraph(request,
@@ -429,6 +435,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -437,7 +444,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CleanupGraphRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CleanupGraphResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanupAll(request,
@@ -445,6 +452,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -453,7 +461,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CleanupAllRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CleanupAllResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RecvTensor(request,
@@ -461,6 +469,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -469,7 +478,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RecvTensorRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RecvTensorResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Logging(request,
@@ -477,6 +486,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -485,7 +495,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.LoggingRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.LoggingResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Tracing(request,
@@ -493,6 +503,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -501,7 +512,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.TracingRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.TracingResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RecvBuf(request,
@@ -509,6 +520,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -517,7 +529,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RecvBufRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.RecvBufResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetStepSequence(request,
@@ -525,6 +537,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -533,7 +546,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.GetStepSequenceRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.GetStepSequenceResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CompleteGroup(request,
@@ -541,6 +554,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -549,7 +563,7 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CompleteGroupRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CompleteGroupResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CompleteInstance(request,
@@ -557,6 +571,7 @@ class WorkerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -565,4 +580,4 @@ class WorkerService(object):
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CompleteInstanceRequest.SerializeToString,
             tensorflow_dot_core_dot_protobuf_dot_worker__pb2.CompleteInstanceResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

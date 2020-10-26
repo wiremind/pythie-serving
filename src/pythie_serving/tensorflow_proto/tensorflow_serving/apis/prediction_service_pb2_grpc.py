@@ -136,6 +136,7 @@ class PredictionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -144,7 +145,7 @@ class PredictionService(object):
             tensorflow__serving_dot_apis_dot_classification__pb2.ClassificationRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_classification__pb2.ClassificationResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Regress(request,
@@ -152,6 +153,7 @@ class PredictionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -160,7 +162,7 @@ class PredictionService(object):
             tensorflow__serving_dot_apis_dot_regression__pb2.RegressionRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_regression__pb2.RegressionResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Predict(request,
@@ -168,6 +170,7 @@ class PredictionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -176,7 +179,7 @@ class PredictionService(object):
             tensorflow__serving_dot_apis_dot_predict__pb2.PredictRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_predict__pb2.PredictResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MultiInference(request,
@@ -184,6 +187,7 @@ class PredictionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -192,7 +196,7 @@ class PredictionService(object):
             tensorflow__serving_dot_apis_dot_inference__pb2.MultiInferenceRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_inference__pb2.MultiInferenceResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetModelMetadata(request,
@@ -200,6 +204,7 @@ class PredictionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -208,4 +213,4 @@ class PredictionService(object):
             tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataRequest.SerializeToString,
             tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
