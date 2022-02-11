@@ -8,7 +8,7 @@ grpcio==1.33.1            # via pythie-serving
 joblib==0.17.0            # via scikit-learn
 lightgbm==2.3.1           # via pythie-serving
 numpy==1.19.2             # via lightgbm, pythie-serving, scikit-learn, scipy, xgboost
-protobuf==3.13.0          # via pythie-serving
+protobuf==3.15.0          # via pythie-serving
 scikit-learn==0.23.2      # via lightgbm
 scipy==1.5.3              # via lightgbm, scikit-learn, xgboost
 six==1.15.0               # via grpcio, protobuf

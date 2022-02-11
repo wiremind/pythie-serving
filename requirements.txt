@@ -6,7 +6,7 @@
 #
 grpcio==1.33.1            # via pythie-serving (setup.py)
 numpy==1.19.2             # via pythie-serving (setup.py)
-protobuf==3.13.0          # via pythie-serving (setup.py)
+protobuf==3.15.0          # via pythie-serving (setup.py)
 six==1.15.0               # via grpcio, protobuf
 
 # The following packages are considered to be unsafe in a requirements file:
