@@ -1,3 +1,4 @@
+import os
 import pickle
 import logging
 
@@ -18,7 +19,7 @@ class XGBoostPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSer
         self.logger = logger
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
-            with open(model_config.base_path, 'rb') as opened_model:
+            with open(os.path.join(model_config.base_path, model_config.name) + ".pickled", 'rb') as opened_model:
                 model = pickle.load(opened_model)
                 model.set_param({'predictor': 'cpu_predictor'})
                 self.model_map[model_config.name] = {'model': model, 'feature_names': model.feature_names}

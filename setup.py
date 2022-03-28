@@ -3,6 +3,19 @@ from setuptools import setup, find_packages
 with open('VERSION') as version_file:
     version = version_file.read().strip()
 
+extras_require_serving = [
+    "lightgbm~=2.3",
+    "xgboost~=0.90",
+    "treelite_runtime~=2.2.2",
+]
+extras_require_dev = [
+    'coverage',
+    'flake8',
+    'flake8-mutable',
+    'mypy',
+    'pip-tools'
+]
+
 setup(
     name='pythie-serving',
     version=version,
@@ -14,27 +27,18 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=True,
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=[
-        "numpy~=1.17",
+        "numpy~=1.19.0",
         "grpcio~=1.30",
         "protobuf~=3.12",
     ],
-    # pip-compile setup.py --no-index --upgrade --rebuild --verbose
-    # echo ".[serving]" | pip-compile - --no-index --upgrade --rebuild --verbose -o pythie-serving-requirements.txt \
-    # && sed -i '/file:/d' pythie-serving-requirements.txt
+    # pip-compile setup.py --no-emit-index-url --upgrade --rebuild
+    # pip-compile setup.py --no-emit-index-url --upgrade --extra serving -o pythie-serving-requirements.txt
     extras_require={
-        'serving': [
-            "lightgbm~=2.3",
-            "xgboost~=0.90"
-        ],
-        'dev': [
-            'coverage',
-            'flake8',
-            'flake8-mutable',
-            'mypy',
-            'pip-tools'
-        ]
+        'serving': extras_require_serving,
+        'dev': extras_require_serving,
+        'all': extras_require_serving + extras_require_dev
     },
     entry_points={
         "console_scripts": [

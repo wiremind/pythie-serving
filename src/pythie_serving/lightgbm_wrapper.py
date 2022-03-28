@@ -1,3 +1,4 @@
+import os
 import pickle
 import logging
 
@@ -17,7 +18,7 @@ class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSe
         self.logger = logger
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
-            with open(model_config.base_path, 'rb') as opened_model:
+            with open(os.path.join(model_config.base_path, model_config.name) + ".pickled", 'rb') as opened_model:
                 model = pickle.load(opened_model)
 
                 if isinstance(model, Booster):
