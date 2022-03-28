@@ -53,6 +53,9 @@ def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, wor
     elif model_platform == 'lightgbm':
         from .lightgbm_wrapper import LightGBMPredictionServiceServicer
         servicer_cls = LightGBMPredictionServiceServicer
+    elif model_platform == 'treelite':
+        from .treelite_wrapper import TreelitePredictionServiceServicer
+        servicer_cls = TreelitePredictionServiceServicer
     else:
         raise ValueError(f'Unsupported model platform {model_platform}')
 
