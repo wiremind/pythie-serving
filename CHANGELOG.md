@@ -1,5 +1,10 @@
 # Pythie serving
 
+## 2.1.0
+
+### Change
+* Allow setting treelite's Predictor `nthread` attribute by setting `TREELITE_NTHREAD` environment variable. Defaults to `1`.
+
 ## 2.0.0
 
 ### Change
