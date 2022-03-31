@@ -1,5 +1,10 @@
 # Pythie serving
 
+## 2.2.0
+
+### Change
+* Allow client to request model with string features used as pandas categoricals during training
+
 ## 2.1.0
 
 ### Change
