@@ -1,5 +1,11 @@
 # Pythie serving
 
+## 2.2.0
+
+### Change
+* Allow client to request model with string features
+* Add support of scikit-learn models
+
 ## 2.1.0
 
 ### Change

@@ -1,27 +1,47 @@
-from typing import List, Any, Type
+from typing import Any, List, Type
 
 import numpy as np
 
-from .tensorflow_proto.tensorflow.core.framework import tensor_pb2, tensor_shape_pb2, types_pb2
-
-_types_map = (
-    (np.int32, types_pb2.DT_INT32), (np.int64, types_pb2.DT_INT64), (np.float32, types_pb2.DT_FLOAT),
-    (np.float64, types_pb2.DT_DOUBLE), (np.bool_, types_pb2.DT_BOOL), (np.bytes_, types_pb2.DT_STRING)
+from .tensorflow_proto.tensorflow.core.framework import (
+    tensor_pb2,
+    tensor_shape_pb2,
+    types_pb2,
 )
 
-_TF_TYPE_MAP = {tf_type: np_type for np_type, tf_type in _types_map}
-_NP_TYPE_MAP = {np_type: tf_type for np_type, tf_type in _types_map}
+# from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/framework/dtypes.py
+_TF_TO_NP = {
+    types_pb2.DT_HALF: np.float16,
+    types_pb2.DT_FLOAT: np.float32,
+    types_pb2.DT_DOUBLE: np.float64,
+    types_pb2.DT_INT32: np.int32,
+    types_pb2.DT_UINT8: np.uint8,
+    types_pb2.DT_UINT16: np.uint16,
+    types_pb2.DT_UINT32: np.uint32,
+    types_pb2.DT_UINT64: np.uint64,
+    types_pb2.DT_INT16: np.int16,
+    types_pb2.DT_INT8: np.int8,
+    # NOTE(touts): For strings we use object as it supports variable length # strings.
+    types_pb2.DT_STRING: object,
+    types_pb2.DT_COMPLEX64: np.complex64,
+    types_pb2.DT_COMPLEX128: np.complex128,
+    types_pb2.DT_INT64: np.int64,
+    types_pb2.DT_BOOL: np.bool_,
+}
+
+_NP_TO_TF = {nt: tt for tt, nt in _TF_TO_NP.items()}
+_NP_TO_TF[np.bytes_] = types_pb2.DT_STRING
+_NP_TO_TF[np.str_] = types_pb2.DT_STRING
 
 
 def get_tf_type(np_dtype: Type):
     """
-    :param np_type: python Type
+    :param np_dtype: python Type
     :return: types_pb2.DataType
     """
     try:
-        return _NP_TYPE_MAP[np_dtype.type]
+        return _NP_TO_TF[np_dtype.type]
     except KeyError:
-        raise TypeError(f'Could not infer tensorflow type for {np_dtype.type}')
+        raise TypeError(f"Could not infer tensorflow type for {np_dtype.type}")
 
 
 def get_np_dtype(tf_type: types_pb2.DataType):
@@ -30,9 +50,9 @@ def get_np_dtype(tf_type: types_pb2.DataType):
     :return: types_pb2.DataType
     """
     try:
-        return np.dtype(_TF_TYPE_MAP[tf_type])
+        return np.dtype(_TF_TO_NP[tf_type])
     except KeyError:
-        raise TypeError(f'Could not infer numpy type for {tf_type}')
+        raise TypeError(f"Could not infer numpy type for {tf_type}")
 
 
 def make_tensor_proto(values: List[Any]):
@@ -59,15 +79,15 @@ def make_tensor_proto(values: List[Any]):
         for vector in np_array:
             for s in vector:
                 if not isinstance(s, bytes):
-                    raise TypeError(f'{values} expect a list of bytes when working with DT_STRING types')
-            string_val.append(s)
-        tensor_kwargs['string_val'] = string_val
+                    raise TypeError(
+                        f"{values} expect a list of bytes when working with DT_STRING types"
+                    )
+                string_val.append(s)
+        tensor_kwargs["string_val"] = string_val
     else:
-        tensor_kwargs['tensor_content'] = np_array.tobytes()
+        tensor_kwargs["tensor_content"] = np_array.tobytes()
     return tensor_pb2.TensorProto(
-        dtype=dtype,
-        tensor_shape=tensor_shape_proto,
-        **tensor_kwargs
+        dtype=dtype, tensor_shape=tensor_shape_proto, **tensor_kwargs
     )
 
 
@@ -75,7 +95,9 @@ def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
     shape = [d.size for d in tensor.tensor_shape.dim]
     np_dtype = get_np_dtype(tensor.dtype)
     if tensor.tensor_content:
-        return np.frombuffer(tensor.tensor_content, dtype=np_dtype).copy().reshape(shape)
+        return (
+            np.frombuffer(tensor.tensor_content, dtype=np_dtype).copy().reshape(shape)
+        )
 
     if tensor.dtype == types_pb2.DT_FLOAT:
         values = np.fromiter(tensor.float_val, dtype=np_dtype)
@@ -85,6 +107,8 @@ def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
         values = np.fromiter(tensor.int_val, dtype=np_dtype)
     elif tensor.dtype == types_pb2.DT_BOOL:
         values = np.fromiter(tensor.bool_val, dtype=np_dtype)
+    elif tensor.dtype == types_pb2.DT_STRING:
+        values = np.array(tensor.string_val, dtype=np_dtype)
     else:
         raise TypeError("Unsupported tensor type: %s" % tensor.dtype)
 

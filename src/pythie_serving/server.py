@@ -56,6 +56,9 @@ def serve(*, model_server_config: model_server_config_pb2.ModelServerConfig, wor
     elif model_platform == 'treelite':
         from .treelite_wrapper import TreelitePredictionServiceServicer
         servicer_cls = TreelitePredictionServiceServicer
+    elif model_platform == 'sklearn':
+        from .sklearn_wrapper import SklearnPredictionServiceServicer
+        servicer_cls = SklearnPredictionServiceServicer
     else:
         raise ValueError(f'Unsupported model platform {model_platform}')
 
