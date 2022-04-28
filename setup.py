@@ -7,6 +7,7 @@ extras_require_serving = [
     "lightgbm~=2.3",
     "xgboost~=0.90",
     "treelite_runtime~=2.2.2",
+    "scikit-learn~=1.0.2",
 ]
 extras_require_dev = [
     'coverage',
@@ -29,7 +30,7 @@ setup(
     zip_safe=True,
     python_requires=">=3.8",
     install_requires=[
-        "numpy~=1.19.0",
+        "numpy~=1.20.0",
         "grpcio~=1.30",
         "protobuf~=3.12",
     ],
