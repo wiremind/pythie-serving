@@ -10,7 +10,7 @@ joblib==1.1.0
     # via scikit-learn
 lightgbm==2.3.1
     # via pythie-serving (setup.py)
-numpy==1.19.5
+numpy==1.21.0
     # via
     #   lightgbm
     #   pythie-serving (setup.py)
