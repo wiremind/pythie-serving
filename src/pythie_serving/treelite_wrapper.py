@@ -68,4 +68,4 @@ class TreelitePredictionServiceServicer(
 
             samples[:, feature_index] = nd_array.reshape(-1)
 
-        return model.predict(DMatrix(samples))
+        return model.predict(DMatrix(samples)).reshape(-1)
