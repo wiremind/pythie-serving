@@ -108,7 +108,7 @@ def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
     elif tensor.dtype == types_pb2.DT_BOOL:
         values = np.fromiter(tensor.bool_val, dtype=np_dtype)
     elif tensor.dtype == types_pb2.DT_STRING:
-        values = np.array(tensor.string_val, dtype=np_dtype).astype(str)
+        values = np.array(tensor.string_val, dtype=np_dtype)
     else:
         raise TypeError("Unsupported tensor type: %s" % tensor.dtype)
 
