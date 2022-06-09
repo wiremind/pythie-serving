@@ -59,7 +59,7 @@ class TreelitePredictionServiceServicer(
             if feature_name not in request.inputs:
                 raise PythieServingException(f"{feature_name} not set in the predict request.")
 
-            if request.inputs[features_names[0]].tensor_shape.dim[0].size != nb_samples:
+            if request.inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
                 raise PythieServingException(f"{feature_name} has invalid length.")
 
             nd_array = make_ndarray_from_tensor(request.inputs[feature_name])

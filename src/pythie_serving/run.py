@@ -10,7 +10,7 @@ from pythie_serving.tensorflow_proto.tensorflow_serving.config import model_serv
 
 
 def run():
-    model_choice_set = {'xgboost', 'lightgbm', 'treelite', 'sklearn'}
+    model_choice_set = {'xgboost', 'lightgbm', 'treelite', 'sklearn', 'table'}
     model_choice_str = ','.join(model_choice_set)
 
     parser = ArgumentParser(description=f'A GRPC server to serve different kind of model amongst: {model_choice_str}')

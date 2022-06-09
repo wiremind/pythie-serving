@@ -1,4 +1,4 @@
-from typing import Any, List, Type
+from typing import Any, List, Type, Dict
 
 import numpy as np
 
@@ -31,6 +31,12 @@ _TF_TO_NP = {
 _NP_TO_TF = {nt: tt for tt, nt in _TF_TO_NP.items()}
 _NP_TO_TF[np.bytes_] = types_pb2.DT_STRING
 _NP_TO_TF[np.str_] = types_pb2.DT_STRING
+
+_CSV_TYPE = {
+    "int": int,
+    "str": lambda x: bytes(x, 'utf-8'),
+    "bool": bool,
+}
 
 
 def get_tf_type(np_dtype: Type):
@@ -120,3 +126,11 @@ def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
         values = np.pad(values, (0, num_elements - values.size), "edge")
 
     return values.reshape(shape)
+
+
+def get_csv_type(type_mapping: Dict[str, str]):
+    try:
+        return {feature_name: _CSV_TYPE[data_type] for feature_name, data_type in type_mapping.items()}
+    except KeyError:
+        raise TypeError(f"Could not infer conversion type given {type_mapping}. "
+                        f"Expecting one of following types: {_CSV_TYPE.keys()}")
