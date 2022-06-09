@@ -1,5 +1,10 @@
 # Pythie serving
 
+## 2.3.0
+
+## Change
+* Add support of CSV table, served as models
+
 ## 2.2.0
 
 ### Change
