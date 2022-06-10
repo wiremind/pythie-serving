@@ -3,14 +3,13 @@ import logging
 import os
 
 import grpc
-import numpy as np
 from treelite_runtime import DMatrix, Predictor
 
 from .exceptions import PythieServingException
 from .tensorflow_proto.tensorflow_serving.apis import (
     predict_pb2, prediction_service_pb2_grpc)
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
-from .utils import make_ndarray_from_tensor
+from .utils import parse_sample
 
 
 class TreelitePredictionServiceServicer(
@@ -53,19 +52,6 @@ class TreelitePredictionServiceServicer(
         features_names = model_dict["feature_names"]
         nb_features = model_dict["nb_features"]
 
-        nb_samples = request.inputs[features_names[0]].tensor_shape.dim[0].size
-        samples = np.empty((nb_samples, nb_features))
-        for feature_index, feature_name in enumerate(features_names):
-            if feature_name not in request.inputs:
-                raise PythieServingException(f"{feature_name} not set in the predict request.")
-
-            if request.inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
-                raise PythieServingException(f"{feature_name} has invalid length.")
-
-            nd_array = make_ndarray_from_tensor(request.inputs[feature_name])
-            if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
-                raise PythieServingException("All input vectors should be 1D tensor")
-
-            samples[:, feature_index] = nd_array.reshape(-1)
+        samples = parse_sample(request.inputs, features_names, nb_features)
 
         return model.predict(DMatrix(samples)).reshape(-1)
