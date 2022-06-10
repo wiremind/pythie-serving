@@ -4,6 +4,7 @@
 
 ## Change
 * Add support of CSV table, served as models
+* Refactor parsing + checks of PredictRequest content
 
 ## 2.2.0
 

@@ -6,7 +6,7 @@ import json
 
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 from .tensorflow_proto.tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
-from .utils import make_ndarray_from_tensor, get_csv_type
+from .utils import parse_sample, get_csv_type
 from .exceptions import PythieServingException
 import csv
 from typing import Dict, Any
@@ -67,25 +67,9 @@ class TablePredictionServiceServicer(prediction_service_pb2_grpc.PredictionServi
         features_names = table_dict["feature_names"]
         nb_features = table_dict["nb_features"]
 
-        for feature_name in features_names:
-            if feature_name not in request.inputs:
-                raise PythieServingException(f"{feature_name} not set in the predict request.")
+        samples = parse_sample(request.inputs, features_names, nb_features, object)
 
-        nb_samples = request.inputs[features_names[0]].tensor_shape.dim[0].size
-        samples = np.empty((nb_samples, nb_features), object)
-
-        for feature_index, feature_name in enumerate(features_names):
-
-            if request.inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
-                raise PythieServingException(f"{feature_name} has invalid length.")
-
-            nd_array = make_ndarray_from_tensor(request.inputs[feature_name])
-            if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
-                raise PythieServingException("All input vectors should be 1D tensor")
-
-            samples[:, feature_index] = nd_array.reshape(-1)
-
-        output = np.empty((nb_samples,), np.int)
+        output = np.empty((np.shape(samples)[0],), np.int)
         for idx, sample in enumerate(samples):
             try:
                 pred = table[tuple(feature_value for feature_value in sample)]

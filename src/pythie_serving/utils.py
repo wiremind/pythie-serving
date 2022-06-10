@@ -1,4 +1,4 @@
-from typing import Any, List, Type, Dict
+from typing import Any, List, Type, Dict, Optional
 
 import numpy as np
 
@@ -7,6 +7,8 @@ from .tensorflow_proto.tensorflow.core.framework import (
     tensor_shape_pb2,
     types_pb2,
 )
+from .exceptions import PythieServingException
+
 
 # from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/framework/dtypes.py
 _TF_TO_NP = {
@@ -134,3 +136,34 @@ def get_csv_type(type_mapping: Dict[str, str]):
     except KeyError:
         raise TypeError(f"Could not infer conversion type given {type_mapping}. "
                         f"Expecting one of following types: {_CSV_TYPE.keys()}")
+
+
+def parse_sample(request_inputs, features_names: List[str], nb_features: int, samples_dtype: Optional[Any] = None):
+    for feature_name in features_names:
+        check_request_feature_exists(request_inputs, feature_name)
+
+    nb_samples = request_inputs[features_names[0]].tensor_shape.dim[0].size
+    samples = np.empty((nb_samples, nb_features), samples_dtype)
+
+    for feature_index, feature_name in enumerate(features_names):
+        check_request_valid_length(request_inputs, feature_name, nb_samples)
+        nd_array = make_ndarray_from_tensor(request_inputs[feature_name])
+        check_array_shape(nd_array)
+
+        samples[:, feature_index] = nd_array.reshape(-1)
+    return samples
+
+
+def check_request_valid_length(request_inputs, feature_name: str, nb_samples: int):
+    if request_inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
+        raise PythieServingException(f"{feature_name} has invalid length.")
+
+
+def check_array_shape(nd_array: np.ndarray):
+    if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
+        raise PythieServingException("All input vectors should be 1D tensor")
+
+
+def check_request_feature_exists(request_inputs, feature_name: str):
+    if feature_name not in request_inputs:
+        raise PythieServingException(f"{feature_name} not set in the predict request.")

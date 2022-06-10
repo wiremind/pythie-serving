@@ -8,7 +8,7 @@ from lightgbm import Booster
 
 from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 from .tensorflow_proto.tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
-from .utils import make_ndarray_from_tensor
+from .utils import make_ndarray_from_tensor, check_request_feature_exists, check_array_shape
 from .exceptions import PythieServingException
 
 
@@ -42,12 +42,10 @@ class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSe
         features_names = model_dict['feature_names']
         samples = None
         for feature_name in features_names:
-            if feature_name not in request.inputs:
-                raise PythieServingException(f'{feature_name} not set in the predict request')
+            check_request_feature_exists(request.inputs, feature_name)
 
             nd_array = make_ndarray_from_tensor(request.inputs[feature_name])
-            if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
-                raise PythieServingException('All input vectors should be 1D tensor')
+            check_array_shape(nd_array)
 
             if samples is None:
                 samples = [[] for _ in range(nd_array.shape[0])]
