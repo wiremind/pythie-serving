@@ -4,13 +4,15 @@
 #
 #    pip-compile --extra=serving --no-emit-index-url --output-file=pythie-serving-requirements.txt setup.py
 #
+cloudpickle==2.1.0
+    # via pythie-serving (setup.py)
 grpcio==1.44.0
     # via pythie-serving (setup.py)
 joblib==1.1.0
     # via scikit-learn
 lightgbm==2.3.1
     # via pythie-serving (setup.py)
-numpy==1.19.5
+numpy==1.20.3
     # via
     #   lightgbm
     #   pythie-serving (setup.py)
@@ -20,8 +22,10 @@ numpy==1.19.5
     #   xgboost
 protobuf==3.19.4
     # via pythie-serving (setup.py)
-scikit-learn==1.0.2
-    # via lightgbm
+scikit-learn==1.1.1
+    # via
+    #   lightgbm
+    #   pythie-serving (setup.py)
 scipy==1.8.0
     # via
     #   lightgbm
