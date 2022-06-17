@@ -9,7 +9,7 @@ from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
 from .tensorflow_proto.tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
 from .utils import parse_sample
 from .exceptions import PythieServingException
-
+import cloudpickle
 
 class SklearnPredictionServiceServicer(prediction_service_pb2_grpc.PredictionServiceServicer):
 
@@ -18,7 +18,8 @@ class SklearnPredictionServiceServicer(prediction_service_pb2_grpc.PredictionSer
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
             with open(os.path.join(model_config.base_path, model_config.name) + ".pickled", 'rb') as opened_model:
-                model = pickle.load(opened_model)
+                # cloudpickle used to be able to load model + modules which are not importable
+                model = cloudpickle.load(opened_model)
                 self.model_map[model_config.name] = {'model': model}
 
             with open(os.path.join(model_config.base_path, "metadata.json"), "r") as f:

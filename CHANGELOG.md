@@ -1,5 +1,12 @@
 # Pythie serving
 
+## 2.3.1
+
+## Change
+* Sklearn wrapper: unpickle models using cloudpickle library to support models pickled with their module
+* Upgrade sklearn version to 1.1.0
+
+
 ## 2.3.0
 
 ## Change

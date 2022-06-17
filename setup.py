@@ -7,7 +7,8 @@ extras_require_serving = [
     "lightgbm~=2.3",
     "xgboost~=0.90",
     "treelite_runtime~=2.2.2",
-    "scikit-learn~=1.0.2",
+    "scikit-learn~=1.1.1",
+    "cloudpickle~=2.1.0",
 ]
 extras_require_dev = [
     'coverage',
