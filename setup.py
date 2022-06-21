@@ -1,6 +1,6 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
-with open('VERSION') as version_file:
+with open("VERSION") as version_file:
     version = version_file.read().strip()
 
 extras_require_serving = [
@@ -10,23 +10,17 @@ extras_require_serving = [
     "scikit-learn~=1.1.1",
     "cloudpickle~=2.1.0",
 ]
-extras_require_dev = [
-    'coverage',
-    'flake8',
-    'flake8-mutable',
-    'mypy',
-    'pip-tools'
-]
+extras_require_dev = ["coverage", "flake8", "flake8-mutable", "mypy", "pip-tools", "pre-commit", "black", "isort"]
 
 setup(
-    name='pythie-serving',
+    name="pythie-serving",
     version=version,
-    description='A GRPC server to serve model types using tensorflow-serving .proto services',
-    author='wiremind data science team',
-    author_email='data-science@wiremind.io',
+    description="A GRPC server to serve model types using tensorflow-serving .proto services",
+    author="wiremind data science team",
+    author_email="data-science@wiremind.io",
     url="https://gitlab.cayzn.com/wiremind/data-science/pythie-neos.git",
-    packages=find_packages(where='src'),
-    package_dir={'': 'src'},
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
     include_package_data=True,
     zip_safe=True,
     python_requires=">=3.8",
@@ -38,9 +32,9 @@ setup(
     # pip-compile setup.py --no-emit-index-url --upgrade --rebuild
     # pip-compile setup.py --no-emit-index-url --upgrade --extra serving -o pythie-serving-requirements.txt
     extras_require={
-        'serving': extras_require_serving,
-        'dev': extras_require_serving,
-        'all': extras_require_serving + extras_require_dev
+        "serving": extras_require_serving,
+        "dev": extras_require_serving,
+        "all": extras_require_serving + extras_require_dev,
     },
     entry_points={
         "console_scripts": [

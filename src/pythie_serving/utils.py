@@ -1,14 +1,13 @@
-from typing import Any, List, Type, Dict, Optional
+from typing import Any, Dict, List, Optional, Type
 
 import numpy as np
 
+from .exceptions import PythieServingException
 from .tensorflow_proto.tensorflow.core.framework import (
     tensor_pb2,
     tensor_shape_pb2,
     types_pb2,
 )
-from .exceptions import PythieServingException
-
 
 # from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/framework/dtypes.py
 _TF_TO_NP = {
@@ -36,7 +35,7 @@ _NP_TO_TF[np.str_] = types_pb2.DT_STRING
 
 _CSV_TYPE = {
     "int": int,
-    "str": lambda x: bytes(x, 'utf-8'),
+    "str": lambda x: bytes(x, "utf-8"),
     "bool": bool,
 }
 
@@ -87,25 +86,19 @@ def make_tensor_proto(values: List[Any]):
         for vector in np_array:
             for s in vector:
                 if not isinstance(s, bytes):
-                    raise TypeError(
-                        f"{values} expect a list of bytes when working with DT_STRING types"
-                    )
+                    raise TypeError(f"{values} expect a list of bytes when working with DT_STRING types")
                 string_val.append(s)
         tensor_kwargs["string_val"] = string_val
     else:
         tensor_kwargs["tensor_content"] = np_array.tobytes()
-    return tensor_pb2.TensorProto(
-        dtype=dtype, tensor_shape=tensor_shape_proto, **tensor_kwargs
-    )
+    return tensor_pb2.TensorProto(dtype=dtype, tensor_shape=tensor_shape_proto, **tensor_kwargs)
 
 
 def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
     shape = [d.size for d in tensor.tensor_shape.dim]
     np_dtype = get_np_dtype(tensor.dtype)
     if tensor.tensor_content:
-        return (
-            np.frombuffer(tensor.tensor_content, dtype=np_dtype).copy().reshape(shape)
-        )
+        return np.frombuffer(tensor.tensor_content, dtype=np_dtype).copy().reshape(shape)
 
     if tensor.dtype == types_pb2.DT_FLOAT:
         values = np.fromiter(tensor.float_val, dtype=np_dtype)
@@ -134,11 +127,18 @@ def get_csv_type(type_mapping: Dict[str, str]):
     try:
         return {feature_name: _CSV_TYPE[data_type] for feature_name, data_type in type_mapping.items()}
     except KeyError:
-        raise TypeError(f"Could not infer conversion type given {type_mapping}. "
-                        f"Expecting one of following types: {_CSV_TYPE.keys()}")
+        raise TypeError(
+            f"Could not infer conversion type given {type_mapping}. "
+            f"Expecting one of following types: {_CSV_TYPE.keys()}"
+        )
 
 
-def parse_sample(request_inputs, features_names: List[str], nb_features: int, samples_dtype: Optional[Any] = None):
+def parse_sample(
+    request_inputs,
+    features_names: List[str],
+    nb_features: int,
+    samples_dtype: Optional[Any] = None,
+):
     for feature_name in features_names:
         check_request_feature_exists(request_inputs, feature_name)
 
