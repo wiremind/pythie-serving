@@ -1,8 +1,8 @@
-from typing import Any, Dict, List, Optional, Type
+from typing import Any, Dict, List, Type, Union
 
 import numpy as np
+from numpy.typing import NDArray
 
-from .exceptions import PythieServingException
 from .tensorflow_proto.tensorflow.core.framework import (
     tensor_pb2,
     tensor_shape_pb2,
@@ -10,6 +10,7 @@ from .tensorflow_proto.tensorflow.core.framework import (
 )
 
 # from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/framework/dtypes.py
+
 _TF_TO_NP = {
     types_pb2.DT_HALF: np.float16,
     types_pb2.DT_FLOAT: np.float32,
@@ -62,7 +63,17 @@ def get_np_dtype(tf_type: types_pb2.DataType):
         raise TypeError(f"Could not infer numpy type for {tf_type}")
 
 
-def make_tensor_proto(values: List[Any]):
+def get_csv_type(type_mapping: Dict[str, str]) -> Dict[str, Type]:
+    try:
+        return {feature_name: _CSV_TYPE[data_type] for feature_name, data_type in type_mapping.items()}
+    except KeyError:
+        raise TypeError(
+            f"Could not infer conversion type given {type_mapping}. "
+            f"Expecting one of following types: {list(_CSV_TYPE.keys())}"
+        )
+
+
+def make_tensor_proto(values: Union[List[Any], NDArray]):
     np_array = np.asarray(values)
 
     # python/numpy default float type is float64. We prefer float32 instead.
@@ -94,7 +105,7 @@ def make_tensor_proto(values: List[Any]):
     return tensor_pb2.TensorProto(dtype=dtype, tensor_shape=tensor_shape_proto, **tensor_kwargs)
 
 
-def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
+def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto) -> NDArray:
     shape = [d.size for d in tensor.tensor_shape.dim]
     np_dtype = get_np_dtype(tensor.dtype)
     if tensor.tensor_content:
@@ -121,49 +132,3 @@ def make_ndarray_from_tensor(tensor: tensor_pb2.TensorProto):
         values = np.pad(values, (0, num_elements - values.size), "edge")
 
     return values.reshape(shape)
-
-
-def get_csv_type(type_mapping: Dict[str, str]):
-    try:
-        return {feature_name: _CSV_TYPE[data_type] for feature_name, data_type in type_mapping.items()}
-    except KeyError:
-        raise TypeError(
-            f"Could not infer conversion type given {type_mapping}. "
-            f"Expecting one of following types: {_CSV_TYPE.keys()}"
-        )
-
-
-def parse_sample(
-    request_inputs,
-    features_names: List[str],
-    nb_features: int,
-    samples_dtype: Optional[Any] = None,
-):
-    for feature_name in features_names:
-        check_request_feature_exists(request_inputs, feature_name)
-
-    nb_samples = request_inputs[features_names[0]].tensor_shape.dim[0].size
-    samples = np.empty((nb_samples, nb_features), samples_dtype)
-
-    for feature_index, feature_name in enumerate(features_names):
-        check_request_valid_length(request_inputs, feature_name, nb_samples)
-        nd_array = make_ndarray_from_tensor(request_inputs[feature_name])
-        check_array_shape(nd_array)
-
-        samples[:, feature_index] = nd_array.reshape(-1)
-    return samples
-
-
-def check_request_valid_length(request_inputs, feature_name: str, nb_samples: int):
-    if request_inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
-        raise PythieServingException(f"{feature_name} has invalid length.")
-
-
-def check_array_shape(nd_array: np.ndarray):
-    if len(nd_array.shape) != 2 or nd_array.shape[1] != 1:
-        raise PythieServingException("All input vectors should be 1D tensor")
-
-
-def check_request_feature_exists(request_inputs, feature_name: str):
-    if feature_name not in request_inputs:
-        raise PythieServingException(f"{feature_name} not set in the predict request.")

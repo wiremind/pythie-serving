@@ -1,78 +1,42 @@
-import logging
 import os
 import pickle
 
-import grpc
 from lightgbm import Booster
+from numpy.typing import NDArray
 
-from .exceptions import PythieServingException
-from .tensorflow_proto.tensorflow_serving.apis import (
-    predict_pb2,
-    prediction_service_pb2_grpc,
-)
-from .tensorflow_proto.tensorflow_serving.config import model_server_config_pb2
-from .utils import (
-    check_array_shape,
-    check_request_feature_exists,
-    make_ndarray_from_tensor,
+from pythie_serving.abstract_wrapper import (
+    AbstractPythieServingPredictionServiceServicer,
+    ModelSpecs,
 )
 
+from .tensorflow_proto.tensorflow_serving.config.model_server_config_pb2 import (
+    ModelConfig,
+    ModelServerConfig,
+)
 
-class LightGBMPredictionServiceServicer(prediction_service_pb2_grpc.PredictionServiceServicer):
-    def __init__(
-        self,
-        *,
-        logger: logging.Logger,
-        model_server_config: model_server_config_pb2.ModelServerConfig,
-    ):
-        self.logger = logger
-        self.model_map = {}
-        for model_config in model_server_config.model_config_list.config:
-            with open(
-                os.path.join(model_config.base_path, model_config.name) + ".pickled",
-                "rb",
-            ) as opened_model:
-                model = pickle.load(opened_model)
 
-                if isinstance(model, Booster):
-                    feature_names = model.feature_name()
-                    best_iteration = model.best_iteration
-                else:
-                    feature_names = model.feature_names
-                    best_iteration = getattr(model, "best_iteration", None)
+class LightGBMPredictionServiceServicer(AbstractPythieServingPredictionServiceServicer):
+    model_file_extension = ".pickled"
 
-                self.model_map[model_config.name] = {
-                    "model": model,
-                    "feature_names": feature_names,
-                    "best_iteration": best_iteration,
-                }
+    def __init__(self, *, model_server_config: ModelServerConfig):
+        super().__init__(model_server_config=model_server_config)
+        self.nthread = int(os.environ.get("LGBM_NTHREAD", 0))
 
-    def Predict(self, request: predict_pb2.PredictRequest, context: grpc.RpcContext):
-        model_name = request.model_spec.name
-        if model_name not in self.model_map:
-            raise PythieServingException(
-                f"Unknown model: {model_name}. This pythie-serving instance can only "
-                f'serve one of the following: {",".join(self.model_map.keys())}'
-            )
+    def _create_model_specs(self, model_config: ModelConfig) -> ModelSpecs:
+        with open(self._get_model_path(model_config), "rb") as opened_model:
+            model = pickle.load(opened_model)
 
-        model_dict = self.model_map[model_name]
+            if isinstance(model, Booster):
+                feature_names = model.feature_name()
+            else:
+                feature_names = model.feature_names
 
-        features_names = model_dict["feature_names"]
-        samples = None
-        for feature_name in features_names:
-            check_request_feature_exists(request.inputs, feature_name)
+            return {
+                "model": model,
+                "feature_names": feature_names,
+                "nb_features": len(feature_names),
+                "samples_dtype": float,
+            }
 
-            nd_array = make_ndarray_from_tensor(request.inputs[feature_name])
-            check_array_shape(nd_array)
-
-            if samples is None:
-                samples = [[] for _ in range(nd_array.shape[0])]
-
-            for sample_index, value in enumerate(nd_array):
-                samples[sample_index].append(value[0])
-
-        model = model_dict["model"]
-        kwargs = {}
-        if model_dict["best_iteration"]:
-            kwargs["best_iteration"] = model_dict["best_iteration"]
-        return model.predict(samples, **kwargs)
+    def _predict(self, model_specs: ModelSpecs, samples: NDArray) -> NDArray:
+        return model_specs["model"].predict(samples, nthread=self.nthread)
