@@ -1,6 +1,5 @@
 import csv
 import json
-import logging
 import pickle
 from unittest import TestCase
 
@@ -55,7 +54,6 @@ class PredictionServiceServicerTestCaseMixin:
             worker_count=1,
             port=9999,
             maximum_concurrent_rpcs=1,
-            _logger=logging.getLogger(),
         )
         self.server.start()
 

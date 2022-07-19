@@ -1,4 +1,3 @@
-import logging
 import os
 import sys
 from argparse import ArgumentParser
@@ -39,6 +38,7 @@ def run():
     )
     parser.add_argument("--port", default=9090, type=int, help="Port number to listen to")
 
+    # set up logger
     dictConfig(
         {
             "disable_existing_loggers": True,
@@ -65,7 +65,6 @@ def run():
             },
         }
     )
-    logger = logging.getLogger("pythie_serving")
 
     ns = parser.parse_args()
 
@@ -85,7 +84,6 @@ def run():
         worker_count=ns.worker_count,
         maximum_concurrent_rpcs=maximum_concurrent_rpcs,
         port=ns.port,
-        _logger=logger,
     )
     server.start()
     server.wait_for_termination()

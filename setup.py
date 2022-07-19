@@ -4,7 +4,7 @@ with open("VERSION") as version_file:
     version = version_file.read().strip()
 
 extras_require_serving = [
-    "lightgbm~=2.3",
+    "lightgbm~=3.3.2",
     "xgboost~=0.90",
     "treelite_runtime~=2.2.2",
     "scikit-learn~=1.1.1",
@@ -40,7 +40,7 @@ setup(
     zip_safe=True,
     python_requires=">=3.8",
     install_requires=[
-        "numpy~=1.20.0",
+        "numpy~=1.23.0",
         "grpcio~=1.30",
         "protobuf~=3.12",
     ],
