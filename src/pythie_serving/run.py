@@ -6,7 +6,7 @@ from logging.config import dictConfig
 
 from google.protobuf import text_format
 
-from pythie_serving import serve
+from pythie_serving import create_grpc_server
 from pythie_serving.tensorflow_proto.tensorflow_serving.config import (
     model_server_config_pb2,
 )
@@ -80,13 +80,15 @@ def run():
     if maximum_concurrent_rpcs < 0:
         maximum_concurrent_rpcs = None  # grpc.server takes None to accept unlimited amount of connections
 
-    serve(
+    server = create_grpc_server(
         model_server_config=model_server_config,
         worker_count=ns.worker_count,
         maximum_concurrent_rpcs=maximum_concurrent_rpcs,
         port=ns.port,
         _logger=logger,
     )
+    server.start()
+    server.wait_for_termination()
 
 
 if __name__ == "__main__":

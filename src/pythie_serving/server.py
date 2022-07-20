@@ -43,14 +43,14 @@ def servicer_decorator(_logger, servicer):
     return servicer
 
 
-def serve(
+def create_grpc_server(
     *,
     model_server_config: model_server_config_pb2.ModelServerConfig,
     worker_count: int,
     port: int,
     maximum_concurrent_rpcs: Optional[int],
     _logger: logging.Logger,
-):
+) -> grpc.server:
     model_platforms = {c.model_platform for c in model_server_config.model_config_list.config}
     if len(model_platforms) > 1:
         raise PythieServingException("Only one model_plateform can be served at a time")
@@ -91,5 +91,4 @@ def serve(
     servicer = servicer_decorator(_logger, servicer_cls(logger=_logger, model_server_config=model_server_config))
     prediction_service_pb2_grpc.add_PredictionServiceServicer_to_server(servicer, server)
 
-    server.start()
-    server.wait_for_termination()
+    return server
