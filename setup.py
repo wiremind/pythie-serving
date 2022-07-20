@@ -10,7 +10,22 @@ extras_require_serving = [
     "scikit-learn~=1.1.1",
     "cloudpickle~=2.1.0",
 ]
-extras_require_dev = ["coverage", "flake8", "flake8-mutable", "mypy", "pip-tools", "pre-commit", "black", "isort"]
+extras_require_test = [
+    *extras_require_serving,
+    "pytest~=6.2",
+]
+extras_require_dev = [
+    *extras_require_test,
+    "treelite~=2.4",
+    "coverage",
+    "flake8",
+    "flake8-mutable",
+    "mypy",
+    "pip-tools",
+    "pre-commit",
+    "black",
+    "isort",
+]
 
 setup(
     name="pythie-serving",
@@ -33,7 +48,8 @@ setup(
     # pip-compile setup.py --no-emit-index-url --upgrade --extra serving -o pythie-serving-requirements.txt
     extras_require={
         "serving": extras_require_serving,
-        "dev": extras_require_serving,
+        "test": extras_require_test,
+        "dev": extras_require_dev,
         "all": extras_require_serving + extras_require_dev,
     },
     entry_points={

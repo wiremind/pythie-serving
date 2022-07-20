@@ -1,0 +1,1 @@
+{"feature_names": ["ureqc", "kwgp", "ajanvw", "bxr", "ld", "efgfda", "qcdmv", "spz", "acm", "pmg"], "target_name": "target", "data_type": {"ureqc": "int", "kwgp": "int", "ajanvw": "int", "bxr": "int", "ld": "int", "efgfda": "int", "qcdmv": "int", "spz": "int", "acm": "int", "pmg": "int", "target": "int"}}
