@@ -38,7 +38,7 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
             if not self._get_model_path(model_config).exists():
                 raise PythieServingException(f"Model file for {model_config.name} not found.")
             if not self._get_metadata_path(model_config).exists():
-                raise PythieServingException(f"Metadata file metadata.json not found ")
+                raise PythieServingException("Metadata file metadata.json not found ")
 
             self.model_map[model_config.name] = self._create_model_specs(model_config)
 

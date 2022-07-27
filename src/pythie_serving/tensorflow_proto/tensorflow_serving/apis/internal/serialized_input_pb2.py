@@ -3,6 +3,7 @@
 # source: tensorflow_serving/apis/internal/serialized_input.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,145 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow_serving/apis/internal/serialized_input.proto',
-  package='tensorflow.serving.internal',
-  syntax='proto3',
-  serialized_options=b'\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n7tensorflow_serving/apis/internal/serialized_input.proto\x12\x1btensorflow.serving.internal\")\n\x15SerializedExampleList\x12\x10\n\x08\x65xamples\x18\x01 \x03(\x0c\"E\n SerializedExampleListWithContext\x12\x10\n\x08\x65xamples\x18\x01 \x03(\x0c\x12\x0f\n\x07\x63ontext\x18\x02 \x01(\x0c\"\xc9\x01\n\x0fSerializedInput\x12J\n\x0c\x65xample_list\x18\x01 \x01(\x0b\x32\x32.tensorflow.serving.internal.SerializedExampleListH\x00\x12\x62\n\x19\x65xample_list_with_context\x18\x02 \x01(\x0b\x32=.tensorflow.serving.internal.SerializedExampleListWithContextH\x00\x42\x06\n\x04kindB\x03\xf8\x01\x01\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n7tensorflow_serving/apis/internal/serialized_input.proto\x12\x1btensorflow.serving.internal\")\n\x15SerializedExampleList\x12\x10\n\x08\x65xamples\x18\x01 \x03(\x0c\"E\n SerializedExampleListWithContext\x12\x10\n\x08\x65xamples\x18\x01 \x03(\x0c\x12\x0f\n\x07\x63ontext\x18\x02 \x01(\x0c\"\xc9\x01\n\x0fSerializedInput\x12J\n\x0c\x65xample_list\x18\x01 \x01(\x0b\x32\x32.tensorflow.serving.internal.SerializedExampleListH\x00\x12\x62\n\x19\x65xample_list_with_context\x18\x02 \x01(\x0b\x32=.tensorflow.serving.internal.SerializedExampleListWithContextH\x00\x42\x06\n\x04kindB\x03\xf8\x01\x01\x62\x06proto3')
 
 
 
-
-_SERIALIZEDEXAMPLELIST = _descriptor.Descriptor(
-  name='SerializedExampleList',
-  full_name='tensorflow.serving.internal.SerializedExampleList',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='examples', full_name='tensorflow.serving.internal.SerializedExampleList.examples', index=0,
-      number=1, type=12, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=88,
-  serialized_end=129,
-)
-
-
-_SERIALIZEDEXAMPLELISTWITHCONTEXT = _descriptor.Descriptor(
-  name='SerializedExampleListWithContext',
-  full_name='tensorflow.serving.internal.SerializedExampleListWithContext',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='examples', full_name='tensorflow.serving.internal.SerializedExampleListWithContext.examples', index=0,
-      number=1, type=12, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='context', full_name='tensorflow.serving.internal.SerializedExampleListWithContext.context', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=131,
-  serialized_end=200,
-)
-
-
-_SERIALIZEDINPUT = _descriptor.Descriptor(
-  name='SerializedInput',
-  full_name='tensorflow.serving.internal.SerializedInput',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='example_list', full_name='tensorflow.serving.internal.SerializedInput.example_list', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='example_list_with_context', full_name='tensorflow.serving.internal.SerializedInput.example_list_with_context', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='kind', full_name='tensorflow.serving.internal.SerializedInput.kind',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=203,
-  serialized_end=404,
-)
-
-_SERIALIZEDINPUT.fields_by_name['example_list'].message_type = _SERIALIZEDEXAMPLELIST
-_SERIALIZEDINPUT.fields_by_name['example_list_with_context'].message_type = _SERIALIZEDEXAMPLELISTWITHCONTEXT
-_SERIALIZEDINPUT.oneofs_by_name['kind'].fields.append(
-  _SERIALIZEDINPUT.fields_by_name['example_list'])
-_SERIALIZEDINPUT.fields_by_name['example_list'].containing_oneof = _SERIALIZEDINPUT.oneofs_by_name['kind']
-_SERIALIZEDINPUT.oneofs_by_name['kind'].fields.append(
-  _SERIALIZEDINPUT.fields_by_name['example_list_with_context'])
-_SERIALIZEDINPUT.fields_by_name['example_list_with_context'].containing_oneof = _SERIALIZEDINPUT.oneofs_by_name['kind']
-DESCRIPTOR.message_types_by_name['SerializedExampleList'] = _SERIALIZEDEXAMPLELIST
-DESCRIPTOR.message_types_by_name['SerializedExampleListWithContext'] = _SERIALIZEDEXAMPLELISTWITHCONTEXT
-DESCRIPTOR.message_types_by_name['SerializedInput'] = _SERIALIZEDINPUT
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_SERIALIZEDEXAMPLELIST = DESCRIPTOR.message_types_by_name['SerializedExampleList']
+_SERIALIZEDEXAMPLELISTWITHCONTEXT = DESCRIPTOR.message_types_by_name['SerializedExampleListWithContext']
+_SERIALIZEDINPUT = DESCRIPTOR.message_types_by_name['SerializedInput']
 SerializedExampleList = _reflection.GeneratedProtocolMessageType('SerializedExampleList', (_message.Message,), {
   'DESCRIPTOR' : _SERIALIZEDEXAMPLELIST,
   '__module__' : 'tensorflow_serving.apis.internal.serialized_input_pb2'
@@ -173,6 +42,14 @@ SerializedInput = _reflection.GeneratedProtocolMessageType('SerializedInput', (_
   })
 _sym_db.RegisterMessage(SerializedInput)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\370\001\001'
+  _SERIALIZEDEXAMPLELIST._serialized_start=88
+  _SERIALIZEDEXAMPLELIST._serialized_end=129
+  _SERIALIZEDEXAMPLELISTWITHCONTEXT._serialized_start=131
+  _SERIALIZEDEXAMPLELISTWITHCONTEXT._serialized_end=200
+  _SERIALIZEDINPUT._serialized_start=203
+  _SERIALIZEDINPUT._serialized_end=404
 # @@protoc_insertion_point(module_scope)

@@ -3,6 +3,7 @@
 # source: tensorflow/core/protobuf/cluster.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,133 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/protobuf/cluster.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=b'\n\032org.tensorflow.distruntimeB\rClusterProtosP\001ZHgithub.com/tensorflow/tensorflow/tensorflow/go/core/core_protos_go_proto\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n&tensorflow/core/protobuf/cluster.proto\x12\ntensorflow\"r\n\x06JobDef\x12\x0c\n\x04name\x18\x01 \x01(\t\x12,\n\x05tasks\x18\x02 \x03(\x0b\x32\x1d.tensorflow.JobDef.TasksEntry\x1a,\n\nTasksEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\nClusterDef\x12\x1f\n\x03job\x18\x01 \x03(\x0b\x32\x12.tensorflow.JobDefBz\n\x1aorg.tensorflow.distruntimeB\rClusterProtosP\x01ZHgithub.com/tensorflow/tensorflow/tensorflow/go/core/core_protos_go_proto\xf8\x01\x01\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&tensorflow/core/protobuf/cluster.proto\x12\ntensorflow\"r\n\x06JobDef\x12\x0c\n\x04name\x18\x01 \x01(\t\x12,\n\x05tasks\x18\x02 \x03(\x0b\x32\x1d.tensorflow.JobDef.TasksEntry\x1a,\n\nTasksEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\nClusterDef\x12\x1f\n\x03job\x18\x01 \x03(\x0b\x32\x12.tensorflow.JobDefB\x87\x01\n\x1aorg.tensorflow.distruntimeB\rClusterProtosP\x01ZUgithub.com/tensorflow/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto\xf8\x01\x01\x62\x06proto3')
 
 
 
-
-_JOBDEF_TASKSENTRY = _descriptor.Descriptor(
-  name='TasksEntry',
-  full_name='tensorflow.JobDef.TasksEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.JobDef.TasksEntry.key', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.JobDef.TasksEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=124,
-  serialized_end=168,
-)
-
-_JOBDEF = _descriptor.Descriptor(
-  name='JobDef',
-  full_name='tensorflow.JobDef',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='tensorflow.JobDef.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tasks', full_name='tensorflow.JobDef.tasks', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_JOBDEF_TASKSENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=54,
-  serialized_end=168,
-)
-
-
-_CLUSTERDEF = _descriptor.Descriptor(
-  name='ClusterDef',
-  full_name='tensorflow.ClusterDef',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='job', full_name='tensorflow.ClusterDef.job', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=170,
-  serialized_end=215,
-)
-
-_JOBDEF_TASKSENTRY.containing_type = _JOBDEF
-_JOBDEF.fields_by_name['tasks'].message_type = _JOBDEF_TASKSENTRY
-_CLUSTERDEF.fields_by_name['job'].message_type = _JOBDEF
-DESCRIPTOR.message_types_by_name['JobDef'] = _JOBDEF
-DESCRIPTOR.message_types_by_name['ClusterDef'] = _CLUSTERDEF
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_JOBDEF = DESCRIPTOR.message_types_by_name['JobDef']
+_JOBDEF_TASKSENTRY = _JOBDEF.nested_types_by_name['TasksEntry']
+_CLUSTERDEF = DESCRIPTOR.message_types_by_name['ClusterDef']
 JobDef = _reflection.GeneratedProtocolMessageType('JobDef', (_message.Message,), {
 
   'TasksEntry' : _reflection.GeneratedProtocolMessageType('TasksEntry', (_message.Message,), {
@@ -162,7 +43,16 @@ ClusterDef = _reflection.GeneratedProtocolMessageType('ClusterDef', (_message.Me
   })
 _sym_db.RegisterMessage(ClusterDef)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
-_JOBDEF_TASKSENTRY._options = None
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\032org.tensorflow.distruntimeB\rClusterProtosP\001ZUgithub.com/tensorflow/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto\370\001\001'
+  _JOBDEF_TASKSENTRY._options = None
+  _JOBDEF_TASKSENTRY._serialized_options = b'8\001'
+  _JOBDEF._serialized_start=54
+  _JOBDEF._serialized_end=168
+  _JOBDEF_TASKSENTRY._serialized_start=124
+  _JOBDEF_TASKSENTRY._serialized_end=168
+  _CLUSTERDEF._serialized_start=170
+  _CLUSTERDEF._serialized_end=215
 # @@protoc_insertion_point(module_scope)

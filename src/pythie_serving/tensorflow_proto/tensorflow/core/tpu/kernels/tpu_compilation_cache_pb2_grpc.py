@@ -2,3 +2,68 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from pythie_serving.tensorflow_proto.tensorflow.core.tpu.kernels import tpu_compilation_cache_common_pb2 as tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__common__pb2
+from pythie_serving.tensorflow_proto.tensorflow.core.tpu.kernels import tpu_compilation_cache_pb2 as tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__pb2
+
+
+class TpuCompilationCacheServiceExternalStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.GetTpuProgram = channel.unary_unary(
+                '/tensorflow.tpu.TpuCompilationCacheServiceExternal/GetTpuProgram',
+                request_serializer=tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__common__pb2.GetTpuProgramRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__pb2.GetTpuProgramResponseExternal.FromString,
+                )
+
+
+class TpuCompilationCacheServiceExternalServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def GetTpuProgram(self, request, context):
+        """This method requests the cached proto that the TPU execute op has been
+        instructed to execute.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_TpuCompilationCacheServiceExternalServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'GetTpuProgram': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTpuProgram,
+                    request_deserializer=tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__common__pb2.GetTpuProgramRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__pb2.GetTpuProgramResponseExternal.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'tensorflow.tpu.TpuCompilationCacheServiceExternal', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class TpuCompilationCacheServiceExternal(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def GetTpuProgram(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.tpu.TpuCompilationCacheServiceExternal/GetTpuProgram',
+            tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__common__pb2.GetTpuProgramRequest.SerializeToString,
+            tensorflow_dot_core_dot_tpu_dot_kernels_dot_tpu__compilation__cache__pb2.GetTpuProgramResponseExternal.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

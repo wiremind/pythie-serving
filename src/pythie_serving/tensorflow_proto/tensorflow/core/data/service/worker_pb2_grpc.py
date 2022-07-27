@@ -24,6 +24,11 @@ class WorkerServiceStub(object):
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementResponse.FromString,
                 )
+        self.GetWorkerTasks = channel.unary_unary(
+                '/tensorflow.data.WorkerService/GetWorkerTasks',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksResponse.FromString,
+                )
 
 
 class WorkerServiceServicer(object):
@@ -43,6 +48,13 @@ class WorkerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetWorkerTasks(self, request, context):
+        """Gets the tasks currently being executed by the worker.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_WorkerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -55,6 +67,11 @@ def add_WorkerServiceServicer_to_server(servicer, server):
                     servicer.GetElement,
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementResponse.SerializeToString,
+            ),
+            'GetWorkerTasks': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorkerTasks,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -97,5 +114,22 @@ class WorkerService(object):
         return grpc.experimental.unary_unary(request, target, '/tensorflow.data.WorkerService/GetElement',
             tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementRequest.SerializeToString,
             tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetElementResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWorkerTasks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.WorkerService/GetWorkerTasks',
+            tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_worker__pb2.GetWorkerTasksResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -3,6 +3,7 @@
 # source: tensorflow/core/protobuf/tpu/tpu_embedding_output_layout.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,253 +14,16 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/protobuf/tpu/tpu_embedding_output_layout.proto',
-  package='tensorflow.tpu',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n>tensorflow/core/protobuf/tpu/tpu_embedding_output_layout.proto\x12\x0etensorflow.tpu\"\x87\x05\n\x18TPUEmbeddingOutputLayout\x12G\n\x05table\x18\x01 \x03(\x0b\x32\x38.tensorflow.tpu.TPUEmbeddingOutputLayout.TableDescriptor\x12N\n\x06output\x18\x02 \x03(\x0b\x32>.tensorflow.tpu.TPUEmbeddingOutputLayout.EmbeddingOutputTensor\x1aP\n\x0eOutputLocation\x12\x14\n\x0ctensor_index\x18\x01 \x01(\x05\x12\x13\n\x0b\x64im0_offset\x18\x02 \x01(\x05\x12\x13\n\x0b\x64im1_offset\x18\x03 \x01(\x05\x1a\x65\n\x11\x46\x65\x61tureDescriptor\x12P\n\x0foutput_location\x18\x01 \x03(\x0b\x32\x37.tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation\x1a^\n\x0fTableDescriptor\x12K\n\x07\x66\x65\x61ture\x18\x01 \x03(\x0b\x32:.tensorflow.tpu.TPUEmbeddingOutputLayout.FeatureDescriptor\x1a\x43\n\x10TwoDOutputTensor\x12\x1c\n\x14\x64im0_size_per_sample\x18\x02 \x01(\x05\x12\x11\n\tdim1_size\x18\x01 \x01(\x05\x1at\n\x15\x45mbeddingOutputTensor\x12J\n\x05two_d\x18\x04 \x01(\x0b\x32\x39.tensorflow.tpu.TPUEmbeddingOutputLayout.TwoDOutputTensorH\x00\x42\x0f\n\routput_formatb\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n>tensorflow/core/protobuf/tpu/tpu_embedding_output_layout.proto\x12\x0etensorflow.tpu\"\x8b\x05\n\x18TPUEmbeddingOutputLayout\x12G\n\x05table\x18\x01 \x03(\x0b\x32\x38.tensorflow.tpu.TPUEmbeddingOutputLayout.TableDescriptor\x12N\n\x06output\x18\x02 \x03(\x0b\x32>.tensorflow.tpu.TPUEmbeddingOutputLayout.EmbeddingOutputTensor\x1aP\n\x0eOutputLocation\x12\x14\n\x0ctensor_index\x18\x01 \x01(\x05\x12\x13\n\x0b\x64im0_offset\x18\x02 \x01(\x05\x12\x13\n\x0b\x64im1_offset\x18\x03 \x01(\x05\x1a\x65\n\x11\x46\x65\x61tureDescriptor\x12P\n\x0foutput_location\x18\x01 \x03(\x0b\x32\x37.tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation\x1a^\n\x0fTableDescriptor\x12K\n\x07\x66\x65\x61ture\x18\x01 \x03(\x0b\x32:.tensorflow.tpu.TPUEmbeddingOutputLayout.FeatureDescriptor\x1a\x43\n\x10TwoDOutputTensor\x12\x1c\n\x14\x64im0_size_per_sample\x18\x02 \x01(\x05\x12\x11\n\tdim1_size\x18\x01 \x01(\x05\x1at\n\x15\x45mbeddingOutputTensor\x12J\n\x05two_d\x18\x04 \x01(\x0b\x32\x39.tensorflow.tpu.TPUEmbeddingOutputLayout.TwoDOutputTensorH\x00\x42\x0f\n\routput_format:\x02\x18\x01\x62\x06proto3')
 
 
 
-
-_TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION = _descriptor.Descriptor(
-  name='OutputLocation',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tensor_index', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation.tensor_index', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='dim0_offset', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation.dim0_offset', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='dim1_offset', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.OutputLocation.dim1_offset', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=264,
-  serialized_end=344,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR = _descriptor.Descriptor(
-  name='FeatureDescriptor',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.FeatureDescriptor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='output_location', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.FeatureDescriptor.output_location', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=346,
-  serialized_end=447,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR = _descriptor.Descriptor(
-  name='TableDescriptor',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.TableDescriptor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='feature', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.TableDescriptor.feature', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=449,
-  serialized_end=543,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR = _descriptor.Descriptor(
-  name='TwoDOutputTensor',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.TwoDOutputTensor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='dim0_size_per_sample', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.TwoDOutputTensor.dim0_size_per_sample', index=0,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='dim1_size', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.TwoDOutputTensor.dim1_size', index=1,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=545,
-  serialized_end=612,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR = _descriptor.Descriptor(
-  name='EmbeddingOutputTensor',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.EmbeddingOutputTensor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='two_d', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.EmbeddingOutputTensor.two_d', index=0,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='output_format', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.EmbeddingOutputTensor.output_format',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=614,
-  serialized_end=730,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT = _descriptor.Descriptor(
-  name='TPUEmbeddingOutputLayout',
-  full_name='tensorflow.tpu.TPUEmbeddingOutputLayout',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='table', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.table', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='output', full_name='tensorflow.tpu.TPUEmbeddingOutputLayout.output', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION, _TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR, _TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR, _TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR, _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=83,
-  serialized_end=730,
-)
-
-_TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION.containing_type = _TPUEMBEDDINGOUTPUTLAYOUT
-_TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR.fields_by_name['output_location'].message_type = _TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION
-_TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR.containing_type = _TPUEMBEDDINGOUTPUTLAYOUT
-_TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR.fields_by_name['feature'].message_type = _TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR
-_TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR.containing_type = _TPUEMBEDDINGOUTPUTLAYOUT
-_TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR.containing_type = _TPUEMBEDDINGOUTPUTLAYOUT
-_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.fields_by_name['two_d'].message_type = _TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR
-_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.containing_type = _TPUEMBEDDINGOUTPUTLAYOUT
-_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.oneofs_by_name['output_format'].fields.append(
-  _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.fields_by_name['two_d'])
-_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.fields_by_name['two_d'].containing_oneof = _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR.oneofs_by_name['output_format']
-_TPUEMBEDDINGOUTPUTLAYOUT.fields_by_name['table'].message_type = _TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR
-_TPUEMBEDDINGOUTPUTLAYOUT.fields_by_name['output'].message_type = _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR
-DESCRIPTOR.message_types_by_name['TPUEmbeddingOutputLayout'] = _TPUEMBEDDINGOUTPUTLAYOUT
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_TPUEMBEDDINGOUTPUTLAYOUT = DESCRIPTOR.message_types_by_name['TPUEmbeddingOutputLayout']
+_TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION = _TPUEMBEDDINGOUTPUTLAYOUT.nested_types_by_name['OutputLocation']
+_TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR = _TPUEMBEDDINGOUTPUTLAYOUT.nested_types_by_name['FeatureDescriptor']
+_TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR = _TPUEMBEDDINGOUTPUTLAYOUT.nested_types_by_name['TableDescriptor']
+_TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR = _TPUEMBEDDINGOUTPUTLAYOUT.nested_types_by_name['TwoDOutputTensor']
+_TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR = _TPUEMBEDDINGOUTPUTLAYOUT.nested_types_by_name['EmbeddingOutputTensor']
 TPUEmbeddingOutputLayout = _reflection.GeneratedProtocolMessageType('TPUEmbeddingOutputLayout', (_message.Message,), {
 
   'OutputLocation' : _reflection.GeneratedProtocolMessageType('OutputLocation', (_message.Message,), {
@@ -307,5 +71,21 @@ _sym_db.RegisterMessage(TPUEmbeddingOutputLayout.TableDescriptor)
 _sym_db.RegisterMessage(TPUEmbeddingOutputLayout.TwoDOutputTensor)
 _sym_db.RegisterMessage(TPUEmbeddingOutputLayout.EmbeddingOutputTensor)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _TPUEMBEDDINGOUTPUTLAYOUT._options = None
+  _TPUEMBEDDINGOUTPUTLAYOUT._serialized_options = b'\030\001'
+  _TPUEMBEDDINGOUTPUTLAYOUT._serialized_start=83
+  _TPUEMBEDDINGOUTPUTLAYOUT._serialized_end=734
+  _TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION._serialized_start=264
+  _TPUEMBEDDINGOUTPUTLAYOUT_OUTPUTLOCATION._serialized_end=344
+  _TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR._serialized_start=346
+  _TPUEMBEDDINGOUTPUTLAYOUT_FEATUREDESCRIPTOR._serialized_end=447
+  _TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR._serialized_start=449
+  _TPUEMBEDDINGOUTPUTLAYOUT_TABLEDESCRIPTOR._serialized_end=543
+  _TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR._serialized_start=545
+  _TPUEMBEDDINGOUTPUTLAYOUT_TWODOUTPUTTENSOR._serialized_end=612
+  _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR._serialized_start=614
+  _TPUEMBEDDINGOUTPUTLAYOUT_EMBEDDINGOUTPUTTENSOR._serialized_end=730
 # @@protoc_insertion_point(module_scope)

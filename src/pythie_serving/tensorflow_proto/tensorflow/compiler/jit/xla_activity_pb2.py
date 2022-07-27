@@ -3,6 +3,7 @@
 # source: tensorflow/compiler/jit/xla_activity.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -14,353 +15,17 @@ _sym_db = _symbol_database.Default()
 from pythie_serving.tensorflow_proto.tensorflow.core.protobuf import config_pb2 as tensorflow_dot_core_dot_protobuf_dot_config__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/compiler/jit/xla_activity.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n*tensorflow/compiler/jit/xla_activity.proto\x12\ntensorflow\x1a%tensorflow/core/protobuf/config.proto\"\x82\x03\n\x18XlaAutoClusteringSummary\x12\x1e\n\x16unclustered_node_count\x18\x01 \x01(\x05\x12\x1c\n\x14\x63lustered_node_count\x18\x02 \x01(\x05\x12>\n\x08\x63lusters\x18\x03 \x03(\x0b\x32,.tensorflow.XlaAutoClusteringSummary.Cluster\x12Q\n\x18unclustered_op_histogram\x18\x04 \x03(\x0b\x32/.tensorflow.XlaAutoClusteringSummary.OpAndCount\x1a\'\n\nOpAndCount\x12\n\n\x02op\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x1al\n\x07\x43luster\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x05\x12\x45\n\x0cop_histogram\x18\x03 \x03(\x0b\x32/.tensorflow.XlaAutoClusteringSummary.OpAndCount\"\xb9\x01\n\x19XlaAutoClusteringActivity\x12\x45\n\x10global_jit_level\x18\x01 \x01(\x0e\x32+.tensorflow.OptimizerOptions.GlobalJitLevel\x12\x1e\n\x16\x63pu_global_jit_enabled\x18\x02 \x01(\x08\x12\x35\n\x07summary\x18\x03 \x01(\x0b\x32$.tensorflow.XlaAutoClusteringSummary\"\x85\x01\n\x19XlaJitCompilationActivity\x12\x14\n\x0c\x63luster_name\x18\x01 \x01(\t\x12\x15\n\rcompile_count\x18\x02 \x01(\x05\x12\x17\n\x0f\x63ompile_time_us\x18\x03 \x01(\x03\x12\"\n\x1a\x63umulative_compile_time_us\x18\x04 \x01(\x03\"\x8b\x02\n\x15XlaOptimizationRemark\x12:\n\x07warning\x18\x01 \x01(\x0e\x32).tensorflow.XlaOptimizationRemark.Warning\x12\x19\n\x11\x64\x65\x62ug_information\x18\x02 \x01(\t\"\x9a\x01\n\x07Warning\x12\x08\n\x04NONE\x10\x00\x12\x18\n\x14INACCURATE_OPERATION\x10\x01\x12\x12\n\x0eSLOW_OPERATION\x10\x02\x12\x1b\n\x17UNIMPLEMENTED_OPERATION\x10\x03\x12 \n\x1cSLOW_IMAGE_RESIZE_DIMENSIONS\x10\x04\x12\x18\n\x14MEGAMORPHIC_FUNCTION\x10\x05\x62\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_protobuf_dot_config__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n*tensorflow/compiler/jit/xla_activity.proto\x12\ntensorflow\x1a%tensorflow/core/protobuf/config.proto\"\x82\x03\n\x18XlaAutoClusteringSummary\x12\x1e\n\x16unclustered_node_count\x18\x01 \x01(\x05\x12\x1c\n\x14\x63lustered_node_count\x18\x02 \x01(\x05\x12>\n\x08\x63lusters\x18\x03 \x03(\x0b\x32,.tensorflow.XlaAutoClusteringSummary.Cluster\x12Q\n\x18unclustered_op_histogram\x18\x04 \x03(\x0b\x32/.tensorflow.XlaAutoClusteringSummary.OpAndCount\x1a\'\n\nOpAndCount\x12\n\n\x02op\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\x1al\n\x07\x43luster\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x05\x12\x45\n\x0cop_histogram\x18\x03 \x03(\x0b\x32/.tensorflow.XlaAutoClusteringSummary.OpAndCount\"\xb9\x01\n\x19XlaAutoClusteringActivity\x12\x45\n\x10global_jit_level\x18\x01 \x01(\x0e\x32+.tensorflow.OptimizerOptions.GlobalJitLevel\x12\x1e\n\x16\x63pu_global_jit_enabled\x18\x02 \x01(\x08\x12\x35\n\x07summary\x18\x03 \x01(\x0b\x32$.tensorflow.XlaAutoClusteringSummary\"\x85\x01\n\x19XlaJitCompilationActivity\x12\x14\n\x0c\x63luster_name\x18\x01 \x01(\t\x12\x15\n\rcompile_count\x18\x02 \x01(\x05\x12\x17\n\x0f\x63ompile_time_us\x18\x03 \x01(\x03\x12\"\n\x1a\x63umulative_compile_time_us\x18\x04 \x01(\x03\"\x8b\x02\n\x15XlaOptimizationRemark\x12:\n\x07warning\x18\x01 \x01(\x0e\x32).tensorflow.XlaOptimizationRemark.Warning\x12\x19\n\x11\x64\x65\x62ug_information\x18\x02 \x01(\t\"\x9a\x01\n\x07Warning\x12\x08\n\x04NONE\x10\x00\x12\x18\n\x14INACCURATE_OPERATION\x10\x01\x12\x12\n\x0eSLOW_OPERATION\x10\x02\x12\x1b\n\x17UNIMPLEMENTED_OPERATION\x10\x03\x12 \n\x1cSLOW_IMAGE_RESIZE_DIMENSIONS\x10\x04\x12\x18\n\x14MEGAMORPHIC_FUNCTION\x10\x05\x62\x06proto3')
 
 
 
-_XLAOPTIMIZATIONREMARK_WARNING = _descriptor.EnumDescriptor(
-  name='Warning',
-  full_name='tensorflow.XlaOptimizationRemark.Warning',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='NONE', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='INACCURATE_OPERATION', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='SLOW_OPERATION', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='UNIMPLEMENTED_OPERATION', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='SLOW_IMAGE_RESIZE_DIMENSIONS', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='MEGAMORPHIC_FUNCTION', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=924,
-  serialized_end=1078,
-)
-_sym_db.RegisterEnumDescriptor(_XLAOPTIMIZATIONREMARK_WARNING)
-
-
-_XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT = _descriptor.Descriptor(
-  name='OpAndCount',
-  full_name='tensorflow.XlaAutoClusteringSummary.OpAndCount',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='op', full_name='tensorflow.XlaAutoClusteringSummary.OpAndCount.op', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='count', full_name='tensorflow.XlaAutoClusteringSummary.OpAndCount.count', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=335,
-  serialized_end=374,
-)
-
-_XLAAUTOCLUSTERINGSUMMARY_CLUSTER = _descriptor.Descriptor(
-  name='Cluster',
-  full_name='tensorflow.XlaAutoClusteringSummary.Cluster',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='tensorflow.XlaAutoClusteringSummary.Cluster.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='size', full_name='tensorflow.XlaAutoClusteringSummary.Cluster.size', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='op_histogram', full_name='tensorflow.XlaAutoClusteringSummary.Cluster.op_histogram', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=376,
-  serialized_end=484,
-)
-
-_XLAAUTOCLUSTERINGSUMMARY = _descriptor.Descriptor(
-  name='XlaAutoClusteringSummary',
-  full_name='tensorflow.XlaAutoClusteringSummary',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='unclustered_node_count', full_name='tensorflow.XlaAutoClusteringSummary.unclustered_node_count', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='clustered_node_count', full_name='tensorflow.XlaAutoClusteringSummary.clustered_node_count', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='clusters', full_name='tensorflow.XlaAutoClusteringSummary.clusters', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='unclustered_op_histogram', full_name='tensorflow.XlaAutoClusteringSummary.unclustered_op_histogram', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT, _XLAAUTOCLUSTERINGSUMMARY_CLUSTER, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=98,
-  serialized_end=484,
-)
-
-
-_XLAAUTOCLUSTERINGACTIVITY = _descriptor.Descriptor(
-  name='XlaAutoClusteringActivity',
-  full_name='tensorflow.XlaAutoClusteringActivity',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='global_jit_level', full_name='tensorflow.XlaAutoClusteringActivity.global_jit_level', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cpu_global_jit_enabled', full_name='tensorflow.XlaAutoClusteringActivity.cpu_global_jit_enabled', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='summary', full_name='tensorflow.XlaAutoClusteringActivity.summary', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=487,
-  serialized_end=672,
-)
-
-
-_XLAJITCOMPILATIONACTIVITY = _descriptor.Descriptor(
-  name='XlaJitCompilationActivity',
-  full_name='tensorflow.XlaJitCompilationActivity',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cluster_name', full_name='tensorflow.XlaJitCompilationActivity.cluster_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='compile_count', full_name='tensorflow.XlaJitCompilationActivity.compile_count', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='compile_time_us', full_name='tensorflow.XlaJitCompilationActivity.compile_time_us', index=2,
-      number=3, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cumulative_compile_time_us', full_name='tensorflow.XlaJitCompilationActivity.cumulative_compile_time_us', index=3,
-      number=4, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=675,
-  serialized_end=808,
-)
-
-
-_XLAOPTIMIZATIONREMARK = _descriptor.Descriptor(
-  name='XlaOptimizationRemark',
-  full_name='tensorflow.XlaOptimizationRemark',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='warning', full_name='tensorflow.XlaOptimizationRemark.warning', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='debug_information', full_name='tensorflow.XlaOptimizationRemark.debug_information', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _XLAOPTIMIZATIONREMARK_WARNING,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=811,
-  serialized_end=1078,
-)
-
-_XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT.containing_type = _XLAAUTOCLUSTERINGSUMMARY
-_XLAAUTOCLUSTERINGSUMMARY_CLUSTER.fields_by_name['op_histogram'].message_type = _XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT
-_XLAAUTOCLUSTERINGSUMMARY_CLUSTER.containing_type = _XLAAUTOCLUSTERINGSUMMARY
-_XLAAUTOCLUSTERINGSUMMARY.fields_by_name['clusters'].message_type = _XLAAUTOCLUSTERINGSUMMARY_CLUSTER
-_XLAAUTOCLUSTERINGSUMMARY.fields_by_name['unclustered_op_histogram'].message_type = _XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT
-_XLAAUTOCLUSTERINGACTIVITY.fields_by_name['global_jit_level'].enum_type = tensorflow_dot_core_dot_protobuf_dot_config__pb2._OPTIMIZEROPTIONS_GLOBALJITLEVEL
-_XLAAUTOCLUSTERINGACTIVITY.fields_by_name['summary'].message_type = _XLAAUTOCLUSTERINGSUMMARY
-_XLAOPTIMIZATIONREMARK.fields_by_name['warning'].enum_type = _XLAOPTIMIZATIONREMARK_WARNING
-_XLAOPTIMIZATIONREMARK_WARNING.containing_type = _XLAOPTIMIZATIONREMARK
-DESCRIPTOR.message_types_by_name['XlaAutoClusteringSummary'] = _XLAAUTOCLUSTERINGSUMMARY
-DESCRIPTOR.message_types_by_name['XlaAutoClusteringActivity'] = _XLAAUTOCLUSTERINGACTIVITY
-DESCRIPTOR.message_types_by_name['XlaJitCompilationActivity'] = _XLAJITCOMPILATIONACTIVITY
-DESCRIPTOR.message_types_by_name['XlaOptimizationRemark'] = _XLAOPTIMIZATIONREMARK
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_XLAAUTOCLUSTERINGSUMMARY = DESCRIPTOR.message_types_by_name['XlaAutoClusteringSummary']
+_XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT = _XLAAUTOCLUSTERINGSUMMARY.nested_types_by_name['OpAndCount']
+_XLAAUTOCLUSTERINGSUMMARY_CLUSTER = _XLAAUTOCLUSTERINGSUMMARY.nested_types_by_name['Cluster']
+_XLAAUTOCLUSTERINGACTIVITY = DESCRIPTOR.message_types_by_name['XlaAutoClusteringActivity']
+_XLAJITCOMPILATIONACTIVITY = DESCRIPTOR.message_types_by_name['XlaJitCompilationActivity']
+_XLAOPTIMIZATIONREMARK = DESCRIPTOR.message_types_by_name['XlaOptimizationRemark']
+_XLAOPTIMIZATIONREMARK_WARNING = _XLAOPTIMIZATIONREMARK.enum_types_by_name['Warning']
 XlaAutoClusteringSummary = _reflection.GeneratedProtocolMessageType('XlaAutoClusteringSummary', (_message.Message,), {
 
   'OpAndCount' : _reflection.GeneratedProtocolMessageType('OpAndCount', (_message.Message,), {
@@ -405,5 +70,21 @@ XlaOptimizationRemark = _reflection.GeneratedProtocolMessageType('XlaOptimizatio
   })
 _sym_db.RegisterMessage(XlaOptimizationRemark)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _XLAAUTOCLUSTERINGSUMMARY._serialized_start=98
+  _XLAAUTOCLUSTERINGSUMMARY._serialized_end=484
+  _XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT._serialized_start=335
+  _XLAAUTOCLUSTERINGSUMMARY_OPANDCOUNT._serialized_end=374
+  _XLAAUTOCLUSTERINGSUMMARY_CLUSTER._serialized_start=376
+  _XLAAUTOCLUSTERINGSUMMARY_CLUSTER._serialized_end=484
+  _XLAAUTOCLUSTERINGACTIVITY._serialized_start=487
+  _XLAAUTOCLUSTERINGACTIVITY._serialized_end=672
+  _XLAJITCOMPILATIONACTIVITY._serialized_start=675
+  _XLAJITCOMPILATIONACTIVITY._serialized_end=808
+  _XLAOPTIMIZATIONREMARK._serialized_start=811
+  _XLAOPTIMIZATIONREMARK._serialized_end=1078
+  _XLAOPTIMIZATIONREMARK_WARNING._serialized_start=924
+  _XLAOPTIMIZATIONREMARK_WARNING._serialized_end=1078
 # @@protoc_insertion_point(module_scope)

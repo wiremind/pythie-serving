@@ -3,6 +3,7 @@
 # source: tensorflow_serving/servables/hashmap/hashmap_source_adapter.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,75 +14,12 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow_serving/servables/hashmap/hashmap_source_adapter.proto',
-  package='tensorflow.serving',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\nAtensorflow_serving/servables/hashmap/hashmap_source_adapter.proto\x12\x12tensorflow.serving\"}\n\x1aHashmapSourceAdapterConfig\x12\x45\n\x06\x66ormat\x18\x01 \x01(\x0e\x32\x35.tensorflow.serving.HashmapSourceAdapterConfig.Format\"\x18\n\x06\x46ormat\x12\x0e\n\nSIMPLE_CSV\x10\x00\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nAtensorflow_serving/servables/hashmap/hashmap_source_adapter.proto\x12\x12tensorflow.serving\"}\n\x1aHashmapSourceAdapterConfig\x12\x45\n\x06\x66ormat\x18\x01 \x01(\x0e\x32\x35.tensorflow.serving.HashmapSourceAdapterConfig.Format\"\x18\n\x06\x46ormat\x12\x0e\n\nSIMPLE_CSV\x10\x00\x62\x06proto3')
 
 
 
-_HASHMAPSOURCEADAPTERCONFIG_FORMAT = _descriptor.EnumDescriptor(
-  name='Format',
-  full_name='tensorflow.serving.HashmapSourceAdapterConfig.Format',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='SIMPLE_CSV', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=190,
-  serialized_end=214,
-)
-_sym_db.RegisterEnumDescriptor(_HASHMAPSOURCEADAPTERCONFIG_FORMAT)
-
-
-_HASHMAPSOURCEADAPTERCONFIG = _descriptor.Descriptor(
-  name='HashmapSourceAdapterConfig',
-  full_name='tensorflow.serving.HashmapSourceAdapterConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='format', full_name='tensorflow.serving.HashmapSourceAdapterConfig.format', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _HASHMAPSOURCEADAPTERCONFIG_FORMAT,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=89,
-  serialized_end=214,
-)
-
-_HASHMAPSOURCEADAPTERCONFIG.fields_by_name['format'].enum_type = _HASHMAPSOURCEADAPTERCONFIG_FORMAT
-_HASHMAPSOURCEADAPTERCONFIG_FORMAT.containing_type = _HASHMAPSOURCEADAPTERCONFIG
-DESCRIPTOR.message_types_by_name['HashmapSourceAdapterConfig'] = _HASHMAPSOURCEADAPTERCONFIG
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_HASHMAPSOURCEADAPTERCONFIG = DESCRIPTOR.message_types_by_name['HashmapSourceAdapterConfig']
+_HASHMAPSOURCEADAPTERCONFIG_FORMAT = _HASHMAPSOURCEADAPTERCONFIG.enum_types_by_name['Format']
 HashmapSourceAdapterConfig = _reflection.GeneratedProtocolMessageType('HashmapSourceAdapterConfig', (_message.Message,), {
   'DESCRIPTOR' : _HASHMAPSOURCEADAPTERCONFIG,
   '__module__' : 'tensorflow_serving.servables.hashmap.hashmap_source_adapter_pb2'
@@ -89,5 +27,11 @@ HashmapSourceAdapterConfig = _reflection.GeneratedProtocolMessageType('HashmapSo
   })
 _sym_db.RegisterMessage(HashmapSourceAdapterConfig)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _HASHMAPSOURCEADAPTERCONFIG._serialized_start=89
+  _HASHMAPSOURCEADAPTERCONFIG._serialized_end=214
+  _HASHMAPSOURCEADAPTERCONFIG_FORMAT._serialized_start=190
+  _HASHMAPSOURCEADAPTERCONFIG_FORMAT._serialized_end=214
 # @@protoc_insertion_point(module_scope)

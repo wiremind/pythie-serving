@@ -3,6 +3,7 @@
 # source: tensorflow/core/util/memmapped_file_system.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,100 +14,12 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/util/memmapped_file_system.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=b'\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n0tensorflow/core/util/memmapped_file_system.proto\x12\ntensorflow\"S\n#MemmappedFileSystemDirectoryElement\x12\x0e\n\x06offset\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06length\x18\x03 \x01(\x04\"`\n\x1cMemmappedFileSystemDirectory\x12@\n\x07\x65lement\x18\x01 \x03(\x0b\x32/.tensorflow.MemmappedFileSystemDirectoryElementB\x03\xf8\x01\x01\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0tensorflow/core/util/memmapped_file_system.proto\x12\ntensorflow\"S\n#MemmappedFileSystemDirectoryElement\x12\x0e\n\x06offset\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06length\x18\x03 \x01(\x04\"`\n\x1cMemmappedFileSystemDirectory\x12@\n\x07\x65lement\x18\x01 \x03(\x0b\x32/.tensorflow.MemmappedFileSystemDirectoryElementB\x03\xf8\x01\x01\x62\x06proto3')
 
 
 
-
-_MEMMAPPEDFILESYSTEMDIRECTORYELEMENT = _descriptor.Descriptor(
-  name='MemmappedFileSystemDirectoryElement',
-  full_name='tensorflow.MemmappedFileSystemDirectoryElement',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='offset', full_name='tensorflow.MemmappedFileSystemDirectoryElement.offset', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='tensorflow.MemmappedFileSystemDirectoryElement.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='length', full_name='tensorflow.MemmappedFileSystemDirectoryElement.length', index=2,
-      number=3, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=64,
-  serialized_end=147,
-)
-
-
-_MEMMAPPEDFILESYSTEMDIRECTORY = _descriptor.Descriptor(
-  name='MemmappedFileSystemDirectory',
-  full_name='tensorflow.MemmappedFileSystemDirectory',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='element', full_name='tensorflow.MemmappedFileSystemDirectory.element', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=149,
-  serialized_end=245,
-)
-
-_MEMMAPPEDFILESYSTEMDIRECTORY.fields_by_name['element'].message_type = _MEMMAPPEDFILESYSTEMDIRECTORYELEMENT
-DESCRIPTOR.message_types_by_name['MemmappedFileSystemDirectoryElement'] = _MEMMAPPEDFILESYSTEMDIRECTORYELEMENT
-DESCRIPTOR.message_types_by_name['MemmappedFileSystemDirectory'] = _MEMMAPPEDFILESYSTEMDIRECTORY
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_MEMMAPPEDFILESYSTEMDIRECTORYELEMENT = DESCRIPTOR.message_types_by_name['MemmappedFileSystemDirectoryElement']
+_MEMMAPPEDFILESYSTEMDIRECTORY = DESCRIPTOR.message_types_by_name['MemmappedFileSystemDirectory']
 MemmappedFileSystemDirectoryElement = _reflection.GeneratedProtocolMessageType('MemmappedFileSystemDirectoryElement', (_message.Message,), {
   'DESCRIPTOR' : _MEMMAPPEDFILESYSTEMDIRECTORYELEMENT,
   '__module__' : 'tensorflow.core.util.memmapped_file_system_pb2'
@@ -121,6 +34,12 @@ MemmappedFileSystemDirectory = _reflection.GeneratedProtocolMessageType('Memmapp
   })
 _sym_db.RegisterMessage(MemmappedFileSystemDirectory)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\370\001\001'
+  _MEMMAPPEDFILESYSTEMDIRECTORYELEMENT._serialized_start=64
+  _MEMMAPPEDFILESYSTEMDIRECTORYELEMENT._serialized_end=147
+  _MEMMAPPEDFILESYSTEMDIRECTORY._serialized_start=149
+  _MEMMAPPEDFILESYSTEMDIRECTORY._serialized_end=245
 # @@protoc_insertion_point(module_scope)

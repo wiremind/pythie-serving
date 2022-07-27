@@ -3,6 +3,7 @@
 # source: tensorflow/compiler/xla/pjrt/distributed/protocol.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,369 +14,25 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/compiler/xla/pjrt/distributed/protocol.proto',
-  package='xla',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n7tensorflow/compiler/xla/pjrt/distributed/protocol.proto\x12\x03xla\"c\n\x0b\x44\x65viceProto\x12\x1c\n\x14local_device_ordinal\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06vendor\x18\x03 \x01(\t\x12\x18\n\x10global_device_id\x18\x04 \x01(\x05\"H\n\x12LocalTopologyProto\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12!\n\x07\x64\x65vices\x18\x02 \x03(\x0b\x32\x10.xla.DeviceProto\"=\n\x13GlobalTopologyProto\x12&\n\x05nodes\x18\x01 \x03(\x0b\x32\x17.xla.LocalTopologyProto\"[\n\x0e\x43onnectRequest\x12\x18\n\x10protocol_version\x18\x01 \x01(\x05\x12/\n\x0elocal_topology\x18\x02 \x01(\x0b\x32\x17.xla.LocalTopologyProto\"D\n\x0f\x43onnectResponse\x12\x31\n\x0fglobal_topology\x18\x02 \x01(\x0b\x32\x18.xla.GlobalTopologyProto\"?\n\x12KeyValueGetRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\x1c\n\x14timeout_milliseconds\x18\x02 \x01(\x05\"3\n\x13KeyValueGetResponse\x12\r\n\x05\x66ound\x18\x01 \x01(\x08\x12\r\n\x05value\x18\x02 \x01(\x0c\"0\n\x12KeyValueSetRequest\x12\x0b\n\x03key\x18\x01 \x01(\x0c\x12\r\n\x05value\x18\x02 \x01(\x0c\"\x15\n\x13KeyValueSetResponse2\xdb\x01\n\x19\x44istributedRuntimeService\x12\x36\n\x07\x43onnect\x12\x13.xla.ConnectRequest\x1a\x14.xla.ConnectResponse\"\x00\x12\x42\n\x0bKeyValueGet\x12\x17.xla.KeyValueGetRequest\x1a\x18.xla.KeyValueGetResponse\"\x00\x12\x42\n\x0bKeyValueSet\x12\x17.xla.KeyValueSetRequest\x1a\x18.xla.KeyValueSetResponse\"\x00\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n7tensorflow/compiler/xla/pjrt/distributed/protocol.proto\x12\x03xla\"c\n\x0b\x44\x65viceProto\x12\x1c\n\x14local_device_ordinal\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06vendor\x18\x03 \x01(\t\x12\x18\n\x10global_device_id\x18\x04 \x01(\x05\"H\n\x12LocalTopologyProto\x12\x0f\n\x07node_id\x18\x01 \x01(\x05\x12!\n\x07\x64\x65vices\x18\x02 \x03(\x0b\x32\x10.xla.DeviceProto\"=\n\x13GlobalTopologyProto\x12&\n\x05nodes\x18\x01 \x03(\x0b\x32\x17.xla.LocalTopologyProto\"l\n\x0e\x43onnectRequest\x12\x18\n\x10protocol_version\x18\x01 \x01(\x05\x12\x1c\n\x14timeout_milliseconds\x18\x02 \x01(\x05\x12\x0f\n\x07node_id\x18\x03 \x01(\x05\x12\x11\n\tclient_id\x18\x04 \x01(\x04\"%\n\x0f\x43onnectResponse\x12\x12\n\nsession_id\x18\x01 \x01(\x04\"^\n\x17\x45numerateDevicesRequest\x12\x12\n\nsession_id\x18\x01 \x01(\x04\x12/\n\x0elocal_topology\x18\x03 \x01(\x0b\x32\x17.xla.LocalTopologyProto\"M\n\x18\x45numerateDevicesResponse\x12\x31\n\x0fglobal_topology\x18\x01 \x01(\x0b\x32\x18.xla.GlobalTopologyProto\"S\n\x12KeyValueGetRequest\x12\x12\n\nsession_id\x18\x01 \x01(\x04\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\x1c\n\x14timeout_milliseconds\x18\x03 \x01(\x05\"3\n\x13KeyValueGetResponse\x12\r\n\x05\x66ound\x18\x01 \x01(\x08\x12\r\n\x05value\x18\x02 \x01(\x0c\"D\n\x12KeyValueSetRequest\x12\x12\n\nsession_id\x18\x01 \x01(\x04\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\r\n\x05value\x18\x03 \x01(\x0c\"\x15\n\x13KeyValueSetResponse\"7\n\x10HeartbeatRequest\x12\x12\n\nsession_id\x18\x01 \x01(\x04\x12\x0f\n\x07node_id\x18\x02 \x01(\x05\"\x13\n\x11HeartbeatResponse\"6\n\x0fShutdownRequest\x12\x12\n\nsession_id\x18\x01 \x01(\x04\x12\x0f\n\x07node_id\x18\x02 \x01(\x05\"\x12\n\x10ShutdownResponse2\xa7\x03\n\x19\x44istributedRuntimeService\x12\x36\n\x07\x43onnect\x12\x13.xla.ConnectRequest\x1a\x14.xla.ConnectResponse\"\x00\x12Q\n\x10\x45numerateDevices\x12\x1c.xla.EnumerateDevicesRequest\x1a\x1d.xla.EnumerateDevicesResponse\"\x00\x12<\n\tHeartbeat\x12\x15.xla.HeartbeatRequest\x1a\x16.xla.HeartbeatResponse\"\x00\x12\x39\n\x08Shutdown\x12\x14.xla.ShutdownRequest\x1a\x15.xla.ShutdownResponse\"\x00\x12\x42\n\x0bKeyValueGet\x12\x17.xla.KeyValueGetRequest\x1a\x18.xla.KeyValueGetResponse\"\x00\x12\x42\n\x0bKeyValueSet\x12\x17.xla.KeyValueSetRequest\x1a\x18.xla.KeyValueSetResponse\"\x00\x62\x06proto3')
 
 
 
-
-_DEVICEPROTO = _descriptor.Descriptor(
-  name='DeviceProto',
-  full_name='xla.DeviceProto',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='local_device_ordinal', full_name='xla.DeviceProto.local_device_ordinal', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='xla.DeviceProto.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='vendor', full_name='xla.DeviceProto.vendor', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='global_device_id', full_name='xla.DeviceProto.global_device_id', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=64,
-  serialized_end=163,
-)
-
-
-_LOCALTOPOLOGYPROTO = _descriptor.Descriptor(
-  name='LocalTopologyProto',
-  full_name='xla.LocalTopologyProto',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='node_id', full_name='xla.LocalTopologyProto.node_id', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='devices', full_name='xla.LocalTopologyProto.devices', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=165,
-  serialized_end=237,
-)
-
-
-_GLOBALTOPOLOGYPROTO = _descriptor.Descriptor(
-  name='GlobalTopologyProto',
-  full_name='xla.GlobalTopologyProto',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='nodes', full_name='xla.GlobalTopologyProto.nodes', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=239,
-  serialized_end=300,
-)
-
-
-_CONNECTREQUEST = _descriptor.Descriptor(
-  name='ConnectRequest',
-  full_name='xla.ConnectRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='protocol_version', full_name='xla.ConnectRequest.protocol_version', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='local_topology', full_name='xla.ConnectRequest.local_topology', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=302,
-  serialized_end=393,
-)
-
-
-_CONNECTRESPONSE = _descriptor.Descriptor(
-  name='ConnectResponse',
-  full_name='xla.ConnectResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='global_topology', full_name='xla.ConnectResponse.global_topology', index=0,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=395,
-  serialized_end=463,
-)
-
-
-_KEYVALUEGETREQUEST = _descriptor.Descriptor(
-  name='KeyValueGetRequest',
-  full_name='xla.KeyValueGetRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='xla.KeyValueGetRequest.key', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='timeout_milliseconds', full_name='xla.KeyValueGetRequest.timeout_milliseconds', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=465,
-  serialized_end=528,
-)
-
-
-_KEYVALUEGETRESPONSE = _descriptor.Descriptor(
-  name='KeyValueGetResponse',
-  full_name='xla.KeyValueGetResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='found', full_name='xla.KeyValueGetResponse.found', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='xla.KeyValueGetResponse.value', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=530,
-  serialized_end=581,
-)
-
-
-_KEYVALUESETREQUEST = _descriptor.Descriptor(
-  name='KeyValueSetRequest',
-  full_name='xla.KeyValueSetRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='xla.KeyValueSetRequest.key', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='xla.KeyValueSetRequest.value', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=583,
-  serialized_end=631,
-)
-
-
-_KEYVALUESETRESPONSE = _descriptor.Descriptor(
-  name='KeyValueSetResponse',
-  full_name='xla.KeyValueSetResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=633,
-  serialized_end=654,
-)
-
-_LOCALTOPOLOGYPROTO.fields_by_name['devices'].message_type = _DEVICEPROTO
-_GLOBALTOPOLOGYPROTO.fields_by_name['nodes'].message_type = _LOCALTOPOLOGYPROTO
-_CONNECTREQUEST.fields_by_name['local_topology'].message_type = _LOCALTOPOLOGYPROTO
-_CONNECTRESPONSE.fields_by_name['global_topology'].message_type = _GLOBALTOPOLOGYPROTO
-DESCRIPTOR.message_types_by_name['DeviceProto'] = _DEVICEPROTO
-DESCRIPTOR.message_types_by_name['LocalTopologyProto'] = _LOCALTOPOLOGYPROTO
-DESCRIPTOR.message_types_by_name['GlobalTopologyProto'] = _GLOBALTOPOLOGYPROTO
-DESCRIPTOR.message_types_by_name['ConnectRequest'] = _CONNECTREQUEST
-DESCRIPTOR.message_types_by_name['ConnectResponse'] = _CONNECTRESPONSE
-DESCRIPTOR.message_types_by_name['KeyValueGetRequest'] = _KEYVALUEGETREQUEST
-DESCRIPTOR.message_types_by_name['KeyValueGetResponse'] = _KEYVALUEGETRESPONSE
-DESCRIPTOR.message_types_by_name['KeyValueSetRequest'] = _KEYVALUESETREQUEST
-DESCRIPTOR.message_types_by_name['KeyValueSetResponse'] = _KEYVALUESETRESPONSE
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_DEVICEPROTO = DESCRIPTOR.message_types_by_name['DeviceProto']
+_LOCALTOPOLOGYPROTO = DESCRIPTOR.message_types_by_name['LocalTopologyProto']
+_GLOBALTOPOLOGYPROTO = DESCRIPTOR.message_types_by_name['GlobalTopologyProto']
+_CONNECTREQUEST = DESCRIPTOR.message_types_by_name['ConnectRequest']
+_CONNECTRESPONSE = DESCRIPTOR.message_types_by_name['ConnectResponse']
+_ENUMERATEDEVICESREQUEST = DESCRIPTOR.message_types_by_name['EnumerateDevicesRequest']
+_ENUMERATEDEVICESRESPONSE = DESCRIPTOR.message_types_by_name['EnumerateDevicesResponse']
+_KEYVALUEGETREQUEST = DESCRIPTOR.message_types_by_name['KeyValueGetRequest']
+_KEYVALUEGETRESPONSE = DESCRIPTOR.message_types_by_name['KeyValueGetResponse']
+_KEYVALUESETREQUEST = DESCRIPTOR.message_types_by_name['KeyValueSetRequest']
+_KEYVALUESETRESPONSE = DESCRIPTOR.message_types_by_name['KeyValueSetResponse']
+_HEARTBEATREQUEST = DESCRIPTOR.message_types_by_name['HeartbeatRequest']
+_HEARTBEATRESPONSE = DESCRIPTOR.message_types_by_name['HeartbeatResponse']
+_SHUTDOWNREQUEST = DESCRIPTOR.message_types_by_name['ShutdownRequest']
+_SHUTDOWNRESPONSE = DESCRIPTOR.message_types_by_name['ShutdownResponse']
 DeviceProto = _reflection.GeneratedProtocolMessageType('DeviceProto', (_message.Message,), {
   'DESCRIPTOR' : _DEVICEPROTO,
   '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
@@ -411,6 +68,20 @@ ConnectResponse = _reflection.GeneratedProtocolMessageType('ConnectResponse', (_
   })
 _sym_db.RegisterMessage(ConnectResponse)
 
+EnumerateDevicesRequest = _reflection.GeneratedProtocolMessageType('EnumerateDevicesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ENUMERATEDEVICESREQUEST,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.EnumerateDevicesRequest)
+  })
+_sym_db.RegisterMessage(EnumerateDevicesRequest)
+
+EnumerateDevicesResponse = _reflection.GeneratedProtocolMessageType('EnumerateDevicesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ENUMERATEDEVICESRESPONSE,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.EnumerateDevicesResponse)
+  })
+_sym_db.RegisterMessage(EnumerateDevicesResponse)
+
 KeyValueGetRequest = _reflection.GeneratedProtocolMessageType('KeyValueGetRequest', (_message.Message,), {
   'DESCRIPTOR' : _KEYVALUEGETREQUEST,
   '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
@@ -439,51 +110,68 @@ KeyValueSetResponse = _reflection.GeneratedProtocolMessageType('KeyValueSetRespo
   })
 _sym_db.RegisterMessage(KeyValueSetResponse)
 
+HeartbeatRequest = _reflection.GeneratedProtocolMessageType('HeartbeatRequest', (_message.Message,), {
+  'DESCRIPTOR' : _HEARTBEATREQUEST,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.HeartbeatRequest)
+  })
+_sym_db.RegisterMessage(HeartbeatRequest)
 
+HeartbeatResponse = _reflection.GeneratedProtocolMessageType('HeartbeatResponse', (_message.Message,), {
+  'DESCRIPTOR' : _HEARTBEATRESPONSE,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.HeartbeatResponse)
+  })
+_sym_db.RegisterMessage(HeartbeatResponse)
 
-_DISTRIBUTEDRUNTIMESERVICE = _descriptor.ServiceDescriptor(
-  name='DistributedRuntimeService',
-  full_name='xla.DistributedRuntimeService',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=657,
-  serialized_end=876,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='Connect',
-    full_name='xla.DistributedRuntimeService.Connect',
-    index=0,
-    containing_service=None,
-    input_type=_CONNECTREQUEST,
-    output_type=_CONNECTRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeyValueGet',
-    full_name='xla.DistributedRuntimeService.KeyValueGet',
-    index=1,
-    containing_service=None,
-    input_type=_KEYVALUEGETREQUEST,
-    output_type=_KEYVALUEGETRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='KeyValueSet',
-    full_name='xla.DistributedRuntimeService.KeyValueSet',
-    index=2,
-    containing_service=None,
-    input_type=_KEYVALUESETREQUEST,
-    output_type=_KEYVALUESETRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_DISTRIBUTEDRUNTIMESERVICE)
+ShutdownRequest = _reflection.GeneratedProtocolMessageType('ShutdownRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SHUTDOWNREQUEST,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.ShutdownRequest)
+  })
+_sym_db.RegisterMessage(ShutdownRequest)
 
-DESCRIPTOR.services_by_name['DistributedRuntimeService'] = _DISTRIBUTEDRUNTIMESERVICE
+ShutdownResponse = _reflection.GeneratedProtocolMessageType('ShutdownResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SHUTDOWNRESPONSE,
+  '__module__' : 'tensorflow.compiler.xla.pjrt.distributed.protocol_pb2'
+  # @@protoc_insertion_point(class_scope:xla.ShutdownResponse)
+  })
+_sym_db.RegisterMessage(ShutdownResponse)
 
+_DISTRIBUTEDRUNTIMESERVICE = DESCRIPTOR.services_by_name['DistributedRuntimeService']
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  _DEVICEPROTO._serialized_start=64
+  _DEVICEPROTO._serialized_end=163
+  _LOCALTOPOLOGYPROTO._serialized_start=165
+  _LOCALTOPOLOGYPROTO._serialized_end=237
+  _GLOBALTOPOLOGYPROTO._serialized_start=239
+  _GLOBALTOPOLOGYPROTO._serialized_end=300
+  _CONNECTREQUEST._serialized_start=302
+  _CONNECTREQUEST._serialized_end=410
+  _CONNECTRESPONSE._serialized_start=412
+  _CONNECTRESPONSE._serialized_end=449
+  _ENUMERATEDEVICESREQUEST._serialized_start=451
+  _ENUMERATEDEVICESREQUEST._serialized_end=545
+  _ENUMERATEDEVICESRESPONSE._serialized_start=547
+  _ENUMERATEDEVICESRESPONSE._serialized_end=624
+  _KEYVALUEGETREQUEST._serialized_start=626
+  _KEYVALUEGETREQUEST._serialized_end=709
+  _KEYVALUEGETRESPONSE._serialized_start=711
+  _KEYVALUEGETRESPONSE._serialized_end=762
+  _KEYVALUESETREQUEST._serialized_start=764
+  _KEYVALUESETREQUEST._serialized_end=832
+  _KEYVALUESETRESPONSE._serialized_start=834
+  _KEYVALUESETRESPONSE._serialized_end=855
+  _HEARTBEATREQUEST._serialized_start=857
+  _HEARTBEATREQUEST._serialized_end=912
+  _HEARTBEATRESPONSE._serialized_start=914
+  _HEARTBEATRESPONSE._serialized_end=933
+  _SHUTDOWNREQUEST._serialized_start=935
+  _SHUTDOWNREQUEST._serialized_end=989
+  _SHUTDOWNRESPONSE._serialized_start=991
+  _SHUTDOWNRESPONSE._serialized_end=1009
+  _DISTRIBUTEDRUNTIMESERVICE._serialized_start=1012
+  _DISTRIBUTEDRUNTIMESERVICE._serialized_end=1435
 # @@protoc_insertion_point(module_scope)

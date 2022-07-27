@@ -3,6 +3,7 @@
 # source: tensorflow/core/framework/function.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -16,454 +17,21 @@ from pythie_serving.tensorflow_proto.tensorflow.core.framework import node_def_p
 from pythie_serving.tensorflow_proto.tensorflow.core.framework import op_def_pb2 as tensorflow_dot_core_dot_framework_dot_op__def__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/framework/function.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=b'\n\030org.tensorflow.frameworkB\016FunctionProtosP\001ZOgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/function_go_proto\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n(tensorflow/core/framework/function.proto\x12\ntensorflow\x1a*tensorflow/core/framework/attr_value.proto\x1a(tensorflow/core/framework/node_def.proto\x1a&tensorflow/core/framework/op_def.proto\"j\n\x12\x46unctionDefLibrary\x12)\n\x08\x66unction\x18\x01 \x03(\x0b\x32\x17.tensorflow.FunctionDef\x12)\n\x08gradient\x18\x02 \x03(\x0b\x32\x17.tensorflow.GradientDef\"\xc4\x06\n\x0b\x46unctionDef\x12$\n\tsignature\x18\x01 \x01(\x0b\x32\x11.tensorflow.OpDef\x12/\n\x04\x61ttr\x18\x05 \x03(\x0b\x32!.tensorflow.FunctionDef.AttrEntry\x12\x36\n\x08\x61rg_attr\x18\x07 \x03(\x0b\x32$.tensorflow.FunctionDef.ArgAttrEntry\x12P\n\x16resource_arg_unique_id\x18\x08 \x03(\x0b\x32\x30.tensorflow.FunctionDef.ResourceArgUniqueIdEntry\x12%\n\x08node_def\x18\x03 \x03(\x0b\x32\x13.tensorflow.NodeDef\x12-\n\x03ret\x18\x04 \x03(\x0b\x32 .tensorflow.FunctionDef.RetEntry\x12<\n\x0b\x63ontrol_ret\x18\x06 \x03(\x0b\x32\'.tensorflow.FunctionDef.ControlRetEntry\x1a\x42\n\tAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12$\n\x05value\x18\x02 \x01(\x0b\x32\x15.tensorflow.AttrValue:\x02\x38\x01\x1a\x88\x01\n\x08\x41rgAttrs\x12\x38\n\x04\x61ttr\x18\x01 \x03(\x0b\x32*.tensorflow.FunctionDef.ArgAttrs.AttrEntry\x1a\x42\n\tAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12$\n\x05value\x18\x02 \x01(\x0b\x32\x15.tensorflow.AttrValue:\x02\x38\x01\x1aP\n\x0c\x41rgAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12/\n\x05value\x18\x02 \x01(\x0b\x32 .tensorflow.FunctionDef.ArgAttrs:\x02\x38\x01\x1a:\n\x18ResourceArgUniqueIdEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\r\n\x05value\x18\x02 \x01(\r:\x02\x38\x01\x1a*\n\x08RetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0f\x43ontrolRetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01J\x04\x08\x02\x10\x03\";\n\x0bGradientDef\x12\x15\n\rfunction_name\x18\x01 \x01(\t\x12\x15\n\rgradient_func\x18\x02 \x01(\tB\x80\x01\n\x18org.tensorflow.frameworkB\x0e\x46unctionProtosP\x01ZOgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/function_go_proto\xf8\x01\x01\x62\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_framework_dot_attr__value__pb2.DESCRIPTOR,tensorflow_dot_core_dot_framework_dot_node__def__pb2.DESCRIPTOR,tensorflow_dot_core_dot_framework_dot_op__def__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(tensorflow/core/framework/function.proto\x12\ntensorflow\x1a*tensorflow/core/framework/attr_value.proto\x1a(tensorflow/core/framework/node_def.proto\x1a&tensorflow/core/framework/op_def.proto\"\xa8\x01\n\x12\x46unctionDefLibrary\x12)\n\x08\x66unction\x18\x01 \x03(\x0b\x32\x17.tensorflow.FunctionDef\x12)\n\x08gradient\x18\x02 \x03(\x0b\x32\x17.tensorflow.GradientDef\x12<\n\x14registered_gradients\x18\x03 \x03(\x0b\x32\x1e.tensorflow.RegisteredGradient\"\xc4\x06\n\x0b\x46unctionDef\x12$\n\tsignature\x18\x01 \x01(\x0b\x32\x11.tensorflow.OpDef\x12/\n\x04\x61ttr\x18\x05 \x03(\x0b\x32!.tensorflow.FunctionDef.AttrEntry\x12\x36\n\x08\x61rg_attr\x18\x07 \x03(\x0b\x32$.tensorflow.FunctionDef.ArgAttrEntry\x12P\n\x16resource_arg_unique_id\x18\x08 \x03(\x0b\x32\x30.tensorflow.FunctionDef.ResourceArgUniqueIdEntry\x12%\n\x08node_def\x18\x03 \x03(\x0b\x32\x13.tensorflow.NodeDef\x12-\n\x03ret\x18\x04 \x03(\x0b\x32 .tensorflow.FunctionDef.RetEntry\x12<\n\x0b\x63ontrol_ret\x18\x06 \x03(\x0b\x32\'.tensorflow.FunctionDef.ControlRetEntry\x1a\x42\n\tAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12$\n\x05value\x18\x02 \x01(\x0b\x32\x15.tensorflow.AttrValue:\x02\x38\x01\x1a\x88\x01\n\x08\x41rgAttrs\x12\x38\n\x04\x61ttr\x18\x01 \x03(\x0b\x32*.tensorflow.FunctionDef.ArgAttrs.AttrEntry\x1a\x42\n\tAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12$\n\x05value\x18\x02 \x01(\x0b\x32\x15.tensorflow.AttrValue:\x02\x38\x01\x1aP\n\x0c\x41rgAttrEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12/\n\x05value\x18\x02 \x01(\x0b\x32 .tensorflow.FunctionDef.ArgAttrs:\x02\x38\x01\x1a:\n\x18ResourceArgUniqueIdEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12\r\n\x05value\x18\x02 \x01(\r:\x02\x38\x01\x1a*\n\x08RetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x31\n\x0f\x43ontrolRetEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01J\x04\x08\x02\x10\x03\";\n\x0bGradientDef\x12\x15\n\rfunction_name\x18\x01 \x01(\t\x12\x15\n\rgradient_func\x18\x02 \x01(\t\"G\n\x12RegisteredGradient\x12\x15\n\rgradient_func\x18\x01 \x01(\t\x12\x1a\n\x12registered_op_type\x18\x02 \x01(\tB\x80\x01\n\x18org.tensorflow.frameworkB\x0e\x46unctionProtosP\x01ZOgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/function_go_proto\xf8\x01\x01\x62\x06proto3')
 
 
 
-
-_FUNCTIONDEFLIBRARY = _descriptor.Descriptor(
-  name='FunctionDefLibrary',
-  full_name='tensorflow.FunctionDefLibrary',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='function', full_name='tensorflow.FunctionDefLibrary.function', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='gradient', full_name='tensorflow.FunctionDefLibrary.gradient', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=182,
-  serialized_end=288,
-)
-
-
-_FUNCTIONDEF_ATTRENTRY = _descriptor.Descriptor(
-  name='AttrEntry',
-  full_name='tensorflow.FunctionDef.AttrEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.AttrEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.AttrEntry.value', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=679,
-  serialized_end=745,
-)
-
-_FUNCTIONDEF_ARGATTRS_ATTRENTRY = _descriptor.Descriptor(
-  name='AttrEntry',
-  full_name='tensorflow.FunctionDef.ArgAttrs.AttrEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.ArgAttrs.AttrEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.ArgAttrs.AttrEntry.value', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=679,
-  serialized_end=745,
-)
-
-_FUNCTIONDEF_ARGATTRS = _descriptor.Descriptor(
-  name='ArgAttrs',
-  full_name='tensorflow.FunctionDef.ArgAttrs',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='attr', full_name='tensorflow.FunctionDef.ArgAttrs.attr', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_FUNCTIONDEF_ARGATTRS_ATTRENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=748,
-  serialized_end=884,
-)
-
-_FUNCTIONDEF_ARGATTRENTRY = _descriptor.Descriptor(
-  name='ArgAttrEntry',
-  full_name='tensorflow.FunctionDef.ArgAttrEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.ArgAttrEntry.key', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.ArgAttrEntry.value', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=886,
-  serialized_end=966,
-)
-
-_FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY = _descriptor.Descriptor(
-  name='ResourceArgUniqueIdEntry',
-  full_name='tensorflow.FunctionDef.ResourceArgUniqueIdEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.ResourceArgUniqueIdEntry.key', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.ResourceArgUniqueIdEntry.value', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=968,
-  serialized_end=1026,
-)
-
-_FUNCTIONDEF_RETENTRY = _descriptor.Descriptor(
-  name='RetEntry',
-  full_name='tensorflow.FunctionDef.RetEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.RetEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.RetEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1028,
-  serialized_end=1070,
-)
-
-_FUNCTIONDEF_CONTROLRETENTRY = _descriptor.Descriptor(
-  name='ControlRetEntry',
-  full_name='tensorflow.FunctionDef.ControlRetEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.FunctionDef.ControlRetEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.FunctionDef.ControlRetEntry.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1072,
-  serialized_end=1121,
-)
-
-_FUNCTIONDEF = _descriptor.Descriptor(
-  name='FunctionDef',
-  full_name='tensorflow.FunctionDef',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='signature', full_name='tensorflow.FunctionDef.signature', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='attr', full_name='tensorflow.FunctionDef.attr', index=1,
-      number=5, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='arg_attr', full_name='tensorflow.FunctionDef.arg_attr', index=2,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='resource_arg_unique_id', full_name='tensorflow.FunctionDef.resource_arg_unique_id', index=3,
-      number=8, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='node_def', full_name='tensorflow.FunctionDef.node_def', index=4,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='ret', full_name='tensorflow.FunctionDef.ret', index=5,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='control_ret', full_name='tensorflow.FunctionDef.control_ret', index=6,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_FUNCTIONDEF_ATTRENTRY, _FUNCTIONDEF_ARGATTRS, _FUNCTIONDEF_ARGATTRENTRY, _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY, _FUNCTIONDEF_RETENTRY, _FUNCTIONDEF_CONTROLRETENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=291,
-  serialized_end=1127,
-)
-
-
-_GRADIENTDEF = _descriptor.Descriptor(
-  name='GradientDef',
-  full_name='tensorflow.GradientDef',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='function_name', full_name='tensorflow.GradientDef.function_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='gradient_func', full_name='tensorflow.GradientDef.gradient_func', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1129,
-  serialized_end=1188,
-)
-
-_FUNCTIONDEFLIBRARY.fields_by_name['function'].message_type = _FUNCTIONDEF
-_FUNCTIONDEFLIBRARY.fields_by_name['gradient'].message_type = _GRADIENTDEF
-_FUNCTIONDEF_ATTRENTRY.fields_by_name['value'].message_type = tensorflow_dot_core_dot_framework_dot_attr__value__pb2._ATTRVALUE
-_FUNCTIONDEF_ATTRENTRY.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF_ARGATTRS_ATTRENTRY.fields_by_name['value'].message_type = tensorflow_dot_core_dot_framework_dot_attr__value__pb2._ATTRVALUE
-_FUNCTIONDEF_ARGATTRS_ATTRENTRY.containing_type = _FUNCTIONDEF_ARGATTRS
-_FUNCTIONDEF_ARGATTRS.fields_by_name['attr'].message_type = _FUNCTIONDEF_ARGATTRS_ATTRENTRY
-_FUNCTIONDEF_ARGATTRS.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF_ARGATTRENTRY.fields_by_name['value'].message_type = _FUNCTIONDEF_ARGATTRS
-_FUNCTIONDEF_ARGATTRENTRY.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF_RETENTRY.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF_CONTROLRETENTRY.containing_type = _FUNCTIONDEF
-_FUNCTIONDEF.fields_by_name['signature'].message_type = tensorflow_dot_core_dot_framework_dot_op__def__pb2._OPDEF
-_FUNCTIONDEF.fields_by_name['attr'].message_type = _FUNCTIONDEF_ATTRENTRY
-_FUNCTIONDEF.fields_by_name['arg_attr'].message_type = _FUNCTIONDEF_ARGATTRENTRY
-_FUNCTIONDEF.fields_by_name['resource_arg_unique_id'].message_type = _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY
-_FUNCTIONDEF.fields_by_name['node_def'].message_type = tensorflow_dot_core_dot_framework_dot_node__def__pb2._NODEDEF
-_FUNCTIONDEF.fields_by_name['ret'].message_type = _FUNCTIONDEF_RETENTRY
-_FUNCTIONDEF.fields_by_name['control_ret'].message_type = _FUNCTIONDEF_CONTROLRETENTRY
-DESCRIPTOR.message_types_by_name['FunctionDefLibrary'] = _FUNCTIONDEFLIBRARY
-DESCRIPTOR.message_types_by_name['FunctionDef'] = _FUNCTIONDEF
-DESCRIPTOR.message_types_by_name['GradientDef'] = _GRADIENTDEF
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_FUNCTIONDEFLIBRARY = DESCRIPTOR.message_types_by_name['FunctionDefLibrary']
+_FUNCTIONDEF = DESCRIPTOR.message_types_by_name['FunctionDef']
+_FUNCTIONDEF_ATTRENTRY = _FUNCTIONDEF.nested_types_by_name['AttrEntry']
+_FUNCTIONDEF_ARGATTRS = _FUNCTIONDEF.nested_types_by_name['ArgAttrs']
+_FUNCTIONDEF_ARGATTRS_ATTRENTRY = _FUNCTIONDEF_ARGATTRS.nested_types_by_name['AttrEntry']
+_FUNCTIONDEF_ARGATTRENTRY = _FUNCTIONDEF.nested_types_by_name['ArgAttrEntry']
+_FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY = _FUNCTIONDEF.nested_types_by_name['ResourceArgUniqueIdEntry']
+_FUNCTIONDEF_RETENTRY = _FUNCTIONDEF.nested_types_by_name['RetEntry']
+_FUNCTIONDEF_CONTROLRETENTRY = _FUNCTIONDEF.nested_types_by_name['ControlRetEntry']
+_GRADIENTDEF = DESCRIPTOR.message_types_by_name['GradientDef']
+_REGISTEREDGRADIENT = DESCRIPTOR.message_types_by_name['RegisteredGradient']
 FunctionDefLibrary = _reflection.GeneratedProtocolMessageType('FunctionDefLibrary', (_message.Message,), {
   'DESCRIPTOR' : _FUNCTIONDEFLIBRARY,
   '__module__' : 'tensorflow.core.framework.function_pb2'
@@ -541,12 +109,49 @@ GradientDef = _reflection.GeneratedProtocolMessageType('GradientDef', (_message.
   })
 _sym_db.RegisterMessage(GradientDef)
 
+RegisteredGradient = _reflection.GeneratedProtocolMessageType('RegisteredGradient', (_message.Message,), {
+  'DESCRIPTOR' : _REGISTEREDGRADIENT,
+  '__module__' : 'tensorflow.core.framework.function_pb2'
+  # @@protoc_insertion_point(class_scope:tensorflow.RegisteredGradient)
+  })
+_sym_db.RegisterMessage(RegisteredGradient)
 
-DESCRIPTOR._options = None
-_FUNCTIONDEF_ATTRENTRY._options = None
-_FUNCTIONDEF_ARGATTRS_ATTRENTRY._options = None
-_FUNCTIONDEF_ARGATTRENTRY._options = None
-_FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY._options = None
-_FUNCTIONDEF_RETENTRY._options = None
-_FUNCTIONDEF_CONTROLRETENTRY._options = None
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\030org.tensorflow.frameworkB\016FunctionProtosP\001ZOgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/function_go_proto\370\001\001'
+  _FUNCTIONDEF_ATTRENTRY._options = None
+  _FUNCTIONDEF_ATTRENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEF_ARGATTRS_ATTRENTRY._options = None
+  _FUNCTIONDEF_ARGATTRS_ATTRENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEF_ARGATTRENTRY._options = None
+  _FUNCTIONDEF_ARGATTRENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY._options = None
+  _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEF_RETENTRY._options = None
+  _FUNCTIONDEF_RETENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEF_CONTROLRETENTRY._options = None
+  _FUNCTIONDEF_CONTROLRETENTRY._serialized_options = b'8\001'
+  _FUNCTIONDEFLIBRARY._serialized_start=183
+  _FUNCTIONDEFLIBRARY._serialized_end=351
+  _FUNCTIONDEF._serialized_start=354
+  _FUNCTIONDEF._serialized_end=1190
+  _FUNCTIONDEF_ATTRENTRY._serialized_start=742
+  _FUNCTIONDEF_ATTRENTRY._serialized_end=808
+  _FUNCTIONDEF_ARGATTRS._serialized_start=811
+  _FUNCTIONDEF_ARGATTRS._serialized_end=947
+  _FUNCTIONDEF_ARGATTRS_ATTRENTRY._serialized_start=742
+  _FUNCTIONDEF_ARGATTRS_ATTRENTRY._serialized_end=808
+  _FUNCTIONDEF_ARGATTRENTRY._serialized_start=949
+  _FUNCTIONDEF_ARGATTRENTRY._serialized_end=1029
+  _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY._serialized_start=1031
+  _FUNCTIONDEF_RESOURCEARGUNIQUEIDENTRY._serialized_end=1089
+  _FUNCTIONDEF_RETENTRY._serialized_start=1091
+  _FUNCTIONDEF_RETENTRY._serialized_end=1133
+  _FUNCTIONDEF_CONTROLRETENTRY._serialized_start=1135
+  _FUNCTIONDEF_CONTROLRETENTRY._serialized_end=1184
+  _GRADIENTDEF._serialized_start=1192
+  _GRADIENTDEF._serialized_end=1251
+  _REGISTEREDGRADIENT._serialized_start=1253
+  _REGISTEREDGRADIENT._serialized_end=1324
 # @@protoc_insertion_point(module_scope)

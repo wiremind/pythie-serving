@@ -3,6 +3,7 @@
 # source: tensorflow_serving/sources/storage_path/static_storage_path_source.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,66 +14,11 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow_serving/sources/storage_path/static_storage_path_source.proto',
-  package='tensorflow.serving',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\nHtensorflow_serving/sources/storage_path/static_storage_path_source.proto\x12\x12tensorflow.serving\"a\n\x1dStaticStoragePathSourceConfig\x12\x15\n\rservable_name\x18\x01 \x01(\t\x12\x13\n\x0bversion_num\x18\x02 \x01(\x03\x12\x14\n\x0cversion_path\x18\x03 \x01(\tb\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nHtensorflow_serving/sources/storage_path/static_storage_path_source.proto\x12\x12tensorflow.serving\"a\n\x1dStaticStoragePathSourceConfig\x12\x15\n\rservable_name\x18\x01 \x01(\t\x12\x13\n\x0bversion_num\x18\x02 \x01(\x03\x12\x14\n\x0cversion_path\x18\x03 \x01(\tb\x06proto3')
 
 
 
-
-_STATICSTORAGEPATHSOURCECONFIG = _descriptor.Descriptor(
-  name='StaticStoragePathSourceConfig',
-  full_name='tensorflow.serving.StaticStoragePathSourceConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='servable_name', full_name='tensorflow.serving.StaticStoragePathSourceConfig.servable_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='version_num', full_name='tensorflow.serving.StaticStoragePathSourceConfig.version_num', index=1,
-      number=2, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='version_path', full_name='tensorflow.serving.StaticStoragePathSourceConfig.version_path', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=96,
-  serialized_end=193,
-)
-
-DESCRIPTOR.message_types_by_name['StaticStoragePathSourceConfig'] = _STATICSTORAGEPATHSOURCECONFIG
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_STATICSTORAGEPATHSOURCECONFIG = DESCRIPTOR.message_types_by_name['StaticStoragePathSourceConfig']
 StaticStoragePathSourceConfig = _reflection.GeneratedProtocolMessageType('StaticStoragePathSourceConfig', (_message.Message,), {
   'DESCRIPTOR' : _STATICSTORAGEPATHSOURCECONFIG,
   '__module__' : 'tensorflow_serving.sources.storage_path.static_storage_path_source_pb2'
@@ -80,5 +26,9 @@ StaticStoragePathSourceConfig = _reflection.GeneratedProtocolMessageType('Static
   })
 _sym_db.RegisterMessage(StaticStoragePathSourceConfig)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _STATICSTORAGEPATHSOURCECONFIG._serialized_start=96
+  _STATICSTORAGEPATHSOURCECONFIG._serialized_end=193
 # @@protoc_insertion_point(module_scope)

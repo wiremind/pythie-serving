@@ -3,6 +3,7 @@
 # source: tensorflow/core/data/service/worker.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -15,154 +16,16 @@ from pythie_serving.tensorflow_proto.tensorflow.core.data import dataset_pb2 as 
 from pythie_serving.tensorflow_proto.tensorflow.core.data.service import common_pb2 as tensorflow_dot_core_dot_data_dot_service_dot_common__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/data/service/worker.proto',
-  package='tensorflow.data',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n)tensorflow/core/data/service/worker.proto\x12\x0ftensorflow.data\x1a\"tensorflow/core/data/dataset.proto\x1a)tensorflow/core/data/service/common.proto\"<\n\x12ProcessTaskRequest\x12&\n\x04task\x18\x01 \x01(\x0b\x32\x18.tensorflow.data.TaskDef\"\x15\n\x13ProcessTaskResponse\"$\n\x11GetElementRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\"m\n\x12GetElementResponse\x12>\n\x12\x63ompressed_element\x18\x03 \x01(\x0b\x32\".tensorflow.data.CompressedElement\x12\x17\n\x0f\x65nd_of_sequence\x18\x02 \x01(\x08\x32\xc0\x01\n\rWorkerService\x12X\n\x0bProcessTask\x12#.tensorflow.data.ProcessTaskRequest\x1a$.tensorflow.data.ProcessTaskResponse\x12U\n\nGetElement\x12\".tensorflow.data.GetElementRequest\x1a#.tensorflow.data.GetElementResponseb\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_data_dot_dataset__pb2.DESCRIPTOR,tensorflow_dot_core_dot_data_dot_service_dot_common__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tensorflow/core/data/service/worker.proto\x12\x0ftensorflow.data\x1a\"tensorflow/core/data/dataset.proto\x1a)tensorflow/core/data/service/common.proto\"<\n\x12ProcessTaskRequest\x12&\n\x04task\x18\x01 \x01(\x0b\x32\x18.tensorflow.data.TaskDef\"\x15\n\x13ProcessTaskResponse\"\xbc\x01\n\x11GetElementRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\x12\x18\n\x0e\x63onsumer_index\x18\x02 \x01(\x03H\x00\x12\x15\n\x0bround_index\x18\x03 \x01(\x03H\x01\x12\x1e\n\x16skipped_previous_round\x18\x04 \x01(\x08\x12\x12\n\nallow_skip\x18\x05 \x01(\x08\x42\x19\n\x17optional_consumer_indexB\x16\n\x14optional_round_index\"\xda\x01\n\x12GetElementResponse\x12\x38\n\ncompressed\x18\x03 \x01(\x0b\x32\".tensorflow.data.CompressedElementH\x00\x12<\n\x0cuncompressed\x18\x05 \x01(\x0b\x32$.tensorflow.data.UncompressedElementH\x00\x12\x15\n\relement_index\x18\x06 \x01(\x03\x12\x17\n\x0f\x65nd_of_sequence\x18\x02 \x01(\x08\x12\x11\n\tskip_task\x18\x04 \x01(\x08\x42\t\n\x07\x65lement\"\x17\n\x15GetWorkerTasksRequest\"B\n\x16GetWorkerTasksResponse\x12(\n\x05tasks\x18\x01 \x03(\x0b\x32\x19.tensorflow.data.TaskInfo2\xa3\x02\n\rWorkerService\x12X\n\x0bProcessTask\x12#.tensorflow.data.ProcessTaskRequest\x1a$.tensorflow.data.ProcessTaskResponse\x12U\n\nGetElement\x12\".tensorflow.data.GetElementRequest\x1a#.tensorflow.data.GetElementResponse\x12\x61\n\x0eGetWorkerTasks\x12&.tensorflow.data.GetWorkerTasksRequest\x1a\'.tensorflow.data.GetWorkerTasksResponseb\x06proto3')
 
 
 
-
-_PROCESSTASKREQUEST = _descriptor.Descriptor(
-  name='ProcessTaskRequest',
-  full_name='tensorflow.data.ProcessTaskRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='task', full_name='tensorflow.data.ProcessTaskRequest.task', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=141,
-  serialized_end=201,
-)
-
-
-_PROCESSTASKRESPONSE = _descriptor.Descriptor(
-  name='ProcessTaskResponse',
-  full_name='tensorflow.data.ProcessTaskResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=203,
-  serialized_end=224,
-)
-
-
-_GETELEMENTREQUEST = _descriptor.Descriptor(
-  name='GetElementRequest',
-  full_name='tensorflow.data.GetElementRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='task_id', full_name='tensorflow.data.GetElementRequest.task_id', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=226,
-  serialized_end=262,
-)
-
-
-_GETELEMENTRESPONSE = _descriptor.Descriptor(
-  name='GetElementResponse',
-  full_name='tensorflow.data.GetElementResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='compressed_element', full_name='tensorflow.data.GetElementResponse.compressed_element', index=0,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='end_of_sequence', full_name='tensorflow.data.GetElementResponse.end_of_sequence', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=264,
-  serialized_end=373,
-)
-
-_PROCESSTASKREQUEST.fields_by_name['task'].message_type = tensorflow_dot_core_dot_data_dot_service_dot_common__pb2._TASKDEF
-_GETELEMENTRESPONSE.fields_by_name['compressed_element'].message_type = tensorflow_dot_core_dot_data_dot_dataset__pb2._COMPRESSEDELEMENT
-DESCRIPTOR.message_types_by_name['ProcessTaskRequest'] = _PROCESSTASKREQUEST
-DESCRIPTOR.message_types_by_name['ProcessTaskResponse'] = _PROCESSTASKRESPONSE
-DESCRIPTOR.message_types_by_name['GetElementRequest'] = _GETELEMENTREQUEST
-DESCRIPTOR.message_types_by_name['GetElementResponse'] = _GETELEMENTRESPONSE
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_PROCESSTASKREQUEST = DESCRIPTOR.message_types_by_name['ProcessTaskRequest']
+_PROCESSTASKRESPONSE = DESCRIPTOR.message_types_by_name['ProcessTaskResponse']
+_GETELEMENTREQUEST = DESCRIPTOR.message_types_by_name['GetElementRequest']
+_GETELEMENTRESPONSE = DESCRIPTOR.message_types_by_name['GetElementResponse']
+_GETWORKERTASKSREQUEST = DESCRIPTOR.message_types_by_name['GetWorkerTasksRequest']
+_GETWORKERTASKSRESPONSE = DESCRIPTOR.message_types_by_name['GetWorkerTasksResponse']
 ProcessTaskRequest = _reflection.GeneratedProtocolMessageType('ProcessTaskRequest', (_message.Message,), {
   'DESCRIPTOR' : _PROCESSTASKREQUEST,
   '__module__' : 'tensorflow.core.data.service.worker_pb2'
@@ -191,41 +54,36 @@ GetElementResponse = _reflection.GeneratedProtocolMessageType('GetElementRespons
   })
 _sym_db.RegisterMessage(GetElementResponse)
 
+GetWorkerTasksRequest = _reflection.GeneratedProtocolMessageType('GetWorkerTasksRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETWORKERTASKSREQUEST,
+  '__module__' : 'tensorflow.core.data.service.worker_pb2'
+  # @@protoc_insertion_point(class_scope:tensorflow.data.GetWorkerTasksRequest)
+  })
+_sym_db.RegisterMessage(GetWorkerTasksRequest)
 
+GetWorkerTasksResponse = _reflection.GeneratedProtocolMessageType('GetWorkerTasksResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETWORKERTASKSRESPONSE,
+  '__module__' : 'tensorflow.core.data.service.worker_pb2'
+  # @@protoc_insertion_point(class_scope:tensorflow.data.GetWorkerTasksResponse)
+  })
+_sym_db.RegisterMessage(GetWorkerTasksResponse)
 
-_WORKERSERVICE = _descriptor.ServiceDescriptor(
-  name='WorkerService',
-  full_name='tensorflow.data.WorkerService',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=376,
-  serialized_end=568,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='ProcessTask',
-    full_name='tensorflow.data.WorkerService.ProcessTask',
-    index=0,
-    containing_service=None,
-    input_type=_PROCESSTASKREQUEST,
-    output_type=_PROCESSTASKRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetElement',
-    full_name='tensorflow.data.WorkerService.GetElement',
-    index=1,
-    containing_service=None,
-    input_type=_GETELEMENTREQUEST,
-    output_type=_GETELEMENTRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_WORKERSERVICE)
+_WORKERSERVICE = DESCRIPTOR.services_by_name['WorkerService']
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR.services_by_name['WorkerService'] = _WORKERSERVICE
-
+  DESCRIPTOR._options = None
+  _PROCESSTASKREQUEST._serialized_start=141
+  _PROCESSTASKREQUEST._serialized_end=201
+  _PROCESSTASKRESPONSE._serialized_start=203
+  _PROCESSTASKRESPONSE._serialized_end=224
+  _GETELEMENTREQUEST._serialized_start=227
+  _GETELEMENTREQUEST._serialized_end=415
+  _GETELEMENTRESPONSE._serialized_start=418
+  _GETELEMENTRESPONSE._serialized_end=636
+  _GETWORKERTASKSREQUEST._serialized_start=638
+  _GETWORKERTASKSREQUEST._serialized_end=661
+  _GETWORKERTASKSRESPONSE._serialized_start=663
+  _GETWORKERTASKSRESPONSE._serialized_end=729
+  _WORKERSERVICE._serialized_start=732
+  _WORKERSERVICE._serialized_end=1023
 # @@protoc_insertion_point(module_scope)

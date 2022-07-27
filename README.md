@@ -17,7 +17,9 @@ To do this,
 
 run "sh generate_pbs.sh X.Y.Z" (you should have an already created pew virtualenv using python3.8 called 'grpc-build'),
 this will generate a working python package in ./tensorflow_proto from the tag version X.Y.Z of tensorflow repo
-you can then copy/paste this package inside src/pythie-serving/ and import it as you need
+you can then copy/paste this package inside src/pythie-serving/ and import it as you need.
+
+This will generate the necessary stubs for type-checking
 
 ## Available model architectures
 The following models can be served by pythie-serving:
@@ -60,7 +62,7 @@ The project is published on GitHub Container Registry: https://github.com/wiremi
 
 ## Development
 
-### How to add a new architecture type
+### Add a new architecture type
 To add a new architecture type, you need to implement a `prediction_service_pb2_grpc.PredictionServiceServicer`.
 To facilitate this, pythie-serving implements an abstract `AbstractPythieServingPredictionServiceServicer` that already implements the necessary `Predict` 
 method, taking a `PredictRequest` as input and outputing a `PredictResponse`.
