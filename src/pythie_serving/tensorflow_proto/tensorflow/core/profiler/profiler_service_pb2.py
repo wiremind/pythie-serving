@@ -3,6 +3,7 @@
 # source: tensorflow/core/profiler/profiler_service.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -15,412 +16,19 @@ from pythie_serving.tensorflow_proto.tensorflow.core.profiler import profiler_op
 from pythie_serving.tensorflow_proto.tensorflow.core.profiler import profiler_service_monitor_result_pb2 as tensorflow_dot_core_dot_profiler_dot_profiler__service__monitor__result__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/profiler/profiler_service.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n/tensorflow/core/profiler/profiler_service.proto\x12\ntensorflow\x1a/tensorflow/core/profiler/profiler_options.proto\x1a>tensorflow/core/profiler/profiler_service_monitor_result.proto\"B\n\x12ToolRequestOptions\x12\x16\n\x0eoutput_formats\x18\x02 \x01(\t\x12\x14\n\x0csave_to_repo\x18\x03 \x01(\x08\"\xc9\x02\n\x0eProfileRequest\x12\x13\n\x0b\x64uration_ms\x18\x01 \x01(\x04\x12\x12\n\nmax_events\x18\x02 \x01(\x04\x12\r\n\x05tools\x18\x03 \x03(\t\x12\x41\n\x0ctool_options\x18\x08 \x03(\x0b\x32+.tensorflow.ProfileRequest.ToolOptionsEntry\x12(\n\x04opts\x18\x04 \x01(\x0b\x32\x1a.tensorflow.ProfileOptions\x12\x17\n\x0frepository_root\x18\x05 \x01(\t\x12\x12\n\nsession_id\x18\x06 \x01(\t\x12\x11\n\thost_name\x18\x07 \x01(\t\x1aR\n\x10ToolOptionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12-\n\x05value\x18\x02 \x01(\x0b\x32\x1e.tensorflow.ToolRequestOptions:\x02\x38\x01\"-\n\x0fProfileToolData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"t\n\x0fProfileResponse\x12.\n\ttool_data\x18\x06 \x03(\x0b\x32\x1b.tensorflow.ProfileToolData\x12\x13\n\x0b\x65mpty_trace\x18\x07 \x01(\x08J\x04\x08\x01\x10\x02J\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06\"&\n\x10TerminateRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\"\x13\n\x11TerminateResponse\"R\n\x0eMonitorRequest\x12\x13\n\x0b\x64uration_ms\x18\x01 \x01(\x04\x12\x18\n\x10monitoring_level\x18\x02 \x01(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x08\"\x91\x01\n\x0fMonitorResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12@\n\x0emonitor_result\x18\n \x01(\x0b\x32(.tensorflow.ProfilerServiceMonitorResultJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x07\x10\x08J\x04\x08\x08\x10\tJ\x04\x08\t\x10\n2\xe9\x01\n\x0fProfilerService\x12\x44\n\x07Profile\x12\x1a.tensorflow.ProfileRequest\x1a\x1b.tensorflow.ProfileResponse\"\x00\x12J\n\tTerminate\x12\x1c.tensorflow.TerminateRequest\x1a\x1d.tensorflow.TerminateResponse\"\x00\x12\x44\n\x07Monitor\x12\x1a.tensorflow.MonitorRequest\x1a\x1b.tensorflow.MonitorResponse\"\x00\x62\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_profiler_dot_profiler__options__pb2.DESCRIPTOR,tensorflow_dot_core_dot_profiler_dot_profiler__service__monitor__result__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n/tensorflow/core/profiler/profiler_service.proto\x12\ntensorflow\x1a/tensorflow/core/profiler/profiler_options.proto\x1a>tensorflow/core/profiler/profiler_service_monitor_result.proto\"B\n\x12ToolRequestOptions\x12\x16\n\x0eoutput_formats\x18\x02 \x01(\t\x12\x14\n\x0csave_to_repo\x18\x03 \x01(\x08\"\xc9\x02\n\x0eProfileRequest\x12\x13\n\x0b\x64uration_ms\x18\x01 \x01(\x04\x12\x12\n\nmax_events\x18\x02 \x01(\x04\x12\r\n\x05tools\x18\x03 \x03(\t\x12\x41\n\x0ctool_options\x18\x08 \x03(\x0b\x32+.tensorflow.ProfileRequest.ToolOptionsEntry\x12(\n\x04opts\x18\x04 \x01(\x0b\x32\x1a.tensorflow.ProfileOptions\x12\x17\n\x0frepository_root\x18\x05 \x01(\t\x12\x12\n\nsession_id\x18\x06 \x01(\t\x12\x11\n\thost_name\x18\x07 \x01(\t\x1aR\n\x10ToolOptionsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12-\n\x05value\x18\x02 \x01(\x0b\x32\x1e.tensorflow.ToolRequestOptions:\x02\x38\x01\"-\n\x0fProfileToolData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"t\n\x0fProfileResponse\x12.\n\ttool_data\x18\x06 \x03(\x0b\x32\x1b.tensorflow.ProfileToolData\x12\x13\n\x0b\x65mpty_trace\x18\x07 \x01(\x08J\x04\x08\x01\x10\x02J\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06\"&\n\x10TerminateRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\"\x13\n\x11TerminateResponse\"R\n\x0eMonitorRequest\x12\x13\n\x0b\x64uration_ms\x18\x01 \x01(\x04\x12\x18\n\x10monitoring_level\x18\x02 \x01(\x05\x12\x11\n\ttimestamp\x18\x03 \x01(\x08\"\x91\x01\n\x0fMonitorResponse\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12@\n\x0emonitor_result\x18\n \x01(\x0b\x32(.tensorflow.ProfilerServiceMonitorResultJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x07\x10\x08J\x04\x08\x08\x10\tJ\x04\x08\t\x10\n2\xe9\x01\n\x0fProfilerService\x12\x44\n\x07Profile\x12\x1a.tensorflow.ProfileRequest\x1a\x1b.tensorflow.ProfileResponse\"\x00\x12J\n\tTerminate\x12\x1c.tensorflow.TerminateRequest\x1a\x1d.tensorflow.TerminateResponse\"\x00\x12\x44\n\x07Monitor\x12\x1a.tensorflow.MonitorRequest\x1a\x1b.tensorflow.MonitorResponse\"\x00\x62\x06proto3')
 
 
 
-
-_TOOLREQUESTOPTIONS = _descriptor.Descriptor(
-  name='ToolRequestOptions',
-  full_name='tensorflow.ToolRequestOptions',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='output_formats', full_name='tensorflow.ToolRequestOptions.output_formats', index=0,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='save_to_repo', full_name='tensorflow.ToolRequestOptions.save_to_repo', index=1,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=176,
-  serialized_end=242,
-)
-
-
-_PROFILEREQUEST_TOOLOPTIONSENTRY = _descriptor.Descriptor(
-  name='ToolOptionsEntry',
-  full_name='tensorflow.ProfileRequest.ToolOptionsEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.ProfileRequest.ToolOptionsEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.ProfileRequest.ToolOptionsEntry.value', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=492,
-  serialized_end=574,
-)
-
-_PROFILEREQUEST = _descriptor.Descriptor(
-  name='ProfileRequest',
-  full_name='tensorflow.ProfileRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='duration_ms', full_name='tensorflow.ProfileRequest.duration_ms', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='max_events', full_name='tensorflow.ProfileRequest.max_events', index=1,
-      number=2, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tools', full_name='tensorflow.ProfileRequest.tools', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tool_options', full_name='tensorflow.ProfileRequest.tool_options', index=3,
-      number=8, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='opts', full_name='tensorflow.ProfileRequest.opts', index=4,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='repository_root', full_name='tensorflow.ProfileRequest.repository_root', index=5,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='session_id', full_name='tensorflow.ProfileRequest.session_id', index=6,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='host_name', full_name='tensorflow.ProfileRequest.host_name', index=7,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_PROFILEREQUEST_TOOLOPTIONSENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=245,
-  serialized_end=574,
-)
-
-
-_PROFILETOOLDATA = _descriptor.Descriptor(
-  name='ProfileToolData',
-  full_name='tensorflow.ProfileToolData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='tensorflow.ProfileToolData.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='tensorflow.ProfileToolData.data', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=576,
-  serialized_end=621,
-)
-
-
-_PROFILERESPONSE = _descriptor.Descriptor(
-  name='ProfileResponse',
-  full_name='tensorflow.ProfileResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tool_data', full_name='tensorflow.ProfileResponse.tool_data', index=0,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='empty_trace', full_name='tensorflow.ProfileResponse.empty_trace', index=1,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=623,
-  serialized_end=739,
-)
-
-
-_TERMINATEREQUEST = _descriptor.Descriptor(
-  name='TerminateRequest',
-  full_name='tensorflow.TerminateRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='session_id', full_name='tensorflow.TerminateRequest.session_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=741,
-  serialized_end=779,
-)
-
-
-_TERMINATERESPONSE = _descriptor.Descriptor(
-  name='TerminateResponse',
-  full_name='tensorflow.TerminateResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=781,
-  serialized_end=800,
-)
-
-
-_MONITORREQUEST = _descriptor.Descriptor(
-  name='MonitorRequest',
-  full_name='tensorflow.MonitorRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='duration_ms', full_name='tensorflow.MonitorRequest.duration_ms', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='monitoring_level', full_name='tensorflow.MonitorRequest.monitoring_level', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='tensorflow.MonitorRequest.timestamp', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=802,
-  serialized_end=884,
-)
-
-
-_MONITORRESPONSE = _descriptor.Descriptor(
-  name='MonitorResponse',
-  full_name='tensorflow.MonitorResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='data', full_name='tensorflow.MonitorResponse.data', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='monitor_result', full_name='tensorflow.MonitorResponse.monitor_result', index=1,
-      number=10, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=887,
-  serialized_end=1032,
-)
-
-_PROFILEREQUEST_TOOLOPTIONSENTRY.fields_by_name['value'].message_type = _TOOLREQUESTOPTIONS
-_PROFILEREQUEST_TOOLOPTIONSENTRY.containing_type = _PROFILEREQUEST
-_PROFILEREQUEST.fields_by_name['tool_options'].message_type = _PROFILEREQUEST_TOOLOPTIONSENTRY
-_PROFILEREQUEST.fields_by_name['opts'].message_type = tensorflow_dot_core_dot_profiler_dot_profiler__options__pb2._PROFILEOPTIONS
-_PROFILERESPONSE.fields_by_name['tool_data'].message_type = _PROFILETOOLDATA
-_MONITORRESPONSE.fields_by_name['monitor_result'].message_type = tensorflow_dot_core_dot_profiler_dot_profiler__service__monitor__result__pb2._PROFILERSERVICEMONITORRESULT
-DESCRIPTOR.message_types_by_name['ToolRequestOptions'] = _TOOLREQUESTOPTIONS
-DESCRIPTOR.message_types_by_name['ProfileRequest'] = _PROFILEREQUEST
-DESCRIPTOR.message_types_by_name['ProfileToolData'] = _PROFILETOOLDATA
-DESCRIPTOR.message_types_by_name['ProfileResponse'] = _PROFILERESPONSE
-DESCRIPTOR.message_types_by_name['TerminateRequest'] = _TERMINATEREQUEST
-DESCRIPTOR.message_types_by_name['TerminateResponse'] = _TERMINATERESPONSE
-DESCRIPTOR.message_types_by_name['MonitorRequest'] = _MONITORREQUEST
-DESCRIPTOR.message_types_by_name['MonitorResponse'] = _MONITORRESPONSE
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_TOOLREQUESTOPTIONS = DESCRIPTOR.message_types_by_name['ToolRequestOptions']
+_PROFILEREQUEST = DESCRIPTOR.message_types_by_name['ProfileRequest']
+_PROFILEREQUEST_TOOLOPTIONSENTRY = _PROFILEREQUEST.nested_types_by_name['ToolOptionsEntry']
+_PROFILETOOLDATA = DESCRIPTOR.message_types_by_name['ProfileToolData']
+_PROFILERESPONSE = DESCRIPTOR.message_types_by_name['ProfileResponse']
+_TERMINATEREQUEST = DESCRIPTOR.message_types_by_name['TerminateRequest']
+_TERMINATERESPONSE = DESCRIPTOR.message_types_by_name['TerminateResponse']
+_MONITORREQUEST = DESCRIPTOR.message_types_by_name['MonitorRequest']
+_MONITORRESPONSE = DESCRIPTOR.message_types_by_name['MonitorResponse']
 ToolRequestOptions = _reflection.GeneratedProtocolMessageType('ToolRequestOptions', (_message.Message,), {
   'DESCRIPTOR' : _TOOLREQUESTOPTIONS,
   '__module__' : 'tensorflow.core.profiler.profiler_service_pb2'
@@ -485,52 +93,30 @@ MonitorResponse = _reflection.GeneratedProtocolMessageType('MonitorResponse', (_
   })
 _sym_db.RegisterMessage(MonitorResponse)
 
+_PROFILERSERVICE = DESCRIPTOR.services_by_name['ProfilerService']
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-_PROFILEREQUEST_TOOLOPTIONSENTRY._options = None
-
-_PROFILERSERVICE = _descriptor.ServiceDescriptor(
-  name='ProfilerService',
-  full_name='tensorflow.ProfilerService',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=1035,
-  serialized_end=1268,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='Profile',
-    full_name='tensorflow.ProfilerService.Profile',
-    index=0,
-    containing_service=None,
-    input_type=_PROFILEREQUEST,
-    output_type=_PROFILERESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Terminate',
-    full_name='tensorflow.ProfilerService.Terminate',
-    index=1,
-    containing_service=None,
-    input_type=_TERMINATEREQUEST,
-    output_type=_TERMINATERESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Monitor',
-    full_name='tensorflow.ProfilerService.Monitor',
-    index=2,
-    containing_service=None,
-    input_type=_MONITORREQUEST,
-    output_type=_MONITORRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_PROFILERSERVICE)
-
-DESCRIPTOR.services_by_name['ProfilerService'] = _PROFILERSERVICE
-
+  DESCRIPTOR._options = None
+  _PROFILEREQUEST_TOOLOPTIONSENTRY._options = None
+  _PROFILEREQUEST_TOOLOPTIONSENTRY._serialized_options = b'8\001'
+  _TOOLREQUESTOPTIONS._serialized_start=176
+  _TOOLREQUESTOPTIONS._serialized_end=242
+  _PROFILEREQUEST._serialized_start=245
+  _PROFILEREQUEST._serialized_end=574
+  _PROFILEREQUEST_TOOLOPTIONSENTRY._serialized_start=492
+  _PROFILEREQUEST_TOOLOPTIONSENTRY._serialized_end=574
+  _PROFILETOOLDATA._serialized_start=576
+  _PROFILETOOLDATA._serialized_end=621
+  _PROFILERESPONSE._serialized_start=623
+  _PROFILERESPONSE._serialized_end=739
+  _TERMINATEREQUEST._serialized_start=741
+  _TERMINATEREQUEST._serialized_end=779
+  _TERMINATERESPONSE._serialized_start=781
+  _TERMINATERESPONSE._serialized_end=800
+  _MONITORREQUEST._serialized_start=802
+  _MONITORREQUEST._serialized_end=884
+  _MONITORRESPONSE._serialized_start=887
+  _MONITORRESPONSE._serialized_end=1032
+  _PROFILERSERVICE._serialized_start=1035
+  _PROFILERSERVICE._serialized_end=1268
 # @@protoc_insertion_point(module_scope)

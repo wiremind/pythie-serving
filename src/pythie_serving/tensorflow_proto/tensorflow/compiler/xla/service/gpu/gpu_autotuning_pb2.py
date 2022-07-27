@@ -3,6 +3,7 @@
 # source: tensorflow/compiler/xla/service/gpu/gpu_autotuning.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -16,214 +17,14 @@ from pythie_serving.tensorflow_proto.tensorflow.compiler.xla import xla_data_pb2
 from pythie_serving.tensorflow_proto.tensorflow.core.protobuf import autotuning_pb2 as tensorflow_dot_core_dot_protobuf_dot_autotuning__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/compiler/xla/service/gpu/gpu_autotuning.proto',
-  package='xla.gpu',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n8tensorflow/compiler/xla/service/gpu/gpu_autotuning.proto\x12\x07xla.gpu\x1a)tensorflow/compiler/xla/service/hlo.proto\x1a&tensorflow/compiler/xla/xla_data.proto\x1a)tensorflow/core/protobuf/autotuning.proto\"\x9f\x01\n\x12\x43onvInstructionLog\x12-\n\x0binstruction\x18\x01 \x01(\x0b\x32\x18.xla.HloInstructionProto\x12\'\n\x0eoperand_shapes\x18\x02 \x03(\x0b\x32\x0f.xla.ShapeProto\x12\x16\n\x0eresult_address\x18\x03 \x01(\x04\x12\x19\n\x11operand_addresses\x18\x04 \x03(\x04\"6\n\x14\x42lacklistedAlgorithm\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x12\n\ntensor_ops\x18\x02 \x01(\x08\"\xc6\x01\n\x17\x41lgorithmBlacklistEntry\x12\x0b\n\x03hlo\x18\x01 \x01(\t\x12)\n\x02\x63\x63\x18\x02 \x01(\x0b\x32\x1d.tensorflow.ComputeCapability\x12/\n\rcudnn_version\x18\x03 \x01(\x0b\x32\x18.tensorflow.CudnnVersion\x12\x14\n\x0c\x62las_version\x18\x05 \x01(\t\x12,\n\x05\x61lgos\x18\x04 \x03(\x0b\x32\x1d.xla.gpu.BlacklistedAlgorithm\"G\n\x12\x41lgorithmBlacklist\x12\x31\n\x07\x65ntries\x18\x01 \x03(\x0b\x32 .xla.gpu.AlgorithmBlacklistEntryb\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_compiler_dot_xla_dot_service_dot_hlo__pb2.DESCRIPTOR,tensorflow_dot_compiler_dot_xla_dot_xla__data__pb2.DESCRIPTOR,tensorflow_dot_core_dot_protobuf_dot_autotuning__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n8tensorflow/compiler/xla/service/gpu/gpu_autotuning.proto\x12\x07xla.gpu\x1a)tensorflow/compiler/xla/service/hlo.proto\x1a&tensorflow/compiler/xla/xla_data.proto\x1a)tensorflow/core/protobuf/autotuning.proto\"\x9f\x01\n\x12\x43onvInstructionLog\x12-\n\x0binstruction\x18\x01 \x01(\x0b\x32\x18.xla.HloInstructionProto\x12\'\n\x0eoperand_shapes\x18\x02 \x03(\x0b\x32\x0f.xla.ShapeProto\x12\x16\n\x0eresult_address\x18\x03 \x01(\x04\x12\x19\n\x11operand_addresses\x18\x04 \x03(\x04\"5\n\x13\x44\x65nylistedAlgorithm\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x12\n\ntensor_ops\x18\x02 \x01(\x08\"\xc4\x01\n\x16\x41lgorithmDenylistEntry\x12\x0b\n\x03hlo\x18\x01 \x01(\t\x12)\n\x02\x63\x63\x18\x02 \x01(\x0b\x32\x1d.tensorflow.ComputeCapability\x12/\n\rcudnn_version\x18\x03 \x01(\x0b\x32\x18.tensorflow.CudnnVersion\x12\x14\n\x0c\x62las_version\x18\x05 \x01(\t\x12+\n\x05\x61lgos\x18\x04 \x03(\x0b\x32\x1c.xla.gpu.DenylistedAlgorithm\"E\n\x11\x41lgorithmDenylist\x12\x30\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x1f.xla.gpu.AlgorithmDenylistEntryb\x06proto3')
 
 
 
-
-_CONVINSTRUCTIONLOG = _descriptor.Descriptor(
-  name='ConvInstructionLog',
-  full_name='xla.gpu.ConvInstructionLog',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='instruction', full_name='xla.gpu.ConvInstructionLog.instruction', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='operand_shapes', full_name='xla.gpu.ConvInstructionLog.operand_shapes', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='result_address', full_name='xla.gpu.ConvInstructionLog.result_address', index=2,
-      number=3, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='operand_addresses', full_name='xla.gpu.ConvInstructionLog.operand_addresses', index=3,
-      number=4, type=4, cpp_type=4, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=196,
-  serialized_end=355,
-)
-
-
-_BLACKLISTEDALGORITHM = _descriptor.Descriptor(
-  name='BlacklistedAlgorithm',
-  full_name='xla.gpu.BlacklistedAlgorithm',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='xla.gpu.BlacklistedAlgorithm.id', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tensor_ops', full_name='xla.gpu.BlacklistedAlgorithm.tensor_ops', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=357,
-  serialized_end=411,
-)
-
-
-_ALGORITHMBLACKLISTENTRY = _descriptor.Descriptor(
-  name='AlgorithmBlacklistEntry',
-  full_name='xla.gpu.AlgorithmBlacklistEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='hlo', full_name='xla.gpu.AlgorithmBlacklistEntry.hlo', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cc', full_name='xla.gpu.AlgorithmBlacklistEntry.cc', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cudnn_version', full_name='xla.gpu.AlgorithmBlacklistEntry.cudnn_version', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='blas_version', full_name='xla.gpu.AlgorithmBlacklistEntry.blas_version', index=3,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='algos', full_name='xla.gpu.AlgorithmBlacklistEntry.algos', index=4,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=414,
-  serialized_end=612,
-)
-
-
-_ALGORITHMBLACKLIST = _descriptor.Descriptor(
-  name='AlgorithmBlacklist',
-  full_name='xla.gpu.AlgorithmBlacklist',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='entries', full_name='xla.gpu.AlgorithmBlacklist.entries', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=614,
-  serialized_end=685,
-)
-
-_CONVINSTRUCTIONLOG.fields_by_name['instruction'].message_type = tensorflow_dot_compiler_dot_xla_dot_service_dot_hlo__pb2._HLOINSTRUCTIONPROTO
-_CONVINSTRUCTIONLOG.fields_by_name['operand_shapes'].message_type = tensorflow_dot_compiler_dot_xla_dot_xla__data__pb2._SHAPEPROTO
-_ALGORITHMBLACKLISTENTRY.fields_by_name['cc'].message_type = tensorflow_dot_core_dot_protobuf_dot_autotuning__pb2._COMPUTECAPABILITY
-_ALGORITHMBLACKLISTENTRY.fields_by_name['cudnn_version'].message_type = tensorflow_dot_core_dot_protobuf_dot_autotuning__pb2._CUDNNVERSION
-_ALGORITHMBLACKLISTENTRY.fields_by_name['algos'].message_type = _BLACKLISTEDALGORITHM
-_ALGORITHMBLACKLIST.fields_by_name['entries'].message_type = _ALGORITHMBLACKLISTENTRY
-DESCRIPTOR.message_types_by_name['ConvInstructionLog'] = _CONVINSTRUCTIONLOG
-DESCRIPTOR.message_types_by_name['BlacklistedAlgorithm'] = _BLACKLISTEDALGORITHM
-DESCRIPTOR.message_types_by_name['AlgorithmBlacklistEntry'] = _ALGORITHMBLACKLISTENTRY
-DESCRIPTOR.message_types_by_name['AlgorithmBlacklist'] = _ALGORITHMBLACKLIST
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_CONVINSTRUCTIONLOG = DESCRIPTOR.message_types_by_name['ConvInstructionLog']
+_DENYLISTEDALGORITHM = DESCRIPTOR.message_types_by_name['DenylistedAlgorithm']
+_ALGORITHMDENYLISTENTRY = DESCRIPTOR.message_types_by_name['AlgorithmDenylistEntry']
+_ALGORITHMDENYLIST = DESCRIPTOR.message_types_by_name['AlgorithmDenylist']
 ConvInstructionLog = _reflection.GeneratedProtocolMessageType('ConvInstructionLog', (_message.Message,), {
   'DESCRIPTOR' : _CONVINSTRUCTIONLOG,
   '__module__' : 'tensorflow.compiler.xla.service.gpu.gpu_autotuning_pb2'
@@ -231,26 +32,36 @@ ConvInstructionLog = _reflection.GeneratedProtocolMessageType('ConvInstructionLo
   })
 _sym_db.RegisterMessage(ConvInstructionLog)
 
-BlacklistedAlgorithm = _reflection.GeneratedProtocolMessageType('BlacklistedAlgorithm', (_message.Message,), {
-  'DESCRIPTOR' : _BLACKLISTEDALGORITHM,
+DenylistedAlgorithm = _reflection.GeneratedProtocolMessageType('DenylistedAlgorithm', (_message.Message,), {
+  'DESCRIPTOR' : _DENYLISTEDALGORITHM,
   '__module__' : 'tensorflow.compiler.xla.service.gpu.gpu_autotuning_pb2'
-  # @@protoc_insertion_point(class_scope:xla.gpu.BlacklistedAlgorithm)
+  # @@protoc_insertion_point(class_scope:xla.gpu.DenylistedAlgorithm)
   })
-_sym_db.RegisterMessage(BlacklistedAlgorithm)
+_sym_db.RegisterMessage(DenylistedAlgorithm)
 
-AlgorithmBlacklistEntry = _reflection.GeneratedProtocolMessageType('AlgorithmBlacklistEntry', (_message.Message,), {
-  'DESCRIPTOR' : _ALGORITHMBLACKLISTENTRY,
+AlgorithmDenylistEntry = _reflection.GeneratedProtocolMessageType('AlgorithmDenylistEntry', (_message.Message,), {
+  'DESCRIPTOR' : _ALGORITHMDENYLISTENTRY,
   '__module__' : 'tensorflow.compiler.xla.service.gpu.gpu_autotuning_pb2'
-  # @@protoc_insertion_point(class_scope:xla.gpu.AlgorithmBlacklistEntry)
+  # @@protoc_insertion_point(class_scope:xla.gpu.AlgorithmDenylistEntry)
   })
-_sym_db.RegisterMessage(AlgorithmBlacklistEntry)
+_sym_db.RegisterMessage(AlgorithmDenylistEntry)
 
-AlgorithmBlacklist = _reflection.GeneratedProtocolMessageType('AlgorithmBlacklist', (_message.Message,), {
-  'DESCRIPTOR' : _ALGORITHMBLACKLIST,
+AlgorithmDenylist = _reflection.GeneratedProtocolMessageType('AlgorithmDenylist', (_message.Message,), {
+  'DESCRIPTOR' : _ALGORITHMDENYLIST,
   '__module__' : 'tensorflow.compiler.xla.service.gpu.gpu_autotuning_pb2'
-  # @@protoc_insertion_point(class_scope:xla.gpu.AlgorithmBlacklist)
+  # @@protoc_insertion_point(class_scope:xla.gpu.AlgorithmDenylist)
   })
-_sym_db.RegisterMessage(AlgorithmBlacklist)
+_sym_db.RegisterMessage(AlgorithmDenylist)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _CONVINSTRUCTIONLOG._serialized_start=196
+  _CONVINSTRUCTIONLOG._serialized_end=355
+  _DENYLISTEDALGORITHM._serialized_start=357
+  _DENYLISTEDALGORITHM._serialized_end=410
+  _ALGORITHMDENYLISTENTRY._serialized_start=413
+  _ALGORITHMDENYLISTENTRY._serialized_end=609
+  _ALGORITHMDENYLIST._serialized_start=611
+  _ALGORITHMDENYLIST._serialized_end=680
 # @@protoc_insertion_point(module_scope)

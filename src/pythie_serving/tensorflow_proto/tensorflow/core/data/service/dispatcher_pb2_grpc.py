@@ -14,15 +14,30 @@ class DispatcherServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.RegisterWorker = channel.unary_unary(
-                '/tensorflow.data.DispatcherService/RegisterWorker',
-                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerRequest.SerializeToString,
-                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerResponse.FromString,
+        self.WorkerHeartbeat = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/WorkerHeartbeat',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatResponse.FromString,
                 )
         self.WorkerUpdate = channel.unary_unary(
                 '/tensorflow.data.DispatcherService/WorkerUpdate',
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateResponse.FromString,
+                )
+        self.GetDatasetDef = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetDatasetDef',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefResponse.FromString,
+                )
+        self.GetSplit = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetSplit',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitResponse.FromString,
+                )
+        self.GetVersion = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetVersion',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionResponse.FromString,
                 )
         self.GetOrRegisterDataset = channel.unary_unary(
                 '/tensorflow.data.DispatcherService/GetOrRegisterDataset',
@@ -34,15 +49,20 @@ class DispatcherServiceStub(object):
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobResponse.FromString,
                 )
-        self.CreateJob = channel.unary_unary(
-                '/tensorflow.data.DispatcherService/CreateJob',
-                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobRequest.SerializeToString,
-                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobResponse.FromString,
+        self.MaybeRemoveTask = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/MaybeRemoveTask',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskResponse.FromString,
                 )
-        self.GetTasks = channel.unary_unary(
-                '/tensorflow.data.DispatcherService/GetTasks',
-                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksRequest.SerializeToString,
-                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksResponse.FromString,
+        self.ReleaseJobClient = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/ReleaseJobClient',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.FromString,
+                )
+        self.ClientHeartbeat = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/ClientHeartbeat',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatResponse.FromString,
                 )
         self.GetWorkers = channel.unary_unary(
                 '/tensorflow.data.DispatcherService/GetWorkers',
@@ -54,8 +74,8 @@ class DispatcherServiceStub(object):
 class DispatcherServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def RegisterWorker(self, request, context):
-        """Registers a worker with the dispatcher.
+    def WorkerHeartbeat(self, request, context):
+        """Performs a periodic worker heartbeat.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,6 +83,27 @@ class DispatcherServiceServicer(object):
 
     def WorkerUpdate(self, request, context):
         """Updates the dispatcher with information about the worker's state.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetDatasetDef(self, request, context):
+        """Gets a dataset defintion.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSplit(self, request, context):
+        """Gets the next split for a given job.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetVersion(self, request, context):
+        """Returns the API version of the server.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -86,15 +127,24 @@ class DispatcherServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateJob(self, request, context):
-        """Creates a job for reading from the tf.data service.
+    def MaybeRemoveTask(self, request, context):
+        """Attempts to remove a task from a round-robin read job.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetTasks(self, request, context):
-        """Reports a list of all tasks for a job.
+    def ReleaseJobClient(self, request, context):
+        """Releases a job client so that a job may eventually be cleaned up.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ClientHeartbeat(self, request, context):
+        """Heartbeats from the client. This lets the dispatcher know that the client
+        is still active, and gives the dispatcher a chance to notify the client
+        of new tasks.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -110,15 +160,30 @@ class DispatcherServiceServicer(object):
 
 def add_DispatcherServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'RegisterWorker': grpc.unary_unary_rpc_method_handler(
-                    servicer.RegisterWorker,
-                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerRequest.FromString,
-                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerResponse.SerializeToString,
+            'WorkerHeartbeat': grpc.unary_unary_rpc_method_handler(
+                    servicer.WorkerHeartbeat,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatResponse.SerializeToString,
             ),
             'WorkerUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.WorkerUpdate,
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateResponse.SerializeToString,
+            ),
+            'GetDatasetDef': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDatasetDef,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefResponse.SerializeToString,
+            ),
+            'GetSplit': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSplit,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitResponse.SerializeToString,
+            ),
+            'GetVersion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetVersion,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionResponse.SerializeToString,
             ),
             'GetOrRegisterDataset': grpc.unary_unary_rpc_method_handler(
                     servicer.GetOrRegisterDataset,
@@ -130,15 +195,20 @@ def add_DispatcherServiceServicer_to_server(servicer, server):
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobResponse.SerializeToString,
             ),
-            'CreateJob': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateJob,
-                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobRequest.FromString,
-                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobResponse.SerializeToString,
+            'MaybeRemoveTask': grpc.unary_unary_rpc_method_handler(
+                    servicer.MaybeRemoveTask,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskResponse.SerializeToString,
             ),
-            'GetTasks': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetTasks,
-                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksRequest.FromString,
-                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksResponse.SerializeToString,
+            'ReleaseJobClient': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReleaseJobClient,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.SerializeToString,
+            ),
+            'ClientHeartbeat': grpc.unary_unary_rpc_method_handler(
+                    servicer.ClientHeartbeat,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatResponse.SerializeToString,
             ),
             'GetWorkers': grpc.unary_unary_rpc_method_handler(
                     servicer.GetWorkers,
@@ -156,7 +226,7 @@ class DispatcherService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def RegisterWorker(request,
+    def WorkerHeartbeat(request,
             target,
             options=(),
             channel_credentials=None,
@@ -166,9 +236,9 @@ class DispatcherService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/RegisterWorker',
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerRequest.SerializeToString,
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.RegisterWorkerResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/WorkerHeartbeat',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerHeartbeatResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -186,6 +256,57 @@ class DispatcherService(object):
         return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/WorkerUpdate',
             tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateRequest.SerializeToString,
             tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.WorkerUpdateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDatasetDef(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetDatasetDef',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDatasetDefResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSplit(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetSplit',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetSplitResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetVersion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetVersion',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetVersionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -224,7 +345,7 @@ class DispatcherService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def CreateJob(request,
+    def MaybeRemoveTask(request,
             target,
             options=(),
             channel_credentials=None,
@@ -234,14 +355,14 @@ class DispatcherService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/CreateJob',
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobRequest.SerializeToString,
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.CreateJobResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/MaybeRemoveTask',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetTasks(request,
+    def ReleaseJobClient(request,
             target,
             options=(),
             channel_credentials=None,
@@ -251,9 +372,26 @@ class DispatcherService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetTasks',
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksRequest.SerializeToString,
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetTasksResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/ReleaseJobClient',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ClientHeartbeat(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/ClientHeartbeat',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ClientHeartbeatResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

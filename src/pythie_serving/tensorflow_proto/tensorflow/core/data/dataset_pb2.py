@@ -3,6 +3,7 @@
 # source: tensorflow/core/data/dataset.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -11,114 +12,18 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from pythie_serving.tensorflow_proto.tensorflow.core.framework import tensor_pb2 as tensorflow_dot_core_dot_framework_dot_tensor__pb2
 from pythie_serving.tensorflow_proto.tensorflow.core.framework import tensor_shape_pb2 as tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2
 from pythie_serving.tensorflow_proto.tensorflow.core.framework import types_pb2 as tensorflow_dot_core_dot_framework_dot_types__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/data/dataset.proto',
-  package='tensorflow.data',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\"tensorflow/core/data/dataset.proto\x12\x0ftensorflow.data\x1a,tensorflow/core/framework/tensor_shape.proto\x1a%tensorflow/core/framework/types.proto\"\x91\x01\n\x1b\x43ompressedComponentMetadata\x12#\n\x05\x64type\x18\x01 \x01(\x0e\x32\x14.tensorflow.DataType\x12\x32\n\x0ctensor_shape\x18\x02 \x01(\x0b\x32\x1c.tensorflow.TensorShapeProto\x12\x19\n\x11tensor_size_bytes\x18\x03 \x01(\x03\"k\n\x11\x43ompressedElement\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12H\n\x12\x63omponent_metadata\x18\x02 \x03(\x0b\x32,.tensorflow.data.CompressedComponentMetadatab\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2.DESCRIPTOR,tensorflow_dot_core_dot_framework_dot_types__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"tensorflow/core/data/dataset.proto\x12\x0ftensorflow.data\x1a&tensorflow/core/framework/tensor.proto\x1a,tensorflow/core/framework/tensor_shape.proto\x1a%tensorflow/core/framework/types.proto\"\x91\x01\n\x1b\x43ompressedComponentMetadata\x12#\n\x05\x64type\x18\x01 \x01(\x0e\x32\x14.tensorflow.DataType\x12\x32\n\x0ctensor_shape\x18\x02 \x01(\x0b\x32\x1c.tensorflow.TensorShapeProto\x12\x19\n\x11tensor_size_bytes\x18\x03 \x01(\x03\"k\n\x11\x43ompressedElement\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12H\n\x12\x63omponent_metadata\x18\x02 \x03(\x0b\x32,.tensorflow.data.CompressedComponentMetadata\"B\n\x13UncompressedElement\x12+\n\ncomponents\x18\x01 \x03(\x0b\x32\x17.tensorflow.TensorProtob\x06proto3')
 
 
 
-
-_COMPRESSEDCOMPONENTMETADATA = _descriptor.Descriptor(
-  name='CompressedComponentMetadata',
-  full_name='tensorflow.data.CompressedComponentMetadata',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='dtype', full_name='tensorflow.data.CompressedComponentMetadata.dtype', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tensor_shape', full_name='tensorflow.data.CompressedComponentMetadata.tensor_shape', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tensor_size_bytes', full_name='tensorflow.data.CompressedComponentMetadata.tensor_size_bytes', index=2,
-      number=3, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=141,
-  serialized_end=286,
-)
-
-
-_COMPRESSEDELEMENT = _descriptor.Descriptor(
-  name='CompressedElement',
-  full_name='tensorflow.data.CompressedElement',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='data', full_name='tensorflow.data.CompressedElement.data', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='component_metadata', full_name='tensorflow.data.CompressedElement.component_metadata', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=288,
-  serialized_end=395,
-)
-
-_COMPRESSEDCOMPONENTMETADATA.fields_by_name['dtype'].enum_type = tensorflow_dot_core_dot_framework_dot_types__pb2._DATATYPE
-_COMPRESSEDCOMPONENTMETADATA.fields_by_name['tensor_shape'].message_type = tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2._TENSORSHAPEPROTO
-_COMPRESSEDELEMENT.fields_by_name['component_metadata'].message_type = _COMPRESSEDCOMPONENTMETADATA
-DESCRIPTOR.message_types_by_name['CompressedComponentMetadata'] = _COMPRESSEDCOMPONENTMETADATA
-DESCRIPTOR.message_types_by_name['CompressedElement'] = _COMPRESSEDELEMENT
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_COMPRESSEDCOMPONENTMETADATA = DESCRIPTOR.message_types_by_name['CompressedComponentMetadata']
+_COMPRESSEDELEMENT = DESCRIPTOR.message_types_by_name['CompressedElement']
+_UNCOMPRESSEDELEMENT = DESCRIPTOR.message_types_by_name['UncompressedElement']
 CompressedComponentMetadata = _reflection.GeneratedProtocolMessageType('CompressedComponentMetadata', (_message.Message,), {
   'DESCRIPTOR' : _COMPRESSEDCOMPONENTMETADATA,
   '__module__' : 'tensorflow.core.data.dataset_pb2'
@@ -133,5 +38,20 @@ CompressedElement = _reflection.GeneratedProtocolMessageType('CompressedElement'
   })
 _sym_db.RegisterMessage(CompressedElement)
 
+UncompressedElement = _reflection.GeneratedProtocolMessageType('UncompressedElement', (_message.Message,), {
+  'DESCRIPTOR' : _UNCOMPRESSEDELEMENT,
+  '__module__' : 'tensorflow.core.data.dataset_pb2'
+  # @@protoc_insertion_point(class_scope:tensorflow.data.UncompressedElement)
+  })
+_sym_db.RegisterMessage(UncompressedElement)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  _COMPRESSEDCOMPONENTMETADATA._serialized_start=181
+  _COMPRESSEDCOMPONENTMETADATA._serialized_end=326
+  _COMPRESSEDELEMENT._serialized_start=328
+  _COMPRESSEDELEMENT._serialized_end=435
+  _UNCOMPRESSEDELEMENT._serialized_start=437
+  _UNCOMPRESSEDELEMENT._serialized_end=503
 # @@protoc_insertion_point(module_scope)

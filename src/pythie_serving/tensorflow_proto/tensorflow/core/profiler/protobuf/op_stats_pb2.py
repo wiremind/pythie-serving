@@ -3,6 +3,7 @@
 # source: tensorflow/core/profiler/protobuf/op_stats.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -18,479 +19,19 @@ from pythie_serving.tensorflow_proto.tensorflow.core.profiler.protobuf import st
 from pythie_serving.tensorflow_proto.tensorflow.core.profiler.protobuf import tf_function_pb2 as tensorflow_dot_core_dot_profiler_dot_protobuf_dot_tf__function__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/profiler/protobuf/op_stats.proto',
-  package='tensorflow.profiler',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n0tensorflow/core/profiler/protobuf/op_stats.proto\x12\x13tensorflow.profiler\x1a\x33tensorflow/core/profiler/protobuf/diagnostics.proto\x1a\x34tensorflow/core/profiler/protobuf/kernel_stats.proto\x1a\x32tensorflow/core/profiler/protobuf/op_metrics.proto\x1a\x30tensorflow/core/profiler/protobuf/steps_db.proto\x1a\x33tensorflow/core/profiler/protobuf/tf_function.proto\"m\n\x07PerfEnv\x12\"\n\x1apeak_tera_flops_per_second\x18\x01 \x01(\x01\x12)\n!peak_hbm_bw_giga_bytes_per_second\x18\x02 \x01(\x01\x12\x13\n\x0bridge_point\x18\x03 \x01(\x01\"z\n\x1cHostIndependentJobInfoResult\x12\x13\n\x0b\x63hange_list\x18\x01 \x01(\x03\x12\x12\n\nbuild_time\x18\x02 \x01(\x03\x12\x14\n\x0c\x62uild_target\x18\x03 \x01(\t\x12\x1b\n\x13profile_duration_ms\x18\x04 \x01(\r\"\x85\x01\n\x1aHostDependentJobInfoResult\x12\x0f\n\x07host_id\x18\x01 \x01(\t\x12\x14\n\x0c\x63ommand_line\x18\x02 \x01(\t\x12\x12\n\nstart_time\x18\x03 \x01(\x03\x12\x13\n\x0b\x62ns_address\x18\x04 \x01(\t\x12\x17\n\x0fprofile_time_ns\x18\x05 \x01(\x04\"s\n\x0eSystemTopology\x12\x13\n\x0bx_dimension\x18\x01 \x01(\x03\x12\x13\n\x0by_dimension\x18\x02 \x01(\x03\x12\x13\n\x0bz_dimension\x18\x03 \x01(\x03\x12\"\n\x1anum_expected_reduced_chips\x18\x04 \x01(\x03\"\xad\x04\n\x0eRunEnvironment\x12\x12\n\nhost_count\x18\x01 \x01(\x05\x12\x12\n\ntask_count\x18\x02 \x01(\x05\x12\x45\n\thostnames\x18\x03 \x03(\x0b\x32\x32.tensorflow.profiler.RunEnvironment.HostnamesEntry\x12\x13\n\x0b\x64\x65vice_type\x18\x04 \x01(\t\x12\x19\n\x11\x64\x65vice_core_count\x18\x05 \x01(\x05\x12\x1b\n\x13per_core_batch_size\x18\x06 \x01(\x05\x12T\n\x19host_independent_job_info\x18\x07 \x01(\x0b\x32\x31.tensorflow.profiler.HostIndependentJobInfoResult\x12P\n\x17host_dependent_job_info\x18\x08 \x03(\x0b\x32/.tensorflow.profiler.HostDependentJobInfoResult\x12\x15\n\rreplica_count\x18\t \x01(\x05\x12\x1d\n\x15num_cores_per_replica\x18\n \x01(\x05\x12\x35\n\x08topology\x18\x0b \x01(\x0b\x32#.tensorflow.profiler.SystemTopology\x12\x18\n\x10host_trace_level\x18\x0c \x01(\r\x1a\x30\n\x0eHostnamesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"\xe4\x03\n\x07OpStats\x12<\n\x12host_op_metrics_db\x18\x01 \x01(\x0b\x32 .tensorflow.profiler.OpMetricsDb\x12>\n\x14\x64\x65vice_op_metrics_db\x18\x02 \x01(\x0b\x32 .tensorflow.profiler.OpMetricsDb\x12.\n\x08perf_env\x18\x03 \x01(\x0b\x32\x1c.tensorflow.profiler.PerfEnv\x12\x38\n\x07step_db\x18\x04 \x01(\x0b\x32\'.tensorflow.profiler.StepDatabaseResult\x12<\n\x0frun_environment\x18\x05 \x01(\x0b\x32#.tensorflow.profiler.RunEnvironment\x12;\n\x0fkernel_stats_db\x18\x06 \x01(\x0b\x32\".tensorflow.profiler.KernelStatsDb\x12\x39\n\x0etf_function_db\x18\x08 \x01(\x0b\x32!.tensorflow.profiler.TfFunctionDb\x12\x35\n\x0b\x64iagnostics\x18\t \x01(\x0b\x32 .tensorflow.profiler.DiagnosticsJ\x04\x08\x07\x10\x08\x62\x06proto3'
-  ,
-  dependencies=[tensorflow_dot_core_dot_profiler_dot_protobuf_dot_diagnostics__pb2.DESCRIPTOR,tensorflow_dot_core_dot_profiler_dot_protobuf_dot_kernel__stats__pb2.DESCRIPTOR,tensorflow_dot_core_dot_profiler_dot_protobuf_dot_op__metrics__pb2.DESCRIPTOR,tensorflow_dot_core_dot_profiler_dot_protobuf_dot_steps__db__pb2.DESCRIPTOR,tensorflow_dot_core_dot_profiler_dot_protobuf_dot_tf__function__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0tensorflow/core/profiler/protobuf/op_stats.proto\x12\x13tensorflow.profiler\x1a\x33tensorflow/core/profiler/protobuf/diagnostics.proto\x1a\x34tensorflow/core/profiler/protobuf/kernel_stats.proto\x1a\x32tensorflow/core/profiler/protobuf/op_metrics.proto\x1a\x30tensorflow/core/profiler/protobuf/steps_db.proto\x1a\x33tensorflow/core/profiler/protobuf/tf_function.proto\"m\n\x07PerfEnv\x12\"\n\x1apeak_tera_flops_per_second\x18\x01 \x01(\x01\x12)\n!peak_hbm_bw_giga_bytes_per_second\x18\x02 \x01(\x01\x12\x13\n\x0bridge_point\x18\x03 \x01(\x01\"z\n\x1cHostIndependentJobInfoResult\x12\x13\n\x0b\x63hange_list\x18\x01 \x01(\x03\x12\x12\n\nbuild_time\x18\x02 \x01(\x03\x12\x14\n\x0c\x62uild_target\x18\x03 \x01(\t\x12\x1b\n\x13profile_duration_ms\x18\x04 \x01(\r\"\x85\x01\n\x1aHostDependentJobInfoResult\x12\x0f\n\x07host_id\x18\x01 \x01(\t\x12\x14\n\x0c\x63ommand_line\x18\x02 \x01(\t\x12\x12\n\nstart_time\x18\x03 \x01(\x03\x12\x13\n\x0b\x62ns_address\x18\x04 \x01(\t\x12\x17\n\x0fprofile_time_ns\x18\x05 \x01(\x04\"s\n\x0eSystemTopology\x12\x13\n\x0bx_dimension\x18\x01 \x01(\x03\x12\x13\n\x0by_dimension\x18\x02 \x01(\x03\x12\x13\n\x0bz_dimension\x18\x03 \x01(\x03\x12\"\n\x1anum_expected_reduced_chips\x18\x04 \x01(\x03\"\xad\x04\n\x0eRunEnvironment\x12\x12\n\nhost_count\x18\x01 \x01(\x05\x12\x12\n\ntask_count\x18\x02 \x01(\x05\x12\x45\n\thostnames\x18\x03 \x03(\x0b\x32\x32.tensorflow.profiler.RunEnvironment.HostnamesEntry\x12\x13\n\x0b\x64\x65vice_type\x18\x04 \x01(\t\x12\x19\n\x11\x64\x65vice_core_count\x18\x05 \x01(\x05\x12\x1b\n\x13per_core_batch_size\x18\x06 \x01(\x05\x12T\n\x19host_independent_job_info\x18\x07 \x01(\x0b\x32\x31.tensorflow.profiler.HostIndependentJobInfoResult\x12P\n\x17host_dependent_job_info\x18\x08 \x03(\x0b\x32/.tensorflow.profiler.HostDependentJobInfoResult\x12\x15\n\rreplica_count\x18\t \x01(\x05\x12\x1d\n\x15num_cores_per_replica\x18\n \x01(\x05\x12\x35\n\x08topology\x18\x0b \x01(\x0b\x32#.tensorflow.profiler.SystemTopology\x12\x18\n\x10host_trace_level\x18\x0c \x01(\r\x1a\x30\n\x0eHostnamesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08:\x02\x38\x01\"\x90\x01\n\x0b\x43oreDetails\x12\x10\n\x08hostname\x18\x01 \x01(\t\x12\x16\n\x0e\x64\x65vice_ordinal\x18\x02 \x01(\r\x12\x10\n\x08\x63ore_num\x18\x03 \x01(\r\x12\x15\n\rlocal_chip_id\x18\x04 \x01(\r\x12\x16\n\x0eglobal_chip_id\x18\x05 \x01(\r\x12\x16\n\x0eglobal_core_id\x18\x06 \x01(\r\"\xdb\x05\n\x07OpStats\x12<\n\x12host_op_metrics_db\x18\x01 \x01(\x0b\x32 .tensorflow.profiler.OpMetricsDb\x12>\n\x14\x64\x65vice_op_metrics_db\x18\x02 \x01(\x0b\x32 .tensorflow.profiler.OpMetricsDb\x12L\n\"hlo_metrics_db_complete_steps_only\x18\n \x01(\x0b\x32 .tensorflow.profiler.OpMetricsDb\x12.\n\x08perf_env\x18\x03 \x01(\x0b\x32\x1c.tensorflow.profiler.PerfEnv\x12\x38\n\x07step_db\x18\x04 \x01(\x0b\x32\'.tensorflow.profiler.StepDatabaseResult\x12<\n\x0frun_environment\x18\x05 \x01(\x0b\x32#.tensorflow.profiler.RunEnvironment\x12;\n\x0fkernel_stats_db\x18\x06 \x01(\x0b\x32\".tensorflow.profiler.KernelStatsDb\x12\x39\n\x0etf_function_db\x18\x08 \x01(\x0b\x32!.tensorflow.profiler.TfFunctionDb\x12M\n\x12\x63ore_id_to_details\x18\x0b \x03(\x0b\x32\x31.tensorflow.profiler.OpStats.CoreIdToDetailsEntry\x12\x35\n\x0b\x64iagnostics\x18\t \x01(\x0b\x32 .tensorflow.profiler.Diagnostics\x1aX\n\x14\x43oreIdToDetailsEntry\x12\x0b\n\x03key\x18\x01 \x01(\r\x12/\n\x05value\x18\x02 \x01(\x0b\x32 .tensorflow.profiler.CoreDetails:\x02\x38\x01J\x04\x08\x07\x10\x08\x62\x06proto3')
 
 
 
-
-_PERFENV = _descriptor.Descriptor(
-  name='PerfEnv',
-  full_name='tensorflow.profiler.PerfEnv',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='peak_tera_flops_per_second', full_name='tensorflow.profiler.PerfEnv.peak_tera_flops_per_second', index=0,
-      number=1, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='peak_hbm_bw_giga_bytes_per_second', full_name='tensorflow.profiler.PerfEnv.peak_hbm_bw_giga_bytes_per_second', index=1,
-      number=2, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='ridge_point', full_name='tensorflow.profiler.PerfEnv.ridge_point', index=2,
-      number=3, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=335,
-  serialized_end=444,
-)
-
-
-_HOSTINDEPENDENTJOBINFORESULT = _descriptor.Descriptor(
-  name='HostIndependentJobInfoResult',
-  full_name='tensorflow.profiler.HostIndependentJobInfoResult',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='change_list', full_name='tensorflow.profiler.HostIndependentJobInfoResult.change_list', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='build_time', full_name='tensorflow.profiler.HostIndependentJobInfoResult.build_time', index=1,
-      number=2, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='build_target', full_name='tensorflow.profiler.HostIndependentJobInfoResult.build_target', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='profile_duration_ms', full_name='tensorflow.profiler.HostIndependentJobInfoResult.profile_duration_ms', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=446,
-  serialized_end=568,
-)
-
-
-_HOSTDEPENDENTJOBINFORESULT = _descriptor.Descriptor(
-  name='HostDependentJobInfoResult',
-  full_name='tensorflow.profiler.HostDependentJobInfoResult',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='host_id', full_name='tensorflow.profiler.HostDependentJobInfoResult.host_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='command_line', full_name='tensorflow.profiler.HostDependentJobInfoResult.command_line', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='start_time', full_name='tensorflow.profiler.HostDependentJobInfoResult.start_time', index=2,
-      number=3, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='bns_address', full_name='tensorflow.profiler.HostDependentJobInfoResult.bns_address', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='profile_time_ns', full_name='tensorflow.profiler.HostDependentJobInfoResult.profile_time_ns', index=4,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=571,
-  serialized_end=704,
-)
-
-
-_SYSTEMTOPOLOGY = _descriptor.Descriptor(
-  name='SystemTopology',
-  full_name='tensorflow.profiler.SystemTopology',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='x_dimension', full_name='tensorflow.profiler.SystemTopology.x_dimension', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='y_dimension', full_name='tensorflow.profiler.SystemTopology.y_dimension', index=1,
-      number=2, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='z_dimension', full_name='tensorflow.profiler.SystemTopology.z_dimension', index=2,
-      number=3, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='num_expected_reduced_chips', full_name='tensorflow.profiler.SystemTopology.num_expected_reduced_chips', index=3,
-      number=4, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=706,
-  serialized_end=821,
-)
-
-
-_RUNENVIRONMENT_HOSTNAMESENTRY = _descriptor.Descriptor(
-  name='HostnamesEntry',
-  full_name='tensorflow.profiler.RunEnvironment.HostnamesEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='tensorflow.profiler.RunEnvironment.HostnamesEntry.key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='tensorflow.profiler.RunEnvironment.HostnamesEntry.value', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=b'8\001',
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1333,
-  serialized_end=1381,
-)
-
-_RUNENVIRONMENT = _descriptor.Descriptor(
-  name='RunEnvironment',
-  full_name='tensorflow.profiler.RunEnvironment',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='host_count', full_name='tensorflow.profiler.RunEnvironment.host_count', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='task_count', full_name='tensorflow.profiler.RunEnvironment.task_count', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='hostnames', full_name='tensorflow.profiler.RunEnvironment.hostnames', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='device_type', full_name='tensorflow.profiler.RunEnvironment.device_type', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='device_core_count', full_name='tensorflow.profiler.RunEnvironment.device_core_count', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='per_core_batch_size', full_name='tensorflow.profiler.RunEnvironment.per_core_batch_size', index=5,
-      number=6, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='host_independent_job_info', full_name='tensorflow.profiler.RunEnvironment.host_independent_job_info', index=6,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='host_dependent_job_info', full_name='tensorflow.profiler.RunEnvironment.host_dependent_job_info', index=7,
-      number=8, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='replica_count', full_name='tensorflow.profiler.RunEnvironment.replica_count', index=8,
-      number=9, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='num_cores_per_replica', full_name='tensorflow.profiler.RunEnvironment.num_cores_per_replica', index=9,
-      number=10, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='topology', full_name='tensorflow.profiler.RunEnvironment.topology', index=10,
-      number=11, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='host_trace_level', full_name='tensorflow.profiler.RunEnvironment.host_trace_level', index=11,
-      number=12, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[_RUNENVIRONMENT_HOSTNAMESENTRY, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=824,
-  serialized_end=1381,
-)
-
-
-_OPSTATS = _descriptor.Descriptor(
-  name='OpStats',
-  full_name='tensorflow.profiler.OpStats',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='host_op_metrics_db', full_name='tensorflow.profiler.OpStats.host_op_metrics_db', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='device_op_metrics_db', full_name='tensorflow.profiler.OpStats.device_op_metrics_db', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='perf_env', full_name='tensorflow.profiler.OpStats.perf_env', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='step_db', full_name='tensorflow.profiler.OpStats.step_db', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='run_environment', full_name='tensorflow.profiler.OpStats.run_environment', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='kernel_stats_db', full_name='tensorflow.profiler.OpStats.kernel_stats_db', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tf_function_db', full_name='tensorflow.profiler.OpStats.tf_function_db', index=6,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='diagnostics', full_name='tensorflow.profiler.OpStats.diagnostics', index=7,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1384,
-  serialized_end=1868,
-)
-
-_RUNENVIRONMENT_HOSTNAMESENTRY.containing_type = _RUNENVIRONMENT
-_RUNENVIRONMENT.fields_by_name['hostnames'].message_type = _RUNENVIRONMENT_HOSTNAMESENTRY
-_RUNENVIRONMENT.fields_by_name['host_independent_job_info'].message_type = _HOSTINDEPENDENTJOBINFORESULT
-_RUNENVIRONMENT.fields_by_name['host_dependent_job_info'].message_type = _HOSTDEPENDENTJOBINFORESULT
-_RUNENVIRONMENT.fields_by_name['topology'].message_type = _SYSTEMTOPOLOGY
-_OPSTATS.fields_by_name['host_op_metrics_db'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_op__metrics__pb2._OPMETRICSDB
-_OPSTATS.fields_by_name['device_op_metrics_db'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_op__metrics__pb2._OPMETRICSDB
-_OPSTATS.fields_by_name['perf_env'].message_type = _PERFENV
-_OPSTATS.fields_by_name['step_db'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_steps__db__pb2._STEPDATABASERESULT
-_OPSTATS.fields_by_name['run_environment'].message_type = _RUNENVIRONMENT
-_OPSTATS.fields_by_name['kernel_stats_db'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_kernel__stats__pb2._KERNELSTATSDB
-_OPSTATS.fields_by_name['tf_function_db'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_tf__function__pb2._TFFUNCTIONDB
-_OPSTATS.fields_by_name['diagnostics'].message_type = tensorflow_dot_core_dot_profiler_dot_protobuf_dot_diagnostics__pb2._DIAGNOSTICS
-DESCRIPTOR.message_types_by_name['PerfEnv'] = _PERFENV
-DESCRIPTOR.message_types_by_name['HostIndependentJobInfoResult'] = _HOSTINDEPENDENTJOBINFORESULT
-DESCRIPTOR.message_types_by_name['HostDependentJobInfoResult'] = _HOSTDEPENDENTJOBINFORESULT
-DESCRIPTOR.message_types_by_name['SystemTopology'] = _SYSTEMTOPOLOGY
-DESCRIPTOR.message_types_by_name['RunEnvironment'] = _RUNENVIRONMENT
-DESCRIPTOR.message_types_by_name['OpStats'] = _OPSTATS
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_PERFENV = DESCRIPTOR.message_types_by_name['PerfEnv']
+_HOSTINDEPENDENTJOBINFORESULT = DESCRIPTOR.message_types_by_name['HostIndependentJobInfoResult']
+_HOSTDEPENDENTJOBINFORESULT = DESCRIPTOR.message_types_by_name['HostDependentJobInfoResult']
+_SYSTEMTOPOLOGY = DESCRIPTOR.message_types_by_name['SystemTopology']
+_RUNENVIRONMENT = DESCRIPTOR.message_types_by_name['RunEnvironment']
+_RUNENVIRONMENT_HOSTNAMESENTRY = _RUNENVIRONMENT.nested_types_by_name['HostnamesEntry']
+_COREDETAILS = DESCRIPTOR.message_types_by_name['CoreDetails']
+_OPSTATS = DESCRIPTOR.message_types_by_name['OpStats']
+_OPSTATS_COREIDTODETAILSENTRY = _OPSTATS.nested_types_by_name['CoreIdToDetailsEntry']
 PerfEnv = _reflection.GeneratedProtocolMessageType('PerfEnv', (_message.Message,), {
   'DESCRIPTOR' : _PERFENV,
   '__module__' : 'tensorflow.core.profiler.protobuf.op_stats_pb2'
@@ -534,13 +75,51 @@ RunEnvironment = _reflection.GeneratedProtocolMessageType('RunEnvironment', (_me
 _sym_db.RegisterMessage(RunEnvironment)
 _sym_db.RegisterMessage(RunEnvironment.HostnamesEntry)
 
+CoreDetails = _reflection.GeneratedProtocolMessageType('CoreDetails', (_message.Message,), {
+  'DESCRIPTOR' : _COREDETAILS,
+  '__module__' : 'tensorflow.core.profiler.protobuf.op_stats_pb2'
+  # @@protoc_insertion_point(class_scope:tensorflow.profiler.CoreDetails)
+  })
+_sym_db.RegisterMessage(CoreDetails)
+
 OpStats = _reflection.GeneratedProtocolMessageType('OpStats', (_message.Message,), {
+
+  'CoreIdToDetailsEntry' : _reflection.GeneratedProtocolMessageType('CoreIdToDetailsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _OPSTATS_COREIDTODETAILSENTRY,
+    '__module__' : 'tensorflow.core.profiler.protobuf.op_stats_pb2'
+    # @@protoc_insertion_point(class_scope:tensorflow.profiler.OpStats.CoreIdToDetailsEntry)
+    })
+  ,
   'DESCRIPTOR' : _OPSTATS,
   '__module__' : 'tensorflow.core.profiler.protobuf.op_stats_pb2'
   # @@protoc_insertion_point(class_scope:tensorflow.profiler.OpStats)
   })
 _sym_db.RegisterMessage(OpStats)
+_sym_db.RegisterMessage(OpStats.CoreIdToDetailsEntry)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-_RUNENVIRONMENT_HOSTNAMESENTRY._options = None
+  DESCRIPTOR._options = None
+  _RUNENVIRONMENT_HOSTNAMESENTRY._options = None
+  _RUNENVIRONMENT_HOSTNAMESENTRY._serialized_options = b'8\001'
+  _OPSTATS_COREIDTODETAILSENTRY._options = None
+  _OPSTATS_COREIDTODETAILSENTRY._serialized_options = b'8\001'
+  _PERFENV._serialized_start=335
+  _PERFENV._serialized_end=444
+  _HOSTINDEPENDENTJOBINFORESULT._serialized_start=446
+  _HOSTINDEPENDENTJOBINFORESULT._serialized_end=568
+  _HOSTDEPENDENTJOBINFORESULT._serialized_start=571
+  _HOSTDEPENDENTJOBINFORESULT._serialized_end=704
+  _SYSTEMTOPOLOGY._serialized_start=706
+  _SYSTEMTOPOLOGY._serialized_end=821
+  _RUNENVIRONMENT._serialized_start=824
+  _RUNENVIRONMENT._serialized_end=1381
+  _RUNENVIRONMENT_HOSTNAMESENTRY._serialized_start=1333
+  _RUNENVIRONMENT_HOSTNAMESENTRY._serialized_end=1381
+  _COREDETAILS._serialized_start=1384
+  _COREDETAILS._serialized_end=1528
+  _OPSTATS._serialized_start=1531
+  _OPSTATS._serialized_end=2262
+  _OPSTATS_COREIDTODETAILSENTRY._serialized_start=2168
+  _OPSTATS_COREIDTODETAILSENTRY._serialized_end=2256
 # @@protoc_insertion_point(module_scope)

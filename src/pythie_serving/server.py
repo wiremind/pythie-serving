@@ -1,7 +1,11 @@
 from concurrent import futures
-from typing import Optional
+from typing import Optional, Type
 
 import grpc
+
+from pythie_serving.abstract_wrapper import (
+    AbstractPythieServingPredictionServiceServicer,
+)
 
 from .exceptions import PythieServingException
 from .tensorflow_proto.tensorflow_serving.apis import prediction_service_pb2_grpc
@@ -21,6 +25,7 @@ def create_grpc_server(
 
     model_platform = model_platforms.pop()
     # import in code to avoid loading too many python libraries in memory
+    servicer_cls: Type[AbstractPythieServingPredictionServiceServicer]
     if model_platform == "xgboost":
         if worker_count > 1:
             raise ValueError(f"Model platform {model_platform} is not thread safe")

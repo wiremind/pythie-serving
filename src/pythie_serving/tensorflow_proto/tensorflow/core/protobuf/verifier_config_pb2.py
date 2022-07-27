@@ -3,6 +3,7 @@
 # source: tensorflow/core/protobuf/verifier_config.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,92 +14,12 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/core/protobuf/verifier_config.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=b'\n\030org.tensorflow.frameworkB\024VerifierConfigProtosP\001ZHgithub.com/tensorflow/tensorflow/tensorflow/go/core/core_protos_go_proto\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n.tensorflow/core/protobuf/verifier_config.proto\x12\ntensorflow\"\x9b\x01\n\x0eVerifierConfig\x12\"\n\x1averification_timeout_in_ms\x18\x01 \x01(\x03\x12=\n\x12structure_verifier\x18\x02 \x01(\x0e\x32!.tensorflow.VerifierConfig.Toggle\"&\n\x06Toggle\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x42\x7f\n\x18org.tensorflow.frameworkB\x14VerifierConfigProtosP\x01ZHgithub.com/tensorflow/tensorflow/tensorflow/go/core/core_protos_go_proto\xf8\x01\x01\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n.tensorflow/core/protobuf/verifier_config.proto\x12\ntensorflow\"\x9b\x01\n\x0eVerifierConfig\x12\"\n\x1averification_timeout_in_ms\x18\x01 \x01(\x03\x12=\n\x12structure_verifier\x18\x02 \x01(\x0e\x32!.tensorflow.VerifierConfig.Toggle\"&\n\x06Toggle\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x42\x8c\x01\n\x18org.tensorflow.frameworkB\x14VerifierConfigProtosP\x01ZUgithub.com/tensorflow/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto\xf8\x01\x01\x62\x06proto3')
 
 
 
-_VERIFIERCONFIG_TOGGLE = _descriptor.EnumDescriptor(
-  name='Toggle',
-  full_name='tensorflow.VerifierConfig.Toggle',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DEFAULT', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ON', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OFF', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=180,
-  serialized_end=218,
-)
-_sym_db.RegisterEnumDescriptor(_VERIFIERCONFIG_TOGGLE)
-
-
-_VERIFIERCONFIG = _descriptor.Descriptor(
-  name='VerifierConfig',
-  full_name='tensorflow.VerifierConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='verification_timeout_in_ms', full_name='tensorflow.VerifierConfig.verification_timeout_in_ms', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='structure_verifier', full_name='tensorflow.VerifierConfig.structure_verifier', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _VERIFIERCONFIG_TOGGLE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=63,
-  serialized_end=218,
-)
-
-_VERIFIERCONFIG.fields_by_name['structure_verifier'].enum_type = _VERIFIERCONFIG_TOGGLE
-_VERIFIERCONFIG_TOGGLE.containing_type = _VERIFIERCONFIG
-DESCRIPTOR.message_types_by_name['VerifierConfig'] = _VERIFIERCONFIG
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_VERIFIERCONFIG = DESCRIPTOR.message_types_by_name['VerifierConfig']
+_VERIFIERCONFIG_TOGGLE = _VERIFIERCONFIG.enum_types_by_name['Toggle']
 VerifierConfig = _reflection.GeneratedProtocolMessageType('VerifierConfig', (_message.Message,), {
   'DESCRIPTOR' : _VERIFIERCONFIG,
   '__module__' : 'tensorflow.core.protobuf.verifier_config_pb2'
@@ -106,6 +27,12 @@ VerifierConfig = _reflection.GeneratedProtocolMessageType('VerifierConfig', (_me
   })
 _sym_db.RegisterMessage(VerifierConfig)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\n\030org.tensorflow.frameworkB\024VerifierConfigProtosP\001ZUgithub.com/tensorflow/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto\370\001\001'
+  _VERIFIERCONFIG._serialized_start=63
+  _VERIFIERCONFIG._serialized_end=218
+  _VERIFIERCONFIG_TOGGLE._serialized_start=180
+  _VERIFIERCONFIG_TOGGLE._serialized_end=218
 # @@protoc_insertion_point(module_scope)

@@ -3,6 +3,7 @@
 # source: tensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -14,54 +15,11 @@ _sym_db = _symbol_database.Default()
 from pythie_serving.tensorflow_proto.tensorflow_serving.servables.tensorflow import session_bundle_config_pb2 as tensorflow__serving_dot_servables_dot_tensorflow_dot_session__bundle__config__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.proto',
-  package='tensorflow.serving',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\nOtensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.proto\x12\x12tensorflow.serving\x1a\x43tensorflow_serving/servables/tensorflow/session_bundle_config.proto\"f\n#SavedModelBundleSourceAdapterConfig\x12?\n\rlegacy_config\x18\xe8\x07 \x01(\x0b\x32\'.tensorflow.serving.SessionBundleConfigb\x06proto3'
-  ,
-  dependencies=[tensorflow__serving_dot_servables_dot_tensorflow_dot_session__bundle__config__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nOtensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.proto\x12\x12tensorflow.serving\x1a\x43tensorflow_serving/servables/tensorflow/session_bundle_config.proto\"f\n#SavedModelBundleSourceAdapterConfig\x12?\n\rlegacy_config\x18\xe8\x07 \x01(\x0b\x32\'.tensorflow.serving.SessionBundleConfigb\x06proto3')
 
 
 
-
-_SAVEDMODELBUNDLESOURCEADAPTERCONFIG = _descriptor.Descriptor(
-  name='SavedModelBundleSourceAdapterConfig',
-  full_name='tensorflow.serving.SavedModelBundleSourceAdapterConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='legacy_config', full_name='tensorflow.serving.SavedModelBundleSourceAdapterConfig.legacy_config', index=0,
-      number=1000, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=172,
-  serialized_end=274,
-)
-
-_SAVEDMODELBUNDLESOURCEADAPTERCONFIG.fields_by_name['legacy_config'].message_type = tensorflow__serving_dot_servables_dot_tensorflow_dot_session__bundle__config__pb2._SESSIONBUNDLECONFIG
-DESCRIPTOR.message_types_by_name['SavedModelBundleSourceAdapterConfig'] = _SAVEDMODELBUNDLESOURCEADAPTERCONFIG
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_SAVEDMODELBUNDLESOURCEADAPTERCONFIG = DESCRIPTOR.message_types_by_name['SavedModelBundleSourceAdapterConfig']
 SavedModelBundleSourceAdapterConfig = _reflection.GeneratedProtocolMessageType('SavedModelBundleSourceAdapterConfig', (_message.Message,), {
   'DESCRIPTOR' : _SAVEDMODELBUNDLESOURCEADAPTERCONFIG,
   '__module__' : 'tensorflow_serving.servables.tensorflow.saved_model_bundle_source_adapter_pb2'
@@ -69,5 +27,9 @@ SavedModelBundleSourceAdapterConfig = _reflection.GeneratedProtocolMessageType('
   })
 _sym_db.RegisterMessage(SavedModelBundleSourceAdapterConfig)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
+  DESCRIPTOR._options = None
+  _SAVEDMODELBUNDLESOURCEADAPTERCONFIG._serialized_start=172
+  _SAVEDMODELBUNDLESOURCEADAPTERCONFIG._serialized_end=274
 # @@protoc_insertion_point(module_scope)

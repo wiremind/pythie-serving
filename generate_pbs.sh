@@ -24,7 +24,7 @@ mv /tmp/scratch/serving/tensorflow_serving /tmp/workspace/
 
 # Install prerequisite packages
 . ~/.virtualenvs/grpc-build/bin/activate
-pip install --upgrade pip protobuf grpcio grpcio-tools
+pip install --upgrade pip protobuf grpcio grpcio-tools mypy-protobuf
 
 # Create the python package of pb2 interfaces
 mkdir -p /tmp/tensorflow_proto
@@ -34,10 +34,12 @@ find . -name '*.proto' -exec \
   python -m grpc_tools.protoc -I./ \
     --python_out=../tensorflow_proto/ \
     --grpc_python_out=../tensorflow_proto/ \
+    --mypy_out=../tensorflow_proto/ \
     {} ';'
 find /tmp/tensorflow_proto/ -type d -exec touch {}/__init__.py ';'
 find /tmp/tensorflow_proto/ -name '*.py' -exec sed -i -- 's/from tensorflow\./from pythie_serving.tensorflow_proto.tensorflow./g' {} ';'
 find /tmp/tensorflow_proto/ -name '*.py' -exec sed -i -- 's/from tensorflow_serving\./from pythie_serving.tensorflow_proto.tensorflow_serving./g' {} ';'
+
 mv /tmp/tensorflow_proto/ "$current_path"
 
 rm -rf /tmp/workspace

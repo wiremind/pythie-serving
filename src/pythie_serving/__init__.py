@@ -1,1 +1,1 @@
-from .server import create_grpc_server  # noqa
+from .server import create_grpc_server

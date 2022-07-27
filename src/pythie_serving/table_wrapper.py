@@ -53,7 +53,7 @@ class TablePredictionServiceServicer(AbstractPythieServingPredictionServiceServi
 
     def _predict(self, model_specs: ModelSpecs, samples: NDArray) -> NDArray:
 
-        output = np.empty((np.shape(samples)[0],), np.int)
+        output = np.empty((np.shape(samples)[0],), dtype=int)
         for idx, sample in enumerate(samples):
             try:
                 pred = model_specs["model"][tuple(feature_value for feature_value in sample)]

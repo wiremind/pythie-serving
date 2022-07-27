@@ -3,6 +3,7 @@
 # source: tensorflow/python/training/checkpoint_state.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,73 +14,11 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/python/training/checkpoint_state.proto',
-  package='tensorflow',
-  syntax='proto3',
-  serialized_options=b'\370\001\001',
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n1tensorflow/python/training/checkpoint_state.proto\x12\ntensorflow\"\x9f\x01\n\x0f\x43heckpointState\x12\x1d\n\x15model_checkpoint_path\x18\x01 \x01(\t\x12\"\n\x1a\x61ll_model_checkpoint_paths\x18\x02 \x03(\t\x12\'\n\x1f\x61ll_model_checkpoint_timestamps\x18\x03 \x03(\x01\x12 \n\x18last_preserved_timestamp\x18\x04 \x01(\x01\x42\x03\xf8\x01\x01\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1tensorflow/python/training/checkpoint_state.proto\x12\ntensorflow\"\x9f\x01\n\x0f\x43heckpointState\x12\x1d\n\x15model_checkpoint_path\x18\x01 \x01(\t\x12\"\n\x1a\x61ll_model_checkpoint_paths\x18\x02 \x03(\t\x12\'\n\x1f\x61ll_model_checkpoint_timestamps\x18\x03 \x03(\x01\x12 \n\x18last_preserved_timestamp\x18\x04 \x01(\x01\x42\x03\xf8\x01\x01\x62\x06proto3')
 
 
 
-
-_CHECKPOINTSTATE = _descriptor.Descriptor(
-  name='CheckpointState',
-  full_name='tensorflow.CheckpointState',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='model_checkpoint_path', full_name='tensorflow.CheckpointState.model_checkpoint_path', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='all_model_checkpoint_paths', full_name='tensorflow.CheckpointState.all_model_checkpoint_paths', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='all_model_checkpoint_timestamps', full_name='tensorflow.CheckpointState.all_model_checkpoint_timestamps', index=2,
-      number=3, type=1, cpp_type=5, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='last_preserved_timestamp', full_name='tensorflow.CheckpointState.last_preserved_timestamp', index=3,
-      number=4, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=66,
-  serialized_end=225,
-)
-
-DESCRIPTOR.message_types_by_name['CheckpointState'] = _CHECKPOINTSTATE
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_CHECKPOINTSTATE = DESCRIPTOR.message_types_by_name['CheckpointState']
 CheckpointState = _reflection.GeneratedProtocolMessageType('CheckpointState', (_message.Message,), {
   'DESCRIPTOR' : _CHECKPOINTSTATE,
   '__module__' : 'tensorflow.python.training.checkpoint_state_pb2'
@@ -87,6 +26,10 @@ CheckpointState = _reflection.GeneratedProtocolMessageType('CheckpointState', (_
   })
 _sym_db.RegisterMessage(CheckpointState)
 
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR._options = None
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'\370\001\001'
+  _CHECKPOINTSTATE._serialized_start=66
+  _CHECKPOINTSTATE._serialized_end=225
 # @@protoc_insertion_point(module_scope)

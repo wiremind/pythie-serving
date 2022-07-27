@@ -4,6 +4,7 @@
 """Generated protocol buffer code."""
 from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -14,164 +15,26 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='tensorflow/lite/experimental/acceleration/configuration/configuration.proto',
-  package='tflite.proto',
-  syntax='proto2',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\nKtensorflow/lite/experimental/acceleration/configuration/configuration.proto\x12\x0ctflite.proto\"\xd0\x01\n\x0f\x43omputeSettings\x12\x35\n\npreference\x18\x01 \x01(\x0e\x32!.tflite.proto.ExecutionPreference\x12\x35\n\x0ftflite_settings\x18\x02 \x01(\x0b\x32\x1c.tflite.proto.TFLiteSettings\x12&\n\x1emodel_namespace_for_statistics\x18\x03 \x01(\t\x12\'\n\x1fmodel_identifier_for_statistics\x18\x04 \x01(\t\"\xac\x02\n\rNNAPISettings\x12\x18\n\x10\x61\x63\x63\x65lerator_name\x18\x01 \x01(\t\x12\x17\n\x0f\x63\x61\x63he_directory\x18\x02 \x01(\t\x12\x13\n\x0bmodel_token\x18\x03 \x01(\t\x12\x44\n\x14\x65xecution_preference\x18\x04 \x01(\x0e\x32&.tflite.proto.NNAPIExecutionPreference\x12&\n\x1eno_of_nnapi_instances_to_cache\x18\x05 \x01(\x05\x12\x39\n\x11\x66\x61llback_settings\x18\x06 \x01(\x0b\x32\x1e.tflite.proto.FallbackSettings\x12*\n\"allow_nnapi_cpu_on_android_10_plus\x18\x07 \x01(\x08\"\x8b\x01\n\x0bGPUSettings\x12!\n\x19is_precision_loss_allowed\x18\x01 \x01(\x08\x12(\n\x1a\x65nable_quantized_inference\x18\x02 \x01(\x08:\x04true\x12/\n\rforce_backend\x18\x03 \x01(\x0e\x32\x18.tflite.proto.GPUBackend\"w\n\x0fHexagonSettings\x12\x13\n\x0b\x64\x65\x62ug_level\x18\x01 \x01(\x05\x12\x17\n\x0fpowersave_level\x18\x02 \x01(\x05\x12\x1b\n\x13print_graph_profile\x18\x03 \x01(\x08\x12\x19\n\x11print_graph_debug\x18\x04 \x01(\x08\"&\n\x0fXNNPackSettings\x12\x13\n\x0bnum_threads\x18\x01 \x01(\x05\"\"\n\x0b\x43PUSettings\x12\x13\n\x0bnum_threads\x18\x01 \x01(\x05\"\xe5\x02\n\x0eTFLiteSettings\x12(\n\x08\x64\x65legate\x18\x01 \x01(\x0e\x32\x16.tflite.proto.Delegate\x12\x33\n\x0ennapi_settings\x18\x02 \x01(\x0b\x32\x1b.tflite.proto.NNAPISettings\x12/\n\x0cgpu_settings\x18\x03 \x01(\x0b\x32\x19.tflite.proto.GPUSettings\x12\x37\n\x10hexagon_settings\x18\x04 \x01(\x0b\x32\x1d.tflite.proto.HexagonSettings\x12\x37\n\x10xnnpack_settings\x18\x05 \x01(\x0b\x32\x1d.tflite.proto.XNNPackSettings\x12/\n\x0c\x63pu_settings\x18\x06 \x01(\x0b\x32\x19.tflite.proto.CPUSettings\x12 \n\x18max_delegated_partitions\x18\x07 \x01(\x05\"~\n\x10\x46\x61llbackSettings\x12\x35\n-allow_automatic_fallback_on_compilation_error\x18\x07 \x01(\x08\x12\x33\n+allow_automatic_fallback_on_execution_error\x18\x08 \x01(\x08*M\n\x13\x45xecutionPreference\x12\x07\n\x03\x41NY\x10\x00\x12\x0f\n\x0bLOW_LATENCY\x10\x01\x12\r\n\tLOW_POWER\x10\x02\x12\r\n\tFORCE_CPU\x10\x03*O\n\x08\x44\x65legate\x12\x08\n\x04NONE\x10\x00\x12\t\n\x05NNAPI\x10\x01\x12\x07\n\x03GPU\x10\x02\x12\x0b\n\x07HEXAGON\x10\x03\x12\x0b\n\x07XNNPACK\x10\x04\x12\x0b\n\x07\x45\x44GETPU\x10\x05*w\n\x18NNAPIExecutionPreference\x12\r\n\tUNDEFINED\x10\x00\x12\x13\n\x0fNNAPI_LOW_POWER\x10\x01\x12\x1c\n\x18NNAPI_FAST_SINGLE_ANSWER\x10\x02\x12\x19\n\x15NNAPI_SUSTAINED_SPEED\x10\x03*/\n\nGPUBackend\x12\t\n\x05UNSET\x10\x00\x12\n\n\x06OPENCL\x10\x01\x12\n\n\x06OPENGL\x10\x02'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nKtensorflow/lite/experimental/acceleration/configuration/configuration.proto\x12\x0ctflite.proto\"\x97\x02\n\x0f\x43omputeSettings\x12\x35\n\npreference\x18\x01 \x01(\x0e\x32!.tflite.proto.ExecutionPreference\x12\x35\n\x0ftflite_settings\x18\x02 \x01(\x0b\x32\x1c.tflite.proto.TFLiteSettings\x12&\n\x1emodel_namespace_for_statistics\x18\x03 \x01(\t\x12\'\n\x1fmodel_identifier_for_statistics\x18\x04 \x01(\t\x12\x45\n\x18settings_to_test_locally\x18\x05 \x01(\x0b\x32#.tflite.proto.MinibenchmarkSettings\"\xda\x03\n\rNNAPISettings\x12\x18\n\x10\x61\x63\x63\x65lerator_name\x18\x01 \x01(\t\x12\x17\n\x0f\x63\x61\x63he_directory\x18\x02 \x01(\t\x12\x13\n\x0bmodel_token\x18\x03 \x01(\t\x12\x44\n\x14\x65xecution_preference\x18\x04 \x01(\x0e\x32&.tflite.proto.NNAPIExecutionPreference\x12&\n\x1eno_of_nnapi_instances_to_cache\x18\x05 \x01(\x05\x12=\n\x11\x66\x61llback_settings\x18\x06 \x01(\x0b\x32\x1e.tflite.proto.FallbackSettingsB\x02\x18\x01\x12*\n\"allow_nnapi_cpu_on_android_10_plus\x18\x07 \x01(\x08\x12@\n\x12\x65xecution_priority\x18\x08 \x01(\x0e\x32$.tflite.proto.NNAPIExecutionPriority\x12 \n\x18\x61llow_dynamic_dimensions\x18\t \x01(\x08\x12%\n\x1d\x61llow_fp16_precision_for_fp32\x18\n \x01(\x08\x12\x1d\n\x15use_burst_computation\x18\x0b \x01(\x08\"\x87\x03\n\x0bGPUSettings\x12!\n\x19is_precision_loss_allowed\x18\x01 \x01(\x08\x12(\n\x1a\x65nable_quantized_inference\x18\x02 \x01(\x08:\x04true\x12/\n\rforce_backend\x18\x03 \x01(\x0e\x32\x18.tflite.proto.GPUBackend\x12R\n\x13inference_priority1\x18\x04 \x01(\x0e\x32\".tflite.proto.GPUInferencePriority:\x11GPU_PRIORITY_AUTO\x12R\n\x13inference_priority2\x18\x05 \x01(\x0e\x32\".tflite.proto.GPUInferencePriority:\x11GPU_PRIORITY_AUTO\x12R\n\x13inference_priority3\x18\x06 \x01(\x0e\x32\".tflite.proto.GPUInferencePriority:\x11GPU_PRIORITY_AUTO\"w\n\x0fHexagonSettings\x12\x13\n\x0b\x64\x65\x62ug_level\x18\x01 \x01(\x05\x12\x17\n\x0fpowersave_level\x18\x02 \x01(\x05\x12\x1b\n\x13print_graph_profile\x18\x03 \x01(\x08\x12\x19\n\x11print_graph_debug\x18\x04 \x01(\x08\"&\n\x0fXNNPackSettings\x12\x13\n\x0bnum_threads\x18\x01 \x01(\x05\"\xe4\x01\n\x11\x45\x64geTpuDeviceSpec\x12\x43\n\rplatform_type\x18\x01 \x01(\x0e\x32,.tflite.proto.EdgeTpuDeviceSpec.PlatformType\x12\x11\n\tnum_chips\x18\x02 \x01(\x05\x12\x14\n\x0c\x64\x65vice_paths\x18\x03 \x03(\t\x12\x13\n\x0b\x63hip_family\x18\x04 \x01(\x05\"L\n\x0cPlatformType\x12\x08\n\x04MMIO\x10\x00\x12\r\n\tREFERENCE\x10\x01\x12\r\n\tSIMULATOR\x10\x02\x12\x14\n\x10REMOTE_SIMULATOR\x10\x03\"x\n\x1a\x45\x64geTpuInactivePowerConfig\x12=\n\x14inactive_power_state\x18\x01 \x01(\x0e\x32\x1f.tflite.proto.EdgeTpuPowerState\x12\x1b\n\x13inactive_timeout_us\x18\x02 \x01(\x03\"\xb3\x03\n\x0f\x45\x64geTpuSettings\x12>\n\x15inference_power_state\x18\x01 \x01(\x0e\x32\x1f.tflite.proto.EdgeTpuPowerState\x12H\n\x16inactive_power_configs\x18\x02 \x03(\x0b\x32(.tflite.proto.EdgeTpuInactivePowerConfig\x12\x1e\n\x12inference_priority\x18\x03 \x01(\x05:\x02-1\x12<\n\x13\x65\x64getpu_device_spec\x18\x04 \x01(\x0b\x32\x1f.tflite.proto.EdgeTpuDeviceSpec\x12\x13\n\x0bmodel_token\x18\x05 \x01(\t\x12P\n\x15\x66loat_truncation_type\x18\x06 \x01(\x0e\x32\x31.tflite.proto.EdgeTpuSettings.FloatTruncationType\"Q\n\x13\x46loatTruncationType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x11\n\rNO_TRUNCATION\x10\x01\x12\x0c\n\x08\x42\x46LOAT16\x10\x02\x12\x08\n\x04HALF\x10\x03\"\xee\x01\n\rCoralSettings\x12\x0e\n\x06\x64\x65vice\x18\x01 \x01(\t\x12\x45\n\x0bperformance\x18\x02 \x01(\x0e\x32\'.tflite.proto.CoralSettings.Performance:\x07MAXIMUM\x12\x16\n\x0eusb_always_dfu\x18\x03 \x01(\x08\x12$\n\x1cusb_max_bulk_in_queue_length\x18\x04 \x01(\x05\"H\n\x0bPerformance\x12\r\n\tUNDEFINED\x10\x00\x12\x0b\n\x07MAXIMUM\x10\x01\x12\x08\n\x04HIGH\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x07\n\x03LOW\x10\x04\"&\n\x0b\x43PUSettings\x12\x17\n\x0bnum_threads\x18\x01 \x01(\x05:\x02-1\"\x8e\x04\n\x0eTFLiteSettings\x12(\n\x08\x64\x65legate\x18\x01 \x01(\x0e\x32\x16.tflite.proto.Delegate\x12\x33\n\x0ennapi_settings\x18\x02 \x01(\x0b\x32\x1b.tflite.proto.NNAPISettings\x12/\n\x0cgpu_settings\x18\x03 \x01(\x0b\x32\x19.tflite.proto.GPUSettings\x12\x37\n\x10hexagon_settings\x18\x04 \x01(\x0b\x32\x1d.tflite.proto.HexagonSettings\x12\x37\n\x10xnnpack_settings\x18\x05 \x01(\x0b\x32\x1d.tflite.proto.XNNPackSettings\x12/\n\x0c\x63pu_settings\x18\x06 \x01(\x0b\x32\x19.tflite.proto.CPUSettings\x12 \n\x18max_delegated_partitions\x18\x07 \x01(\x05\x12\x37\n\x10\x65\x64getpu_settings\x18\x08 \x01(\x0b\x32\x1d.tflite.proto.EdgeTpuSettings\x12\x33\n\x0e\x63oral_settings\x18\n \x01(\x0b\x32\x1b.tflite.proto.CoralSettings\x12\x39\n\x11\x66\x61llback_settings\x18\t \x01(\x0b\x32\x1e.tflite.proto.FallbackSettings\"~\n\x10\x46\x61llbackSettings\x12\x35\n-allow_automatic_fallback_on_compilation_error\x18\x07 \x01(\x08\x12\x33\n+allow_automatic_fallback_on_execution_error\x18\x08 \x01(\x08\"3\n\x0f\x42\x65nchmarkMetric\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\x06values\x18\x02 \x03(\x02\x42\x02\x10\x01\"\xa7\x01\n\x0f\x42\x65nchmarkResult\x12\"\n\x16initialization_time_us\x18\x01 \x03(\x03\x42\x02\x10\x01\x12\x1d\n\x11inference_time_us\x18\x02 \x03(\x03\x42\x02\x10\x01\x12\x15\n\rmax_memory_kb\x18\x03 \x01(\x05\x12\n\n\x02ok\x18\x04 \x01(\x08\x12.\n\x07metrics\x18\x05 \x03(\x0b\x32\x1d.tflite.proto.BenchmarkMetric\"g\n\tErrorCode\x12&\n\x06source\x18\x01 \x01(\x0e\x32\x16.tflite.proto.Delegate\x12\x14\n\x0ctflite_error\x18\x02 \x01(\x05\x12\x1c\n\x14underlying_api_error\x18\x03 \x01(\x03\"\xb0\x01\n\x0e\x42\x65nchmarkError\x12+\n\x05stage\x18\x01 \x01(\x0e\x32\x1c.tflite.proto.BenchmarkStage\x12\x11\n\texit_code\x18\x02 \x01(\x05\x12\x0e\n\x06signal\x18\x03 \x01(\x05\x12+\n\nerror_code\x18\x04 \x03(\x0b\x32\x17.tflite.proto.ErrorCode\x12!\n\x19mini_benchmark_error_code\x18\x05 \x01(\x05\"\x84\x02\n\x0e\x42\x65nchmarkEvent\x12\x35\n\x0ftflite_settings\x18\x01 \x01(\x0b\x32\x1c.tflite.proto.TFLiteSettings\x12\x34\n\nevent_type\x18\x02 \x01(\x0e\x32 .tflite.proto.BenchmarkEventType\x12-\n\x06result\x18\x03 \x01(\x0b\x32\x1d.tflite.proto.BenchmarkResult\x12+\n\x05\x65rror\x18\x04 \x01(\x0b\x32\x1c.tflite.proto.BenchmarkError\x12\x13\n\x0b\x62oottime_us\x18\x05 \x01(\x03\x12\x14\n\x0cwallclock_us\x18\x06 \x01(\x03\"\x93\x01\n\x18\x42\x65stAccelerationDecision\x12\x1f\n\x17number_of_source_events\x18\x01 \x01(\x05\x12\x37\n\x11min_latency_event\x18\x02 \x01(\x0b\x32\x1c.tflite.proto.BenchmarkEvent\x12\x1d\n\x15min_inference_time_us\x18\x03 \x01(\x03\"?\n\x1e\x42\x65nchmarkInitializationFailure\x12\x1d\n\x15initialization_status\x18\x01 \x01(\x05\"\xcd\x01\n\x12MiniBenchmarkEvent\x12\x1d\n\x15is_log_flushing_event\x18\x01 \x01(\x08\x12J\n\x1a\x62\x65st_acceleration_decision\x18\x02 \x01(\x0b\x32&.tflite.proto.BestAccelerationDecision\x12L\n\x16initialization_failure\x18\x03 \x01(\x0b\x32,.tflite.proto.BenchmarkInitializationFailure\"I\n\tModelFile\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\n\n\x02\x66\x64\x18\x02 \x01(\x03\x12\x0e\n\x06offset\x18\x03 \x01(\x03\x12\x0e\n\x06length\x18\x04 \x01(\x03\"O\n\x15\x42\x65nchmarkStoragePaths\x12\x19\n\x11storage_file_path\x18\x01 \x01(\t\x12\x1b\n\x13\x64\x61ta_directory_path\x18\x02 \x01(\t\"\xb8\x01\n\x15MinibenchmarkSettings\x12\x36\n\x10settings_to_test\x18\x01 \x03(\x0b\x32\x1c.tflite.proto.TFLiteSettings\x12+\n\nmodel_file\x18\x02 \x01(\x0b\x32\x17.tflite.proto.ModelFile\x12:\n\rstorage_paths\x18\x03 \x01(\x0b\x32#.tflite.proto.BenchmarkStoragePaths*M\n\x13\x45xecutionPreference\x12\x07\n\x03\x41NY\x10\x00\x12\x0f\n\x0bLOW_LATENCY\x10\x01\x12\r\n\tLOW_POWER\x10\x02\x12\r\n\tFORCE_CPU\x10\x03*b\n\x08\x44\x65legate\x12\x08\n\x04NONE\x10\x00\x12\t\n\x05NNAPI\x10\x01\x12\x07\n\x03GPU\x10\x02\x12\x0b\n\x07HEXAGON\x10\x03\x12\x0b\n\x07XNNPACK\x10\x04\x12\x0b\n\x07\x45\x44GETPU\x10\x05\x12\x11\n\rEDGETPU_CORAL\x10\x06*w\n\x18NNAPIExecutionPreference\x12\r\n\tUNDEFINED\x10\x00\x12\x13\n\x0fNNAPI_LOW_POWER\x10\x01\x12\x1c\n\x18NNAPI_FAST_SINGLE_ANSWER\x10\x02\x12\x19\n\x15NNAPI_SUSTAINED_SPEED\x10\x03*\x82\x01\n\x16NNAPIExecutionPriority\x12\x1c\n\x18NNAPI_PRIORITY_UNDEFINED\x10\x00\x12\x16\n\x12NNAPI_PRIORITY_LOW\x10\x01\x12\x19\n\x15NNAPI_PRIORITY_MEDIUM\x10\x02\x12\x17\n\x13NNAPI_PRIORITY_HIGH\x10\x03*/\n\nGPUBackend\x12\t\n\x05UNSET\x10\x00\x12\n\n\x06OPENCL\x10\x01\x12\n\n\x06OPENGL\x10\x02*\x8e\x01\n\x14GPUInferencePriority\x12\x15\n\x11GPU_PRIORITY_AUTO\x10\x00\x12\x1e\n\x1aGPU_PRIORITY_MAX_PRECISION\x10\x01\x12\x1c\n\x18GPU_PRIORITY_MIN_LATENCY\x10\x02\x12!\n\x1dGPU_PRIORITY_MIN_MEMORY_USAGE\x10\x03*\xad\x01\n\x11\x45\x64geTpuPowerState\x12\x18\n\x14UNDEFINED_POWERSTATE\x10\x00\x12\x10\n\x0cTPU_CORE_OFF\x10\x01\x12\t\n\x05READY\x10\x02\x12\x14\n\x10\x41\x43TIVE_MIN_POWER\x10\x03\x12\x19\n\x15\x41\x43TIVE_VERY_LOW_POWER\x10\x04\x12\x14\n\x10\x41\x43TIVE_LOW_POWER\x10\x05\x12\n\n\x06\x41\x43TIVE\x10\x06\x12\x0e\n\nOVER_DRIVE\x10\x07*c\n\x12\x42\x65nchmarkEventType\x12\"\n\x1eUNDEFINED_BENCHMARK_EVENT_TYPE\x10\x00\x12\t\n\x05START\x10\x01\x12\x07\n\x03\x45ND\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x12\n\n\x06LOGGED\x10\x04*@\n\x0e\x42\x65nchmarkStage\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x12\n\x0eINITIALIZATION\x10\x01\x12\r\n\tINFERENCE\x10\x02')
 
-_EXECUTIONPREFERENCE = _descriptor.EnumDescriptor(
-  name='ExecutionPreference',
-  full_name='tflite.proto.ExecutionPreference',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='ANY', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='LOW_LATENCY', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='LOW_POWER', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='FORCE_CPU', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1434,
-  serialized_end=1511,
-)
-_sym_db.RegisterEnumDescriptor(_EXECUTIONPREFERENCE)
-
+_EXECUTIONPREFERENCE = DESCRIPTOR.enum_types_by_name['ExecutionPreference']
 ExecutionPreference = enum_type_wrapper.EnumTypeWrapper(_EXECUTIONPREFERENCE)
-_DELEGATE = _descriptor.EnumDescriptor(
-  name='Delegate',
-  full_name='tflite.proto.Delegate',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='NONE', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NNAPI', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='GPU', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='HEXAGON', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='XNNPACK', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='EDGETPU', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1513,
-  serialized_end=1592,
-)
-_sym_db.RegisterEnumDescriptor(_DELEGATE)
-
+_DELEGATE = DESCRIPTOR.enum_types_by_name['Delegate']
 Delegate = enum_type_wrapper.EnumTypeWrapper(_DELEGATE)
-_NNAPIEXECUTIONPREFERENCE = _descriptor.EnumDescriptor(
-  name='NNAPIExecutionPreference',
-  full_name='tflite.proto.NNAPIExecutionPreference',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNDEFINED', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NNAPI_LOW_POWER', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NNAPI_FAST_SINGLE_ANSWER', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NNAPI_SUSTAINED_SPEED', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1594,
-  serialized_end=1713,
-)
-_sym_db.RegisterEnumDescriptor(_NNAPIEXECUTIONPREFERENCE)
-
+_NNAPIEXECUTIONPREFERENCE = DESCRIPTOR.enum_types_by_name['NNAPIExecutionPreference']
 NNAPIExecutionPreference = enum_type_wrapper.EnumTypeWrapper(_NNAPIEXECUTIONPREFERENCE)
-_GPUBACKEND = _descriptor.EnumDescriptor(
-  name='GPUBackend',
-  full_name='tflite.proto.GPUBackend',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNSET', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OPENCL', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OPENGL', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1715,
-  serialized_end=1762,
-)
-_sym_db.RegisterEnumDescriptor(_GPUBACKEND)
-
+_NNAPIEXECUTIONPRIORITY = DESCRIPTOR.enum_types_by_name['NNAPIExecutionPriority']
+NNAPIExecutionPriority = enum_type_wrapper.EnumTypeWrapper(_NNAPIEXECUTIONPRIORITY)
+_GPUBACKEND = DESCRIPTOR.enum_types_by_name['GPUBackend']
 GPUBackend = enum_type_wrapper.EnumTypeWrapper(_GPUBACKEND)
+_GPUINFERENCEPRIORITY = DESCRIPTOR.enum_types_by_name['GPUInferencePriority']
+GPUInferencePriority = enum_type_wrapper.EnumTypeWrapper(_GPUINFERENCEPRIORITY)
+_EDGETPUPOWERSTATE = DESCRIPTOR.enum_types_by_name['EdgeTpuPowerState']
+EdgeTpuPowerState = enum_type_wrapper.EnumTypeWrapper(_EDGETPUPOWERSTATE)
+_BENCHMARKEVENTTYPE = DESCRIPTOR.enum_types_by_name['BenchmarkEventType']
+BenchmarkEventType = enum_type_wrapper.EnumTypeWrapper(_BENCHMARKEVENTTYPE)
+_BENCHMARKSTAGE = DESCRIPTOR.enum_types_by_name['BenchmarkStage']
+BenchmarkStage = enum_type_wrapper.EnumTypeWrapper(_BENCHMARKSTAGE)
 ANY = 0
 LOW_LATENCY = 1
 LOW_POWER = 2
@@ -182,443 +45,66 @@ GPU = 2
 HEXAGON = 3
 XNNPACK = 4
 EDGETPU = 5
+EDGETPU_CORAL = 6
 UNDEFINED = 0
 NNAPI_LOW_POWER = 1
 NNAPI_FAST_SINGLE_ANSWER = 2
 NNAPI_SUSTAINED_SPEED = 3
+NNAPI_PRIORITY_UNDEFINED = 0
+NNAPI_PRIORITY_LOW = 1
+NNAPI_PRIORITY_MEDIUM = 2
+NNAPI_PRIORITY_HIGH = 3
 UNSET = 0
 OPENCL = 1
 OPENGL = 2
+GPU_PRIORITY_AUTO = 0
+GPU_PRIORITY_MAX_PRECISION = 1
+GPU_PRIORITY_MIN_LATENCY = 2
+GPU_PRIORITY_MIN_MEMORY_USAGE = 3
+UNDEFINED_POWERSTATE = 0
+TPU_CORE_OFF = 1
+READY = 2
+ACTIVE_MIN_POWER = 3
+ACTIVE_VERY_LOW_POWER = 4
+ACTIVE_LOW_POWER = 5
+ACTIVE = 6
+OVER_DRIVE = 7
+UNDEFINED_BENCHMARK_EVENT_TYPE = 0
+START = 1
+END = 2
+ERROR = 3
+LOGGED = 4
+UNKNOWN = 0
+INITIALIZATION = 1
+INFERENCE = 2
 
 
-
-_COMPUTESETTINGS = _descriptor.Descriptor(
-  name='ComputeSettings',
-  full_name='tflite.proto.ComputeSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='preference', full_name='tflite.proto.ComputeSettings.preference', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='tflite_settings', full_name='tflite.proto.ComputeSettings.tflite_settings', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='model_namespace_for_statistics', full_name='tflite.proto.ComputeSettings.model_namespace_for_statistics', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='model_identifier_for_statistics', full_name='tflite.proto.ComputeSettings.model_identifier_for_statistics', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=94,
-  serialized_end=302,
-)
-
-
-_NNAPISETTINGS = _descriptor.Descriptor(
-  name='NNAPISettings',
-  full_name='tflite.proto.NNAPISettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='accelerator_name', full_name='tflite.proto.NNAPISettings.accelerator_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cache_directory', full_name='tflite.proto.NNAPISettings.cache_directory', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='model_token', full_name='tflite.proto.NNAPISettings.model_token', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='execution_preference', full_name='tflite.proto.NNAPISettings.execution_preference', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='no_of_nnapi_instances_to_cache', full_name='tflite.proto.NNAPISettings.no_of_nnapi_instances_to_cache', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='fallback_settings', full_name='tflite.proto.NNAPISettings.fallback_settings', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='allow_nnapi_cpu_on_android_10_plus', full_name='tflite.proto.NNAPISettings.allow_nnapi_cpu_on_android_10_plus', index=6,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=305,
-  serialized_end=605,
-)
-
-
-_GPUSETTINGS = _descriptor.Descriptor(
-  name='GPUSettings',
-  full_name='tflite.proto.GPUSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='is_precision_loss_allowed', full_name='tflite.proto.GPUSettings.is_precision_loss_allowed', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='enable_quantized_inference', full_name='tflite.proto.GPUSettings.enable_quantized_inference', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=True, default_value=True,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='force_backend', full_name='tflite.proto.GPUSettings.force_backend', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=608,
-  serialized_end=747,
-)
-
-
-_HEXAGONSETTINGS = _descriptor.Descriptor(
-  name='HexagonSettings',
-  full_name='tflite.proto.HexagonSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='debug_level', full_name='tflite.proto.HexagonSettings.debug_level', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='powersave_level', full_name='tflite.proto.HexagonSettings.powersave_level', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='print_graph_profile', full_name='tflite.proto.HexagonSettings.print_graph_profile', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='print_graph_debug', full_name='tflite.proto.HexagonSettings.print_graph_debug', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=749,
-  serialized_end=868,
-)
-
-
-_XNNPACKSETTINGS = _descriptor.Descriptor(
-  name='XNNPackSettings',
-  full_name='tflite.proto.XNNPackSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='num_threads', full_name='tflite.proto.XNNPackSettings.num_threads', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=870,
-  serialized_end=908,
-)
-
-
-_CPUSETTINGS = _descriptor.Descriptor(
-  name='CPUSettings',
-  full_name='tflite.proto.CPUSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='num_threads', full_name='tflite.proto.CPUSettings.num_threads', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=910,
-  serialized_end=944,
-)
-
-
-_TFLITESETTINGS = _descriptor.Descriptor(
-  name='TFLiteSettings',
-  full_name='tflite.proto.TFLiteSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='delegate', full_name='tflite.proto.TFLiteSettings.delegate', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='nnapi_settings', full_name='tflite.proto.TFLiteSettings.nnapi_settings', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='gpu_settings', full_name='tflite.proto.TFLiteSettings.gpu_settings', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='hexagon_settings', full_name='tflite.proto.TFLiteSettings.hexagon_settings', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='xnnpack_settings', full_name='tflite.proto.TFLiteSettings.xnnpack_settings', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cpu_settings', full_name='tflite.proto.TFLiteSettings.cpu_settings', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='max_delegated_partitions', full_name='tflite.proto.TFLiteSettings.max_delegated_partitions', index=6,
-      number=7, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=947,
-  serialized_end=1304,
-)
-
-
-_FALLBACKSETTINGS = _descriptor.Descriptor(
-  name='FallbackSettings',
-  full_name='tflite.proto.FallbackSettings',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='allow_automatic_fallback_on_compilation_error', full_name='tflite.proto.FallbackSettings.allow_automatic_fallback_on_compilation_error', index=0,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='allow_automatic_fallback_on_execution_error', full_name='tflite.proto.FallbackSettings.allow_automatic_fallback_on_execution_error', index=1,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1306,
-  serialized_end=1432,
-)
-
-_COMPUTESETTINGS.fields_by_name['preference'].enum_type = _EXECUTIONPREFERENCE
-_COMPUTESETTINGS.fields_by_name['tflite_settings'].message_type = _TFLITESETTINGS
-_NNAPISETTINGS.fields_by_name['execution_preference'].enum_type = _NNAPIEXECUTIONPREFERENCE
-_NNAPISETTINGS.fields_by_name['fallback_settings'].message_type = _FALLBACKSETTINGS
-_GPUSETTINGS.fields_by_name['force_backend'].enum_type = _GPUBACKEND
-_TFLITESETTINGS.fields_by_name['delegate'].enum_type = _DELEGATE
-_TFLITESETTINGS.fields_by_name['nnapi_settings'].message_type = _NNAPISETTINGS
-_TFLITESETTINGS.fields_by_name['gpu_settings'].message_type = _GPUSETTINGS
-_TFLITESETTINGS.fields_by_name['hexagon_settings'].message_type = _HEXAGONSETTINGS
-_TFLITESETTINGS.fields_by_name['xnnpack_settings'].message_type = _XNNPACKSETTINGS
-_TFLITESETTINGS.fields_by_name['cpu_settings'].message_type = _CPUSETTINGS
-DESCRIPTOR.message_types_by_name['ComputeSettings'] = _COMPUTESETTINGS
-DESCRIPTOR.message_types_by_name['NNAPISettings'] = _NNAPISETTINGS
-DESCRIPTOR.message_types_by_name['GPUSettings'] = _GPUSETTINGS
-DESCRIPTOR.message_types_by_name['HexagonSettings'] = _HEXAGONSETTINGS
-DESCRIPTOR.message_types_by_name['XNNPackSettings'] = _XNNPACKSETTINGS
-DESCRIPTOR.message_types_by_name['CPUSettings'] = _CPUSETTINGS
-DESCRIPTOR.message_types_by_name['TFLiteSettings'] = _TFLITESETTINGS
-DESCRIPTOR.message_types_by_name['FallbackSettings'] = _FALLBACKSETTINGS
-DESCRIPTOR.enum_types_by_name['ExecutionPreference'] = _EXECUTIONPREFERENCE
-DESCRIPTOR.enum_types_by_name['Delegate'] = _DELEGATE
-DESCRIPTOR.enum_types_by_name['NNAPIExecutionPreference'] = _NNAPIEXECUTIONPREFERENCE
-DESCRIPTOR.enum_types_by_name['GPUBackend'] = _GPUBACKEND
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_COMPUTESETTINGS = DESCRIPTOR.message_types_by_name['ComputeSettings']
+_NNAPISETTINGS = DESCRIPTOR.message_types_by_name['NNAPISettings']
+_GPUSETTINGS = DESCRIPTOR.message_types_by_name['GPUSettings']
+_HEXAGONSETTINGS = DESCRIPTOR.message_types_by_name['HexagonSettings']
+_XNNPACKSETTINGS = DESCRIPTOR.message_types_by_name['XNNPackSettings']
+_EDGETPUDEVICESPEC = DESCRIPTOR.message_types_by_name['EdgeTpuDeviceSpec']
+_EDGETPUINACTIVEPOWERCONFIG = DESCRIPTOR.message_types_by_name['EdgeTpuInactivePowerConfig']
+_EDGETPUSETTINGS = DESCRIPTOR.message_types_by_name['EdgeTpuSettings']
+_CORALSETTINGS = DESCRIPTOR.message_types_by_name['CoralSettings']
+_CPUSETTINGS = DESCRIPTOR.message_types_by_name['CPUSettings']
+_TFLITESETTINGS = DESCRIPTOR.message_types_by_name['TFLiteSettings']
+_FALLBACKSETTINGS = DESCRIPTOR.message_types_by_name['FallbackSettings']
+_BENCHMARKMETRIC = DESCRIPTOR.message_types_by_name['BenchmarkMetric']
+_BENCHMARKRESULT = DESCRIPTOR.message_types_by_name['BenchmarkResult']
+_ERRORCODE = DESCRIPTOR.message_types_by_name['ErrorCode']
+_BENCHMARKERROR = DESCRIPTOR.message_types_by_name['BenchmarkError']
+_BENCHMARKEVENT = DESCRIPTOR.message_types_by_name['BenchmarkEvent']
+_BESTACCELERATIONDECISION = DESCRIPTOR.message_types_by_name['BestAccelerationDecision']
+_BENCHMARKINITIALIZATIONFAILURE = DESCRIPTOR.message_types_by_name['BenchmarkInitializationFailure']
+_MINIBENCHMARKEVENT = DESCRIPTOR.message_types_by_name['MiniBenchmarkEvent']
+_MODELFILE = DESCRIPTOR.message_types_by_name['ModelFile']
+_BENCHMARKSTORAGEPATHS = DESCRIPTOR.message_types_by_name['BenchmarkStoragePaths']
+_MINIBENCHMARKSETTINGS = DESCRIPTOR.message_types_by_name['MinibenchmarkSettings']
+_EDGETPUDEVICESPEC_PLATFORMTYPE = _EDGETPUDEVICESPEC.enum_types_by_name['PlatformType']
+_EDGETPUSETTINGS_FLOATTRUNCATIONTYPE = _EDGETPUSETTINGS.enum_types_by_name['FloatTruncationType']
+_CORALSETTINGS_PERFORMANCE = _CORALSETTINGS.enum_types_by_name['Performance']
 ComputeSettings = _reflection.GeneratedProtocolMessageType('ComputeSettings', (_message.Message,), {
   'DESCRIPTOR' : _COMPUTESETTINGS,
   '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
@@ -654,6 +140,34 @@ XNNPackSettings = _reflection.GeneratedProtocolMessageType('XNNPackSettings', (_
   })
 _sym_db.RegisterMessage(XNNPackSettings)
 
+EdgeTpuDeviceSpec = _reflection.GeneratedProtocolMessageType('EdgeTpuDeviceSpec', (_message.Message,), {
+  'DESCRIPTOR' : _EDGETPUDEVICESPEC,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.EdgeTpuDeviceSpec)
+  })
+_sym_db.RegisterMessage(EdgeTpuDeviceSpec)
+
+EdgeTpuInactivePowerConfig = _reflection.GeneratedProtocolMessageType('EdgeTpuInactivePowerConfig', (_message.Message,), {
+  'DESCRIPTOR' : _EDGETPUINACTIVEPOWERCONFIG,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.EdgeTpuInactivePowerConfig)
+  })
+_sym_db.RegisterMessage(EdgeTpuInactivePowerConfig)
+
+EdgeTpuSettings = _reflection.GeneratedProtocolMessageType('EdgeTpuSettings', (_message.Message,), {
+  'DESCRIPTOR' : _EDGETPUSETTINGS,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.EdgeTpuSettings)
+  })
+_sym_db.RegisterMessage(EdgeTpuSettings)
+
+CoralSettings = _reflection.GeneratedProtocolMessageType('CoralSettings', (_message.Message,), {
+  'DESCRIPTOR' : _CORALSETTINGS,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.CoralSettings)
+  })
+_sym_db.RegisterMessage(CoralSettings)
+
 CPUSettings = _reflection.GeneratedProtocolMessageType('CPUSettings', (_message.Message,), {
   'DESCRIPTOR' : _CPUSETTINGS,
   '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
@@ -675,5 +189,162 @@ FallbackSettings = _reflection.GeneratedProtocolMessageType('FallbackSettings', 
   })
 _sym_db.RegisterMessage(FallbackSettings)
 
+BenchmarkMetric = _reflection.GeneratedProtocolMessageType('BenchmarkMetric', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKMETRIC,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkMetric)
+  })
+_sym_db.RegisterMessage(BenchmarkMetric)
 
+BenchmarkResult = _reflection.GeneratedProtocolMessageType('BenchmarkResult', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKRESULT,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkResult)
+  })
+_sym_db.RegisterMessage(BenchmarkResult)
+
+ErrorCode = _reflection.GeneratedProtocolMessageType('ErrorCode', (_message.Message,), {
+  'DESCRIPTOR' : _ERRORCODE,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.ErrorCode)
+  })
+_sym_db.RegisterMessage(ErrorCode)
+
+BenchmarkError = _reflection.GeneratedProtocolMessageType('BenchmarkError', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKERROR,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkError)
+  })
+_sym_db.RegisterMessage(BenchmarkError)
+
+BenchmarkEvent = _reflection.GeneratedProtocolMessageType('BenchmarkEvent', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKEVENT,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkEvent)
+  })
+_sym_db.RegisterMessage(BenchmarkEvent)
+
+BestAccelerationDecision = _reflection.GeneratedProtocolMessageType('BestAccelerationDecision', (_message.Message,), {
+  'DESCRIPTOR' : _BESTACCELERATIONDECISION,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BestAccelerationDecision)
+  })
+_sym_db.RegisterMessage(BestAccelerationDecision)
+
+BenchmarkInitializationFailure = _reflection.GeneratedProtocolMessageType('BenchmarkInitializationFailure', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKINITIALIZATIONFAILURE,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkInitializationFailure)
+  })
+_sym_db.RegisterMessage(BenchmarkInitializationFailure)
+
+MiniBenchmarkEvent = _reflection.GeneratedProtocolMessageType('MiniBenchmarkEvent', (_message.Message,), {
+  'DESCRIPTOR' : _MINIBENCHMARKEVENT,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.MiniBenchmarkEvent)
+  })
+_sym_db.RegisterMessage(MiniBenchmarkEvent)
+
+ModelFile = _reflection.GeneratedProtocolMessageType('ModelFile', (_message.Message,), {
+  'DESCRIPTOR' : _MODELFILE,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.ModelFile)
+  })
+_sym_db.RegisterMessage(ModelFile)
+
+BenchmarkStoragePaths = _reflection.GeneratedProtocolMessageType('BenchmarkStoragePaths', (_message.Message,), {
+  'DESCRIPTOR' : _BENCHMARKSTORAGEPATHS,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.BenchmarkStoragePaths)
+  })
+_sym_db.RegisterMessage(BenchmarkStoragePaths)
+
+MinibenchmarkSettings = _reflection.GeneratedProtocolMessageType('MinibenchmarkSettings', (_message.Message,), {
+  'DESCRIPTOR' : _MINIBENCHMARKSETTINGS,
+  '__module__' : 'tensorflow.lite.experimental.acceleration.configuration.configuration_pb2'
+  # @@protoc_insertion_point(class_scope:tflite.proto.MinibenchmarkSettings)
+  })
+_sym_db.RegisterMessage(MinibenchmarkSettings)
+
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  _NNAPISETTINGS.fields_by_name['fallback_settings']._options = None
+  _NNAPISETTINGS.fields_by_name['fallback_settings']._serialized_options = b'\030\001'
+  _BENCHMARKMETRIC.fields_by_name['values']._options = None
+  _BENCHMARKMETRIC.fields_by_name['values']._serialized_options = b'\020\001'
+  _BENCHMARKRESULT.fields_by_name['initialization_time_us']._options = None
+  _BENCHMARKRESULT.fields_by_name['initialization_time_us']._serialized_options = b'\020\001'
+  _BENCHMARKRESULT.fields_by_name['inference_time_us']._options = None
+  _BENCHMARKRESULT.fields_by_name['inference_time_us']._serialized_options = b'\020\001'
+  _EXECUTIONPREFERENCE._serialized_start=4672
+  _EXECUTIONPREFERENCE._serialized_end=4749
+  _DELEGATE._serialized_start=4751
+  _DELEGATE._serialized_end=4849
+  _NNAPIEXECUTIONPREFERENCE._serialized_start=4851
+  _NNAPIEXECUTIONPREFERENCE._serialized_end=4970
+  _NNAPIEXECUTIONPRIORITY._serialized_start=4973
+  _NNAPIEXECUTIONPRIORITY._serialized_end=5103
+  _GPUBACKEND._serialized_start=5105
+  _GPUBACKEND._serialized_end=5152
+  _GPUINFERENCEPRIORITY._serialized_start=5155
+  _GPUINFERENCEPRIORITY._serialized_end=5297
+  _EDGETPUPOWERSTATE._serialized_start=5300
+  _EDGETPUPOWERSTATE._serialized_end=5473
+  _BENCHMARKEVENTTYPE._serialized_start=5475
+  _BENCHMARKEVENTTYPE._serialized_end=5574
+  _BENCHMARKSTAGE._serialized_start=5576
+  _BENCHMARKSTAGE._serialized_end=5640
+  _COMPUTESETTINGS._serialized_start=94
+  _COMPUTESETTINGS._serialized_end=373
+  _NNAPISETTINGS._serialized_start=376
+  _NNAPISETTINGS._serialized_end=850
+  _GPUSETTINGS._serialized_start=853
+  _GPUSETTINGS._serialized_end=1244
+  _HEXAGONSETTINGS._serialized_start=1246
+  _HEXAGONSETTINGS._serialized_end=1365
+  _XNNPACKSETTINGS._serialized_start=1367
+  _XNNPACKSETTINGS._serialized_end=1405
+  _EDGETPUDEVICESPEC._serialized_start=1408
+  _EDGETPUDEVICESPEC._serialized_end=1636
+  _EDGETPUDEVICESPEC_PLATFORMTYPE._serialized_start=1560
+  _EDGETPUDEVICESPEC_PLATFORMTYPE._serialized_end=1636
+  _EDGETPUINACTIVEPOWERCONFIG._serialized_start=1638
+  _EDGETPUINACTIVEPOWERCONFIG._serialized_end=1758
+  _EDGETPUSETTINGS._serialized_start=1761
+  _EDGETPUSETTINGS._serialized_end=2196
+  _EDGETPUSETTINGS_FLOATTRUNCATIONTYPE._serialized_start=2115
+  _EDGETPUSETTINGS_FLOATTRUNCATIONTYPE._serialized_end=2196
+  _CORALSETTINGS._serialized_start=2199
+  _CORALSETTINGS._serialized_end=2437
+  _CORALSETTINGS_PERFORMANCE._serialized_start=2365
+  _CORALSETTINGS_PERFORMANCE._serialized_end=2437
+  _CPUSETTINGS._serialized_start=2439
+  _CPUSETTINGS._serialized_end=2477
+  _TFLITESETTINGS._serialized_start=2480
+  _TFLITESETTINGS._serialized_end=3006
+  _FALLBACKSETTINGS._serialized_start=3008
+  _FALLBACKSETTINGS._serialized_end=3134
+  _BENCHMARKMETRIC._serialized_start=3136
+  _BENCHMARKMETRIC._serialized_end=3187
+  _BENCHMARKRESULT._serialized_start=3190
+  _BENCHMARKRESULT._serialized_end=3357
+  _ERRORCODE._serialized_start=3359
+  _ERRORCODE._serialized_end=3462
+  _BENCHMARKERROR._serialized_start=3465
+  _BENCHMARKERROR._serialized_end=3641
+  _BENCHMARKEVENT._serialized_start=3644
+  _BENCHMARKEVENT._serialized_end=3904
+  _BESTACCELERATIONDECISION._serialized_start=3907
+  _BESTACCELERATIONDECISION._serialized_end=4054
+  _BENCHMARKINITIALIZATIONFAILURE._serialized_start=4056
+  _BENCHMARKINITIALIZATIONFAILURE._serialized_end=4119
+  _MINIBENCHMARKEVENT._serialized_start=4122
+  _MINIBENCHMARKEVENT._serialized_end=4327
+  _MODELFILE._serialized_start=4329
+  _MODELFILE._serialized_end=4402
+  _BENCHMARKSTORAGEPATHS._serialized_start=4404
+  _BENCHMARKSTORAGEPATHS._serialized_end=4483
+  _MINIBENCHMARKSETTINGS._serialized_start=4486
+  _MINIBENCHMARKSETTINGS._serialized_end=4670
 # @@protoc_insertion_point(module_scope)
