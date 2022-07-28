@@ -13,18 +13,17 @@ extras_require_serving = [
 extras_require_test = [
     *extras_require_serving,
     "pytest~=6.2",
+    "black~=22.6.0",
+    "isort~=5.10.1",
+    "flake8~=4.0.1",
+    "flake8-mutable~=1.2.0",
+    "mypy==0.942",
+    "mypy-protobuf~=3.2.0",
 ]
 extras_require_dev = [
     *extras_require_test,
     "treelite~=2.4",
-    "coverage",
-    "flake8",
-    "flake8-mutable",
-    "mypy",
-    "pip-tools",
-    "pre-commit",
-    "black",
-    "isort",
+    "pre-commit~=2.20.0",
 ]
 
 setup(
