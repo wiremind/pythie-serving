@@ -6,32 +6,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.8
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Set up python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: 3.8
-      - name: Install dependencies
+
+      - name: Install test requirements
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Lint with flake8
-        run: |
-          pip install flake8
-          flake8 .
-      - name: mypy
-        run: |
-          pip install mypy mypy-protobuf
-          mypy
-      - name: Lint with black
-        uses: psf/black@stable
-        with:
-          options: "--check --diff --extend-exclude src/pythie_serving/tensorflow_proto"
-      - name: isort
-        uses: isort/isort-action@master
-        with:
-          configuration: "--check-only --diff --profile black --extend-skip-glob src/pythie_serving/tensorflow_proto"
-      - name: Run unittests with pytest
-        run: |
+          pip install --upgrade pip pip-tools
           pip install ".[test]"
+
+      - name: Check pythie-serving-requirements.txt
+        run: |
+          pip-compile --extra=serving --no-emit-index-url --quiet --output-file=pythie-serving-requirements.txt setup.py
+          if ! [ -z "$(git status --porcelain)" ]; then
+            echo "pythie-serving-requirements.txt are not sync'ed with setup.py, please run pip-compile.";
+            false;
+          fi
+
+      - name: Lint (flake8)
+        run: |
+          flake8 .
+
+      - name: Lint (black)
+        run: |
+          black . --check
+
+      - name: Lint (isort)
+        run: |
+          isort . --check-only
+
+      - name: Check typing (mypy)
+        run: |
+          mypy
+
+      - name: Run unit tests
+        run: |
           pytest tests --junitxml=junit/test-results.xml

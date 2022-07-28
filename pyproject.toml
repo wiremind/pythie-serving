@@ -1,2 +1,3 @@
 [tool.black]
 line-length = 120
+extend-exclude = '(.+\.pyi|.+_pb2\.py|.+_pb2_grpc.py)'  # ignore stubs and protobuf files
