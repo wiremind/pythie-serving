@@ -8,7 +8,7 @@ cloudpickle==2.1.0
     # via pythie-serving (setup.py)
 grpcio==1.44.0
     # via pythie-serving (setup.py)
-joblib==1.1.0
+joblib==1.2.0
     # via scikit-learn
 lightgbm==3.3.2
     # via pythie-serving (setup.py)
