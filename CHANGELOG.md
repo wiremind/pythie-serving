@@ -1,5 +1,9 @@
 # Pythie serving
 
+## 2.6.0
+## Change
+* add new servicer for lgbm model outputting count per leaf instead of its target. The final value is an average of all counts from each tree
+
 ## 2.3.1
 
 ## Change
