@@ -25,6 +25,7 @@ class ModelSpecs(TypedDict):
     feature_names: List[str]
     nb_features: int
     samples_dtype: Any
+    extra_specs: Any
 
 
 class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc.PredictionServiceServicer, abc.ABC):
@@ -91,8 +92,10 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
 
         features_names = model_specs["feature_names"]
         if set(request_inputs) != set(features_names):
+            missing_features = set(features_names) - set(request_inputs)
             raise PythieServingException(
-                f"Features names mismatch. Expected {features_names}, got {set(request_inputs)}."
+                f"Features names mismatch. Missing features: {missing_features}, "
+                f"Expected {features_names}, got {set(request_inputs)}."
             )
 
         nb_samples = request_inputs[features_names[0]].tensor_shape.dim[0].size

@@ -29,6 +29,7 @@ class SklearnPredictionServiceServicer(AbstractPythieServingPredictionServiceSer
             "feature_names": metadata["feature_names"],
             "nb_features": len(metadata["feature_names"]),
             "samples_dtype": object,
+            "extra_specs": None,
         }
 
     def _predict(self, model_specs: ModelSpecs, samples: NDArray) -> NDArray:

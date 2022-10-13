@@ -36,6 +36,12 @@ def create_grpc_server(
         from .lightgbm_wrapper import LightGBMPredictionServiceServicer
 
         servicer_cls = LightGBMPredictionServiceServicer
+
+    elif model_platform == "lightgbmcount":
+        from .lightgbm_wrapper import LGBMCountServiceServicer
+
+        servicer_cls = LGBMCountServiceServicer
+
     elif model_platform == "treelite":
         from .treelite_wrapper import TreelitePredictionServiceServicer
 
