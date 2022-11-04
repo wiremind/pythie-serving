@@ -101,4 +101,4 @@ class LGBMCountServiceServicer(AbstractPythieServingPredictionServiceServicer):
                 for tree_id in range(nb_trees)
             ],
             axis=0,
-        )
+        ).reshape(-1)
