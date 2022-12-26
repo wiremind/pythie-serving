@@ -38,7 +38,7 @@ threadpoolctl==3.1.0
     # via scikit-learn
 treelite-runtime==2.2.2
     # via pythie-serving (setup.py)
-wheel==0.37.1
+wheel==0.38.1
     # via lightgbm
 xgboost==0.90
     # via pythie-serving (setup.py)
