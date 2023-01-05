@@ -1,5 +1,9 @@
 # Pythie serving
 
+## 3.1.0
+## Change
+* Add GRPC server timeout (in seconds) in var env `GRPC_SERVER_TIMEOUT`. Default to None. 
+
 ## 3.0.0
 ## Change
 * Upgrade sklearn version to 1.2.0
