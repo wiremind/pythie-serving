@@ -1,5 +1,9 @@
 # Pythie serving
 
+## 3.0.0.dev1
+## Change
+* Add GRPC server timeout 
+
 ## 3.0.0
 ## Change
 * Upgrade sklearn version to 1.2.0
