@@ -3,21 +3,31 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.attr_value_pb2
 import tensorflow.core.framework.step_stats_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class CodeDef(google.protobuf.message.Message):
     """It specifies the Python callstack that creates an op."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Trace(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         FILE_FIELD_NUMBER: builtins.int
         FILE_ID_FIELD_NUMBER: builtins.int
         LINENO_FIELD_NUMBER: builtins.int
@@ -26,146 +36,161 @@ class CodeDef(google.protobuf.message.Message):
         LINE_FIELD_NUMBER: builtins.int
         LINE_ID_FIELD_NUMBER: builtins.int
         FUNC_START_LINE_FIELD_NUMBER: builtins.int
-        file: typing.Text
+        file: builtins.str
         """deprecated by file_id."""
-
         file_id: builtins.int
         lineno: builtins.int
-        function: typing.Text
+        function: builtins.str
         """deprecated by function_id."""
-
         function_id: builtins.int
-        line: typing.Text
+        line: builtins.str
         """deprecated line_id."""
-
         line_id: builtins.int
         func_start_line: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            file: typing.Text = ...,
+            file: builtins.str = ...,
             file_id: builtins.int = ...,
             lineno: builtins.int = ...,
-            function: typing.Text = ...,
+            function: builtins.str = ...,
             function_id: builtins.int = ...,
-            line: typing.Text = ...,
+            line: builtins.str = ...,
             line_id: builtins.int = ...,
             func_start_line: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["file",b"file","file_id",b"file_id","func_start_line",b"func_start_line","function",b"function","function_id",b"function_id","line",b"line","line_id",b"line_id","lineno",b"lineno"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["file", b"file", "file_id", b"file_id", "func_start_line", b"func_start_line", "function", b"function", "function_id", b"function_id", "line", b"line", "line_id", b"line_id", "lineno", b"lineno"]) -> None: ...
 
     TRACES_FIELD_NUMBER: builtins.int
     @property
     def traces(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CodeDef.Trace]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        traces: typing.Optional[typing.Iterable[global___CodeDef.Trace]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["traces",b"traces"]) -> None: ...
+        traces: collections.abc.Iterable[global___CodeDef.Trace] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["traces", b"traces"]) -> None: ...
+
 global___CodeDef = CodeDef
 
+@typing_extensions.final
 class OpLogEntry(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     FLOAT_OPS_FIELD_NUMBER: builtins.int
     TYPES_FIELD_NUMBER: builtins.int
     CODE_DEF_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """op name."""
-
     float_ops: builtins.int
     """float_ops is filled by tfprof Python API when called. It requires the
     op has RegisterStatistics defined. Currently, Conv2D, MatMul, etc, are
     implemented.
     """
-
     @property
-    def types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """User can define extra op type information for an op. This allows the user
         to select a group of ops precisely using op_type as a key.
         """
-        pass
     @property
     def code_def(self) -> global___CodeDef:
         """Used to support tfprof "code" view."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         float_ops: builtins.int = ...,
-        types: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        code_def: typing.Optional[global___CodeDef] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["code_def",b"code_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["code_def",b"code_def","float_ops",b"float_ops","name",b"name","types",b"types"]) -> None: ...
+        types: collections.abc.Iterable[builtins.str] | None = ...,
+        code_def: global___CodeDef | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["code_def", b"code_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code_def", b"code_def", "float_ops", b"float_ops", "name", b"name", "types", b"types"]) -> None: ...
+
 global___OpLogEntry = OpLogEntry
 
+@typing_extensions.final
 class OpLogProto(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class IdToStringEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
-        value: typing.Text
-        def __init__(self,
+        value: builtins.str
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     LOG_ENTRIES_FIELD_NUMBER: builtins.int
     ID_TO_STRING_FIELD_NUMBER: builtins.int
     @property
     def log_entries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OpLogEntry]: ...
     @property
-    def id_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, typing.Text]:
+    def id_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]:
         """Maps from id of CodeDef file,function,line to its string
         In the future can also map other id of other fields to string.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        log_entries: typing.Optional[typing.Iterable[global___OpLogEntry]] = ...,
-        id_to_string: typing.Optional[typing.Mapping[builtins.int, typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id_to_string",b"id_to_string","log_entries",b"log_entries"]) -> None: ...
+        log_entries: collections.abc.Iterable[global___OpLogEntry] | None = ...,
+        id_to_string: collections.abc.Mapping[builtins.int, builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id_to_string", b"id_to_string", "log_entries", b"log_entries"]) -> None: ...
+
 global___OpLogProto = OpLogProto
 
+@typing_extensions.final
 class ProfileProto(google.protobuf.message.Message):
     """A proto representation of the profiler's profile.
     It allows serialization, shipping around and deserialization of the profiles.
 
     Please don't depend on the internals of the profile proto.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class NodesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___ProfileNode: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___ProfileNode] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___ProfileNode | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class IdToStringEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
-        value: typing.Text
-        def __init__(self,
+        value: builtins.str
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     NODES_FIELD_NUMBER: builtins.int
     HAS_TRACE_FIELD_NUMBER: builtins.int
@@ -176,133 +201,154 @@ class ProfileProto(google.protobuf.message.Message):
     def nodes(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___ProfileNode]: ...
     has_trace: builtins.bool
     """Whether or not has code traces."""
-
     miss_accelerator_stream: builtins.bool
     """Whether or not the TF device tracer fails to return accelerator
     information (which could lead to 0 accelerator execution time).
     """
-
     @property
     def steps(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Traced steps."""
-        pass
     @property
-    def id_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, typing.Text]:
+    def id_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]:
         """Maps from id of CodeDef file,function,line to its string
         In the future can also map other id of other fields to string.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        nodes: typing.Optional[typing.Mapping[builtins.int, global___ProfileNode]] = ...,
+        nodes: collections.abc.Mapping[builtins.int, global___ProfileNode] | None = ...,
         has_trace: builtins.bool = ...,
         miss_accelerator_stream: builtins.bool = ...,
-        steps: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        id_to_string: typing.Optional[typing.Mapping[builtins.int, typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["has_trace",b"has_trace","id_to_string",b"id_to_string","miss_accelerator_stream",b"miss_accelerator_stream","nodes",b"nodes","steps",b"steps"]) -> None: ...
+        steps: collections.abc.Iterable[builtins.int] | None = ...,
+        id_to_string: collections.abc.Mapping[builtins.int, builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["has_trace", b"has_trace", "id_to_string", b"id_to_string", "miss_accelerator_stream", b"miss_accelerator_stream", "nodes", b"nodes", "steps", b"steps"]) -> None: ...
+
 global___ProfileProto = ProfileProto
 
+@typing_extensions.final
 class ProfileNode(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class InputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class InputShapesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___Tuple: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___Tuple] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___Tuple | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class OutputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class OutputShapesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___Tuple: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___Tuple] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___Tuple | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class SrcOutputIndexEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class AttrsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.attr_value_pb2.AttrValue: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.attr_value_pb2.AttrValue] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.attr_value_pb2.AttrValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class ExecsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___ExecProfile: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___ExecProfile] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___ExecProfile | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     OP_FIELD_NUMBER: builtins.int
@@ -320,15 +366,12 @@ class ProfileNode(google.protobuf.message.Message):
     TRACE_FIELD_NUMBER: builtins.int
     ATTRS_FIELD_NUMBER: builtins.int
     EXECS_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """graph node name."""
-
-    op: typing.Text
+    op: builtins.str
     """graph operation type."""
-
     id: builtins.int
     """A unique id for the node."""
-
     @property
     def inputs(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.int]: ...
     @property
@@ -340,74 +383,83 @@ class ProfileNode(google.protobuf.message.Message):
     @property
     def src_output_index(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.int]:
         """A map from source node id to its output index to current node."""
-        pass
     @property
     def shape(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     @property
-    def op_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    canonical_device: typing.Text
-    host_device: typing.Text
+    def op_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    canonical_device: builtins.str
+    host_device: builtins.str
     float_ops: builtins.int
     @property
     def trace(self) -> global___CodeDef: ...
     @property
-    def attrs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
+    def attrs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
     @property
     def execs(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___ExecProfile]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        op: typing.Text = ...,
+        name: builtins.str = ...,
+        op: builtins.str = ...,
         id: builtins.int = ...,
-        inputs: typing.Optional[typing.Mapping[builtins.int, builtins.int]] = ...,
-        input_shapes: typing.Optional[typing.Mapping[builtins.int, global___Tuple]] = ...,
-        outputs: typing.Optional[typing.Mapping[builtins.int, builtins.int]] = ...,
-        output_shapes: typing.Optional[typing.Mapping[builtins.int, global___Tuple]] = ...,
-        src_output_index: typing.Optional[typing.Mapping[builtins.int, builtins.int]] = ...,
-        shape: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        op_types: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        canonical_device: typing.Text = ...,
-        host_device: typing.Text = ...,
+        inputs: collections.abc.Mapping[builtins.int, builtins.int] | None = ...,
+        input_shapes: collections.abc.Mapping[builtins.int, global___Tuple] | None = ...,
+        outputs: collections.abc.Mapping[builtins.int, builtins.int] | None = ...,
+        output_shapes: collections.abc.Mapping[builtins.int, global___Tuple] | None = ...,
+        src_output_index: collections.abc.Mapping[builtins.int, builtins.int] | None = ...,
+        shape: collections.abc.Iterable[builtins.int] | None = ...,
+        op_types: collections.abc.Iterable[builtins.str] | None = ...,
+        canonical_device: builtins.str = ...,
+        host_device: builtins.str = ...,
         float_ops: builtins.int = ...,
-        trace: typing.Optional[global___CodeDef] = ...,
-        attrs: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]] = ...,
-        execs: typing.Optional[typing.Mapping[builtins.int, global___ExecProfile]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["trace",b"trace"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["attrs",b"attrs","canonical_device",b"canonical_device","execs",b"execs","float_ops",b"float_ops","host_device",b"host_device","id",b"id","input_shapes",b"input_shapes","inputs",b"inputs","name",b"name","op",b"op","op_types",b"op_types","output_shapes",b"output_shapes","outputs",b"outputs","shape",b"shape","src_output_index",b"src_output_index","trace",b"trace"]) -> None: ...
+        trace: global___CodeDef | None = ...,
+        attrs: collections.abc.Mapping[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue] | None = ...,
+        execs: collections.abc.Mapping[builtins.int, global___ExecProfile] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["trace", b"trace"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["attrs", b"attrs", "canonical_device", b"canonical_device", "execs", b"execs", "float_ops", b"float_ops", "host_device", b"host_device", "id", b"id", "input_shapes", b"input_shapes", "inputs", b"inputs", "name", b"name", "op", b"op", "op_types", b"op_types", "output_shapes", b"output_shapes", "outputs", b"outputs", "shape", b"shape", "src_output_index", b"src_output_index", "trace", b"trace"]) -> None: ...
+
 global___ProfileNode = ProfileNode
 
+@typing_extensions.final
 class ExecProfile(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class AcceleratorExecsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___ExecTime: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___ExecTime] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___ExecTime | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class CpuExecsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___ExecTime: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___ExecTime] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___ExecTime | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     RUN_COUNT_FIELD_NUMBER: builtins.int
     ALL_START_MICROS_FIELD_NUMBER: builtins.int
@@ -419,81 +471,85 @@ class ExecProfile(google.protobuf.message.Message):
     DEVICES_FIELD_NUMBER: builtins.int
     run_count: builtins.int
     """Can be larger than 1 if run multiple times in loop."""
-
     all_start_micros: builtins.int
     """The earliest/latest time including scheduling and execution."""
-
     latest_end_micros: builtins.int
     @property
-    def accelerator_execs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___ExecTime]:
+    def accelerator_execs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___ExecTime]:
         """device -> vector of {op_start_micros, op_exec_micros} pairs.
         accelerator_execs: gpu:id/stream:all -> {op_start_micros, op_exec_micros}
         For accelerator, vector size can be larger than 1, multiple kernel fires
         or in tf.while_loop.
         """
-        pass
     @property
-    def cpu_execs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___ExecTime]:
+    def cpu_execs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___ExecTime]:
         """cpu_execs: cpu/gpu:id -> {op_start_micros, op_exec_micros}
         For cpu, vector size can be larger than 1 if in tf.while_loop.
         """
-        pass
     @property
     def memory_execs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ExecMemory]:
         """Each entry to memory information of a scheduling of the node.
         Normally, there will be multiple entries in while_loop.
         """
-        pass
     @property
     def allocations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.step_stats_pb2.AllocationRecord]:
         """The allocation and deallocation times and sizes throughout execution."""
-        pass
     @property
-    def devices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def devices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The devices related to this execution."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         run_count: builtins.int = ...,
         all_start_micros: builtins.int = ...,
         latest_end_micros: builtins.int = ...,
-        accelerator_execs: typing.Optional[typing.Mapping[typing.Text, global___ExecTime]] = ...,
-        cpu_execs: typing.Optional[typing.Mapping[typing.Text, global___ExecTime]] = ...,
-        memory_execs: typing.Optional[typing.Iterable[global___ExecMemory]] = ...,
-        allocations: typing.Optional[typing.Iterable[tensorflow.core.framework.step_stats_pb2.AllocationRecord]] = ...,
-        devices: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accelerator_execs",b"accelerator_execs","all_start_micros",b"all_start_micros","allocations",b"allocations","cpu_execs",b"cpu_execs","devices",b"devices","latest_end_micros",b"latest_end_micros","memory_execs",b"memory_execs","run_count",b"run_count"]) -> None: ...
+        accelerator_execs: collections.abc.Mapping[builtins.str, global___ExecTime] | None = ...,
+        cpu_execs: collections.abc.Mapping[builtins.str, global___ExecTime] | None = ...,
+        memory_execs: collections.abc.Iterable[global___ExecMemory] | None = ...,
+        allocations: collections.abc.Iterable[tensorflow.core.framework.step_stats_pb2.AllocationRecord] | None = ...,
+        devices: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_execs", b"accelerator_execs", "all_start_micros", b"all_start_micros", "allocations", b"allocations", "cpu_execs", b"cpu_execs", "devices", b"devices", "latest_end_micros", b"latest_end_micros", "memory_execs", b"memory_execs", "run_count", b"run_count"]) -> None: ...
+
 global___ExecProfile = ExecProfile
 
+@typing_extensions.final
 class ExecTime(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TIMES_FIELD_NUMBER: builtins.int
     @property
     def times(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Tuple]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        times: typing.Optional[typing.Iterable[global___Tuple]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["times",b"times"]) -> None: ...
+        times: collections.abc.Iterable[global___Tuple] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["times", b"times"]) -> None: ...
+
 global___ExecTime = ExecTime
 
+@typing_extensions.final
 class ExecMemory(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class OutputMemoryEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___Memory: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___Memory] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___Memory | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     MEMORY_MICROS_FIELD_NUMBER: builtins.int
     HOST_TEMP_BYTES_FIELD_NUMBER: builtins.int
@@ -508,36 +564,29 @@ class ExecMemory(google.protobuf.message.Message):
     OUTPUT_MEMORY_FIELD_NUMBER: builtins.int
     memory_micros: builtins.int
     """This is the timestamp when the memory information was tracked."""
-
     host_temp_bytes: builtins.int
     """NOTE: Please don't depend on the following 4 fields yet. Due to
     TensorFlow internal tracing issues, the numbers can be quite wrong.
     TODO(xpan): Fix the TensorFlow internal tracing.
     """
-
     host_persistent_bytes: builtins.int
     accelerator_temp_bytes: builtins.int
     accelerator_persistent_bytes: builtins.int
     requested_bytes: builtins.int
     """Total bytes requested by the op."""
-
     peak_bytes: builtins.int
     """Total bytes requested by the op and released before op end."""
-
     residual_bytes: builtins.int
     """Total bytes requested by the op and not released after op end."""
-
     output_bytes: builtins.int
     """Total bytes output by the op (not necessarily requested by the op)."""
-
     allocator_bytes_in_use: builtins.int
     """The total number of bytes currently allocated by the allocator if >0."""
-
     @property
     def output_memory(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___Memory]:
         """The memory of each output of the operation."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         memory_micros: builtins.int = ...,
         host_temp_bytes: builtins.int = ...,
@@ -549,33 +598,42 @@ class ExecMemory(google.protobuf.message.Message):
         residual_bytes: builtins.int = ...,
         output_bytes: builtins.int = ...,
         allocator_bytes_in_use: builtins.int = ...,
-        output_memory: typing.Optional[typing.Mapping[builtins.int, global___Memory]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accelerator_persistent_bytes",b"accelerator_persistent_bytes","accelerator_temp_bytes",b"accelerator_temp_bytes","allocator_bytes_in_use",b"allocator_bytes_in_use","host_persistent_bytes",b"host_persistent_bytes","host_temp_bytes",b"host_temp_bytes","memory_micros",b"memory_micros","output_bytes",b"output_bytes","output_memory",b"output_memory","peak_bytes",b"peak_bytes","requested_bytes",b"requested_bytes","residual_bytes",b"residual_bytes"]) -> None: ...
+        output_memory: collections.abc.Mapping[builtins.int, global___Memory] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_persistent_bytes", b"accelerator_persistent_bytes", "accelerator_temp_bytes", b"accelerator_temp_bytes", "allocator_bytes_in_use", b"allocator_bytes_in_use", "host_persistent_bytes", b"host_persistent_bytes", "host_temp_bytes", b"host_temp_bytes", "memory_micros", b"memory_micros", "output_bytes", b"output_bytes", "output_memory", b"output_memory", "peak_bytes", b"peak_bytes", "requested_bytes", b"requested_bytes", "residual_bytes", b"residual_bytes"]) -> None: ...
+
 global___ExecMemory = ExecMemory
 
+@typing_extensions.final
 class Tuple(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     INT64_VALUES_FIELD_NUMBER: builtins.int
     @property
     def int64_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        int64_values: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["int64_values",b"int64_values"]) -> None: ...
+        int64_values: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["int64_values", b"int64_values"]) -> None: ...
+
 global___Tuple = Tuple
 
+@typing_extensions.final
 class Memory(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     BYTES_FIELD_NUMBER: builtins.int
     PTR_FIELD_NUMBER: builtins.int
     bytes: builtins.int
     ptr: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         bytes: builtins.int = ...,
         ptr: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bytes",b"bytes","ptr",b"ptr"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bytes", b"bytes", "ptr", b"ptr"]) -> None: ...
+
 global___Memory = Memory

@@ -5,35 +5,47 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import tensorflow_serving.apis.status_pb2
 import tensorflow_serving.config.model_server_config_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ReloadConfigRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONFIG_FIELD_NUMBER: builtins.int
     @property
     def config(self) -> tensorflow_serving.config.model_server_config_pb2.ModelServerConfig: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        config: typing.Optional[tensorflow_serving.config.model_server_config_pb2.ModelServerConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config",b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config",b"config"]) -> None: ...
+        config: tensorflow_serving.config.model_server_config_pb2.ModelServerConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["config", b"config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["config", b"config"]) -> None: ...
+
 global___ReloadConfigRequest = ReloadConfigRequest
 
+@typing_extensions.final
 class ReloadConfigResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> tensorflow_serving.apis.status_pb2.StatusProto: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[tensorflow_serving.apis.status_pb2.StatusProto] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status"]) -> None: ...
+        status: tensorflow_serving.apis.status_pb2.StatusProto | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
 global___ReloadConfigResponse = ReloadConfigResponse

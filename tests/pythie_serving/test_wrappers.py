@@ -166,7 +166,7 @@ class TablePredictionServiceServicerTestCase(PredictionServiceServicerTestCaseMi
         return table
 
     def _model_predict(self, inputs):
-        output = np.empty((np.shape(inputs)[0],), np.int)
+        output = np.empty((np.shape(inputs)[0],), dtype=int)
         for idx, sample in enumerate(inputs):
             pred = self.model[tuple(feature_value for feature_value in sample)]
 

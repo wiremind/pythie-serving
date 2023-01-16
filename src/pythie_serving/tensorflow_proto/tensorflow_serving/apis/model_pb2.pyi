@@ -6,41 +6,46 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
 import google.protobuf.wrappers_pb2
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ModelSpec(google.protobuf.message.Message):
     """Metadata for an inference request such as the model name and version."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     VERSION_FIELD_NUMBER: builtins.int
     VERSION_LABEL_FIELD_NUMBER: builtins.int
     SIGNATURE_NAME_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """Required servable name."""
-
     @property
     def version(self) -> google.protobuf.wrappers_pb2.Int64Value:
         """Use this specific version number."""
-        pass
-    version_label: typing.Text
+    version_label: builtins.str
     """Use the version associated with the given label."""
-
-    signature_name: typing.Text
+    signature_name: builtins.str
     """A named signature to evaluate. If unspecified, the default signature will
     be used.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        version: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        version_label: typing.Text = ...,
-        signature_name: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["version",b"version","version_choice",b"version_choice","version_label",b"version_label"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name",b"name","signature_name",b"signature_name","version",b"version","version_choice",b"version_choice","version_label",b"version_label"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["version_choice",b"version_choice"]) -> typing.Optional[typing_extensions.Literal["version","version_label"]]: ...
+        name: builtins.str = ...,
+        version: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        version_label: builtins.str = ...,
+        signature_name: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["version", b"version", "version_choice", b"version_choice", "version_label", b"version_label"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "signature_name", b"signature_name", "version", b"version", "version_choice", b"version_choice", "version_label", b"version_label"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["version_choice", b"version_choice"]) -> typing_extensions.Literal["version", "version_label"] | None: ...
+
 global___ModelSpec = ModelSpec

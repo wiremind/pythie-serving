@@ -5,28 +5,37 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class DebuggerEventMetadata(google.protobuf.message.Message):
     """Encapsulates per-event data related to debugging."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_FIELD_NUMBER: builtins.int
     OUTPUT_SLOT_FIELD_NUMBER: builtins.int
     NUM_CHUNKS_FIELD_NUMBER: builtins.int
     CHUNK_INDEX_FIELD_NUMBER: builtins.int
-    device: typing.Text
+    device: builtins.str
     output_slot: builtins.int
     num_chunks: builtins.int
     chunk_index: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        device: typing.Text = ...,
+        device: builtins.str = ...,
         output_slot: builtins.int = ...,
         num_chunks: builtins.int = ...,
         chunk_index: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["chunk_index",b"chunk_index","device",b"device","num_chunks",b"num_chunks","output_slot",b"output_slot"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["chunk_index", b"chunk_index", "device", b"device", "num_chunks", b"num_chunks", "output_slot", b"output_slot"]) -> None: ...
+
 global___DebuggerEventMetadata = DebuggerEventMetadata

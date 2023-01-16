@@ -1,5 +1,4 @@
 from concurrent import futures
-from typing import Optional, Type
 
 import grpc
 
@@ -17,7 +16,7 @@ def create_grpc_server(
     model_server_config: model_server_config_pb2.ModelServerConfig,
     worker_count: int,
     port: int,
-    maximum_concurrent_rpcs: Optional[int],
+    maximum_concurrent_rpcs: int | None,
 ) -> grpc.server:
     model_platforms = {c.model_platform for c in model_server_config.model_config_list.config}
     if len(model_platforms) > 1:
@@ -25,7 +24,7 @@ def create_grpc_server(
 
     model_platform = model_platforms.pop()
     # import in code to avoid loading too many python libraries in memory
-    servicer_cls: Type[AbstractPythieServingPredictionServiceServicer]
+    servicer_cls: type[AbstractPythieServingPredictionServiceServicer]
     if model_platform == "xgboost":
         if worker_count > 1:
             raise ValueError(f"Model platform {model_platform} is not thread safe")

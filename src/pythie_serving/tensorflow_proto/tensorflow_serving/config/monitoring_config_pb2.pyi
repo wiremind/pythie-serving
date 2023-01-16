@@ -5,42 +5,54 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class PrometheusConfig(google.protobuf.message.Message):
     """Configuration for Prometheus monitoring."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ENABLE_FIELD_NUMBER: builtins.int
     PATH_FIELD_NUMBER: builtins.int
     enable: builtins.bool
     """Whether to expose Prometheus metrics."""
-
-    path: typing.Text
+    path: builtins.str
     """The endpoint to expose Prometheus metrics.
     If not specified, PrometheusExporter::kPrometheusPath value is used.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         enable: builtins.bool = ...,
-        path: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enable",b"enable","path",b"path"]) -> None: ...
+        path: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["enable", b"enable", "path", b"path"]) -> None: ...
+
 global___PrometheusConfig = PrometheusConfig
 
+@typing_extensions.final
 class MonitoringConfig(google.protobuf.message.Message):
     """Configuration for monitoring."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PROMETHEUS_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def prometheus_config(self) -> global___PrometheusConfig: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prometheus_config: typing.Optional[global___PrometheusConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["prometheus_config",b"prometheus_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["prometheus_config",b"prometheus_config"]) -> None: ...
+        prometheus_config: global___PrometheusConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["prometheus_config", b"prometheus_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["prometheus_config", b"prometheus_config"]) -> None: ...
+
 global___MonitoringConfig = MonitoringConfig

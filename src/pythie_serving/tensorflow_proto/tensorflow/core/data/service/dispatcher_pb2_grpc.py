@@ -49,15 +49,20 @@ class DispatcherServiceStub(object):
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobResponse.FromString,
                 )
+        self.GetOrCreateIteration = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetOrCreateIteration',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationResponse.FromString,
+                )
         self.MaybeRemoveTask = channel.unary_unary(
                 '/tensorflow.data.DispatcherService/MaybeRemoveTask',
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskResponse.FromString,
                 )
-        self.ReleaseJobClient = channel.unary_unary(
-                '/tensorflow.data.DispatcherService/ReleaseJobClient',
-                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.SerializeToString,
-                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.FromString,
+        self.ReleaseIterationClient = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/ReleaseIterationClient',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientResponse.FromString,
                 )
         self.ClientHeartbeat = channel.unary_unary(
                 '/tensorflow.data.DispatcherService/ClientHeartbeat',
@@ -68,6 +73,16 @@ class DispatcherServiceStub(object):
                 '/tensorflow.data.DispatcherService/GetWorkers',
                 request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersResponse.FromString,
+                )
+        self.GetDataServiceMetadata = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetDataServiceMetadata',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataResponse.FromString,
+                )
+        self.GetDataServiceConfig = channel.unary_unary(
+                '/tensorflow.data.DispatcherService/GetDataServiceConfig',
+                request_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigResponse.FromString,
                 )
 
 
@@ -89,14 +104,14 @@ class DispatcherServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetDatasetDef(self, request, context):
-        """Gets a dataset defintion.
+        """Gets a dataset definition.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSplit(self, request, context):
-        """Gets the next split for a given job.
+        """Gets the next split for a given iteration.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -127,15 +142,23 @@ class DispatcherServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def MaybeRemoveTask(self, request, context):
-        """Attempts to remove a task from a round-robin read job.
+    def GetOrCreateIteration(self, request, context):
+        """Gets an iteration if it already exists, otherwise creates it.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ReleaseJobClient(self, request, context):
-        """Releases a job client so that a job may eventually be cleaned up.
+    def MaybeRemoveTask(self, request, context):
+        """Attempts to remove a task from a round-robin read iteration.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReleaseIterationClient(self, request, context):
+        """Releases an iteration client so that an iteration may eventually be cleaned
+        up.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -152,6 +175,20 @@ class DispatcherServiceServicer(object):
 
     def GetWorkers(self, request, context):
         """Reports a list of all workers registered with the dispatcher.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetDataServiceMetadata(self, request, context):
+        """Returns the data service metadata for the registered dataset.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetDataServiceConfig(self, request, context):
+        """Returns the config of a data service cluster.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -195,15 +232,20 @@ def add_DispatcherServiceServicer_to_server(servicer, server):
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateJobResponse.SerializeToString,
             ),
+            'GetOrCreateIteration': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOrCreateIteration,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationResponse.SerializeToString,
+            ),
             'MaybeRemoveTask': grpc.unary_unary_rpc_method_handler(
                     servicer.MaybeRemoveTask,
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.MaybeRemoveTaskResponse.SerializeToString,
             ),
-            'ReleaseJobClient': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReleaseJobClient,
-                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.FromString,
-                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.SerializeToString,
+            'ReleaseIterationClient': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReleaseIterationClient,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientResponse.SerializeToString,
             ),
             'ClientHeartbeat': grpc.unary_unary_rpc_method_handler(
                     servicer.ClientHeartbeat,
@@ -214,6 +256,16 @@ def add_DispatcherServiceServicer_to_server(servicer, server):
                     servicer.GetWorkers,
                     request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersRequest.FromString,
                     response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersResponse.SerializeToString,
+            ),
+            'GetDataServiceMetadata': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDataServiceMetadata,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataResponse.SerializeToString,
+            ),
+            'GetDataServiceConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDataServiceConfig,
+                    request_deserializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigRequest.FromString,
+                    response_serializer=tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -345,6 +397,23 @@ class DispatcherService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetOrCreateIteration(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetOrCreateIteration',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetOrCreateIterationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def MaybeRemoveTask(request,
             target,
             options=(),
@@ -362,7 +431,7 @@ class DispatcherService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ReleaseJobClient(request,
+    def ReleaseIterationClient(request,
             target,
             options=(),
             channel_credentials=None,
@@ -372,9 +441,9 @@ class DispatcherService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/ReleaseJobClient',
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientRequest.SerializeToString,
-            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseJobClientResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/ReleaseIterationClient',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.ReleaseIterationClientResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -409,5 +478,39 @@ class DispatcherService(object):
         return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetWorkers',
             tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersRequest.SerializeToString,
             tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetWorkersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDataServiceMetadata(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetDataServiceMetadata',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceMetadataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDataServiceConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/tensorflow.data.DispatcherService/GetDataServiceConfig',
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigRequest.SerializeToString,
+            tensorflow_dot_core_dot_data_dot_service_dot_dispatcher__pb2.GetDataServiceConfigResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -3,45 +3,60 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class InterconnectLink(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_ID_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     STRENGTH_FIELD_NUMBER: builtins.int
     device_id: builtins.int
-    type: typing.Text
+    type: builtins.str
     strength: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         device_id: builtins.int = ...,
-        type: typing.Text = ...,
+        type: builtins.str = ...,
         strength: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_id",b"device_id","strength",b"strength","type",b"type"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_id", b"device_id", "strength", b"strength", "type", b"type"]) -> None: ...
+
 global___InterconnectLink = InterconnectLink
 
+@typing_extensions.final
 class LocalLinks(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     LINK_FIELD_NUMBER: builtins.int
     @property
     def link(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InterconnectLink]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        link: typing.Optional[typing.Iterable[global___InterconnectLink]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["link",b"link"]) -> None: ...
+        link: collections.abc.Iterable[global___InterconnectLink] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["link", b"link"]) -> None: ...
+
 global___LocalLinks = LocalLinks
 
+@typing_extensions.final
 class DeviceLocality(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     BUS_ID_FIELD_NUMBER: builtins.int
     NUMA_NODE_FIELD_NUMBER: builtins.int
     LINKS_FIELD_NUMBER: builtins.int
@@ -49,64 +64,68 @@ class DeviceLocality(google.protobuf.message.Message):
     """Optional bus locality of device.  Default value of 0 means
     no specific locality.  Specific localities are indexed from 1.
     """
-
     numa_node: builtins.int
     """Optional NUMA locality of device."""
-
     @property
     def links(self) -> global___LocalLinks:
         """Optional local interconnect links to other devices."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         bus_id: builtins.int = ...,
         numa_node: builtins.int = ...,
-        links: typing.Optional[global___LocalLinks] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["links",b"links"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bus_id",b"bus_id","links",b"links","numa_node",b"numa_node"]) -> None: ...
+        links: global___LocalLinks | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["links", b"links"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bus_id", b"bus_id", "links", b"links", "numa_node", b"numa_node"]) -> None: ...
+
 global___DeviceLocality = DeviceLocality
 
+@typing_extensions.final
 class DeviceAttributes(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     DEVICE_TYPE_FIELD_NUMBER: builtins.int
     MEMORY_LIMIT_FIELD_NUMBER: builtins.int
     LOCALITY_FIELD_NUMBER: builtins.int
     INCARNATION_FIELD_NUMBER: builtins.int
     PHYSICAL_DEVICE_DESC_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    XLA_GLOBAL_ID_FIELD_NUMBER: builtins.int
+    name: builtins.str
     """Fully specified name of the device within a cluster."""
-
-    device_type: typing.Text
+    device_type: builtins.str
     """String representation of device_type."""
-
     memory_limit: builtins.int
     """Memory capacity of device in bytes."""
-
     @property
     def locality(self) -> global___DeviceLocality:
         """Platform-specific data about device that may be useful
         for supporting efficient data transfers.
         """
-        pass
     incarnation: builtins.int
     """A device is assigned a global unique number each time it is
     initialized. "incarnation" should never be 0.
     """
-
-    physical_device_desc: typing.Text
+    physical_device_desc: builtins.str
     """String representation of the physical device that this device maps to."""
-
-    def __init__(self,
+    xla_global_id: builtins.int
+    """A physical device ID for use in XLA DeviceAssignments, unique across
+    clients in a multi-client setup. Set to -1 if unavailable, non-negative
+    otherwise.
+    """
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        device_type: typing.Text = ...,
+        name: builtins.str = ...,
+        device_type: builtins.str = ...,
         memory_limit: builtins.int = ...,
-        locality: typing.Optional[global___DeviceLocality] = ...,
+        locality: global___DeviceLocality | None = ...,
         incarnation: builtins.int = ...,
-        physical_device_desc: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["locality",b"locality"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_type",b"device_type","incarnation",b"incarnation","locality",b"locality","memory_limit",b"memory_limit","name",b"name","physical_device_desc",b"physical_device_desc"]) -> None: ...
+        physical_device_desc: builtins.str = ...,
+        xla_global_id: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["locality", b"locality"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_type", b"device_type", "incarnation", b"incarnation", "locality", b"locality", "memory_limit", b"memory_limit", "name", b"name", "physical_device_desc", b"physical_device_desc", "xla_global_id", b"xla_global_id"]) -> None: ...
+
 global___DeviceAttributes = DeviceAttributes

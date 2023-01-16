@@ -3,7 +3,7 @@ The utils functions defined here directly come from tensorflow:
 https://github.com/tensorflow/tensorflow/blob/v2.6.0/tensorflow/python/framework/tensor_util.py
 """
 
-from typing import Any, Dict, List, Type, Union, no_type_check
+from typing import Any, no_type_check
 
 import numpy as np
 from numpy.typing import DTypeLike, NDArray
@@ -46,9 +46,9 @@ _CSV_TYPE = {
 }
 
 
-def get_tf_type(np_dtype: Type):
+def get_tf_type(np_dtype: np.dtype):
     """
-    :param np_dtype: python Type
+    :param np_dtype: numpy dtype
     :return: types_pb2.DataType
     """
     try:
@@ -68,7 +68,7 @@ def get_np_dtype(tf_type) -> DTypeLike:
         raise TypeError(f"Could not infer numpy type for {tf_type}")
 
 
-def get_csv_type(type_mapping: Dict[str, str]) -> Dict[str, Any]:
+def get_csv_type(type_mapping: dict[str, str]) -> dict[str, Any]:
     try:
         return {feature_name: _CSV_TYPE[data_type] for feature_name, data_type in type_mapping.items()}
     except KeyError:
@@ -79,7 +79,7 @@ def get_csv_type(type_mapping: Dict[str, str]) -> Dict[str, Any]:
 
 
 @no_type_check  # because copied/pasted from tensorflow repo
-def make_tensor_proto(values: Union[List[Any], NDArray]):
+def make_tensor_proto(values: list[Any] | NDArray):
     np_array = np.asarray(values)
 
     # python/numpy default float type is float64. We prefer float32 instead.

@@ -3,47 +3,62 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.protobuf.meta_graph_pb2
 import tensorflow_serving.apis.model_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class SignatureDefMap(google.protobuf.message.Message):
     """Message returned for "signature_def" field."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class SignatureDefEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.protobuf.meta_graph_pb2.SignatureDef: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.protobuf.meta_graph_pb2.SignatureDef] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.protobuf.meta_graph_pb2.SignatureDef | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     SIGNATURE_DEF_FIELD_NUMBER: builtins.int
     @property
-    def signature_def(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.protobuf.meta_graph_pb2.SignatureDef]: ...
-    def __init__(self,
+    def signature_def(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.protobuf.meta_graph_pb2.SignatureDef]: ...
+    def __init__(
+        self,
         *,
-        signature_def: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.protobuf.meta_graph_pb2.SignatureDef]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["signature_def",b"signature_def"]) -> None: ...
+        signature_def: collections.abc.Mapping[builtins.str, tensorflow.core.protobuf.meta_graph_pb2.SignatureDef] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["signature_def", b"signature_def"]) -> None: ...
+
 global___SignatureDefMap = SignatureDefMap
 
+@typing_extensions.final
 class GetModelMetadataRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     MODEL_SPEC_FIELD_NUMBER: builtins.int
     METADATA_FIELD_FIELD_NUMBER: builtins.int
     @property
@@ -51,55 +66,60 @@ class GetModelMetadataRequest(google.protobuf.message.Message):
         """Model Specification indicating which model we are querying for metadata.
         If version is not specified, will use the latest (numerical) version.
         """
-        pass
     @property
-    def metadata_field(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def metadata_field(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Metadata fields to get. Currently supported: "signature_def"."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        model_spec: typing.Optional[tensorflow_serving.apis.model_pb2.ModelSpec] = ...,
-        metadata_field: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_spec",b"model_spec"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metadata_field",b"metadata_field","model_spec",b"model_spec"]) -> None: ...
+        model_spec: tensorflow_serving.apis.model_pb2.ModelSpec | None = ...,
+        metadata_field: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_spec", b"model_spec"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metadata_field", b"metadata_field", "model_spec", b"model_spec"]) -> None: ...
+
 global___GetModelMetadataRequest = GetModelMetadataRequest
 
+@typing_extensions.final
 class GetModelMetadataResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class MetadataEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> google.protobuf.any_pb2.Any: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: google.protobuf.any_pb2.Any | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     MODEL_SPEC_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     @property
     def model_spec(self) -> tensorflow_serving.apis.model_pb2.ModelSpec:
         """Model Specification indicating which model this metadata belongs to."""
-        pass
     @property
-    def metadata(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, google.protobuf.any_pb2.Any]:
+    def metadata(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, google.protobuf.any_pb2.Any]:
         """Map of metadata field name to metadata field. The options for metadata
         field name are listed in GetModelMetadataRequest. Currently supported:
         "signature_def".
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        model_spec: typing.Optional[tensorflow_serving.apis.model_pb2.ModelSpec] = ...,
-        metadata: typing.Optional[typing.Mapping[typing.Text, google.protobuf.any_pb2.Any]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_spec",b"model_spec"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","model_spec",b"model_spec"]) -> None: ...
+        model_spec: tensorflow_serving.apis.model_pb2.ModelSpec | None = ...,
+        metadata: collections.abc.Mapping[builtins.str, google.protobuf.any_pb2.Any] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_spec", b"model_spec"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metadata", b"metadata", "model_spec", b"model_spec"]) -> None: ...
+
 global___GetModelMetadataResponse = GetModelMetadataResponse

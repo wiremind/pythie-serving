@@ -5,25 +5,31 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class LogCollectorConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TYPE_FIELD_NUMBER: builtins.int
     FILENAME_PREFIX_FIELD_NUMBER: builtins.int
-    type: typing.Text
+    type: builtins.str
     """Identifies the type of the LogCollector we will use to collect these logs."""
-
-    filename_prefix: typing.Text
+    filename_prefix: builtins.str
     """The prefix to use for the filenames of the logs."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        type: typing.Text = ...,
-        filename_prefix: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filename_prefix",b"filename_prefix","type",b"type"]) -> None: ...
+        type: builtins.str = ...,
+        filename_prefix: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["filename_prefix", b"filename_prefix", "type", b"type"]) -> None: ...
+
 global___LogCollectorConfig = LogCollectorConfig

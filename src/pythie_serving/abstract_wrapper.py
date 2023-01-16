@@ -2,7 +2,7 @@ import abc
 import logging
 import time
 from pathlib import Path
-from typing import Any, ClassVar, List, TypedDict
+from typing import Any, ClassVar, TypedDict
 
 import grpc
 import numpy as np
@@ -22,7 +22,7 @@ from .utils import make_ndarray_from_tensor, make_tensor_proto
 
 class ModelSpecs(TypedDict):
     model: Any
-    feature_names: List[str]
+    feature_names: list[str]
     nb_features: int
     samples_dtype: Any
     extra_specs: Any

@@ -3,17 +3,25 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class MemAllocatorStats(google.protobuf.message.Message):
     """Some of the data from AllocatorStats"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NUM_ALLOCS_FIELD_NUMBER: builtins.int
     BYTES_IN_USE_FIELD_NUMBER: builtins.int
     PEAK_BYTES_IN_USE_FIELD_NUMBER: builtins.int
@@ -24,19 +32,23 @@ class MemAllocatorStats(google.protobuf.message.Message):
     peak_bytes_in_use: builtins.int
     largest_alloc_size: builtins.int
     fragmentation_metric: builtins.float
-    def __init__(self,
+    def __init__(
+        self,
         *,
         num_allocs: builtins.int = ...,
         bytes_in_use: builtins.int = ...,
         peak_bytes_in_use: builtins.int = ...,
         largest_alloc_size: builtins.int = ...,
         fragmentation_metric: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bytes_in_use",b"bytes_in_use","fragmentation_metric",b"fragmentation_metric","largest_alloc_size",b"largest_alloc_size","num_allocs",b"num_allocs","peak_bytes_in_use",b"peak_bytes_in_use"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bytes_in_use", b"bytes_in_use", "fragmentation_metric", b"fragmentation_metric", "largest_alloc_size", b"largest_alloc_size", "num_allocs", b"num_allocs", "peak_bytes_in_use", b"peak_bytes_in_use"]) -> None: ...
+
 global___MemAllocatorStats = MemAllocatorStats
 
+@typing_extensions.final
 class MemChunk(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ADDRESS_FIELD_NUMBER: builtins.int
     SIZE_FIELD_NUMBER: builtins.int
     REQUESTED_SIZE_FIELD_NUMBER: builtins.int
@@ -50,28 +62,32 @@ class MemChunk(google.protobuf.message.Message):
     size: builtins.int
     requested_size: builtins.int
     bin: builtins.int
-    op_name: typing.Text
+    op_name: builtins.str
     freed_at_count: builtins.int
     action_count: builtins.int
     in_use: builtins.bool
     step_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         address: builtins.int = ...,
         size: builtins.int = ...,
         requested_size: builtins.int = ...,
         bin: builtins.int = ...,
-        op_name: typing.Text = ...,
+        op_name: builtins.str = ...,
         freed_at_count: builtins.int = ...,
         action_count: builtins.int = ...,
         in_use: builtins.bool = ...,
         step_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action_count",b"action_count","address",b"address","bin",b"bin","freed_at_count",b"freed_at_count","in_use",b"in_use","op_name",b"op_name","requested_size",b"requested_size","size",b"size","step_id",b"step_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action_count", b"action_count", "address", b"address", "bin", b"bin", "freed_at_count", b"freed_at_count", "in_use", b"in_use", "op_name", b"op_name", "requested_size", b"requested_size", "size", b"size", "step_id", b"step_id"]) -> None: ...
+
 global___MemChunk = MemChunk
 
+@typing_extensions.final
 class BinSummary(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     BIN_FIELD_NUMBER: builtins.int
     TOTAL_BYTES_IN_USE_FIELD_NUMBER: builtins.int
     TOTAL_BYTES_IN_BIN_FIELD_NUMBER: builtins.int
@@ -82,39 +98,47 @@ class BinSummary(google.protobuf.message.Message):
     total_bytes_in_bin: builtins.int
     total_chunks_in_use: builtins.int
     total_chunks_in_bin: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         bin: builtins.int = ...,
         total_bytes_in_use: builtins.int = ...,
         total_bytes_in_bin: builtins.int = ...,
         total_chunks_in_use: builtins.int = ...,
         total_chunks_in_bin: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bin",b"bin","total_bytes_in_bin",b"total_bytes_in_bin","total_bytes_in_use",b"total_bytes_in_use","total_chunks_in_bin",b"total_chunks_in_bin","total_chunks_in_use",b"total_chunks_in_use"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bin", b"bin", "total_bytes_in_bin", b"total_bytes_in_bin", "total_bytes_in_use", b"total_bytes_in_use", "total_chunks_in_bin", b"total_chunks_in_bin", "total_chunks_in_use", b"total_chunks_in_use"]) -> None: ...
+
 global___BinSummary = BinSummary
 
+@typing_extensions.final
 class SnapShot(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ACTION_COUNT_FIELD_NUMBER: builtins.int
     SIZE_FIELD_NUMBER: builtins.int
     action_count: builtins.int
     size: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         action_count: builtins.int = ...,
         size: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action_count",b"action_count","size",b"size"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action_count", b"action_count", "size", b"size"]) -> None: ...
+
 global___SnapShot = SnapShot
 
+@typing_extensions.final
 class MemoryDump(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ALLOCATOR_NAME_FIELD_NUMBER: builtins.int
     BIN_SUMMARY_FIELD_NUMBER: builtins.int
     CHUNK_FIELD_NUMBER: builtins.int
     SNAP_SHOT_FIELD_NUMBER: builtins.int
     STATS_FIELD_NUMBER: builtins.int
-    allocator_name: typing.Text
+    allocator_name: builtins.str
     @property
     def bin_summary(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BinSummary]: ...
     @property
@@ -123,14 +147,16 @@ class MemoryDump(google.protobuf.message.Message):
     def snap_shot(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SnapShot]: ...
     @property
     def stats(self) -> global___MemAllocatorStats: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        allocator_name: typing.Text = ...,
-        bin_summary: typing.Optional[typing.Iterable[global___BinSummary]] = ...,
-        chunk: typing.Optional[typing.Iterable[global___MemChunk]] = ...,
-        snap_shot: typing.Optional[typing.Iterable[global___SnapShot]] = ...,
-        stats: typing.Optional[global___MemAllocatorStats] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["stats",b"stats"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allocator_name",b"allocator_name","bin_summary",b"bin_summary","chunk",b"chunk","snap_shot",b"snap_shot","stats",b"stats"]) -> None: ...
+        allocator_name: builtins.str = ...,
+        bin_summary: collections.abc.Iterable[global___BinSummary] | None = ...,
+        chunk: collections.abc.Iterable[global___MemChunk] | None = ...,
+        snap_shot: collections.abc.Iterable[global___SnapShot] | None = ...,
+        stats: global___MemAllocatorStats | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["stats", b"stats"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["allocator_name", b"allocator_name", "bin_summary", b"bin_summary", "chunk", b"chunk", "snap_shot", b"snap_shot", "stats", b"stats"]) -> None: ...
+
 global___MemoryDump = MemoryDump

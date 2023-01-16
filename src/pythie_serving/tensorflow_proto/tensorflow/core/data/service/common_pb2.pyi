@@ -3,140 +3,202 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.graph_pb2
+import tensorflow.core.protobuf.data_service_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-class _ProcessingModeDef:
-    ValueType = typing.NewType('ValueType', builtins.int)
+class _TargetWorkers:
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
-class _ProcessingModeDefEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ProcessingModeDef.ValueType], builtins.type):
+
+class _TargetWorkersEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TargetWorkers.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    INVALID: _ProcessingModeDef.ValueType  # 0
-    PARALLEL_EPOCHS: _ProcessingModeDef.ValueType  # 1
-    """Each tf.data worker processes an entire epoch."""
+    TARGET_WORKERS_UNSPECIFIED: _TargetWorkers.ValueType  # 0
+    TARGET_WORKERS_AUTO: _TargetWorkers.ValueType  # 1
+    """tf.data service runtime decides which workers to read from."""
+    TARGET_WORKERS_ANY: _TargetWorkers.ValueType  # 2
+    """Reads from any available worker."""
+    TARGET_WORKERS_LOCAL: _TargetWorkers.ValueType  # 3
+    """Only reads from local workers. If no local worker is found, it is an error."""
 
-    DISTRIBUTED_EPOCH: _ProcessingModeDef.ValueType  # 2
-    """Processing of an epoch is distributed across all tf.data workers."""
+class TargetWorkers(_TargetWorkers, metaclass=_TargetWorkersEnumTypeWrapper):
+    """Specifies which tf.data service workers to read from."""
 
-class ProcessingModeDef(_ProcessingModeDef, metaclass=_ProcessingModeDefEnumTypeWrapper):
-    """Next tag: 3"""
-    pass
+TARGET_WORKERS_UNSPECIFIED: TargetWorkers.ValueType  # 0
+TARGET_WORKERS_AUTO: TargetWorkers.ValueType  # 1
+"""tf.data service runtime decides which workers to read from."""
+TARGET_WORKERS_ANY: TargetWorkers.ValueType  # 2
+"""Reads from any available worker."""
+TARGET_WORKERS_LOCAL: TargetWorkers.ValueType  # 3
+"""Only reads from local workers. If no local worker is found, it is an error."""
+global___TargetWorkers = TargetWorkers
 
-INVALID: ProcessingModeDef.ValueType  # 0
-PARALLEL_EPOCHS: ProcessingModeDef.ValueType  # 1
-"""Each tf.data worker processes an entire epoch."""
-
-DISTRIBUTED_EPOCH: ProcessingModeDef.ValueType  # 2
-"""Processing of an epoch is distributed across all tf.data workers."""
-
-global___ProcessingModeDef = ProcessingModeDef
-
-
+@typing_extensions.final
 class DatasetDef(google.protobuf.message.Message):
     """Next tag: 2"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     GRAPH_FIELD_NUMBER: builtins.int
     @property
     def graph(self) -> tensorflow.core.framework.graph_pb2.GraphDef:
         """We represent datasets as tensorflow GraphDefs which define the operations
         needed to create a tf.data dataset.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        graph: typing.Optional[tensorflow.core.framework.graph_pb2.GraphDef] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["graph",b"graph"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["graph",b"graph"]) -> None: ...
+        graph: tensorflow.core.framework.graph_pb2.GraphDef | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["graph", b"graph"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["graph", b"graph"]) -> None: ...
+
 global___DatasetDef = DatasetDef
 
-class TaskDef(google.protobuf.message.Message):
-    """Next tag: 10"""
+@typing_extensions.final
+class IterationKeyDef(google.protobuf.message.Message):
+    """Next tag: 3"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    ITERATION_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    iteration: builtins.int
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        iteration: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration", b"iteration", "name", b"name"]) -> None: ...
+
+global___IterationKeyDef = IterationKeyDef
+
+@typing_extensions.final
+class TaskDef(google.protobuf.message.Message):
+    """Next tag: 14"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DATASET_DEF_FIELD_NUMBER: builtins.int
     PATH_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
-    JOB_ID_FIELD_NUMBER: builtins.int
+    ITERATION_ID_FIELD_NUMBER: builtins.int
     NUM_SPLIT_PROVIDERS_FIELD_NUMBER: builtins.int
     WORKER_ADDRESS_FIELD_NUMBER: builtins.int
-    PROCESSING_MODE_FIELD_NUMBER: builtins.int
+    PROCESSING_MODE_DEF_FIELD_NUMBER: builtins.int
     NUM_CONSUMERS_FIELD_NUMBER: builtins.int
+    NUM_WORKERS_FIELD_NUMBER: builtins.int
+    WORKER_INDEX_FIELD_NUMBER: builtins.int
+    USE_CROSS_TRAINER_CACHE_FIELD_NUMBER: builtins.int
     @property
     def dataset_def(self) -> global___DatasetDef: ...
-    path: typing.Text
-    dataset_id: builtins.int
+    path: builtins.str
+    dataset_id: builtins.str
     task_id: builtins.int
-    job_id: builtins.int
+    iteration_id: builtins.int
     num_split_providers: builtins.int
     """In distributed epoch processing mode, we use one split provider for each
     source that feeds into the dataset. In parallel_epochs mode,
     `num_split_providers` is always zero.
     """
-
-    worker_address: typing.Text
+    worker_address: builtins.str
     """Address of the worker that the task is assigned to."""
-
-    processing_mode: global___ProcessingModeDef.ValueType
+    @property
+    def processing_mode_def(self) -> tensorflow.core.protobuf.data_service_pb2.ProcessingModeDef: ...
     num_consumers: builtins.int
-    def __init__(self,
+    num_workers: builtins.int
+    """Number of workers and the worker index. These are only populated when the
+    `processing_mode_def` specifies a static sharding policy.
+    """
+    worker_index: builtins.int
+    use_cross_trainer_cache: builtins.bool
+    """True if cross-trainer cache is enabled."""
+    def __init__(
+        self,
         *,
-        dataset_def: typing.Optional[global___DatasetDef] = ...,
-        path: typing.Text = ...,
-        dataset_id: builtins.int = ...,
+        dataset_def: global___DatasetDef | None = ...,
+        path: builtins.str = ...,
+        dataset_id: builtins.str = ...,
         task_id: builtins.int = ...,
-        job_id: builtins.int = ...,
+        iteration_id: builtins.int = ...,
         num_split_providers: builtins.int = ...,
-        worker_address: typing.Text = ...,
-        processing_mode: global___ProcessingModeDef.ValueType = ...,
+        worker_address: builtins.str = ...,
+        processing_mode_def: tensorflow.core.protobuf.data_service_pb2.ProcessingModeDef | None = ...,
         num_consumers: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset",b"dataset","dataset_def",b"dataset_def","num_consumers",b"num_consumers","optional_num_consumers",b"optional_num_consumers","path",b"path"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset",b"dataset","dataset_def",b"dataset_def","dataset_id",b"dataset_id","job_id",b"job_id","num_consumers",b"num_consumers","num_split_providers",b"num_split_providers","optional_num_consumers",b"optional_num_consumers","path",b"path","processing_mode",b"processing_mode","task_id",b"task_id","worker_address",b"worker_address"]) -> None: ...
+        num_workers: builtins.int = ...,
+        worker_index: builtins.int = ...,
+        use_cross_trainer_cache: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "dataset_def", b"dataset_def", "num_consumers", b"num_consumers", "optional_num_consumers", b"optional_num_consumers", "path", b"path", "processing_mode_def", b"processing_mode_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "dataset_def", b"dataset_def", "dataset_id", b"dataset_id", "iteration_id", b"iteration_id", "num_consumers", b"num_consumers", "num_split_providers", b"num_split_providers", "num_workers", b"num_workers", "optional_num_consumers", b"optional_num_consumers", "path", b"path", "processing_mode_def", b"processing_mode_def", "task_id", b"task_id", "use_cross_trainer_cache", b"use_cross_trainer_cache", "worker_address", b"worker_address", "worker_index", b"worker_index"]) -> None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["dataset",b"dataset"]) -> typing.Optional[typing_extensions.Literal["dataset_def","path"]]: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["dataset", b"dataset"]) -> typing_extensions.Literal["dataset_def", "path"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["optional_num_consumers",b"optional_num_consumers"]) -> typing.Optional[typing_extensions.Literal["num_consumers"]]: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["optional_num_consumers", b"optional_num_consumers"]) -> typing_extensions.Literal["num_consumers"] | None: ...
+
 global___TaskDef = TaskDef
 
+@typing_extensions.final
 class TaskInfo(google.protobuf.message.Message):
-    """Next tag: 6"""
+    """Next tag: 8"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     WORKER_ADDRESS_FIELD_NUMBER: builtins.int
     TRANSFER_ADDRESS_FIELD_NUMBER: builtins.int
+    WORKER_TAGS_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
-    JOB_ID_FIELD_NUMBER: builtins.int
+    ITERATION_ID_FIELD_NUMBER: builtins.int
+    WORKER_UID_FIELD_NUMBER: builtins.int
     STARTING_ROUND_FIELD_NUMBER: builtins.int
-    worker_address: typing.Text
+    worker_address: builtins.str
     """The address of the worker processing the task."""
-
-    transfer_address: typing.Text
+    transfer_address: builtins.str
     """The transfer address of the worker processing the task."""
-
+    @property
+    def worker_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Tags attached to the worker. This allows reading from selected workers.
+        For example, by applying a "COLOCATED" tag, tf.data service is able to read
+        from the local tf.data worker if one exists, then from off-TF-host workers,
+        to avoid cross-TF-host reads.
+        """
     task_id: builtins.int
     """The task id."""
-
-    job_id: builtins.int
-    """The id of the job that the task is part of."""
-
+    iteration_id: builtins.int
+    """The id of the iteration that the task is part of."""
+    worker_uid: builtins.int
+    """The UID of the worker Borg job, used for telemetry."""
     starting_round: builtins.int
     """The round to start reading from the task in. For non-round-robin reads,
     this is always 0.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        worker_address: typing.Text = ...,
-        transfer_address: typing.Text = ...,
+        worker_address: builtins.str = ...,
+        transfer_address: builtins.str = ...,
+        worker_tags: collections.abc.Iterable[builtins.str] | None = ...,
         task_id: builtins.int = ...,
-        job_id: builtins.int = ...,
+        iteration_id: builtins.int = ...,
+        worker_uid: builtins.int = ...,
         starting_round: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id",b"job_id","starting_round",b"starting_round","task_id",b"task_id","transfer_address",b"transfer_address","worker_address",b"worker_address"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_id", b"iteration_id", "starting_round", b"starting_round", "task_id", b"task_id", "transfer_address", b"transfer_address", "worker_address", b"worker_address", "worker_tags", b"worker_tags", "worker_uid", b"worker_uid"]) -> None: ...
+
 global___TaskInfo = TaskInfo

@@ -5,41 +5,53 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import tensorflow_serving.config.log_collector_config_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class SamplingConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SAMPLING_RATE_FIELD_NUMBER: builtins.int
     sampling_rate: builtins.float
     """Requests will be logged uniformly at random with this probability. Valid
     range: [0, 1.0].
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         sampling_rate: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["sampling_rate",b"sampling_rate"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["sampling_rate", b"sampling_rate"]) -> None: ...
+
 global___SamplingConfig = SamplingConfig
 
+@typing_extensions.final
 class LoggingConfig(google.protobuf.message.Message):
     """Configuration for logging query/responses."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     LOG_COLLECTOR_CONFIG_FIELD_NUMBER: builtins.int
     SAMPLING_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def log_collector_config(self) -> tensorflow_serving.config.log_collector_config_pb2.LogCollectorConfig: ...
     @property
     def sampling_config(self) -> global___SamplingConfig: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        log_collector_config: typing.Optional[tensorflow_serving.config.log_collector_config_pb2.LogCollectorConfig] = ...,
-        sampling_config: typing.Optional[global___SamplingConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["log_collector_config",b"log_collector_config","sampling_config",b"sampling_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["log_collector_config",b"log_collector_config","sampling_config",b"sampling_config"]) -> None: ...
+        log_collector_config: tensorflow_serving.config.log_collector_config_pb2.LogCollectorConfig | None = ...,
+        sampling_config: global___SamplingConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["log_collector_config", b"log_collector_config", "sampling_config", b"sampling_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["log_collector_config", b"log_collector_config", "sampling_config", b"sampling_config"]) -> None: ...
+
 global___LoggingConfig = LoggingConfig

@@ -3,26 +3,33 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _ForeignEnum:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _ForeignEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ForeignEnum.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     FOREIGN_ZERO: _ForeignEnum.ValueType  # 0
     FOREIGN_FOO: _ForeignEnum.ValueType  # 4
     FOREIGN_BAR: _ForeignEnum.ValueType  # 5
     FOREIGN_BAZ: _ForeignEnum.ValueType  # 6
-class ForeignEnum(_ForeignEnum, metaclass=_ForeignEnumEnumTypeWrapper):
-    pass
+
+class ForeignEnum(_ForeignEnum, metaclass=_ForeignEnumEnumTypeWrapper): ...
 
 FOREIGN_ZERO: ForeignEnum.ValueType  # 0
 FOREIGN_FOO: ForeignEnum.ValueType  # 4
@@ -30,13 +37,15 @@ FOREIGN_BAR: ForeignEnum.ValueType  # 5
 FOREIGN_BAZ: ForeignEnum.ValueType  # 6
 global___ForeignEnum = ForeignEnum
 
-
+@typing_extensions.final
 class TestAllTypes(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _NestedEnum:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], builtins.type):
+
+    class _NestedEnumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TestAllTypes._NestedEnum.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ZERO: TestAllTypes._NestedEnum.ValueType  # 0
         FOO: TestAllTypes._NestedEnum.ValueType  # 1
@@ -45,9 +54,7 @@ class TestAllTypes(google.protobuf.message.Message):
         NEG: TestAllTypes._NestedEnum.ValueType  # -1
         """Intentionally negative."""
 
-    class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper):
-        pass
-
+    class NestedEnum(_NestedEnum, metaclass=_NestedEnumEnumTypeWrapper): ...
     ZERO: TestAllTypes.NestedEnum.ValueType  # 0
     FOO: TestAllTypes.NestedEnum.ValueType  # 1
     BAR: TestAllTypes.NestedEnum.ValueType  # 2
@@ -55,18 +62,22 @@ class TestAllTypes(google.protobuf.message.Message):
     NEG: TestAllTypes.NestedEnum.ValueType  # -1
     """Intentionally negative."""
 
-
+    @typing_extensions.final
     class NestedMessage(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class DoubleNestedMessage(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             OPTIONAL_STRING_FIELD_NUMBER: builtins.int
-            optional_string: typing.Text
-            def __init__(self,
+            optional_string: builtins.str
+            def __init__(
+                self,
                 *,
-                optional_string: typing.Text = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["optional_string",b"optional_string"]) -> None: ...
+                optional_string: builtins.str = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["optional_string", b"optional_string"]) -> None: ...
 
         OPTIONAL_INT32_FIELD_NUMBER: builtins.int
         REPEATED_INT32_FIELD_NUMBER: builtins.int
@@ -78,116 +89,138 @@ class TestAllTypes(google.protobuf.message.Message):
         @property
         def msg(self) -> global___TestAllTypes.NestedMessage.DoubleNestedMessage: ...
         optional_int64: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             optional_int32: builtins.int = ...,
-            repeated_int32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-            msg: typing.Optional[global___TestAllTypes.NestedMessage.DoubleNestedMessage] = ...,
+            repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
+            msg: global___TestAllTypes.NestedMessage.DoubleNestedMessage | None = ...,
             optional_int64: builtins.int = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["msg",b"msg"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["msg",b"msg","optional_int32",b"optional_int32","optional_int64",b"optional_int64","repeated_int32",b"repeated_int32"]) -> None: ...
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["msg", b"msg"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["msg", b"msg", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "repeated_int32", b"repeated_int32"]) -> None: ...
 
+    @typing_extensions.final
     class MapStringToMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___TestAllTypes.NestedMessage: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___TestAllTypes.NestedMessage | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapInt32ToMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___TestAllTypes.NestedMessage: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___TestAllTypes.NestedMessage | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapInt64ToMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___TestAllTypes.NestedMessage: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___TestAllTypes.NestedMessage | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapBoolToMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.bool
         @property
         def value(self) -> global___TestAllTypes.NestedMessage: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.bool = ...,
-            value: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___TestAllTypes.NestedMessage | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapStringToInt64Entry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
+            key: builtins.str = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class MapInt64ToStringEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
-        value: typing.Text
-        def __init__(self,
+        value: builtins.str
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class AnotherMapStringToMessageEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___TestAllTypes.NestedMessage: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___TestAllTypes.NestedMessage | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     OPTIONAL_INT32_FIELD_NUMBER: builtins.int
     OPTIONAL_INT64_FIELD_NUMBER: builtins.int
@@ -244,12 +277,10 @@ class TestAllTypes(google.protobuf.message.Message):
     """Singular
     use large tag to test output order.
     """
-
     optional_int64: builtins.int
     optional_uint32: builtins.int
     optional_uint64: builtins.int
     """use large tag to test output order."""
-
     optional_sint32: builtins.int
     optional_sint64: builtins.int
     optional_fixed32: builtins.int
@@ -259,7 +290,7 @@ class TestAllTypes(google.protobuf.message.Message):
     optional_float: builtins.float
     optional_double: builtins.float
     optional_bool: builtins.bool
-    optional_string: typing.Text
+    optional_string: builtins.str
     optional_bytes: builtins.bytes
     @property
     def optional_nested_message(self) -> global___TestAllTypes.NestedMessage: ...
@@ -267,11 +298,10 @@ class TestAllTypes(google.protobuf.message.Message):
     def optional_foreign_message(self) -> global___ForeignMessage: ...
     optional_nested_enum: global___TestAllTypes.NestedEnum.ValueType
     optional_foreign_enum: global___ForeignEnum.ValueType
-    optional_cord: typing.Text
+    optional_cord: builtins.str
     @property
     def repeated_int32(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Repeated"""
-        pass
     @property
     def repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     @property
@@ -297,7 +327,7 @@ class TestAllTypes(google.protobuf.message.Message):
     @property
     def repeated_bool(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]: ...
     @property
-    def repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def repeated_string(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
     def repeated_bytes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
     @property
@@ -305,15 +335,15 @@ class TestAllTypes(google.protobuf.message.Message):
     @property
     def repeated_nested_enum(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___TestAllTypes.NestedEnum.ValueType]: ...
     @property
-    def repeated_cord(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def repeated_cord(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     oneof_uint32: builtins.int
     @property
     def oneof_nested_message(self) -> global___TestAllTypes.NestedMessage: ...
-    oneof_string: typing.Text
+    oneof_string: builtins.str
     oneof_bytes: builtins.bytes
     oneof_enum: global___TestAllTypes.NestedEnum.ValueType
     @property
-    def map_string_to_message(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___TestAllTypes.NestedMessage]: ...
+    def map_string_to_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___TestAllTypes.NestedMessage]: ...
     @property
     def map_int32_to_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___TestAllTypes.NestedMessage]: ...
     @property
@@ -321,14 +351,15 @@ class TestAllTypes(google.protobuf.message.Message):
     @property
     def map_bool_to_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.bool, global___TestAllTypes.NestedMessage]: ...
     @property
-    def map_string_to_int64(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, builtins.int]: ...
+    def map_string_to_int64(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.int]: ...
     @property
-    def map_int64_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, typing.Text]: ...
+    def map_int64_to_string(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.str]: ...
     @property
-    def another_map_string_to_message(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___TestAllTypes.NestedMessage]: ...
+    def another_map_string_to_message(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___TestAllTypes.NestedMessage]: ...
     @property
     def packed_repeated_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         optional_int32: builtins.int = ...,
         optional_int64: builtins.int = ...,
@@ -343,65 +374,72 @@ class TestAllTypes(google.protobuf.message.Message):
         optional_float: builtins.float = ...,
         optional_double: builtins.float = ...,
         optional_bool: builtins.bool = ...,
-        optional_string: typing.Text = ...,
+        optional_string: builtins.str = ...,
         optional_bytes: builtins.bytes = ...,
-        optional_nested_message: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-        optional_foreign_message: typing.Optional[global___ForeignMessage] = ...,
+        optional_nested_message: global___TestAllTypes.NestedMessage | None = ...,
+        optional_foreign_message: global___ForeignMessage | None = ...,
         optional_nested_enum: global___TestAllTypes.NestedEnum.ValueType = ...,
         optional_foreign_enum: global___ForeignEnum.ValueType = ...,
-        optional_cord: typing.Text = ...,
-        repeated_int32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_int64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_uint32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_uint64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_sint32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_sint64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_fixed32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_fixed64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_sfixed32: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_sfixed64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        repeated_float: typing.Optional[typing.Iterable[builtins.float]] = ...,
-        repeated_double: typing.Optional[typing.Iterable[builtins.float]] = ...,
-        repeated_bool: typing.Optional[typing.Iterable[builtins.bool]] = ...,
-        repeated_string: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        repeated_bytes: typing.Optional[typing.Iterable[builtins.bytes]] = ...,
-        repeated_nested_message: typing.Optional[typing.Iterable[global___TestAllTypes.NestedMessage]] = ...,
-        repeated_nested_enum: typing.Optional[typing.Iterable[global___TestAllTypes.NestedEnum.ValueType]] = ...,
-        repeated_cord: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        optional_cord: builtins.str = ...,
+        repeated_int32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_uint32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_uint64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_sint32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_sint64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_fixed32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_fixed64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_sfixed32: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_sfixed64: collections.abc.Iterable[builtins.int] | None = ...,
+        repeated_float: collections.abc.Iterable[builtins.float] | None = ...,
+        repeated_double: collections.abc.Iterable[builtins.float] | None = ...,
+        repeated_bool: collections.abc.Iterable[builtins.bool] | None = ...,
+        repeated_string: collections.abc.Iterable[builtins.str] | None = ...,
+        repeated_bytes: collections.abc.Iterable[builtins.bytes] | None = ...,
+        repeated_nested_message: collections.abc.Iterable[global___TestAllTypes.NestedMessage] | None = ...,
+        repeated_nested_enum: collections.abc.Iterable[global___TestAllTypes.NestedEnum.ValueType] | None = ...,
+        repeated_cord: collections.abc.Iterable[builtins.str] | None = ...,
         oneof_uint32: builtins.int = ...,
-        oneof_nested_message: typing.Optional[global___TestAllTypes.NestedMessage] = ...,
-        oneof_string: typing.Text = ...,
+        oneof_nested_message: global___TestAllTypes.NestedMessage | None = ...,
+        oneof_string: builtins.str = ...,
         oneof_bytes: builtins.bytes = ...,
         oneof_enum: global___TestAllTypes.NestedEnum.ValueType = ...,
-        map_string_to_message: typing.Optional[typing.Mapping[typing.Text, global___TestAllTypes.NestedMessage]] = ...,
-        map_int32_to_message: typing.Optional[typing.Mapping[builtins.int, global___TestAllTypes.NestedMessage]] = ...,
-        map_int64_to_message: typing.Optional[typing.Mapping[builtins.int, global___TestAllTypes.NestedMessage]] = ...,
-        map_bool_to_message: typing.Optional[typing.Mapping[builtins.bool, global___TestAllTypes.NestedMessage]] = ...,
-        map_string_to_int64: typing.Optional[typing.Mapping[typing.Text, builtins.int]] = ...,
-        map_int64_to_string: typing.Optional[typing.Mapping[builtins.int, typing.Text]] = ...,
-        another_map_string_to_message: typing.Optional[typing.Mapping[typing.Text, global___TestAllTypes.NestedMessage]] = ...,
-        packed_repeated_int64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["oneof_bytes",b"oneof_bytes","oneof_enum",b"oneof_enum","oneof_field",b"oneof_field","oneof_nested_message",b"oneof_nested_message","oneof_string",b"oneof_string","oneof_uint32",b"oneof_uint32","optional_foreign_message",b"optional_foreign_message","optional_nested_message",b"optional_nested_message"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["another_map_string_to_message",b"another_map_string_to_message","map_bool_to_message",b"map_bool_to_message","map_int32_to_message",b"map_int32_to_message","map_int64_to_message",b"map_int64_to_message","map_int64_to_string",b"map_int64_to_string","map_string_to_int64",b"map_string_to_int64","map_string_to_message",b"map_string_to_message","oneof_bytes",b"oneof_bytes","oneof_enum",b"oneof_enum","oneof_field",b"oneof_field","oneof_nested_message",b"oneof_nested_message","oneof_string",b"oneof_string","oneof_uint32",b"oneof_uint32","optional_bool",b"optional_bool","optional_bytes",b"optional_bytes","optional_cord",b"optional_cord","optional_double",b"optional_double","optional_fixed32",b"optional_fixed32","optional_fixed64",b"optional_fixed64","optional_float",b"optional_float","optional_foreign_enum",b"optional_foreign_enum","optional_foreign_message",b"optional_foreign_message","optional_int32",b"optional_int32","optional_int64",b"optional_int64","optional_nested_enum",b"optional_nested_enum","optional_nested_message",b"optional_nested_message","optional_sfixed32",b"optional_sfixed32","optional_sfixed64",b"optional_sfixed64","optional_sint32",b"optional_sint32","optional_sint64",b"optional_sint64","optional_string",b"optional_string","optional_uint32",b"optional_uint32","optional_uint64",b"optional_uint64","packed_repeated_int64",b"packed_repeated_int64","repeated_bool",b"repeated_bool","repeated_bytes",b"repeated_bytes","repeated_cord",b"repeated_cord","repeated_double",b"repeated_double","repeated_fixed32",b"repeated_fixed32","repeated_fixed64",b"repeated_fixed64","repeated_float",b"repeated_float","repeated_int32",b"repeated_int32","repeated_int64",b"repeated_int64","repeated_nested_enum",b"repeated_nested_enum","repeated_nested_message",b"repeated_nested_message","repeated_sfixed32",b"repeated_sfixed32","repeated_sfixed64",b"repeated_sfixed64","repeated_sint32",b"repeated_sint32","repeated_sint64",b"repeated_sint64","repeated_string",b"repeated_string","repeated_uint32",b"repeated_uint32","repeated_uint64",b"repeated_uint64"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["oneof_field",b"oneof_field"]) -> typing.Optional[typing_extensions.Literal["oneof_uint32","oneof_nested_message","oneof_string","oneof_bytes","oneof_enum"]]: ...
+        map_string_to_message: collections.abc.Mapping[builtins.str, global___TestAllTypes.NestedMessage] | None = ...,
+        map_int32_to_message: collections.abc.Mapping[builtins.int, global___TestAllTypes.NestedMessage] | None = ...,
+        map_int64_to_message: collections.abc.Mapping[builtins.int, global___TestAllTypes.NestedMessage] | None = ...,
+        map_bool_to_message: collections.abc.Mapping[builtins.bool, global___TestAllTypes.NestedMessage] | None = ...,
+        map_string_to_int64: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
+        map_int64_to_string: collections.abc.Mapping[builtins.int, builtins.str] | None = ...,
+        another_map_string_to_message: collections.abc.Mapping[builtins.str, global___TestAllTypes.NestedMessage] | None = ...,
+        packed_repeated_int64: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["oneof_bytes", b"oneof_bytes", "oneof_enum", b"oneof_enum", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_foreign_message", b"optional_foreign_message", "optional_nested_message", b"optional_nested_message"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["another_map_string_to_message", b"another_map_string_to_message", "map_bool_to_message", b"map_bool_to_message", "map_int32_to_message", b"map_int32_to_message", "map_int64_to_message", b"map_int64_to_message", "map_int64_to_string", b"map_int64_to_string", "map_string_to_int64", b"map_string_to_int64", "map_string_to_message", b"map_string_to_message", "oneof_bytes", b"oneof_bytes", "oneof_enum", b"oneof_enum", "oneof_field", b"oneof_field", "oneof_nested_message", b"oneof_nested_message", "oneof_string", b"oneof_string", "oneof_uint32", b"oneof_uint32", "optional_bool", b"optional_bool", "optional_bytes", b"optional_bytes", "optional_cord", b"optional_cord", "optional_double", b"optional_double", "optional_fixed32", b"optional_fixed32", "optional_fixed64", b"optional_fixed64", "optional_float", b"optional_float", "optional_foreign_enum", b"optional_foreign_enum", "optional_foreign_message", b"optional_foreign_message", "optional_int32", b"optional_int32", "optional_int64", b"optional_int64", "optional_nested_enum", b"optional_nested_enum", "optional_nested_message", b"optional_nested_message", "optional_sfixed32", b"optional_sfixed32", "optional_sfixed64", b"optional_sfixed64", "optional_sint32", b"optional_sint32", "optional_sint64", b"optional_sint64", "optional_string", b"optional_string", "optional_uint32", b"optional_uint32", "optional_uint64", b"optional_uint64", "packed_repeated_int64", b"packed_repeated_int64", "repeated_bool", b"repeated_bool", "repeated_bytes", b"repeated_bytes", "repeated_cord", b"repeated_cord", "repeated_double", b"repeated_double", "repeated_fixed32", b"repeated_fixed32", "repeated_fixed64", b"repeated_fixed64", "repeated_float", b"repeated_float", "repeated_int32", b"repeated_int32", "repeated_int64", b"repeated_int64", "repeated_nested_enum", b"repeated_nested_enum", "repeated_nested_message", b"repeated_nested_message", "repeated_sfixed32", b"repeated_sfixed32", "repeated_sfixed64", b"repeated_sfixed64", "repeated_sint32", b"repeated_sint32", "repeated_sint64", b"repeated_sint64", "repeated_string", b"repeated_string", "repeated_uint32", b"repeated_uint32", "repeated_uint64", b"repeated_uint64"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["oneof_field", b"oneof_field"]) -> typing_extensions.Literal["oneof_uint32", "oneof_nested_message", "oneof_string", "oneof_bytes", "oneof_enum"] | None: ...
+
 global___TestAllTypes = TestAllTypes
 
+@typing_extensions.final
 class NestedTestAllTypes(google.protobuf.message.Message):
     """A recursive message."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class MapStringToInt64Entry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
+            key: builtins.str = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     CHILD_FIELD_NUMBER: builtins.int
     PAYLOAD_FIELD_NUMBER: builtins.int
@@ -411,30 +449,40 @@ class NestedTestAllTypes(google.protobuf.message.Message):
     @property
     def payload(self) -> global___TestAllTypes: ...
     @property
-    def map_string_to_int64(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, builtins.int]: ...
-    def __init__(self,
+    def map_string_to_int64(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.int]: ...
+    def __init__(
+        self,
         *,
-        child: typing.Optional[global___NestedTestAllTypes] = ...,
-        payload: typing.Optional[global___TestAllTypes] = ...,
-        map_string_to_int64: typing.Optional[typing.Mapping[typing.Text, builtins.int]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["child",b"child","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["child",b"child","map_string_to_int64",b"map_string_to_int64","payload",b"payload"]) -> None: ...
+        child: global___NestedTestAllTypes | None = ...,
+        payload: global___TestAllTypes | None = ...,
+        map_string_to_int64: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["child", b"child", "payload", b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["child", b"child", "map_string_to_int64", b"map_string_to_int64", "payload", b"payload"]) -> None: ...
+
 global___NestedTestAllTypes = NestedTestAllTypes
 
+@typing_extensions.final
 class ForeignMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     C_FIELD_NUMBER: builtins.int
     c: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         c: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["c",b"c"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["c", b"c"]) -> None: ...
+
 global___ForeignMessage = ForeignMessage
 
+@typing_extensions.final
 class TestEmptyMessage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___TestEmptyMessage = TestEmptyMessage

@@ -3,20 +3,28 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.function_pb2
 import tensorflow.core.framework.node_def_pb2
 import tensorflow.core.framework.versions_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class GraphDef(google.protobuf.message.Message):
     """Represents the graph of operations"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NODE_FIELD_NUMBER: builtins.int
     VERSIONS_FIELD_NUMBER: builtins.int
     VERSION_FIELD_NUMBER: builtins.int
@@ -29,13 +37,11 @@ class GraphDef(google.protobuf.message.Message):
         history.  The GraphDef version is distinct from the TensorFlow version, and
         each release of TensorFlow will support a range of GraphDef versions.
         """
-        pass
     version: builtins.int
     """Deprecated single version field; use versions above instead.  Since all
     GraphDef changes before "versions" was introduced were forward
     compatible, this field is entirely ignored.
     """
-
     @property
     def library(self) -> tensorflow.core.framework.function_pb2.FunctionDefLibrary:
         """"library" provides user-defined functions.
@@ -65,14 +71,15 @@ class GraphDef(google.protobuf.message.Message):
             consumer does not start until all return values of the callee
             function are ready.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        node: typing.Optional[typing.Iterable[tensorflow.core.framework.node_def_pb2.NodeDef]] = ...,
-        versions: typing.Optional[tensorflow.core.framework.versions_pb2.VersionDef] = ...,
+        node: collections.abc.Iterable[tensorflow.core.framework.node_def_pb2.NodeDef] | None = ...,
+        versions: tensorflow.core.framework.versions_pb2.VersionDef | None = ...,
         version: builtins.int = ...,
-        library: typing.Optional[tensorflow.core.framework.function_pb2.FunctionDefLibrary] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["library",b"library","versions",b"versions"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["library",b"library","node",b"node","version",b"version","versions",b"versions"]) -> None: ...
+        library: tensorflow.core.framework.function_pb2.FunctionDefLibrary | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["library", b"library", "versions", b"versions"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["library", b"library", "node", b"node", "version", b"version", "versions", b"versions"]) -> None: ...
+
 global___GraphDef = GraphDef

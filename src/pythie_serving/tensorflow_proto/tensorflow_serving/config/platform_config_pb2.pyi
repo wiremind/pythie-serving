@@ -3,60 +3,75 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class PlatformConfig(google.protobuf.message.Message):
     """Configuration for a servable platform e.g. tensorflow or other ML systems."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SOURCE_ADAPTER_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def source_adapter_config(self) -> google.protobuf.any_pb2.Any:
         """The config proto for a SourceAdapter in the StoragePathSourceAdapter
         registry.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        source_adapter_config: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["source_adapter_config",b"source_adapter_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["source_adapter_config",b"source_adapter_config"]) -> None: ...
+        source_adapter_config: google.protobuf.any_pb2.Any | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["source_adapter_config", b"source_adapter_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["source_adapter_config", b"source_adapter_config"]) -> None: ...
+
 global___PlatformConfig = PlatformConfig
 
+@typing_extensions.final
 class PlatformConfigMap(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class PlatformConfigsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___PlatformConfig: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___PlatformConfig] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___PlatformConfig | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     PLATFORM_CONFIGS_FIELD_NUMBER: builtins.int
     @property
-    def platform_configs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___PlatformConfig]:
+    def platform_configs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___PlatformConfig]:
         """A map from a platform name to a platform config. The platform name is used
         in ModelConfig.model_platform.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        platform_configs: typing.Optional[typing.Mapping[typing.Text, global___PlatformConfig]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["platform_configs",b"platform_configs"]) -> None: ...
+        platform_configs: collections.abc.Mapping[builtins.str, global___PlatformConfig] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["platform_configs", b"platform_configs"]) -> None: ...
+
 global___PlatformConfigMap = PlatformConfigMap

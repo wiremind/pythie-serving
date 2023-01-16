@@ -3,20 +3,28 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.profiler.protobuf.diagnostics_pb2
 import tensorflow.core.profiler.protobuf.input_pipeline_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class OverviewTfOp(google.protobuf.message.Message):
     """Overview result for a TensorFlow Op."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     CATEGORY_FIELD_NUMBER: builtins.int
     SELF_TIME_FRACTION_FIELD_NUMBER: builtins.int
@@ -24,47 +32,45 @@ class OverviewTfOp(google.protobuf.message.Message):
     FLOP_RATE_FIELD_NUMBER: builtins.int
     IS_OP_TENSORCORE_ELIGIBLE_FIELD_NUMBER: builtins.int
     IS_OP_USING_TENSORCORE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """Name of the Op."""
-
-    category: typing.Text
+    category: builtins.str
     """Category of the Op."""
-
     self_time_fraction: builtins.float
     """The amount of time that this Op takes by itself
     as fraction of the total execution time on the device or host.
     """
-
     cumulative_time_fraction: builtins.float
     """The cumulative time upto this Op as fraction of the total execution time."""
-
     flop_rate: builtins.float
     """How many GFlops/sec that this Op achieves."""
-
     is_op_tensorcore_eligible: builtins.bool
     """Whether the Op is eligible to use TensorCores."""
-
     is_op_using_tensorcore: builtins.bool
     """Whether at least one of the kernels launched in this op is using
     TensorCore.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        category: typing.Text = ...,
+        name: builtins.str = ...,
+        category: builtins.str = ...,
         self_time_fraction: builtins.float = ...,
         cumulative_time_fraction: builtins.float = ...,
         flop_rate: builtins.float = ...,
         is_op_tensorcore_eligible: builtins.bool = ...,
         is_op_using_tensorcore: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["category",b"category","cumulative_time_fraction",b"cumulative_time_fraction","flop_rate",b"flop_rate","is_op_tensorcore_eligible",b"is_op_tensorcore_eligible","is_op_using_tensorcore",b"is_op_using_tensorcore","name",b"name","self_time_fraction",b"self_time_fraction"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["category", b"category", "cumulative_time_fraction", b"cumulative_time_fraction", "flop_rate", b"flop_rate", "is_op_tensorcore_eligible", b"is_op_tensorcore_eligible", "is_op_using_tensorcore", b"is_op_using_tensorcore", "name", b"name", "self_time_fraction", b"self_time_fraction"]) -> None: ...
+
 global___OverviewTfOp = OverviewTfOp
 
+@typing_extensions.final
 class OverviewPageAnalysis(google.protobuf.message.Message):
     """Overview result for general analysis."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     MXU_UTILIZATION_PERCENT_FIELD_NUMBER: builtins.int
     DEVICE_IDLE_TIME_PERCENT_FIELD_NUMBER: builtins.int
     HOST_IDLE_TIME_PERCENT_FIELD_NUMBER: builtins.int
@@ -81,69 +87,57 @@ class OverviewPageAnalysis(google.protobuf.message.Message):
     HOST_OP_TIME_EAGER_PERCENT_FIELD_NUMBER: builtins.int
     DEVICE_OP_TIME_EAGER_PERCENT_FIELD_NUMBER: builtins.int
     DEVICE_OP_TIME_OUTSIDE_COMPILATION_PERCENT_FIELD_NUMBER: builtins.int
+    DEVICE_DUTY_CYCLE_PERCENT_FIELD_NUMBER: builtins.int
     mxu_utilization_percent: builtins.float
     """MXU utilization in percentage."""
-
     device_idle_time_percent: builtins.float
     """Percentage of the device time that is idle."""
-
     host_idle_time_percent: builtins.float
     """Percentage of the host time that is idle."""
-
     @property
     def top_device_ops(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewTfOp]:
         """Top TF Ops executed on the device."""
-        pass
-    remark_text: typing.Text
+    remark_text: builtins.str
     """Remark text in the performance summary section."""
-
-    remark_color: typing.Text
+    remark_color: builtins.str
     """Color of the remark text."""
-
     flop_rate_utilization_relative_to_roofline_percent: builtins.float
     """FLOP rate utilization relative to the roofline in percentage."""
-
     memory_bw_utilization_relative_to_hw_limit_percent: builtins.float
     """Memory bandwidth utilization relative to the hw limit in percentage."""
-
     device_compute_16bit_percent: builtins.float
     """Percentage of device computation that is 16-bit."""
-
     device_compute_32bit_percent: builtins.float
     """Percentage of device computation that is 32-bit."""
-
     host_tf_op_percent: builtins.float
     """Percentage of TF ops executed on the host."""
-
     device_tf_op_percent: builtins.float
     """Percentage of TF ops executed on the device."""
-
     host_trace_level: builtins.int
     """Host trace level."""
-
     host_op_time_eager_percent: builtins.float
     """Percentage of TF-op execution time on the host (excluding the idle time)
     that are in eager mode.
     """
-
     device_op_time_eager_percent: builtins.float
     """Percentage of TF-op execution time on the device (excluding the idle time)
     that are in eager mode.
     """
-
     device_op_time_outside_compilation_percent: builtins.float
     """Percentage of TF-op execution time on the device (excluding the idle time)
     that are for outside compilation.
     """
-
-    def __init__(self,
+    device_duty_cycle_percent: builtins.float
+    """Percentage of the device time that is in use."""
+    def __init__(
+        self,
         *,
         mxu_utilization_percent: builtins.float = ...,
         device_idle_time_percent: builtins.float = ...,
         host_idle_time_percent: builtins.float = ...,
-        top_device_ops: typing.Optional[typing.Iterable[global___OverviewTfOp]] = ...,
-        remark_text: typing.Text = ...,
-        remark_color: typing.Text = ...,
+        top_device_ops: collections.abc.Iterable[global___OverviewTfOp] | None = ...,
+        remark_text: builtins.str = ...,
+        remark_color: builtins.str = ...,
         flop_rate_utilization_relative_to_roofline_percent: builtins.float = ...,
         memory_bw_utilization_relative_to_hw_limit_percent: builtins.float = ...,
         device_compute_16bit_percent: builtins.float = ...,
@@ -154,26 +148,34 @@ class OverviewPageAnalysis(google.protobuf.message.Message):
         host_op_time_eager_percent: builtins.float = ...,
         device_op_time_eager_percent: builtins.float = ...,
         device_op_time_outside_compilation_percent: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_compute_16bit_percent",b"device_compute_16bit_percent","device_compute_32bit_percent",b"device_compute_32bit_percent","device_idle_time_percent",b"device_idle_time_percent","device_op_time_eager_percent",b"device_op_time_eager_percent","device_op_time_outside_compilation_percent",b"device_op_time_outside_compilation_percent","device_tf_op_percent",b"device_tf_op_percent","flop_rate_utilization_relative_to_roofline_percent",b"flop_rate_utilization_relative_to_roofline_percent","host_idle_time_percent",b"host_idle_time_percent","host_op_time_eager_percent",b"host_op_time_eager_percent","host_tf_op_percent",b"host_tf_op_percent","host_trace_level",b"host_trace_level","memory_bw_utilization_relative_to_hw_limit_percent",b"memory_bw_utilization_relative_to_hw_limit_percent","mxu_utilization_percent",b"mxu_utilization_percent","remark_color",b"remark_color","remark_text",b"remark_text","top_device_ops",b"top_device_ops"]) -> None: ...
+        device_duty_cycle_percent: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_compute_16bit_percent", b"device_compute_16bit_percent", "device_compute_32bit_percent", b"device_compute_32bit_percent", "device_duty_cycle_percent", b"device_duty_cycle_percent", "device_idle_time_percent", b"device_idle_time_percent", "device_op_time_eager_percent", b"device_op_time_eager_percent", "device_op_time_outside_compilation_percent", b"device_op_time_outside_compilation_percent", "device_tf_op_percent", b"device_tf_op_percent", "flop_rate_utilization_relative_to_roofline_percent", b"flop_rate_utilization_relative_to_roofline_percent", "host_idle_time_percent", b"host_idle_time_percent", "host_op_time_eager_percent", b"host_op_time_eager_percent", "host_tf_op_percent", b"host_tf_op_percent", "host_trace_level", b"host_trace_level", "memory_bw_utilization_relative_to_hw_limit_percent", b"memory_bw_utilization_relative_to_hw_limit_percent", "mxu_utilization_percent", b"mxu_utilization_percent", "remark_color", b"remark_color", "remark_text", b"remark_text", "top_device_ops", b"top_device_ops"]) -> None: ...
+
 global___OverviewPageAnalysis = OverviewPageAnalysis
 
+@typing_extensions.final
 class OverviewPageTip(google.protobuf.message.Message):
     """Overview result for a performance tip to users."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    LINK_FIELD_NUMBER: builtins.int
-    link: typing.Text
-    """Link to the tip."""
 
-    def __init__(self,
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LINK_FIELD_NUMBER: builtins.int
+    link: builtins.str
+    """Link to the tip."""
+    def __init__(
+        self,
         *,
-        link: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["link",b"link"]) -> None: ...
+        link: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["link", b"link"]) -> None: ...
+
 global___OverviewPageTip = OverviewPageTip
 
+@typing_extensions.final
 class GenericRecommendation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     KERNEL_LAUNCH_BOTTLENECK_FIELD_NUMBER: builtins.int
     KERNEL_LAUNCH_STATEMENT_FIELD_NUMBER: builtins.int
     ALL_OTHER_BOTTLENECK_FIELD_NUMBER: builtins.int
@@ -181,57 +183,55 @@ class GenericRecommendation(google.protobuf.message.Message):
     PRECISION_STATEMENT_FIELD_NUMBER: builtins.int
     DEVICE_COLLECTIVES_BOTTLENECK_FIELD_NUMBER: builtins.int
     DEVICE_COLLECTIVES_STATEMENT_FIELD_NUMBER: builtins.int
-    kernel_launch_bottleneck: typing.Text
+    kernel_launch_bottleneck: builtins.str
     """Indicates if kernel launch is a performance bottleneck. Possible values:
     "no", "moderate", "high".
     """
-
-    kernel_launch_statement: typing.Text
+    kernel_launch_statement: builtins.str
     """A statement that recommends if we need to further investigate kernel-launch
     performance.
     """
-
-    all_other_bottleneck: typing.Text
+    all_other_bottleneck: builtins.str
     """Indicates if all other is a performance bottleneck. Possible values: "no",
     "moderate", "high".
     """
-
-    all_other_statement: typing.Text
+    all_other_statement: builtins.str
     """A statement that recommends if we need to further investigate all-other
     performance.
     """
-
-    precision_statement: typing.Text
+    precision_statement: builtins.str
     """A statement that recommends if the user should try using lower precision.
     Shows this statement to users only if it is not empty.
     """
-
-    device_collectives_bottleneck: typing.Text
+    device_collectives_bottleneck: builtins.str
     """Indicates if device collectives are a performance bottleneck. Possible
     values: "no", "moderate", "high".
     """
-
-    device_collectives_statement: typing.Text
+    device_collectives_statement: builtins.str
     """A statement that recommends if we need to further investigate
     device-collectives performance.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        kernel_launch_bottleneck: typing.Text = ...,
-        kernel_launch_statement: typing.Text = ...,
-        all_other_bottleneck: typing.Text = ...,
-        all_other_statement: typing.Text = ...,
-        precision_statement: typing.Text = ...,
-        device_collectives_bottleneck: typing.Text = ...,
-        device_collectives_statement: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["all_other_bottleneck",b"all_other_bottleneck","all_other_statement",b"all_other_statement","device_collectives_bottleneck",b"device_collectives_bottleneck","device_collectives_statement",b"device_collectives_statement","kernel_launch_bottleneck",b"kernel_launch_bottleneck","kernel_launch_statement",b"kernel_launch_statement","precision_statement",b"precision_statement"]) -> None: ...
+        kernel_launch_bottleneck: builtins.str = ...,
+        kernel_launch_statement: builtins.str = ...,
+        all_other_bottleneck: builtins.str = ...,
+        all_other_statement: builtins.str = ...,
+        precision_statement: builtins.str = ...,
+        device_collectives_bottleneck: builtins.str = ...,
+        device_collectives_statement: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["all_other_bottleneck", b"all_other_bottleneck", "all_other_statement", b"all_other_statement", "device_collectives_bottleneck", b"device_collectives_bottleneck", "device_collectives_statement", b"device_collectives_statement", "kernel_launch_bottleneck", b"kernel_launch_bottleneck", "kernel_launch_statement", b"kernel_launch_statement", "precision_statement", b"precision_statement"]) -> None: ...
+
 global___GenericRecommendation = GenericRecommendation
 
+@typing_extensions.final
 class OverviewPageRecommendation(google.protobuf.message.Message):
     """Overview result for the recommendation section."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     BOTTLENECK_FIELD_NUMBER: builtins.int
     STATEMENT_FIELD_NUMBER: builtins.int
     INPUT_TIPS_FIELD_NUMBER: builtins.int
@@ -245,234 +245,220 @@ class OverviewPageRecommendation(google.protobuf.message.Message):
     RECOMMENDATION_FIELD_NUMBER: builtins.int
     FAQ_TIPS_FIELD_NUMBER: builtins.int
     INFERENCE_TIPS_FIELD_NUMBER: builtins.int
-    bottleneck: typing.Text
+    bottleneck: builtins.str
     """Possible performance bottleneck: "host", "device", "both"."""
-
-    statement: typing.Text
+    statement: builtins.str
     """A statement for input that recommends the next steps for investigating the
     bottleneck.
     """
-
     @property
     def input_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of tips for tackling input bottleneck."""
-        pass
-    output_statement: typing.Text
+    output_statement: builtins.str
     """A statement for output that recommends the next steps for investigating the
     bottleneck.
     """
-
-    eager_statement_html: typing.Text
+    eager_statement_html: builtins.str
     """A statement that recommends the next steps for investigating eager-mode
     related bottleneck (it is an html so that it can link to other tools/docs.)
     """
-
-    outside_compilation_statement_html: typing.Text
+    outside_compilation_statement_html: builtins.str
     """A statement that recommends the next steps for investigating
     outside-compilation related bottleneck (it is an html so that it can link
     to other tools/docs.)
     """
-
-    tf_function_statement_html: typing.Text
+    tf_function_statement_html: builtins.str
     """A statement that recommends the next steps for investigating tf-function
     related bottleneck (it is an html so that it can link to other tools/docs.)
     """
-
     @property
     def host_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of tips for improving host performance."""
-        pass
     @property
     def device_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of tips for improving device performance."""
-        pass
     @property
     def documentation_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of links to related useful documents."""
-        pass
     @property
     def recommendation(self) -> google.protobuf.any_pb2.Any:
         """// The recommendation made to the user. Can be unpacked into a
         GenericRecommendation.
         """
-        pass
     @property
     def faq_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of tips for FAQ."""
-        pass
     @property
     def inference_tips(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageTip]:
         """A list of tips for inference run."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        bottleneck: typing.Text = ...,
-        statement: typing.Text = ...,
-        input_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        output_statement: typing.Text = ...,
-        eager_statement_html: typing.Text = ...,
-        outside_compilation_statement_html: typing.Text = ...,
-        tf_function_statement_html: typing.Text = ...,
-        host_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        device_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        documentation_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        recommendation: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-        faq_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        inference_tips: typing.Optional[typing.Iterable[global___OverviewPageTip]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["recommendation",b"recommendation"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bottleneck",b"bottleneck","device_tips",b"device_tips","documentation_tips",b"documentation_tips","eager_statement_html",b"eager_statement_html","faq_tips",b"faq_tips","host_tips",b"host_tips","inference_tips",b"inference_tips","input_tips",b"input_tips","output_statement",b"output_statement","outside_compilation_statement_html",b"outside_compilation_statement_html","recommendation",b"recommendation","statement",b"statement","tf_function_statement_html",b"tf_function_statement_html"]) -> None: ...
+        bottleneck: builtins.str = ...,
+        statement: builtins.str = ...,
+        input_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+        output_statement: builtins.str = ...,
+        eager_statement_html: builtins.str = ...,
+        outside_compilation_statement_html: builtins.str = ...,
+        tf_function_statement_html: builtins.str = ...,
+        host_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+        device_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+        documentation_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+        recommendation: google.protobuf.any_pb2.Any | None = ...,
+        faq_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+        inference_tips: collections.abc.Iterable[global___OverviewPageTip] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["recommendation", b"recommendation"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bottleneck", b"bottleneck", "device_tips", b"device_tips", "documentation_tips", b"documentation_tips", "eager_statement_html", b"eager_statement_html", "faq_tips", b"faq_tips", "host_tips", b"host_tips", "inference_tips", b"inference_tips", "input_tips", b"input_tips", "output_statement", b"output_statement", "outside_compilation_statement_html", b"outside_compilation_statement_html", "recommendation", b"recommendation", "statement", b"statement", "tf_function_statement_html", b"tf_function_statement_html"]) -> None: ...
+
 global___OverviewPageRecommendation = OverviewPageRecommendation
 
+@typing_extensions.final
 class OverviewPageHostIndependentJobInfo(google.protobuf.message.Message):
     """Result proto for host-independent job information."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CHANGE_LIST_FIELD_NUMBER: builtins.int
     BUILD_TIME_FIELD_NUMBER: builtins.int
     BUILD_TARGET_FIELD_NUMBER: builtins.int
     PROFILE_DURATION_MS_FIELD_NUMBER: builtins.int
     change_list: builtins.int
     """The change-list number of this build."""
-
     build_time: builtins.int
     """The time of this build (nanoseconds since the Unix epoch)."""
-
-    build_target: typing.Text
+    build_target: builtins.str
     """The target of this build."""
-
     profile_duration_ms: builtins.int
     """Profiling duration (in ms)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         change_list: builtins.int = ...,
         build_time: builtins.int = ...,
-        build_target: typing.Text = ...,
+        build_target: builtins.str = ...,
         profile_duration_ms: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["build_target",b"build_target","build_time",b"build_time","change_list",b"change_list","profile_duration_ms",b"profile_duration_ms"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["build_target", b"build_target", "build_time", b"build_time", "change_list", b"change_list", "profile_duration_ms", b"profile_duration_ms"]) -> None: ...
+
 global___OverviewPageHostIndependentJobInfo = OverviewPageHostIndependentJobInfo
 
+@typing_extensions.final
 class OverviewPageHostDependentJobInfo(google.protobuf.message.Message):
     """Result proto for host-dependent job information."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     HOST_ID_FIELD_NUMBER: builtins.int
     COMMAND_LINE_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     BNS_ADDRESS_FIELD_NUMBER: builtins.int
     PROFILE_TIME_NS_FIELD_NUMBER: builtins.int
-    host_id: typing.Text
+    host_id: builtins.str
     """This ID of the host where the job was run on."""
-
-    command_line: typing.Text
+    command_line: builtins.str
     """The command line used to run the job."""
-
     start_time: builtins.int
     """The start time of this run (nanoseconds since the Unix epoch)."""
-
-    bns_address: typing.Text
+    bns_address: builtins.str
     """BNS address specified by client at time of profiling request."""
-
     profile_time_ns: builtins.int
     """Profiling start walltime (in ns)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        host_id: typing.Text = ...,
-        command_line: typing.Text = ...,
+        host_id: builtins.str = ...,
+        command_line: builtins.str = ...,
         start_time: builtins.int = ...,
-        bns_address: typing.Text = ...,
+        bns_address: builtins.str = ...,
         profile_time_ns: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bns_address",b"bns_address","command_line",b"command_line","host_id",b"host_id","profile_time_ns",b"profile_time_ns","start_time",b"start_time"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bns_address", b"bns_address", "command_line", b"command_line", "host_id", b"host_id", "profile_time_ns", b"profile_time_ns", "start_time", b"start_time"]) -> None: ...
+
 global___OverviewPageHostDependentJobInfo = OverviewPageHostDependentJobInfo
 
+@typing_extensions.final
 class OverviewPageRunEnvironment(google.protobuf.message.Message):
     """The run environment of a profiling session."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class HostnamesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         value: builtins.bool
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
+            key: builtins.str = ...,
             value: builtins.bool = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     HOST_COUNT_FIELD_NUMBER: builtins.int
     TASK_COUNT_FIELD_NUMBER: builtins.int
     HOSTNAMES_FIELD_NUMBER: builtins.int
     DEVICE_TYPE_FIELD_NUMBER: builtins.int
     DEVICE_CORE_COUNT_FIELD_NUMBER: builtins.int
-    PER_CORE_BATCH_SIZE_FIELD_NUMBER: builtins.int
     HOST_INDEPENDENT_JOB_INFO_FIELD_NUMBER: builtins.int
     HOST_DEPENDENT_JOB_INFO_FIELD_NUMBER: builtins.int
     REPLICA_COUNT_FIELD_NUMBER: builtins.int
     NUM_CORES_PER_REPLICA_FIELD_NUMBER: builtins.int
     host_count: builtins.int
     """Number of hosts used."""
-
     task_count: builtins.int
     """Number of tasks used."""
-
     @property
-    def hostnames(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, builtins.bool]:
+    def hostnames(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.bool]:
         """Distinct hostnames seen."""
-        pass
-    device_type: typing.Text
+    device_type: builtins.str
     """The type of device used."""
-
     device_core_count: builtins.int
     """The number of device cores used.
       In TPU case, this corresponds to the number of TPU cores
       In GPU case, this corresponds to the number of GPUs (not the number of
       SMs).
     """
-
-    per_core_batch_size: builtins.int
-    """The per-device-core batch size."""
-
     @property
     def host_independent_job_info(self) -> global___OverviewPageHostIndependentJobInfo:
         """Host-independent information about this job."""
-        pass
     @property
     def host_dependent_job_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OverviewPageHostDependentJobInfo]:
         """Host-dependent information about this job."""
-        pass
     replica_count: builtins.int
     """The number of replicas, corresponds to input parallelism.
     If there is no model parallelism, replica_count = device_core_count
     """
-
     num_cores_per_replica: builtins.int
     """The number of cores used for a single replica, e.g. model parallelism.
     If there is no model parallelism, then num_cores_per_replica = 1
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         host_count: builtins.int = ...,
         task_count: builtins.int = ...,
-        hostnames: typing.Optional[typing.Mapping[typing.Text, builtins.bool]] = ...,
-        device_type: typing.Text = ...,
+        hostnames: collections.abc.Mapping[builtins.str, builtins.bool] | None = ...,
+        device_type: builtins.str = ...,
         device_core_count: builtins.int = ...,
-        per_core_batch_size: builtins.int = ...,
-        host_independent_job_info: typing.Optional[global___OverviewPageHostIndependentJobInfo] = ...,
-        host_dependent_job_info: typing.Optional[typing.Iterable[global___OverviewPageHostDependentJobInfo]] = ...,
+        host_independent_job_info: global___OverviewPageHostIndependentJobInfo | None = ...,
+        host_dependent_job_info: collections.abc.Iterable[global___OverviewPageHostDependentJobInfo] | None = ...,
         replica_count: builtins.int = ...,
         num_cores_per_replica: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["host_independent_job_info",b"host_independent_job_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_core_count",b"device_core_count","device_type",b"device_type","host_count",b"host_count","host_dependent_job_info",b"host_dependent_job_info","host_independent_job_info",b"host_independent_job_info","hostnames",b"hostnames","num_cores_per_replica",b"num_cores_per_replica","per_core_batch_size",b"per_core_batch_size","replica_count",b"replica_count","task_count",b"task_count"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["host_independent_job_info", b"host_independent_job_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_core_count", b"device_core_count", "device_type", b"device_type", "host_count", b"host_count", "host_dependent_job_info", b"host_dependent_job_info", "host_independent_job_info", b"host_independent_job_info", "hostnames", b"hostnames", "num_cores_per_replica", b"num_cores_per_replica", "replica_count", b"replica_count", "task_count", b"task_count"]) -> None: ...
+
 global___OverviewPageRunEnvironment = OverviewPageRunEnvironment
 
+@typing_extensions.final
 class OverviewPage(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     RUN_ENVIRONMENT_FIELD_NUMBER: builtins.int
     INPUT_ANALYSIS_FIELD_NUMBER: builtins.int
     ANALYSIS_FIELD_NUMBER: builtins.int
@@ -481,31 +467,28 @@ class OverviewPage(google.protobuf.message.Message):
     @property
     def run_environment(self) -> global___OverviewPageRunEnvironment:
         """The run environment of the profiled session."""
-        pass
     @property
     def input_analysis(self) -> tensorflow.core.profiler.protobuf.input_pipeline_pb2.InputPipelineAnalysisResult:
         """The step-time result."""
-        pass
     @property
     def analysis(self) -> global___OverviewPageAnalysis:
         """The other analysis result."""
-        pass
     @property
     def recommendation(self) -> global___OverviewPageRecommendation:
         """The recommendation made to the user."""
-        pass
     @property
     def diagnostics(self) -> tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics:
         """Error and warning messages for diagnosing profiling issues."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        run_environment: typing.Optional[global___OverviewPageRunEnvironment] = ...,
-        input_analysis: typing.Optional[tensorflow.core.profiler.protobuf.input_pipeline_pb2.InputPipelineAnalysisResult] = ...,
-        analysis: typing.Optional[global___OverviewPageAnalysis] = ...,
-        recommendation: typing.Optional[global___OverviewPageRecommendation] = ...,
-        diagnostics: typing.Optional[tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["analysis",b"analysis","diagnostics",b"diagnostics","input_analysis",b"input_analysis","recommendation",b"recommendation","run_environment",b"run_environment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["analysis",b"analysis","diagnostics",b"diagnostics","input_analysis",b"input_analysis","recommendation",b"recommendation","run_environment",b"run_environment"]) -> None: ...
+        run_environment: global___OverviewPageRunEnvironment | None = ...,
+        input_analysis: tensorflow.core.profiler.protobuf.input_pipeline_pb2.InputPipelineAnalysisResult | None = ...,
+        analysis: global___OverviewPageAnalysis | None = ...,
+        recommendation: global___OverviewPageRecommendation | None = ...,
+        diagnostics: tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["analysis", b"analysis", "diagnostics", b"diagnostics", "input_analysis", b"input_analysis", "recommendation", b"recommendation", "run_environment", b"run_environment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["analysis", b"analysis", "diagnostics", b"diagnostics", "input_analysis", b"input_analysis", "recommendation", b"recommendation", "run_environment", b"run_environment"]) -> None: ...
+
 global___OverviewPage = OverviewPage

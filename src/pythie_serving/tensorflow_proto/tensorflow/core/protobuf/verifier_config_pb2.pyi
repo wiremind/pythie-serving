@@ -6,25 +6,33 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class VerifierConfig(google.protobuf.message.Message):
     """The config for graph verifiers."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _Toggle:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _ToggleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[VerifierConfig._Toggle.ValueType], builtins.type):
+
+    class _ToggleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[VerifierConfig._Toggle.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         DEFAULT: VerifierConfig._Toggle.ValueType  # 0
         ON: VerifierConfig._Toggle.ValueType  # 1
         OFF: VerifierConfig._Toggle.ValueType  # 2
-    class Toggle(_Toggle, metaclass=_ToggleEnumTypeWrapper):
-        pass
 
+    class Toggle(_Toggle, metaclass=_ToggleEnumTypeWrapper): ...
     DEFAULT: VerifierConfig.Toggle.ValueType  # 0
     ON: VerifierConfig.Toggle.ValueType  # 1
     OFF: VerifierConfig.Toggle.ValueType  # 2
@@ -35,14 +43,14 @@ class VerifierConfig(google.protobuf.message.Message):
     """Deadline for completion of all verification i.e. all the Toggle ON
     verifiers must complete execution within this time.
     """
-
     structure_verifier: global___VerifierConfig.Toggle.ValueType
     """Perform structural validation on a tensorflow graph. Default is OFF."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         verification_timeout_in_ms: builtins.int = ...,
         structure_verifier: global___VerifierConfig.Toggle.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["structure_verifier",b"structure_verifier","verification_timeout_in_ms",b"verification_timeout_in_ms"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["structure_verifier", b"structure_verifier", "verification_timeout_in_ms", b"verification_timeout_in_ms"]) -> None: ...
+
 global___VerifierConfig = VerifierConfig

@@ -3,74 +3,91 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.profiler.protobuf.diagnostics_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class StepBreakdownEvents(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     id: builtins.int
-    name: typing.Text
-    def __init__(self,
+    name: builtins.str
+    def __init__(
+        self,
         *,
         id: builtins.int = ...,
-        name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","name",b"name"]) -> None: ...
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "name", b"name"]) -> None: ...
+
 global___StepBreakdownEvents = StepBreakdownEvents
 
+@typing_extensions.final
 class PodStatsDatabase(google.protobuf.message.Message):
     """A database of PodStats records."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     POD_STATS_RECORD_FIELD_NUMBER: builtins.int
     DIAGNOSTICS_FIELD_NUMBER: builtins.int
     STEP_BREAKDOWN_EVENTS_FIELD_NUMBER: builtins.int
     @property
     def pod_stats_record(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PodStatsRecord]:
         """All PodStats records, one for each row in the PodStats tool."""
-        pass
     @property
     def diagnostics(self) -> tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics:
         """Error and warning messages for diagnosing profiling issues."""
-        pass
     @property
     def step_breakdown_events(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StepBreakdownEvents]:
         """A map from event type number to event name string for step breakdown."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        pod_stats_record: typing.Optional[typing.Iterable[global___PodStatsRecord]] = ...,
-        diagnostics: typing.Optional[tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics] = ...,
-        step_breakdown_events: typing.Optional[typing.Iterable[global___StepBreakdownEvents]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["diagnostics",b"diagnostics"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["diagnostics",b"diagnostics","pod_stats_record",b"pod_stats_record","step_breakdown_events",b"step_breakdown_events"]) -> None: ...
+        pod_stats_record: collections.abc.Iterable[global___PodStatsRecord] | None = ...,
+        diagnostics: tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics | None = ...,
+        step_breakdown_events: collections.abc.Iterable[global___StepBreakdownEvents] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["diagnostics", b"diagnostics"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["diagnostics", b"diagnostics", "pod_stats_record", b"pod_stats_record", "step_breakdown_events", b"step_breakdown_events"]) -> None: ...
+
 global___PodStatsDatabase = PodStatsDatabase
 
+@typing_extensions.final
 class PodStatsRecord(google.protobuf.message.Message):
     """Next ID: 20
     There is one PodStatsRecord for each step traced on each compute node.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class StepBreakdownUsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.float
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
             value: builtins.float = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     HOST_NAME_FIELD_NUMBER: builtins.int
     CHIP_ID_FIELD_NUMBER: builtins.int
@@ -79,37 +96,32 @@ class PodStatsRecord(google.protobuf.message.Message):
     TOTAL_DURATION_US_FIELD_NUMBER: builtins.int
     STEP_BREAKDOWN_US_FIELD_NUMBER: builtins.int
     BOTTLENECK_FIELD_NUMBER: builtins.int
-    host_name: typing.Text
+    host_name: builtins.str
     """The host name where the trace was collected."""
-
     chip_id: builtins.int
     """The TPU global chip id where the trace was collected."""
-
     node_id: builtins.int
     """The TPU node id where the trace was collected."""
-
     step_num: builtins.int
     """The step number."""
-
     total_duration_us: builtins.float
     """The step duration in micro-seconds."""
-
     @property
     def step_breakdown_us(self) -> google.protobuf.internal.containers.ScalarMap[builtins.int, builtins.float]:
         """Breakdown the durations for each event type in micro-seconds."""
-        pass
-    bottleneck: typing.Text
+    bottleneck: builtins.str
     """Indicates the bottleneck out of the above mentioned metrics."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        host_name: typing.Text = ...,
+        host_name: builtins.str = ...,
         chip_id: builtins.int = ...,
         node_id: builtins.int = ...,
         step_num: builtins.int = ...,
         total_duration_us: builtins.float = ...,
-        step_breakdown_us: typing.Optional[typing.Mapping[builtins.int, builtins.float]] = ...,
-        bottleneck: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bottleneck",b"bottleneck","chip_id",b"chip_id","host_name",b"host_name","node_id",b"node_id","step_breakdown_us",b"step_breakdown_us","step_num",b"step_num","total_duration_us",b"total_duration_us"]) -> None: ...
+        step_breakdown_us: collections.abc.Mapping[builtins.int, builtins.float] | None = ...,
+        bottleneck: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bottleneck", b"bottleneck", "chip_id", b"chip_id", "host_name", b"host_name", "node_id", b"node_id", "step_breakdown_us", b"step_breakdown_us", "step_num", b"step_num", "total_duration_us", b"total_duration_us"]) -> None: ...
+
 global___PodStatsRecord = PodStatsRecord

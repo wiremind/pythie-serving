@@ -3,27 +3,34 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _LayoutDimensionSemantics:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _LayoutDimensionSemanticsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LayoutDimensionSemantics.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     UNKNOWN_SEMANTICS: _LayoutDimensionSemantics.ValueType  # 0
     FEATURE: _LayoutDimensionSemantics.ValueType  # 1
     BATCH: _LayoutDimensionSemantics.ValueType  # 2
     SPATIAL: _LayoutDimensionSemantics.ValueType  # 3
+
 class LayoutDimensionSemantics(_LayoutDimensionSemantics, metaclass=_LayoutDimensionSemanticsEnumTypeWrapper):
     """What the dimension represents, e.g. spatial, feature or batch."""
-    pass
 
 UNKNOWN_SEMANTICS: LayoutDimensionSemantics.ValueType  # 0
 FEATURE: LayoutDimensionSemantics.ValueType  # 1
@@ -31,64 +38,74 @@ BATCH: LayoutDimensionSemantics.ValueType  # 2
 SPATIAL: LayoutDimensionSemantics.ValueType  # 3
 global___LayoutDimensionSemantics = LayoutDimensionSemantics
 
-
+@typing_extensions.final
 class LayoutAnalysis(google.protobuf.message.Message):
     """Data layout of an op."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Dimension(google.protobuf.message.Message):
         """Physical data layout in each tensor dimension."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         SIZE_FIELD_NUMBER: builtins.int
         ALIGNMENT_FIELD_NUMBER: builtins.int
         SEMANTICS_FIELD_NUMBER: builtins.int
         size: builtins.int
         """Size of the data in this dimension."""
-
         alignment: builtins.int
         """Data must be padded to a multiple of alignment."""
-
         semantics: global___LayoutDimensionSemantics.ValueType
         """What the dimension represents."""
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
             size: builtins.int = ...,
             alignment: builtins.int = ...,
             semantics: global___LayoutDimensionSemantics.ValueType = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["alignment",b"alignment","semantics",b"semantics","size",b"size"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["alignment", b"alignment", "semantics", b"semantics", "size", b"size"]) -> None: ...
 
     DIMENSIONS_FIELD_NUMBER: builtins.int
     @property
     def dimensions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LayoutAnalysis.Dimension]:
         """The physical data layout, from most-minor to most-major dimensions."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        dimensions: typing.Optional[typing.Iterable[global___LayoutAnalysis.Dimension]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dimensions",b"dimensions"]) -> None: ...
+        dimensions: collections.abc.Iterable[global___LayoutAnalysis.Dimension] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dimensions", b"dimensions"]) -> None: ...
+
 global___LayoutAnalysis = LayoutAnalysis
 
+@typing_extensions.final
 class OpMetrics(google.protobuf.message.Message):
     """Metrics for an operation (accumulated over all occurrences).
-    Next ID: 21
+    Next ID: 24
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class MemoryAccessed(google.protobuf.message.Message):
         """Breakdown of memory accessed by operation type and memory space."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         class _OperationType:
-            ValueType = typing.NewType('ValueType', builtins.int)
+            ValueType = typing.NewType("ValueType", builtins.int)
             V: typing_extensions.TypeAlias = ValueType
-        class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OpMetrics.MemoryAccessed._OperationType.ValueType], builtins.type):
+
+        class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OpMetrics.MemoryAccessed._OperationType.ValueType], builtins.type):  # noqa: F821
             DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
             UNKNOWN: OpMetrics.MemoryAccessed._OperationType.ValueType  # 0
             READ: OpMetrics.MemoryAccessed._OperationType.ValueType  # 1
             WRITE: OpMetrics.MemoryAccessed._OperationType.ValueType  # 2
-        class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
-            pass
 
+        class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper): ...
         UNKNOWN: OpMetrics.MemoryAccessed.OperationType.ValueType  # 0
         READ: OpMetrics.MemoryAccessed.OperationType.ValueType  # 1
         WRITE: OpMetrics.MemoryAccessed.OperationType.ValueType  # 2
@@ -99,15 +116,15 @@ class OpMetrics(google.protobuf.message.Message):
         operation_type: global___OpMetrics.MemoryAccessed.OperationType.ValueType
         memory_space: builtins.int
         """Device-specific id of memory space."""
-
         bytes_accessed: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             operation_type: global___OpMetrics.MemoryAccessed.OperationType.ValueType = ...,
             memory_space: builtins.int = ...,
             bytes_accessed: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["bytes_accessed",b"bytes_accessed","memory_space",b"memory_space","operation_type",b"operation_type"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["bytes_accessed", b"bytes_accessed", "memory_space", b"memory_space", "operation_type", b"operation_type"]) -> None: ...
 
     HLO_MODULE_ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -126,65 +143,62 @@ class OpMetrics(google.protobuf.message.Message):
     LAYOUT_FIELD_NUMBER: builtins.int
     DEDUPLICATED_NAME_FIELD_NUMBER: builtins.int
     CHILDREN_FIELD_NUMBER: builtins.int
+    NUM_CORES_FIELD_NUMBER: builtins.int
+    COMPUTATION_PRIMITIVE_SIZE_FIELD_NUMBER: builtins.int
+    AUTOTUNED_FIELD_NUMBER: builtins.int
     hlo_module_id: builtins.int
     """HLO module id. 0 for TF ops."""
-
-    name: typing.Text
+    name: builtins.str
     """Name of this op."""
-
-    long_name: typing.Text
+    long_name: builtins.str
     """Long name of this op (e.g., HLO expression)."""
-
-    category: typing.Text
+    category: builtins.str
     """Category of this op."""
-
-    provenance: typing.Text
+    provenance: builtins.str
     """Provenance of this op (e.g., if HLO op, original TF op)."""
-
     is_eager: builtins.bool
     """Whether it is executed eagerly."""
-
     occurrences: builtins.int
     """Number of executions."""
-
     time_ps: builtins.int
     """Total time (self + children) in picoseconds."""
-
     min_time_ps: builtins.int
     """Minimum time (self + children) among all occurrences."""
-
     self_time_ps: builtins.int
     """Total self time in picoseconds."""
-
     flops: builtins.int
     """Total FLOPs."""
-
     bytes_accessed: builtins.int
     """Total bytes accessed."""
-
     @property
     def memory_accessed_breakdown(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OpMetrics.MemoryAccessed]: ...
     dma_stall_ps: builtins.int
     """Total dma stall time in picoseconds."""
-
     @property
     def layout(self) -> global___LayoutAnalysis:
         """The data layout for this op. Only set for convolution ops for now."""
-        pass
-    deduplicated_name: typing.Text
+    deduplicated_name: builtins.str
     """Deduplicated HLO name for this op. Not set for TF ops."""
-
     @property
     def children(self) -> global___OpMetricsDb:
         """Children of the op. e.g. fused ops if this op is fusion."""
-        pass
-    def __init__(self,
+    num_cores: builtins.int
+    """Number of cores this op occurs."""
+    computation_primitive_size: builtins.int
+    """Computation primitive size in BITS. This is the size of the type of the
+    hardware computation. In the future this may be extended to include info
+    such as signed/unsigned, int/fp, etc. Currently only the size is needed.
+    """
+    autotuned: builtins.bool
+    """Whether the op is autotuned."""
+    def __init__(
+        self,
         *,
         hlo_module_id: builtins.int = ...,
-        name: typing.Text = ...,
-        long_name: typing.Text = ...,
-        category: typing.Text = ...,
-        provenance: typing.Text = ...,
+        name: builtins.str = ...,
+        long_name: builtins.str = ...,
+        category: builtins.str = ...,
+        provenance: builtins.str = ...,
         is_eager: builtins.bool = ...,
         occurrences: builtins.int = ...,
         time_ps: builtins.int = ...,
@@ -192,40 +206,50 @@ class OpMetrics(google.protobuf.message.Message):
         self_time_ps: builtins.int = ...,
         flops: builtins.int = ...,
         bytes_accessed: builtins.int = ...,
-        memory_accessed_breakdown: typing.Optional[typing.Iterable[global___OpMetrics.MemoryAccessed]] = ...,
+        memory_accessed_breakdown: collections.abc.Iterable[global___OpMetrics.MemoryAccessed] | None = ...,
         dma_stall_ps: builtins.int = ...,
-        layout: typing.Optional[global___LayoutAnalysis] = ...,
-        deduplicated_name: typing.Text = ...,
-        children: typing.Optional[global___OpMetricsDb] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["children",b"children","layout",b"layout"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bytes_accessed",b"bytes_accessed","category",b"category","children",b"children","deduplicated_name",b"deduplicated_name","dma_stall_ps",b"dma_stall_ps","flops",b"flops","hlo_module_id",b"hlo_module_id","is_eager",b"is_eager","layout",b"layout","long_name",b"long_name","memory_accessed_breakdown",b"memory_accessed_breakdown","min_time_ps",b"min_time_ps","name",b"name","occurrences",b"occurrences","provenance",b"provenance","self_time_ps",b"self_time_ps","time_ps",b"time_ps"]) -> None: ...
+        layout: global___LayoutAnalysis | None = ...,
+        deduplicated_name: builtins.str = ...,
+        children: global___OpMetricsDb | None = ...,
+        num_cores: builtins.int = ...,
+        computation_primitive_size: builtins.int = ...,
+        autotuned: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["children", b"children", "layout", b"layout"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["autotuned", b"autotuned", "bytes_accessed", b"bytes_accessed", "category", b"category", "children", b"children", "computation_primitive_size", b"computation_primitive_size", "deduplicated_name", b"deduplicated_name", "dma_stall_ps", b"dma_stall_ps", "flops", b"flops", "hlo_module_id", b"hlo_module_id", "is_eager", b"is_eager", "layout", b"layout", "long_name", b"long_name", "memory_accessed_breakdown", b"memory_accessed_breakdown", "min_time_ps", b"min_time_ps", "name", b"name", "num_cores", b"num_cores", "occurrences", b"occurrences", "provenance", b"provenance", "self_time_ps", b"self_time_ps", "time_ps", b"time_ps"]) -> None: ...
+
 global___OpMetrics = OpMetrics
 
+@typing_extensions.final
 class PrecisionStats(google.protobuf.message.Message):
     """Statistics about the various precision used in computation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     COMPUTE_16BIT_PS_FIELD_NUMBER: builtins.int
     COMPUTE_32BIT_PS_FIELD_NUMBER: builtins.int
     compute_16bit_ps: builtins.int
     """Amount of time spent on 16-bit computation (in ps)."""
-
     compute_32bit_ps: builtins.int
     """Amount of time spent on 32-bit computation (in ps)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         compute_16bit_ps: builtins.int = ...,
         compute_32bit_ps: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_16bit_ps",b"compute_16bit_ps","compute_32bit_ps",b"compute_32bit_ps"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_16bit_ps", b"compute_16bit_ps", "compute_32bit_ps", b"compute_32bit_ps"]) -> None: ...
+
 global___PrecisionStats = PrecisionStats
 
+@typing_extensions.final
 class OpMetricsDb(google.protobuf.message.Message):
     """A database for OpMetrics.
     Next ID: 14
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     METRICS_DB_FIELD_NUMBER: builtins.int
     TOTAL_HOST_INFEED_ENQ_DURATION_PS_FIELD_NUMBER: builtins.int
     TOTAL_HOST_INFEED_ENQ_START_TIMESTAMP_PS_DIFF_FIELD_NUMBER: builtins.int
@@ -235,34 +259,30 @@ class OpMetricsDb(google.protobuf.message.Message):
     @property
     def metrics_db(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___OpMetrics]:
         """A bunch of OpMetrics."""
-        pass
     total_host_infeed_enq_duration_ps: builtins.int
     """The total host infeed-enqueue duration in picoseconds."""
-
     total_host_infeed_enq_start_timestamp_ps_diff: builtins.int
     """The total of the difference between the start times of two
     consecutive infeed-enqueues (per host) in picoseconds.
     """
-
     total_time_ps: builtins.int
     """The total time in picoseconds."""
-
     total_op_time_ps: builtins.int
     """The total time incurred by OPs in picoseconds."""
-
     @property
     def precision_stats(self) -> global___PrecisionStats:
         """Precision-related stats."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        metrics_db: typing.Optional[typing.Iterable[global___OpMetrics]] = ...,
+        metrics_db: collections.abc.Iterable[global___OpMetrics] | None = ...,
         total_host_infeed_enq_duration_ps: builtins.int = ...,
         total_host_infeed_enq_start_timestamp_ps_diff: builtins.int = ...,
         total_time_ps: builtins.int = ...,
         total_op_time_ps: builtins.int = ...,
-        precision_stats: typing.Optional[global___PrecisionStats] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["precision_stats",b"precision_stats"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metrics_db",b"metrics_db","precision_stats",b"precision_stats","total_host_infeed_enq_duration_ps",b"total_host_infeed_enq_duration_ps","total_host_infeed_enq_start_timestamp_ps_diff",b"total_host_infeed_enq_start_timestamp_ps_diff","total_op_time_ps",b"total_op_time_ps","total_time_ps",b"total_time_ps"]) -> None: ...
+        precision_stats: global___PrecisionStats | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["precision_stats", b"precision_stats"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metrics_db", b"metrics_db", "precision_stats", b"precision_stats", "total_host_infeed_enq_duration_ps", b"total_host_infeed_enq_duration_ps", "total_host_infeed_enq_start_timestamp_ps_diff", b"total_host_infeed_enq_start_timestamp_ps_diff", "total_op_time_ps", b"total_op_time_ps", "total_time_ps", b"total_time_ps"]) -> None: ...
+
 global___OpMetricsDb = OpMetricsDb

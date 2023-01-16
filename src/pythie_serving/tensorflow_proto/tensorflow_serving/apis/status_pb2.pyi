@@ -5,29 +5,36 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import tensorflow.core.protobuf.error_codes_pb2
-import typing
-import typing_extensions
+import sys
+import tensorflow.tsl.protobuf.error_codes_pb2
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class StatusProto(google.protobuf.message.Message):
     """Status that corresponds to Status in
     third_party/tensorflow/core/lib/core/status.h.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ERROR_CODE_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_code: tensorflow.core.protobuf.error_codes_pb2.Code.ValueType
+    error_code: tensorflow.tsl.protobuf.error_codes_pb2.Code.ValueType
     """Error code."""
-
-    error_message: typing.Text
+    error_message: builtins.str
     """Error message. Will only be set if an error was encountered."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        error_code: tensorflow.core.protobuf.error_codes_pb2.Code.ValueType = ...,
-        error_message: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_code",b"error_code","error_message",b"error_message"]) -> None: ...
+        error_code: tensorflow.tsl.protobuf.error_codes_pb2.Code.ValueType = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_code", b"error_code", "error_message", b"error_message"]) -> None: ...
+
 global___StatusProto = StatusProto

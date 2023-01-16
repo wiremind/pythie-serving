@@ -3,43 +3,62 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
     """Config proto for FileSystemStoragePathSource."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class ServableVersionPolicy(google.protobuf.message.Message):
         """A policy that dictates which version(s) of a servable should be served."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class Latest(google.protobuf.message.Message):
             """Serve the latest versions (i.e. the ones with the highest version
             numbers), among those found on disk.
 
             This is the default policy, with the default number of versions as 1.
             """
+
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             NUM_VERSIONS_FIELD_NUMBER: builtins.int
             num_versions: builtins.int
             """Number of latest versions to serve. (The default is 1.)"""
-
-            def __init__(self,
+            def __init__(
+                self,
                 *,
                 num_versions: builtins.int = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["num_versions",b"num_versions"]) -> None: ...
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["num_versions", b"num_versions"]) -> None: ...
 
+        @typing_extensions.final
         class All(google.protobuf.message.Message):
             """Serve all versions found on disk."""
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-            def __init__(self,
-                ) -> None: ...
 
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            def __init__(
+                self,
+            ) -> None: ...
+
+        @typing_extensions.final
         class Specific(google.protobuf.message.Message):
             """Serve a specific version (or set of versions).
 
@@ -47,17 +66,19 @@ class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
             canarying a specific version while still serving a separate stable
             version.
             """
+
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             VERSIONS_FIELD_NUMBER: builtins.int
             @property
             def versions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
                 """The version numbers to serve."""
-                pass
-            def __init__(self,
+            def __init__(
+                self,
                 *,
-                versions: typing.Optional[typing.Iterable[builtins.int]] = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["versions",b"versions"]) -> None: ...
+                versions: collections.abc.Iterable[builtins.int] | None = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["versions", b"versions"]) -> None: ...
 
         LATEST_FIELD_NUMBER: builtins.int
         ALL_FIELD_NUMBER: builtins.int
@@ -68,62 +89,54 @@ class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
         def all(self) -> global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.All: ...
         @property
         def specific(self) -> global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            latest: typing.Optional[global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest] = ...,
-            all: typing.Optional[global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.All] = ...,
-            specific: typing.Optional[global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["all",b"all","latest",b"latest","policy_choice",b"policy_choice","specific",b"specific"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["all",b"all","latest",b"latest","policy_choice",b"policy_choice","specific",b"specific"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["policy_choice",b"policy_choice"]) -> typing.Optional[typing_extensions.Literal["latest","all","specific"]]: ...
+            latest: global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.Latest | None = ...,
+            all: global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.All | None = ...,
+            specific: global___FileSystemStoragePathSourceConfig.ServableVersionPolicy.Specific | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["all", b"all", "latest", b"latest", "policy_choice", b"policy_choice", "specific", b"specific"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["all", b"all", "latest", b"latest", "policy_choice", b"policy_choice", "specific", b"specific"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["policy_choice", b"policy_choice"]) -> typing_extensions.Literal["latest", "all", "specific"] | None: ...
 
+    @typing_extensions.final
     class ServableToMonitor(google.protobuf.message.Message):
         """A servable name and base path to look for versions of the servable."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         SERVABLE_NAME_FIELD_NUMBER: builtins.int
         BASE_PATH_FIELD_NUMBER: builtins.int
         SERVABLE_VERSION_POLICY_FIELD_NUMBER: builtins.int
-        servable_name: typing.Text
+        servable_name: builtins.str
         """The servable name to supply in aspired-versions callback calls. Child
         paths of 'base_path' are considered to be versions of this servable.
         """
-
-        base_path: typing.Text
+        base_path: builtins.str
         """The path to monitor, i.e. look for child paths of the form base_path/123."""
-
         @property
         def servable_version_policy(self) -> global___FileSystemStoragePathSourceConfig.ServableVersionPolicy:
             """The policy to determines the number of versions of the servable to be
             served at the same time.
             """
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            servable_name: typing.Text = ...,
-            base_path: typing.Text = ...,
-            servable_version_policy: typing.Optional[global___FileSystemStoragePathSourceConfig.ServableVersionPolicy] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["servable_version_policy",b"servable_version_policy"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["base_path",b"base_path","servable_name",b"servable_name","servable_version_policy",b"servable_version_policy"]) -> None: ...
+            servable_name: builtins.str = ...,
+            base_path: builtins.str = ...,
+            servable_version_policy: global___FileSystemStoragePathSourceConfig.ServableVersionPolicy | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["servable_version_policy", b"servable_version_policy"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["base_path", b"base_path", "servable_name", b"servable_name", "servable_version_policy", b"servable_version_policy"]) -> None: ...
 
     SERVABLES_FIELD_NUMBER: builtins.int
-    SERVABLE_NAME_FIELD_NUMBER: builtins.int
-    BASE_PATH_FIELD_NUMBER: builtins.int
     FILE_SYSTEM_POLL_WAIT_SECONDS_FIELD_NUMBER: builtins.int
     FAIL_IF_ZERO_VERSIONS_AT_STARTUP_FIELD_NUMBER: builtins.int
     SERVABLE_VERSIONS_ALWAYS_PRESENT_FIELD_NUMBER: builtins.int
     @property
     def servables(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileSystemStoragePathSourceConfig.ServableToMonitor]:
         """The servables to monitor for new versions, and aspire."""
-        pass
-    servable_name: typing.Text
-    """A single servable name/base_path pair to monitor.
-    DEPRECATED: Use 'servables' instead.
-    TODO(b/30898016): Stop using these fields, and ultimately remove them here.
-    """
-
-    base_path: typing.Text
     file_system_poll_wait_seconds: builtins.int
     """How long to wait between file-system polling to look for children of
     'base_path', in seconds.
@@ -131,7 +144,6 @@ class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
     If set to zero, filesystem will be polled exactly once. If set to a
     negative value (for testing use only), polling will be entirely disabled.
     """
-
     fail_if_zero_versions_at_startup: builtins.bool
     """If true, then FileSystemStoragePathSource::Create() and ::UpdateConfig()
     fail if, for any configured servables, the file system doesn't currently
@@ -142,7 +154,6 @@ class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
     this behavior.
     TODO(b/30898016): Remove 2019-10-31 or later.
     """
-
     servable_versions_always_present: builtins.bool
     """If true, the servable is always expected to exist on the underlying
     filesystem. FileSystemStoragePathSource::Create() and ::UpdateConfig() will
@@ -150,15 +161,14 @@ class FileSystemStoragePathSourceConfig(google.protobuf.message.Message):
     contain at least one version under the base path. In addition, if a polling
     loop find the base path empty, it will not unload existing servables.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        servables: typing.Optional[typing.Iterable[global___FileSystemStoragePathSourceConfig.ServableToMonitor]] = ...,
-        servable_name: typing.Text = ...,
-        base_path: typing.Text = ...,
+        servables: collections.abc.Iterable[global___FileSystemStoragePathSourceConfig.ServableToMonitor] | None = ...,
         file_system_poll_wait_seconds: builtins.int = ...,
         fail_if_zero_versions_at_startup: builtins.bool = ...,
         servable_versions_always_present: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["base_path",b"base_path","fail_if_zero_versions_at_startup",b"fail_if_zero_versions_at_startup","file_system_poll_wait_seconds",b"file_system_poll_wait_seconds","servable_name",b"servable_name","servable_versions_always_present",b"servable_versions_always_present","servables",b"servables"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["fail_if_zero_versions_at_startup", b"fail_if_zero_versions_at_startup", "file_system_poll_wait_seconds", b"file_system_poll_wait_seconds", "servable_versions_always_present", b"servable_versions_always_present", "servables", b"servables"]) -> None: ...
+
 global___FileSystemStoragePathSourceConfig = FileSystemStoragePathSourceConfig

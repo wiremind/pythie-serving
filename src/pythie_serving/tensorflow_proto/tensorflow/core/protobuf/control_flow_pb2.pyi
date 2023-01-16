@@ -3,117 +3,135 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ValuesDef(google.protobuf.message.Message):
     """Control flow context related protocol buffers.
 
     Protocol buffer representing the values in ControlFlowContext.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class ExternalValuesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     VALUES_FIELD_NUMBER: builtins.int
     EXTERNAL_VALUES_FIELD_NUMBER: builtins.int
     @property
-    def values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Value names that have been seen in this context."""
-        pass
     @property
-    def external_values(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def external_values(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """Value names referenced by but external to this context."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        values: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        external_values: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["external_values",b"external_values","values",b"values"]) -> None: ...
+        values: collections.abc.Iterable[builtins.str] | None = ...,
+        external_values: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["external_values", b"external_values", "values", b"values"]) -> None: ...
+
 global___ValuesDef = ValuesDef
 
+@typing_extensions.final
 class ControlFlowContextDef(google.protobuf.message.Message):
     """Container for any kind of control flow context. Any other control flow
     contexts that are added below should also be added here.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     COND_CTXT_FIELD_NUMBER: builtins.int
     WHILE_CTXT_FIELD_NUMBER: builtins.int
     @property
     def cond_ctxt(self) -> global___CondContextDef: ...
     @property
     def while_ctxt(self) -> global___WhileContextDef: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        cond_ctxt: typing.Optional[global___CondContextDef] = ...,
-        while_ctxt: typing.Optional[global___WhileContextDef] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cond_ctxt",b"cond_ctxt","ctxt",b"ctxt","while_ctxt",b"while_ctxt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cond_ctxt",b"cond_ctxt","ctxt",b"ctxt","while_ctxt",b"while_ctxt"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["ctxt",b"ctxt"]) -> typing.Optional[typing_extensions.Literal["cond_ctxt","while_ctxt"]]: ...
+        cond_ctxt: global___CondContextDef | None = ...,
+        while_ctxt: global___WhileContextDef | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cond_ctxt", b"cond_ctxt", "ctxt", b"ctxt", "while_ctxt", b"while_ctxt"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cond_ctxt", b"cond_ctxt", "ctxt", b"ctxt", "while_ctxt", b"while_ctxt"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["ctxt", b"ctxt"]) -> typing_extensions.Literal["cond_ctxt", "while_ctxt"] | None: ...
+
 global___ControlFlowContextDef = ControlFlowContextDef
 
+@typing_extensions.final
 class CondContextDef(google.protobuf.message.Message):
     """Protocol buffer representing a CondContext object."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_NAME_FIELD_NUMBER: builtins.int
     PRED_NAME_FIELD_NUMBER: builtins.int
     PIVOT_NAME_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
     VALUES_DEF_FIELD_NUMBER: builtins.int
     NESTED_CONTEXTS_FIELD_NUMBER: builtins.int
-    context_name: typing.Text
+    context_name: builtins.str
     """Name of the context."""
-
-    pred_name: typing.Text
+    pred_name: builtins.str
     """Name of the pred tensor."""
-
-    pivot_name: typing.Text
+    pivot_name: builtins.str
     """Name of the pivot tensor."""
-
     branch: builtins.int
     """Branch prediction. 0 or 1."""
-
     @property
     def values_def(self) -> global___ValuesDef:
         """Values and external values in control flow context."""
-        pass
     @property
     def nested_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ControlFlowContextDef]:
         """Contexts contained inside this context (e.g. nested conds)."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        context_name: typing.Text = ...,
-        pred_name: typing.Text = ...,
-        pivot_name: typing.Text = ...,
+        context_name: builtins.str = ...,
+        pred_name: builtins.str = ...,
+        pivot_name: builtins.str = ...,
         branch: builtins.int = ...,
-        values_def: typing.Optional[global___ValuesDef] = ...,
-        nested_contexts: typing.Optional[typing.Iterable[global___ControlFlowContextDef]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["values_def",b"values_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch",b"branch","context_name",b"context_name","nested_contexts",b"nested_contexts","pivot_name",b"pivot_name","pred_name",b"pred_name","values_def",b"values_def"]) -> None: ...
+        values_def: global___ValuesDef | None = ...,
+        nested_contexts: collections.abc.Iterable[global___ControlFlowContextDef] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["values_def", b"values_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "context_name", b"context_name", "nested_contexts", b"nested_contexts", "pivot_name", b"pivot_name", "pred_name", b"pred_name", "values_def", b"values_def"]) -> None: ...
+
 global___CondContextDef = CondContextDef
 
+@typing_extensions.final
 class WhileContextDef(google.protobuf.message.Message):
     """Protocol buffer representing a WhileContext object."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_NAME_FIELD_NUMBER: builtins.int
     PARALLEL_ITERATIONS_FIELD_NUMBER: builtins.int
     BACK_PROP_FIELD_NUMBER: builtins.int
@@ -126,61 +144,51 @@ class WhileContextDef(google.protobuf.message.Message):
     VALUES_DEF_FIELD_NUMBER: builtins.int
     MAXIMUM_ITERATIONS_NAME_FIELD_NUMBER: builtins.int
     NESTED_CONTEXTS_FIELD_NUMBER: builtins.int
-    context_name: typing.Text
+    context_name: builtins.str
     """Name of the context."""
-
     parallel_iterations: builtins.int
     """The number of iterations allowed to run in parallel."""
-
     back_prop: builtins.bool
     """Whether backprop is enabled for this while loop."""
-
     swap_memory: builtins.bool
     """Whether GPU-CPU memory swap is enabled for this loop."""
-
-    pivot_name: typing.Text
+    pivot_name: builtins.str
     """Name of the pivot tensor."""
-
-    pivot_for_pred_name: typing.Text
+    pivot_for_pred_name: builtins.str
     """Name of the pivot_for_pred tensor."""
-
-    pivot_for_body_name: typing.Text
+    pivot_for_body_name: builtins.str
     """Name of the pivot_for_body tensor."""
-
     @property
-    def loop_exit_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def loop_exit_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of names for exit tensors."""
-        pass
     @property
-    def loop_enter_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def loop_enter_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of names for enter tensors."""
-        pass
     @property
     def values_def(self) -> global___ValuesDef:
         """Values and external values in control flow context."""
-        pass
-    maximum_iterations_name: typing.Text
+    maximum_iterations_name: builtins.str
     """Optional name of the maximum_iterations tensor."""
-
     @property
     def nested_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ControlFlowContextDef]:
         """Contexts contained inside this context (e.g. nested whiles)."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        context_name: typing.Text = ...,
+        context_name: builtins.str = ...,
         parallel_iterations: builtins.int = ...,
         back_prop: builtins.bool = ...,
         swap_memory: builtins.bool = ...,
-        pivot_name: typing.Text = ...,
-        pivot_for_pred_name: typing.Text = ...,
-        pivot_for_body_name: typing.Text = ...,
-        loop_exit_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        loop_enter_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        values_def: typing.Optional[global___ValuesDef] = ...,
-        maximum_iterations_name: typing.Text = ...,
-        nested_contexts: typing.Optional[typing.Iterable[global___ControlFlowContextDef]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["values_def",b"values_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["back_prop",b"back_prop","context_name",b"context_name","loop_enter_names",b"loop_enter_names","loop_exit_names",b"loop_exit_names","maximum_iterations_name",b"maximum_iterations_name","nested_contexts",b"nested_contexts","parallel_iterations",b"parallel_iterations","pivot_for_body_name",b"pivot_for_body_name","pivot_for_pred_name",b"pivot_for_pred_name","pivot_name",b"pivot_name","swap_memory",b"swap_memory","values_def",b"values_def"]) -> None: ...
+        pivot_name: builtins.str = ...,
+        pivot_for_pred_name: builtins.str = ...,
+        pivot_for_body_name: builtins.str = ...,
+        loop_exit_names: collections.abc.Iterable[builtins.str] | None = ...,
+        loop_enter_names: collections.abc.Iterable[builtins.str] | None = ...,
+        values_def: global___ValuesDef | None = ...,
+        maximum_iterations_name: builtins.str = ...,
+        nested_contexts: collections.abc.Iterable[global___ControlFlowContextDef] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["values_def", b"values_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["back_prop", b"back_prop", "context_name", b"context_name", "loop_enter_names", b"loop_enter_names", "loop_exit_names", b"loop_exit_names", "maximum_iterations_name", b"maximum_iterations_name", "nested_contexts", b"nested_contexts", "parallel_iterations", b"parallel_iterations", "pivot_for_body_name", b"pivot_for_body_name", "pivot_for_pred_name", b"pivot_for_pred_name", "pivot_name", b"pivot_name", "swap_memory", b"swap_memory", "values_def", b"values_def"]) -> None: ...
+
 global___WhileContextDef = WhileContextDef

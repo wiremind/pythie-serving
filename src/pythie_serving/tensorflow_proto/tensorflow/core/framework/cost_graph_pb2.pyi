@@ -3,40 +3,56 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.tensor_shape_pb2
 import tensorflow.core.framework.types_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class CostGraphDef(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Node(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class InputInfo(google.protobuf.message.Message):
             """Inputs of this node. They must be executed before this node can be
             executed. An input is a particular output of another node, specified
             by the node id and the output index.
             """
+
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             PRECEDING_NODE_FIELD_NUMBER: builtins.int
             PRECEDING_PORT_FIELD_NUMBER: builtins.int
             preceding_node: builtins.int
             preceding_port: builtins.int
-            def __init__(self,
+            def __init__(
+                self,
                 *,
                 preceding_node: builtins.int = ...,
                 preceding_port: builtins.int = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["preceding_node",b"preceding_node","preceding_port",b"preceding_port"]) -> None: ...
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["preceding_node", b"preceding_node", "preceding_port", b"preceding_port"]) -> None: ...
 
+        @typing_extensions.final
         class OutputInfo(google.protobuf.message.Message):
             """Outputs of this node."""
+
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             SIZE_FIELD_NUMBER: builtins.int
             ALIAS_INPUT_PORT_FIELD_NUMBER: builtins.int
             SHAPE_FIELD_NUMBER: builtins.int
@@ -47,19 +63,19 @@ class CostGraphDef(google.protobuf.message.Message):
             may itself be an alias. The algorithm will therefore need to follow
             those pointers.
             """
-
             @property
             def shape(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto: ...
             dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
-            def __init__(self,
+            def __init__(
+                self,
                 *,
                 size: builtins.int = ...,
                 alias_input_port: builtins.int = ...,
-                shape: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
+                shape: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
                 dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-                ) -> None: ...
-            def HasField(self, field_name: typing_extensions.Literal["shape",b"shape"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing_extensions.Literal["alias_input_port",b"alias_input_port","dtype",b"dtype","shape",b"shape","size",b"size"]) -> None: ...
+            ) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["shape", b"shape"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["alias_input_port", b"alias_input_port", "dtype", b"dtype", "shape", b"shape", "size", b"size"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         DEVICE_FIELD_NUMBER: builtins.int
@@ -77,62 +93,52 @@ class CostGraphDef(google.protobuf.message.Message):
         IS_FINAL_FIELD_NUMBER: builtins.int
         CONTROL_INPUT_FIELD_NUMBER: builtins.int
         INACCURATE_FIELD_NUMBER: builtins.int
-        name: typing.Text
+        name: builtins.str
         """The name of the node. Names are globally unique."""
-
-        device: typing.Text
+        device: builtins.str
         """The device of the node. Can be empty if the node is mapped to the
         default partition or partitioning hasn't been run yet.
         """
-
         id: builtins.int
         """The id of the node. Node ids are only unique inside a partition."""
-
         @property
         def input_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CostGraphDef.Node.InputInfo]: ...
         @property
         def output_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CostGraphDef.Node.OutputInfo]: ...
         temporary_memory_size: builtins.int
         """Temporary memory used by this node."""
-
         persistent_memory_size: builtins.int
         """Persistent memory used by this node."""
-
         host_temp_memory_size: builtins.int
         device_temp_memory_size: builtins.int
         device_persistent_memory_size: builtins.int
         compute_cost: builtins.int
         """Estimate of the computational cost of this node, in microseconds."""
-
         compute_time: builtins.int
         """Analytical estimate of the computational cost of this node, in
         microseconds.
         """
-
         memory_time: builtins.int
         """Analytical estimate of the memory access cost of this node, in
         microseconds.
         """
-
         is_final: builtins.bool
         """If true, the output is permanent: it can't be discarded, because this
         node is part of the "final output". Nodes may depend on final nodes.
         """
-
         @property
         def control_input(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
             """Ids of the control inputs for this node."""
-            pass
         inaccurate: builtins.bool
         """Are the costs inaccurate?"""
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            name: typing.Text = ...,
-            device: typing.Text = ...,
+            name: builtins.str = ...,
+            device: builtins.str = ...,
             id: builtins.int = ...,
-            input_info: typing.Optional[typing.Iterable[global___CostGraphDef.Node.InputInfo]] = ...,
-            output_info: typing.Optional[typing.Iterable[global___CostGraphDef.Node.OutputInfo]] = ...,
+            input_info: collections.abc.Iterable[global___CostGraphDef.Node.InputInfo] | None = ...,
+            output_info: collections.abc.Iterable[global___CostGraphDef.Node.OutputInfo] | None = ...,
             temporary_memory_size: builtins.int = ...,
             persistent_memory_size: builtins.int = ...,
             host_temp_memory_size: builtins.int = ...,
@@ -142,28 +148,30 @@ class CostGraphDef(google.protobuf.message.Message):
             compute_time: builtins.int = ...,
             memory_time: builtins.int = ...,
             is_final: builtins.bool = ...,
-            control_input: typing.Optional[typing.Iterable[builtins.int]] = ...,
+            control_input: collections.abc.Iterable[builtins.int] | None = ...,
             inaccurate: builtins.bool = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["compute_cost",b"compute_cost","compute_time",b"compute_time","control_input",b"control_input","device",b"device","device_persistent_memory_size",b"device_persistent_memory_size","device_temp_memory_size",b"device_temp_memory_size","host_temp_memory_size",b"host_temp_memory_size","id",b"id","inaccurate",b"inaccurate","input_info",b"input_info","is_final",b"is_final","memory_time",b"memory_time","name",b"name","output_info",b"output_info","persistent_memory_size",b"persistent_memory_size","temporary_memory_size",b"temporary_memory_size"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["compute_cost", b"compute_cost", "compute_time", b"compute_time", "control_input", b"control_input", "device", b"device", "device_persistent_memory_size", b"device_persistent_memory_size", "device_temp_memory_size", b"device_temp_memory_size", "host_temp_memory_size", b"host_temp_memory_size", "id", b"id", "inaccurate", b"inaccurate", "input_info", b"input_info", "is_final", b"is_final", "memory_time", b"memory_time", "name", b"name", "output_info", b"output_info", "persistent_memory_size", b"persistent_memory_size", "temporary_memory_size", b"temporary_memory_size"]) -> None: ...
 
+    @typing_extensions.final
     class AggregatedCost(google.protobuf.message.Message):
         """Total cost of this graph, typically used for balancing decisions."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         COST_FIELD_NUMBER: builtins.int
         DIMENSION_FIELD_NUMBER: builtins.int
         cost: builtins.float
         """Aggregated cost value."""
-
-        dimension: typing.Text
+        dimension: builtins.str
         """Aggregated cost dimension (e.g. 'memory', 'compute', 'network')."""
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
             cost: builtins.float = ...,
-            dimension: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["cost",b"cost","dimension",b"dimension"]) -> None: ...
+            dimension: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["cost", b"cost", "dimension", b"dimension"]) -> None: ...
 
     NODE_FIELD_NUMBER: builtins.int
     COST_FIELD_NUMBER: builtins.int
@@ -171,10 +179,12 @@ class CostGraphDef(google.protobuf.message.Message):
     def node(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CostGraphDef.Node]: ...
     @property
     def cost(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CostGraphDef.AggregatedCost]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        node: typing.Optional[typing.Iterable[global___CostGraphDef.Node]] = ...,
-        cost: typing.Optional[typing.Iterable[global___CostGraphDef.AggregatedCost]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cost",b"cost","node",b"node"]) -> None: ...
+        node: collections.abc.Iterable[global___CostGraphDef.Node] | None = ...,
+        cost: collections.abc.Iterable[global___CostGraphDef.AggregatedCost] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cost", b"cost", "node", b"node"]) -> None: ...
+
 global___CostGraphDef = CostGraphDef

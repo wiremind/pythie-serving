@@ -3,34 +3,45 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ProfileOptions(google.protobuf.message.Message):
     """Next ID: 11"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _DeviceType:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _DeviceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ProfileOptions._DeviceType.ValueType], builtins.type):
+
+    class _DeviceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ProfileOptions._DeviceType.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNSPECIFIED: ProfileOptions._DeviceType.ValueType  # 0
         CPU: ProfileOptions._DeviceType.ValueType  # 1
         GPU: ProfileOptions._DeviceType.ValueType  # 2
         TPU: ProfileOptions._DeviceType.ValueType  # 3
-    class DeviceType(_DeviceType, metaclass=_DeviceTypeEnumTypeWrapper):
-        pass
+        PLUGGABLE_DEVICE: ProfileOptions._DeviceType.ValueType  # 4
 
+    class DeviceType(_DeviceType, metaclass=_DeviceTypeEnumTypeWrapper): ...
     UNSPECIFIED: ProfileOptions.DeviceType.ValueType  # 0
     CPU: ProfileOptions.DeviceType.ValueType  # 1
     GPU: ProfileOptions.DeviceType.ValueType  # 2
     TPU: ProfileOptions.DeviceType.ValueType  # 3
+    PLUGGABLE_DEVICE: ProfileOptions.DeviceType.ValueType  # 4
 
     VERSION_FIELD_NUMBER: builtins.int
     DEVICE_TYPE_FIELD_NUMBER: builtins.int
@@ -47,20 +58,19 @@ class ProfileOptions(google.protobuf.message.Message):
     to determine if we should use default option value instead of proto3
     default value.
     """
-
     device_type: global___ProfileOptions.DeviceType.ValueType
     """Device type to profile/trace: (version >= 1)
     DeviceType::UNSPECIFIED: All registered device profiler will be enabled.
     DeviceType::CPU: only CPU will be profiled.
     DeviceType::GPU: only CPU/GPU will be profiled.
     DeviceType::TPU: only CPU/TPU will be profiled.
+    DeviceType::PLUGGABLE_DEVICE: only CPU/pluggable devices with profilers
+    will be profiled.
     """
-
     include_dataset_ops: builtins.bool
     """We don't collect the dataset ops by default for better trace-viewer
     scalability. The caller can mannually set this field to include the ops.
     """
-
     host_tracer_level: builtins.int
     """Levels of host tracing: (version >= 1)
     - Level 0 is used to disable host traces.
@@ -71,7 +81,6 @@ class ProfileOptions(google.protobuf.message.Message):
     - Level 3 enables tracing of all level 2 TraceMe(s) and more verbose
               (low-level) program execution details (cheap TF ops, etc).
     """
-
     device_tracer_level: builtins.int
     """Levels of device tracing: (version >= 1)
     - Level 0 is used to disable device traces.
@@ -79,27 +88,22 @@ class ProfileOptions(google.protobuf.message.Message):
     - More levels might be defined for specific device for controlling the
       verbosity of the trace.
     """
-
     python_tracer_level: builtins.int
     """Whether enable python function calls tracing. Runtime overhead ensues if
     enabled. Default off. (version >= 1)
     """
-
     enable_hlo_proto: builtins.bool
     """Whether serialize hlo_proto when XLA is used. (version >= 1)"""
-
     start_timestamp_ns: builtins.int
     """The local profiler starts profiling at this Unix timestamp in nanoseconds."""
-
     duration_ms: builtins.int
     """The local profiler collects `duration_ms` milliseconds of data. If the
     value is 0, profiling continues until interrupted.
     """
-
-    repository_path: typing.Text
+    repository_path: builtins.str
     """Directory to save profile data to. No-op when empty."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         version: builtins.int = ...,
         device_type: global___ProfileOptions.DeviceType.ValueType = ...,
@@ -110,16 +114,20 @@ class ProfileOptions(google.protobuf.message.Message):
         enable_hlo_proto: builtins.bool = ...,
         start_timestamp_ns: builtins.int = ...,
         duration_ms: builtins.int = ...,
-        repository_path: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_tracer_level",b"device_tracer_level","device_type",b"device_type","duration_ms",b"duration_ms","enable_hlo_proto",b"enable_hlo_proto","host_tracer_level",b"host_tracer_level","include_dataset_ops",b"include_dataset_ops","python_tracer_level",b"python_tracer_level","repository_path",b"repository_path","start_timestamp_ns",b"start_timestamp_ns","version",b"version"]) -> None: ...
+        repository_path: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_tracer_level", b"device_tracer_level", "device_type", b"device_type", "duration_ms", b"duration_ms", "enable_hlo_proto", b"enable_hlo_proto", "host_tracer_level", b"host_tracer_level", "include_dataset_ops", b"include_dataset_ops", "python_tracer_level", b"python_tracer_level", "repository_path", b"repository_path", "start_timestamp_ns", b"start_timestamp_ns", "version", b"version"]) -> None: ...
+
 global___ProfileOptions = ProfileOptions
 
+@typing_extensions.final
 class RemoteProfilerSessionManagerOptions(google.protobuf.message.Message):
     """Options for remote profiler session manager.
     Next ID: 6
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PROFILER_OPTIONS_FIELD_NUMBER: builtins.int
     SERVICE_ADDRESSES_FIELD_NUMBER: builtins.int
     SESSION_CREATION_TIMESTAMP_NS_FIELD_NUMBER: builtins.int
@@ -128,32 +136,29 @@ class RemoteProfilerSessionManagerOptions(google.protobuf.message.Message):
     @property
     def profiler_options(self) -> global___ProfileOptions:
         """Options for each local profiler."""
-        pass
     @property
-    def service_addresses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def service_addresses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of servers to profile. Supported formats: host:port."""
-        pass
     session_creation_timestamp_ns: builtins.int
     """Unix timestamp of when the session was started."""
-
     max_session_duration_ms: builtins.int
     """Maximum time (in milliseconds) a profiling session manager waits for all
     profilers to finish after issuing gRPC request. If value is 0, session
     continues until interrupted. Otherwise, value must be greater than
     profiler_options.duration_ms.
     """
-
     delay_ms: builtins.int
     """Start of profiling is delayed by this much (in milliseconds)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        profiler_options: typing.Optional[global___ProfileOptions] = ...,
-        service_addresses: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        profiler_options: global___ProfileOptions | None = ...,
+        service_addresses: collections.abc.Iterable[builtins.str] | None = ...,
         session_creation_timestamp_ns: builtins.int = ...,
         max_session_duration_ms: builtins.int = ...,
         delay_ms: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["profiler_options",b"profiler_options"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delay_ms",b"delay_ms","max_session_duration_ms",b"max_session_duration_ms","profiler_options",b"profiler_options","service_addresses",b"service_addresses","session_creation_timestamp_ns",b"session_creation_timestamp_ns"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["profiler_options", b"profiler_options"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["delay_ms", b"delay_ms", "max_session_duration_ms", b"max_session_duration_ms", "profiler_options", b"profiler_options", "service_addresses", b"service_addresses", "session_creation_timestamp_ns", b"session_creation_timestamp_ns"]) -> None: ...
+
 global___RemoteProfilerSessionManagerOptions = RemoteProfilerSessionManagerOptions

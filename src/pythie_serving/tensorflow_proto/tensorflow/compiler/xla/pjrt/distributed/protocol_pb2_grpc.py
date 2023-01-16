@@ -44,6 +44,11 @@ class DistributedRuntimeServiceStub(object):
                 request_serializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetRequest.SerializeToString,
                 response_deserializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetResponse.FromString,
                 )
+        self.WaitAtBarrier = channel.unary_unary(
+                '/xla.DistributedRuntimeService/WaitAtBarrier',
+                request_serializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierRequest.SerializeToString,
+                response_deserializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierResponse.FromString,
+                )
 
 
 class DistributedRuntimeServiceServicer(object):
@@ -104,6 +109,13 @@ class DistributedRuntimeServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def WaitAtBarrier(self, request, context):
+        """Blocks until all nodes are at the barrier or the barrier times out.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_DistributedRuntimeServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -136,6 +148,11 @@ def add_DistributedRuntimeServiceServicer_to_server(servicer, server):
                     servicer.KeyValueSet,
                     request_deserializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetRequest.FromString,
                     response_serializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetResponse.SerializeToString,
+            ),
+            'WaitAtBarrier': grpc.unary_unary_rpc_method_handler(
+                    servicer.WaitAtBarrier,
+                    request_deserializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierRequest.FromString,
+                    response_serializer=tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -246,5 +263,22 @@ class DistributedRuntimeService(object):
         return grpc.experimental.unary_unary(request, target, '/xla.DistributedRuntimeService/KeyValueSet',
             tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetRequest.SerializeToString,
             tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.KeyValueSetResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WaitAtBarrier(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/xla.DistributedRuntimeService/WaitAtBarrier',
+            tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierRequest.SerializeToString,
+            tensorflow_dot_compiler_dot_xla_dot_pjrt_dot_distributed_dot_protocol__pb2.WaitAtBarrierResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

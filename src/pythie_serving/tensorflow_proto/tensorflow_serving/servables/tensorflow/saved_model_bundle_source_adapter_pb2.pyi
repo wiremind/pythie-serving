@@ -5,15 +5,22 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import tensorflow_serving.servables.tensorflow.session_bundle_config_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class SavedModelBundleSourceAdapterConfig(google.protobuf.message.Message):
     """Config proto for SavedModelBundleSourceAdapter."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     LEGACY_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def legacy_config(self) -> tensorflow_serving.servables.tensorflow.session_bundle_config_pb2.SessionBundleConfig:
@@ -21,11 +28,12 @@ class SavedModelBundleSourceAdapterConfig(google.protobuf.message.Message):
         FOR INTERNAL USE ONLY DURING TRANSITION TO SAVED_MODEL. WILL BE DEPRECATED.
         TODO(b/32248363): Replace this field with the "real" field(s).
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        legacy_config: typing.Optional[tensorflow_serving.servables.tensorflow.session_bundle_config_pb2.SessionBundleConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["legacy_config",b"legacy_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["legacy_config",b"legacy_config"]) -> None: ...
+        legacy_config: tensorflow_serving.servables.tensorflow.session_bundle_config_pb2.SessionBundleConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["legacy_config", b"legacy_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["legacy_config", b"legacy_config"]) -> None: ...
+
 global___SavedModelBundleSourceAdapterConfig = SavedModelBundleSourceAdapterConfig

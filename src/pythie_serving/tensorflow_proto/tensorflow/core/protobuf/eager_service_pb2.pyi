@@ -3,9 +3,11 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.attr_value_pb2
 import tensorflow.core.framework.device_attributes_pb2
 import tensorflow.core.framework.function_pb2
@@ -14,45 +16,57 @@ import tensorflow.core.framework.tensor_shape_pb2
 import tensorflow.core.framework.versions_pb2
 import tensorflow.core.protobuf.remote_tensor_handle_pb2
 import tensorflow.core.protobuf.tensorflow_server_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class Operation(google.protobuf.message.Message):
     """A proto representation of an eager operation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Input(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         REMOTE_HANDLE_FIELD_NUMBER: builtins.int
         TENSOR_FIELD_NUMBER: builtins.int
         @property
         def remote_handle(self) -> tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle: ...
         @property
         def tensor(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            remote_handle: typing.Optional[tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle] = ...,
-            tensor: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["item",b"item","remote_handle",b"remote_handle","tensor",b"tensor"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["item",b"item","remote_handle",b"remote_handle","tensor",b"tensor"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["item",b"item"]) -> typing.Optional[typing_extensions.Literal["remote_handle","tensor"]]: ...
+            remote_handle: tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle | None = ...,
+            tensor: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["item", b"item", "remote_handle", b"remote_handle", "tensor", b"tensor"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["item", b"item", "remote_handle", b"remote_handle", "tensor", b"tensor"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["item", b"item"]) -> typing_extensions.Literal["remote_handle", "tensor"] | None: ...
 
+    @typing_extensions.final
     class AttrsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.attr_value_pb2.AttrValue: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.attr_value_pb2.AttrValue] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.attr_value_pb2.AttrValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -71,8 +85,7 @@ class Operation(google.protobuf.message.Message):
     behaviour, but additional constraints may be placed upon this in the
     future.
     """
-
-    name: typing.Text
+    name: builtins.str
     @property
     def op_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation.Input]: ...
     @property
@@ -81,13 +94,11 @@ class Operation(google.protobuf.message.Message):
         async execution. If async execution (+ op re-ordering) is not enabled, this
         should have no effect.
         """
-        pass
     @property
-    def attrs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
-    device: typing.Text
+    def attrs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
+    device: builtins.str
     is_component_function: builtins.bool
     """Indicates whether the op is a component of a multi-device function."""
-
     func_step_id: builtins.int
     """Set when is_component_function is true. It's initially generated
     when we create an FunctionLibraryRuntime::Options (negative value) and used
@@ -95,27 +106,29 @@ class Operation(google.protobuf.message.Message):
     multi-device function should use the same step id to make sure that they
     can communicate through Send/Recv ops.
     """
-
     is_function: builtins.bool
     """Indicates whether the op is a function."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         id: builtins.int = ...,
-        name: typing.Text = ...,
-        op_inputs: typing.Optional[typing.Iterable[global___Operation.Input]] = ...,
-        control_op_ids: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        attrs: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]] = ...,
-        device: typing.Text = ...,
+        name: builtins.str = ...,
+        op_inputs: collections.abc.Iterable[global___Operation.Input] | None = ...,
+        control_op_ids: collections.abc.Iterable[builtins.int] | None = ...,
+        attrs: collections.abc.Mapping[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue] | None = ...,
+        device: builtins.str = ...,
         is_component_function: builtins.bool = ...,
         func_step_id: builtins.int = ...,
         is_function: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["attrs",b"attrs","control_op_ids",b"control_op_ids","device",b"device","func_step_id",b"func_step_id","id",b"id","is_component_function",b"is_component_function","is_function",b"is_function","name",b"name","op_inputs",b"op_inputs"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["attrs", b"attrs", "control_op_ids", b"control_op_ids", "device", b"device", "func_step_id", b"func_step_id", "id", b"id", "is_component_function", b"is_component_function", "is_function", b"is_function", "name", b"name", "op_inputs", b"op_inputs"]) -> None: ...
+
 global___Operation = Operation
 
+@typing_extensions.final
 class QueueItem(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     HANDLE_TO_DECREF_FIELD_NUMBER: builtins.int
     OPERATION_FIELD_NUMBER: builtins.int
     SEND_TENSOR_FIELD_NUMBER: builtins.int
@@ -132,7 +145,6 @@ class QueueItem(google.protobuf.message.Message):
     @property
     def register_function(self) -> global___RegisterFunctionOp:
         """Takes a FunctionDef and makes it enqueable on the remote worker."""
-        pass
     @property
     def cleanup_function(self) -> global___CleanupFunctionOp: ...
     @property
@@ -141,26 +153,29 @@ class QueueItem(google.protobuf.message.Message):
         enqueued in streaming call. Request with this item type waits for pending
         nodes to finish on the remote executor and report status.
         """
-        pass
     @property
     def send_packed_handle(self) -> global___SendPackedHandleOp: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        handle_to_decref: typing.Optional[tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle] = ...,
-        operation: typing.Optional[global___Operation] = ...,
-        send_tensor: typing.Optional[global___SendTensorOp] = ...,
-        register_function: typing.Optional[global___RegisterFunctionOp] = ...,
-        cleanup_function: typing.Optional[global___CleanupFunctionOp] = ...,
-        sync_remote_executor_for_stream: typing.Optional[global___SyncRemoteExecutorForStream] = ...,
-        send_packed_handle: typing.Optional[global___SendPackedHandleOp] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cleanup_function",b"cleanup_function","handle_to_decref",b"handle_to_decref","item",b"item","operation",b"operation","register_function",b"register_function","send_packed_handle",b"send_packed_handle","send_tensor",b"send_tensor","sync_remote_executor_for_stream",b"sync_remote_executor_for_stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cleanup_function",b"cleanup_function","handle_to_decref",b"handle_to_decref","item",b"item","operation",b"operation","register_function",b"register_function","send_packed_handle",b"send_packed_handle","send_tensor",b"send_tensor","sync_remote_executor_for_stream",b"sync_remote_executor_for_stream"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["item",b"item"]) -> typing.Optional[typing_extensions.Literal["handle_to_decref","operation","send_tensor","register_function","cleanup_function","sync_remote_executor_for_stream","send_packed_handle"]]: ...
+        handle_to_decref: tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle | None = ...,
+        operation: global___Operation | None = ...,
+        send_tensor: global___SendTensorOp | None = ...,
+        register_function: global___RegisterFunctionOp | None = ...,
+        cleanup_function: global___CleanupFunctionOp | None = ...,
+        sync_remote_executor_for_stream: global___SyncRemoteExecutorForStream | None = ...,
+        send_packed_handle: global___SendPackedHandleOp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cleanup_function", b"cleanup_function", "handle_to_decref", b"handle_to_decref", "item", b"item", "operation", b"operation", "register_function", b"register_function", "send_packed_handle", b"send_packed_handle", "send_tensor", b"send_tensor", "sync_remote_executor_for_stream", b"sync_remote_executor_for_stream"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cleanup_function", b"cleanup_function", "handle_to_decref", b"handle_to_decref", "item", b"item", "operation", b"operation", "register_function", b"register_function", "send_packed_handle", b"send_packed_handle", "send_tensor", b"send_tensor", "sync_remote_executor_for_stream", b"sync_remote_executor_for_stream"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["item", b"item"]) -> typing_extensions.Literal["handle_to_decref", "operation", "send_tensor", "register_function", "cleanup_function", "sync_remote_executor_for_stream", "send_packed_handle"] | None: ...
+
 global___QueueItem = QueueItem
 
+@typing_extensions.final
 class QueueResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SHAPE_FIELD_NUMBER: builtins.int
     DEVICE_FIELD_NUMBER: builtins.int
     TENSOR_FIELD_NUMBER: builtins.int
@@ -169,26 +184,27 @@ class QueueResponse(google.protobuf.message.Message):
         """`shape` and `tensor` cannot be set in the same response.
         Shapes of output tensors for creating remote TensorHandles.
         """
-        pass
     @property
-    def device(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def device(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. If set, represents the output devices of a function."""
-        pass
     @property
     def tensor(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.tensor_pb2.TensorProto]:
         """Output tensors of a remote function. Set when Operation.id is invalid."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        shape: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]] = ...,
-        device: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        tensor: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device",b"device","shape",b"shape","tensor",b"tensor"]) -> None: ...
+        shape: collections.abc.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] | None = ...,
+        device: collections.abc.Iterable[builtins.str] | None = ...,
+        tensor: collections.abc.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device", b"device", "shape", b"shape", "tensor", b"tensor"]) -> None: ...
+
 global___QueueResponse = QueueResponse
 
+@typing_extensions.final
 class CreateContextRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SERVER_DEF_FIELD_NUMBER: builtins.int
     ASYNC_FIELD_NUMBER: builtins.int
     KEEP_ALIVE_SECS_FIELD_NUMBER: builtins.int
@@ -200,21 +216,17 @@ class CreateContextRequest(google.protobuf.message.Message):
     @property
     def server_def(self) -> tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef:
         """Identifies the full cluster, and this particular worker's position within."""
-        pass
     keep_alive_secs: builtins.int
     """Number of seconds to keep the context alive. If more than keep_alive_secs
     has passed since a particular context has been communicated with, it will
     be garbage collected.
     """
-
     @property
     def version_def(self) -> tensorflow.core.framework.versions_pb2.VersionDef:
         """This is the version for all the ops that will be enqueued by the client."""
-        pass
     @property
     def cluster_device_attributes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]:
         """Device attributes in the cluster"""
-        pass
     context_id: builtins.int
     """The ID of the created context. This is usually a randomly generated number,
     that will be used to identify the context in future requests to the
@@ -223,46 +235,50 @@ class CreateContextRequest(google.protobuf.message.Message):
     that both ends use this ID for selecting a rendezvous to get everything to
     match.
     """
-
     context_view_id: builtins.int
     """The view ID of the context."""
-
     lazy_copy_remote_function_inputs: builtins.bool
     """For a multi device function, if false, eagerly copy all remote inputs to
     the default function device; if true, lazily copy remote inputs to their
     target devices after function instantiation to avoid redundant copies.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        server_def: typing.Optional[tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef] = ...,
+        server_def: tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef | None = ...,
         keep_alive_secs: builtins.int = ...,
-        version_def: typing.Optional[tensorflow.core.framework.versions_pb2.VersionDef] = ...,
-        cluster_device_attributes: typing.Optional[typing.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]] = ...,
+        version_def: tensorflow.core.framework.versions_pb2.VersionDef | None = ...,
+        cluster_device_attributes: collections.abc.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes] | None = ...,
         context_id: builtins.int = ...,
         context_view_id: builtins.int = ...,
         lazy_copy_remote_function_inputs: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["server_def",b"server_def","version_def",b"version_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["async",b"async","cluster_device_attributes",b"cluster_device_attributes","context_id",b"context_id","context_view_id",b"context_view_id","keep_alive_secs",b"keep_alive_secs","lazy_copy_remote_function_inputs",b"lazy_copy_remote_function_inputs","server_def",b"server_def","version_def",b"version_def"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["server_def", b"server_def", "version_def", b"version_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["async", b"async", "cluster_device_attributes", b"cluster_device_attributes", "context_id", b"context_id", "context_view_id", b"context_view_id", "keep_alive_secs", b"keep_alive_secs", "lazy_copy_remote_function_inputs", b"lazy_copy_remote_function_inputs", "server_def", b"server_def", "version_def", b"version_def"]) -> None: ...
+
 global___CreateContextRequest = CreateContextRequest
 
+@typing_extensions.final
 class CreateContextResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_ATTRIBUTES_FIELD_NUMBER: builtins.int
     @property
     def device_attributes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]:
         """List of devices that are locally accessible to the worker."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        device_attributes: typing.Optional[typing.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_attributes",b"device_attributes"]) -> None: ...
+        device_attributes: collections.abc.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_attributes", b"device_attributes"]) -> None: ...
+
 global___CreateContextResponse = CreateContextResponse
 
+@typing_extensions.final
 class UpdateContextRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SERVER_DEF_FIELD_NUMBER: builtins.int
     CLUSTER_DEVICE_ATTRIBUTES_FIELD_NUMBER: builtins.int
     CONTEXT_ID_FIELD_NUMBER: builtins.int
@@ -270,7 +286,6 @@ class UpdateContextRequest(google.protobuf.message.Message):
     @property
     def server_def(self) -> tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef:
         """Identifies the full cluster, and this particular worker's position within."""
-        pass
     @property
     def cluster_device_attributes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]:
         """Device attributes in the cluster.
@@ -278,99 +293,118 @@ class UpdateContextRequest(google.protobuf.message.Message):
         that only increments the cluster view ID and does not require changes to
         the workers it connects to.
         """
-        pass
     context_id: builtins.int
     """The ID of the context to be updated. A context with the specified ID must
     already exist on the recepient server of this request.
     """
-
     context_view_id: builtins.int
     """The view ID of the context, which should be contiguously incremented when
     updating the same context.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        server_def: typing.Optional[tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef] = ...,
-        cluster_device_attributes: typing.Optional[typing.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]] = ...,
+        server_def: tensorflow.core.protobuf.tensorflow_server_pb2.ServerDef | None = ...,
+        cluster_device_attributes: collections.abc.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes] | None = ...,
         context_id: builtins.int = ...,
         context_view_id: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["server_def",b"server_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cluster_device_attributes",b"cluster_device_attributes","context_id",b"context_id","context_view_id",b"context_view_id","server_def",b"server_def"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["server_def", b"server_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cluster_device_attributes", b"cluster_device_attributes", "context_id", b"context_id", "context_view_id", b"context_view_id", "server_def", b"server_def"]) -> None: ...
+
 global___UpdateContextRequest = UpdateContextRequest
 
+@typing_extensions.final
 class UpdateContextResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_ATTRIBUTES_FIELD_NUMBER: builtins.int
     @property
     def device_attributes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]:
         """List of devices that are locally accessible to the worker."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        device_attributes: typing.Optional[typing.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_attributes",b"device_attributes"]) -> None: ...
+        device_attributes: collections.abc.Iterable[tensorflow.core.framework.device_attributes_pb2.DeviceAttributes] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_attributes", b"device_attributes"]) -> None: ...
+
 global___UpdateContextResponse = UpdateContextResponse
 
+@typing_extensions.final
 class EnqueueRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_ID_FIELD_NUMBER: builtins.int
     QUEUE_FIELD_NUMBER: builtins.int
     context_id: builtins.int
     @property
     def queue(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___QueueItem]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_id: builtins.int = ...,
-        queue: typing.Optional[typing.Iterable[global___QueueItem]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_id",b"context_id","queue",b"queue"]) -> None: ...
+        queue: collections.abc.Iterable[global___QueueItem] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_id", b"context_id", "queue", b"queue"]) -> None: ...
+
 global___EnqueueRequest = EnqueueRequest
 
+@typing_extensions.final
 class EnqueueResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     QUEUE_RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def queue_response(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___QueueResponse]:
         """A single operation response for every item in the request."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        queue_response: typing.Optional[typing.Iterable[global___QueueResponse]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["queue_response",b"queue_response"]) -> None: ...
+        queue_response: collections.abc.Iterable[global___QueueResponse] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["queue_response", b"queue_response"]) -> None: ...
+
 global___EnqueueResponse = EnqueueResponse
 
+@typing_extensions.final
 class WaitQueueDoneRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_ID_FIELD_NUMBER: builtins.int
     OP_ID_FIELD_NUMBER: builtins.int
     context_id: builtins.int
     @property
     def op_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Ids to wait on. If empty, wait on everything currently pending."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_id: builtins.int = ...,
-        op_id: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_id",b"context_id","op_id",b"op_id"]) -> None: ...
+        op_id: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_id", b"context_id", "op_id", b"op_id"]) -> None: ...
+
 global___WaitQueueDoneRequest = WaitQueueDoneRequest
 
+@typing_extensions.final
 class WaitQueueDoneResponse(google.protobuf.message.Message):
     """TODO(nareshmodi): Consider adding NodeExecStats here to be able to
     propagate some stats.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___WaitQueueDoneResponse = WaitQueueDoneResponse
 
+@typing_extensions.final
 class RunComponentFunctionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_ID_FIELD_NUMBER: builtins.int
     OPERATION_FIELD_NUMBER: builtins.int
     OUTPUT_NUM_FIELD_NUMBER: builtins.int
@@ -380,79 +414,101 @@ class RunComponentFunctionRequest(google.protobuf.message.Message):
     @property
     def output_num(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """The output indices of its parent function."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_id: builtins.int = ...,
-        operation: typing.Optional[global___Operation] = ...,
-        output_num: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["operation",b"operation"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_id",b"context_id","operation",b"operation","output_num",b"output_num"]) -> None: ...
+        operation: global___Operation | None = ...,
+        output_num: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["operation", b"operation"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_id", b"context_id", "operation", b"operation", "output_num", b"output_num"]) -> None: ...
+
 global___RunComponentFunctionRequest = RunComponentFunctionRequest
 
+@typing_extensions.final
 class RunComponentFunctionResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SHAPE_FIELD_NUMBER: builtins.int
     TENSOR_FIELD_NUMBER: builtins.int
     @property
     def shape(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]: ...
     @property
     def tensor(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.tensor_pb2.TensorProto]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        shape: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]] = ...,
-        tensor: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["shape",b"shape","tensor",b"tensor"]) -> None: ...
+        shape: collections.abc.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] | None = ...,
+        tensor: collections.abc.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["shape", b"shape", "tensor", b"tensor"]) -> None: ...
+
 global___RunComponentFunctionResponse = RunComponentFunctionResponse
 
+@typing_extensions.final
 class KeepAliveRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_ID_FIELD_NUMBER: builtins.int
     context_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_id",b"context_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_id", b"context_id"]) -> None: ...
+
 global___KeepAliveRequest = KeepAliveRequest
 
+@typing_extensions.final
 class KeepAliveResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_VIEW_ID_FIELD_NUMBER: builtins.int
     context_view_id: builtins.int
     """If the requested context_id is on the remote host, set the context view ID."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_view_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_view_id",b"context_view_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_view_id", b"context_view_id"]) -> None: ...
+
 global___KeepAliveResponse = KeepAliveResponse
 
+@typing_extensions.final
 class CloseContextRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONTEXT_ID_FIELD_NUMBER: builtins.int
     CONTEXT_VIEW_ID_FIELD_NUMBER: builtins.int
     context_id: builtins.int
     context_view_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         context_id: builtins.int = ...,
         context_view_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_id",b"context_id","context_view_id",b"context_view_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_id", b"context_id", "context_view_id", b"context_view_id"]) -> None: ...
+
 global___CloseContextRequest = CloseContextRequest
 
+@typing_extensions.final
 class CloseContextResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___CloseContextResponse = CloseContextResponse
 
+@typing_extensions.final
 class RegisterFunctionOp(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FUNCTION_DEF_FIELD_NUMBER: builtins.int
     IS_COMPONENT_FUNCTION_FIELD_NUMBER: builtins.int
     LIBRARY_FIELD_NUMBER: builtins.int
@@ -462,7 +518,6 @@ class RegisterFunctionOp(google.protobuf.message.Message):
     """If true, it means that function_def is produced by graph partition during
     multi-device function instantiation.
     """
-
     @property
     def library(self) -> tensorflow.core.framework.function_pb2.FunctionDefLibrary:
         """All necessary FunctionDefs and GradientDefs to expand `function_def`.
@@ -472,39 +527,51 @@ class RegisterFunctionOp(google.protobuf.message.Message):
         add FunctionDefs here to the function cache in EagerContext since they
         won't be executed as KernelAndDevices.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        function_def: typing.Optional[tensorflow.core.framework.function_pb2.FunctionDef] = ...,
+        function_def: tensorflow.core.framework.function_pb2.FunctionDef | None = ...,
         is_component_function: builtins.bool = ...,
-        library: typing.Optional[tensorflow.core.framework.function_pb2.FunctionDefLibrary] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["function_def",b"function_def","library",b"library"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["function_def",b"function_def","is_component_function",b"is_component_function","library",b"library"]) -> None: ...
+        library: tensorflow.core.framework.function_pb2.FunctionDefLibrary | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["function_def", b"function_def", "library", b"library"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["function_def", b"function_def", "is_component_function", b"is_component_function", "library", b"library"]) -> None: ...
+
 global___RegisterFunctionOp = RegisterFunctionOp
 
+@typing_extensions.final
 class CleanupFunctionOp(google.protobuf.message.Message):
     """Cleanup the step state of a multi-device function (e.g. tensors buffered by
     a `Send` op but not picked up by its corresponding `Recv` op).
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STEP_ID_FIELD_NUMBER: builtins.int
     step_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         step_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["step_id",b"step_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["step_id", b"step_id"]) -> None: ...
+
 global___CleanupFunctionOp = CleanupFunctionOp
 
+@typing_extensions.final
 class SyncRemoteExecutorForStream(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___SyncRemoteExecutorForStream = SyncRemoteExecutorForStream
 
+@typing_extensions.final
 class SendTensorOp(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     OP_ID_FIELD_NUMBER: builtins.int
     TENSORS_FIELD_NUMBER: builtins.int
     DEVICE_NAME_FIELD_NUMBER: builtins.int
@@ -513,76 +580,84 @@ class SendTensorOp(google.protobuf.message.Message):
     situation when directly sending tensors, we include an "artificial" op ID
     (which would have corresponded to the _Recv op when not using SendTensor).
     """
-
     @property
     def tensors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.tensor_pb2.TensorProto]:
         """The index within the repeated field is the output number that will help
         uniquely identify (along with the above op_id) the particular tensor.
         """
-        pass
-    device_name: typing.Text
+    device_name: builtins.str
     """The device on which the tensors should be resident."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         op_id: builtins.int = ...,
-        tensors: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        device_name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_name",b"device_name","op_id",b"op_id","tensors",b"tensors"]) -> None: ...
+        tensors: collections.abc.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+        device_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_name", b"device_name", "op_id", b"op_id", "tensors", b"tensors"]) -> None: ...
+
 global___SendTensorOp = SendTensorOp
 
+@typing_extensions.final
 class SendPackedHandleOp(google.protobuf.message.Message):
     """Send a packed TensorHandle to a remote worker."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class LocalTensorHandle(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         TENSOR_FIELD_NUMBER: builtins.int
         DEVICE_FIELD_NUMBER: builtins.int
         @property
         def tensor(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
-        device: typing.Text
+        device: builtins.str
         """Device where the tensor is produced."""
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            tensor: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-            device: typing.Text = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["tensor",b"tensor"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["device",b"device","tensor",b"tensor"]) -> None: ...
+            tensor: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+            device: builtins.str = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["tensor", b"tensor"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["device", b"device", "tensor", b"tensor"]) -> None: ...
 
+    @typing_extensions.final
     class Handle(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         LOCAL_HANDLE_FIELD_NUMBER: builtins.int
         REMOTE_HANDLE_FIELD_NUMBER: builtins.int
         @property
         def local_handle(self) -> global___SendPackedHandleOp.LocalTensorHandle: ...
         @property
         def remote_handle(self) -> tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            local_handle: typing.Optional[global___SendPackedHandleOp.LocalTensorHandle] = ...,
-            remote_handle: typing.Optional[tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["item",b"item","local_handle",b"local_handle","remote_handle",b"remote_handle"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["item",b"item","local_handle",b"local_handle","remote_handle",b"remote_handle"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["item",b"item"]) -> typing.Optional[typing_extensions.Literal["local_handle","remote_handle"]]: ...
+            local_handle: global___SendPackedHandleOp.LocalTensorHandle | None = ...,
+            remote_handle: tensorflow.core.protobuf.remote_tensor_handle_pb2.RemoteTensorHandle | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["item", b"item", "local_handle", b"local_handle", "remote_handle", b"remote_handle"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["item", b"item", "local_handle", b"local_handle", "remote_handle", b"remote_handle"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing_extensions.Literal["item", b"item"]) -> typing_extensions.Literal["local_handle", "remote_handle"] | None: ...
 
     OP_ID_FIELD_NUMBER: builtins.int
     HANDLES_FIELD_NUMBER: builtins.int
     DEVICE_NAME_FIELD_NUMBER: builtins.int
     op_id: builtins.int
     """Op id of the remote packed TensorHandle."""
-
     @property
     def handles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SendPackedHandleOp.Handle]: ...
-    device_name: typing.Text
-    def __init__(self,
+    device_name: builtins.str
+    def __init__(
+        self,
         *,
         op_id: builtins.int = ...,
-        handles: typing.Optional[typing.Iterable[global___SendPackedHandleOp.Handle]] = ...,
-        device_name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_name",b"device_name","handles",b"handles","op_id",b"op_id"]) -> None: ...
+        handles: collections.abc.Iterable[global___SendPackedHandleOp.Handle] | None = ...,
+        device_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_name", b"device_name", "handles", b"handles", "op_id", b"op_id"]) -> None: ...
+
 global___SendPackedHandleOp = SendPackedHandleOp

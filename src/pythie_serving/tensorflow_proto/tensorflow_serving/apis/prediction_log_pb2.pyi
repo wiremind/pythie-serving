@@ -5,105 +5,132 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import sys
 import tensorflow_serving.apis.classification_pb2
 import tensorflow_serving.apis.inference_pb2
 import tensorflow_serving.apis.logging_pb2
 import tensorflow_serving.apis.predict_pb2
 import tensorflow_serving.apis.regression_pb2
 import tensorflow_serving.apis.session_service_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ClassifyLog(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REQUEST_FIELD_NUMBER: builtins.int
     RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def request(self) -> tensorflow_serving.apis.classification_pb2.ClassificationRequest: ...
     @property
     def response(self) -> tensorflow_serving.apis.classification_pb2.ClassificationResponse: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        request: typing.Optional[tensorflow_serving.apis.classification_pb2.ClassificationRequest] = ...,
-        response: typing.Optional[tensorflow_serving.apis.classification_pb2.ClassificationResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> None: ...
+        request: tensorflow_serving.apis.classification_pb2.ClassificationRequest | None = ...,
+        response: tensorflow_serving.apis.classification_pb2.ClassificationResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> None: ...
+
 global___ClassifyLog = ClassifyLog
 
+@typing_extensions.final
 class RegressLog(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REQUEST_FIELD_NUMBER: builtins.int
     RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def request(self) -> tensorflow_serving.apis.regression_pb2.RegressionRequest: ...
     @property
     def response(self) -> tensorflow_serving.apis.regression_pb2.RegressionResponse: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        request: typing.Optional[tensorflow_serving.apis.regression_pb2.RegressionRequest] = ...,
-        response: typing.Optional[tensorflow_serving.apis.regression_pb2.RegressionResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> None: ...
+        request: tensorflow_serving.apis.regression_pb2.RegressionRequest | None = ...,
+        response: tensorflow_serving.apis.regression_pb2.RegressionResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> None: ...
+
 global___RegressLog = RegressLog
 
+@typing_extensions.final
 class PredictLog(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REQUEST_FIELD_NUMBER: builtins.int
     RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def request(self) -> tensorflow_serving.apis.predict_pb2.PredictRequest: ...
     @property
     def response(self) -> tensorflow_serving.apis.predict_pb2.PredictResponse: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        request: typing.Optional[tensorflow_serving.apis.predict_pb2.PredictRequest] = ...,
-        response: typing.Optional[tensorflow_serving.apis.predict_pb2.PredictResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> None: ...
+        request: tensorflow_serving.apis.predict_pb2.PredictRequest | None = ...,
+        response: tensorflow_serving.apis.predict_pb2.PredictResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> None: ...
+
 global___PredictLog = PredictLog
 
+@typing_extensions.final
 class MultiInferenceLog(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REQUEST_FIELD_NUMBER: builtins.int
     RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def request(self) -> tensorflow_serving.apis.inference_pb2.MultiInferenceRequest: ...
     @property
     def response(self) -> tensorflow_serving.apis.inference_pb2.MultiInferenceResponse: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        request: typing.Optional[tensorflow_serving.apis.inference_pb2.MultiInferenceRequest] = ...,
-        response: typing.Optional[tensorflow_serving.apis.inference_pb2.MultiInferenceResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> None: ...
+        request: tensorflow_serving.apis.inference_pb2.MultiInferenceRequest | None = ...,
+        response: tensorflow_serving.apis.inference_pb2.MultiInferenceResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> None: ...
+
 global___MultiInferenceLog = MultiInferenceLog
 
+@typing_extensions.final
 class SessionRunLog(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REQUEST_FIELD_NUMBER: builtins.int
     RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def request(self) -> tensorflow_serving.apis.session_service_pb2.SessionRunRequest: ...
     @property
     def response(self) -> tensorflow_serving.apis.session_service_pb2.SessionRunResponse: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        request: typing.Optional[tensorflow_serving.apis.session_service_pb2.SessionRunRequest] = ...,
-        response: typing.Optional[tensorflow_serving.apis.session_service_pb2.SessionRunResponse] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["request",b"request","response",b"response"]) -> None: ...
+        request: tensorflow_serving.apis.session_service_pb2.SessionRunRequest | None = ...,
+        response: tensorflow_serving.apis.session_service_pb2.SessionRunResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["request", b"request", "response", b"response"]) -> None: ...
+
 global___SessionRunLog = SessionRunLog
 
+@typing_extensions.final
 class PredictionLog(google.protobuf.message.Message):
     """Logged model inference request."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     LOG_METADATA_FIELD_NUMBER: builtins.int
     CLASSIFY_LOG_FIELD_NUMBER: builtins.int
     REGRESS_LOG_FIELD_NUMBER: builtins.int
@@ -122,16 +149,18 @@ class PredictionLog(google.protobuf.message.Message):
     def multi_inference_log(self) -> global___MultiInferenceLog: ...
     @property
     def session_run_log(self) -> global___SessionRunLog: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        log_metadata: typing.Optional[tensorflow_serving.apis.logging_pb2.LogMetadata] = ...,
-        classify_log: typing.Optional[global___ClassifyLog] = ...,
-        regress_log: typing.Optional[global___RegressLog] = ...,
-        predict_log: typing.Optional[global___PredictLog] = ...,
-        multi_inference_log: typing.Optional[global___MultiInferenceLog] = ...,
-        session_run_log: typing.Optional[global___SessionRunLog] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["classify_log",b"classify_log","log_metadata",b"log_metadata","log_type",b"log_type","multi_inference_log",b"multi_inference_log","predict_log",b"predict_log","regress_log",b"regress_log","session_run_log",b"session_run_log"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["classify_log",b"classify_log","log_metadata",b"log_metadata","log_type",b"log_type","multi_inference_log",b"multi_inference_log","predict_log",b"predict_log","regress_log",b"regress_log","session_run_log",b"session_run_log"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["log_type",b"log_type"]) -> typing.Optional[typing_extensions.Literal["classify_log","regress_log","predict_log","multi_inference_log","session_run_log"]]: ...
+        log_metadata: tensorflow_serving.apis.logging_pb2.LogMetadata | None = ...,
+        classify_log: global___ClassifyLog | None = ...,
+        regress_log: global___RegressLog | None = ...,
+        predict_log: global___PredictLog | None = ...,
+        multi_inference_log: global___MultiInferenceLog | None = ...,
+        session_run_log: global___SessionRunLog | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["classify_log", b"classify_log", "log_metadata", b"log_metadata", "log_type", b"log_type", "multi_inference_log", b"multi_inference_log", "predict_log", b"predict_log", "regress_log", b"regress_log", "session_run_log", b"session_run_log"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["classify_log", b"classify_log", "log_metadata", b"log_metadata", "log_type", b"log_type", "multi_inference_log", b"multi_inference_log", "predict_log", b"predict_log", "regress_log", b"regress_log", "session_run_log", b"session_run_log"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["log_type", b"log_type"]) -> typing_extensions.Literal["classify_log", "regress_log", "predict_log", "multi_inference_log", "session_run_log"] | None: ...
+
 global___PredictionLog = PredictionLog

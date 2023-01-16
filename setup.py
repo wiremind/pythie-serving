@@ -7,7 +7,7 @@ extras_require_serving = [
     "lightgbm~=3.3.2",
     "xgboost~=0.90",
     "treelite_runtime~=2.2.2",
-    "scikit-learn~=1.1.1",
+    "scikit-learn~=1.2.0",
     "cloudpickle~=2.1.0",
 ]
 extras_require_test = [
@@ -17,8 +17,10 @@ extras_require_test = [
     "isort~=5.10.1",
     "flake8~=4.0.1",
     "flake8-mutable~=1.2.0",
-    "mypy==0.942",
+    "mypy==0.991",
     "mypy-protobuf~=3.2.0",
+    "types-protobuf",
+    "pyupgrade~=3.3.1",
 ]
 extras_require_dev = [
     *extras_require_test,
@@ -37,7 +39,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=True,
-    python_requires=">=3.8",
+    python_requires=">=3.10",
     install_requires=[
         "numpy~=1.23.0",
         "grpcio~=1.30",
@@ -57,7 +59,7 @@ setup(
         ]
     },
     classifiers=[
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3 :: Only",
         "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
     ],

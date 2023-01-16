@@ -3,25 +3,37 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import tensorflow.compiler.tf2xla.host_compute_metadata_pb2
 import tensorflow.compiler.xla.service.hlo_pb2
 import tensorflow.compiler.xla.xla_data_pb2
 import tensorflow.compiler.xla.xla_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class DeviceAssignment(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class ComputationDevice(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class DeviceMeshCoordinates(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             VALUE_FIELD_NUMBER: builtins.int
             @property
             def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
@@ -32,23 +44,23 @@ class DeviceAssignment(google.protobuf.message.Message):
                  Z    = value(2)
                  Core = value(3)
                 """
-                pass
-            def __init__(self,
+            def __init__(
+                self,
                 *,
-                value: typing.Optional[typing.Iterable[builtins.int]] = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+                value: collections.abc.Iterable[builtins.int] | None = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
         REPLICA_DEVICES_FIELD_NUMBER: builtins.int
         @property
         def replica_devices(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DeviceAssignment.ComputationDevice.DeviceMeshCoordinates]:
             """As many replicas as there are in the replicated computation."""
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            replica_devices: typing.Optional[typing.Iterable[global___DeviceAssignment.ComputationDevice.DeviceMeshCoordinates]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["replica_devices",b"replica_devices"]) -> None: ...
+            replica_devices: collections.abc.Iterable[global___DeviceAssignment.ComputationDevice.DeviceMeshCoordinates] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["replica_devices", b"replica_devices"]) -> None: ...
 
     COMPUTATION_DEVICES_FIELD_NUMBER: builtins.int
     @property
@@ -56,35 +68,45 @@ class DeviceAssignment(google.protobuf.message.Message):
         """As many ComputationDevice as many there are computations (number
         of cores per replica).
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        computation_devices: typing.Optional[typing.Iterable[global___DeviceAssignment.ComputationDevice]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["computation_devices",b"computation_devices"]) -> None: ...
+        computation_devices: collections.abc.Iterable[global___DeviceAssignment.ComputationDevice] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["computation_devices", b"computation_devices"]) -> None: ...
+
 global___DeviceAssignment = DeviceAssignment
 
+@typing_extensions.final
 class XLAComputationConfig(google.protobuf.message.Message):
     """Options for an XLA compilation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Experimental(google.protobuf.message.Message):
         """Everything inside Experimental is subject to change and is not subject
         to API stability guarantees in
         https://www.tensorflow.org/guide/version_compat.
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class UpdateIndexPair(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             INDEX_FIELD_NUMBER: builtins.int
             UPDATED_FIELD_NUMBER: builtins.int
             index: builtins.int
             updated: builtins.bool
-            def __init__(self,
+            def __init__(
+                self,
                 *,
                 index: builtins.int = ...,
                 updated: builtins.bool = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["index",b"index","updated",b"updated"]) -> None: ...
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["index", b"index", "updated", b"updated"]) -> None: ...
 
         STATEFUL_INPUT_INDICES_FIELD_NUMBER: builtins.int
         @property
@@ -103,12 +125,12 @@ class XLAComputationConfig(google.protobuf.message.Message):
             to a resource variable in the execution op, and may not be
             present for any other input.
             """
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            stateful_input_indices: typing.Optional[typing.Iterable[global___XLAComputationConfig.Experimental.UpdateIndexPair]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["stateful_input_indices",b"stateful_input_indices"]) -> None: ...
+            stateful_input_indices: collections.abc.Iterable[global___XLAComputationConfig.Experimental.UpdateIndexPair] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["stateful_input_indices", b"stateful_input_indices"]) -> None: ...
 
     NUM_REPLICAS_FIELD_NUMBER: builtins.int
     NUM_CORES_PER_REPLICA_FIELD_NUMBER: builtins.int
@@ -122,27 +144,22 @@ class XLAComputationConfig(google.protobuf.message.Message):
     """The number of replicas the computation will be run on. If this is
     default (0) it is interpreted as 1.
     """
-
     num_cores_per_replica: builtins.int
     """The number of "model-parallel" cores per replica. If this is
     default (0) it is interpreted as 1.
     """
-
     @property
     def host_compute_metadata(self) -> tensorflow.compiler.tf2xla.host_compute_metadata_pb2.HostComputeMetadata:
         """Optional metadata about host sends and recvs."""
-        pass
     @property
     def program_shape(self) -> tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto:
         """The arg/result shapes for the whole computation."""
-        pass
     @property
     def per_core_program_shape(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto]:
         """The arg/result shapes for each core of a model-parallel
         computation. per_core_args_and_result_shapes is optional for a
         single-core computation.
         """
-        pass
     @property
     def device_assignment(self) -> global___DeviceAssignment:
         """Describes how replicated computation instances should be assigned to
@@ -150,60 +167,71 @@ class XLAComputationConfig(google.protobuf.message.Message):
         sent and executed to the set of replica device numbers described in the
         DeviceAssignment proto.
         """
-        pass
     @property
     def debug_options(self) -> tensorflow.compiler.xla.xla_pb2.DebugOptions:
         """The debugging options to be passed to the XLA compilation process."""
-        pass
     @property
     def experimental(self) -> global___XLAComputationConfig.Experimental: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         num_replicas: builtins.int = ...,
         num_cores_per_replica: builtins.int = ...,
-        host_compute_metadata: typing.Optional[tensorflow.compiler.tf2xla.host_compute_metadata_pb2.HostComputeMetadata] = ...,
-        program_shape: typing.Optional[tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto] = ...,
-        per_core_program_shape: typing.Optional[typing.Iterable[tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto]] = ...,
-        device_assignment: typing.Optional[global___DeviceAssignment] = ...,
-        debug_options: typing.Optional[tensorflow.compiler.xla.xla_pb2.DebugOptions] = ...,
-        experimental: typing.Optional[global___XLAComputationConfig.Experimental] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["debug_options",b"debug_options","device_assignment",b"device_assignment","experimental",b"experimental","host_compute_metadata",b"host_compute_metadata","program_shape",b"program_shape"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["debug_options",b"debug_options","device_assignment",b"device_assignment","experimental",b"experimental","host_compute_metadata",b"host_compute_metadata","num_cores_per_replica",b"num_cores_per_replica","num_replicas",b"num_replicas","per_core_program_shape",b"per_core_program_shape","program_shape",b"program_shape"]) -> None: ...
+        host_compute_metadata: tensorflow.compiler.tf2xla.host_compute_metadata_pb2.HostComputeMetadata | None = ...,
+        program_shape: tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto | None = ...,
+        per_core_program_shape: collections.abc.Iterable[tensorflow.compiler.xla.xla_data_pb2.ProgramShapeProto] | None = ...,
+        device_assignment: global___DeviceAssignment | None = ...,
+        debug_options: tensorflow.compiler.xla.xla_pb2.DebugOptions | None = ...,
+        experimental: global___XLAComputationConfig.Experimental | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["debug_options", b"debug_options", "device_assignment", b"device_assignment", "experimental", b"experimental", "host_compute_metadata", b"host_compute_metadata", "program_shape", b"program_shape"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["debug_options", b"debug_options", "device_assignment", b"device_assignment", "experimental", b"experimental", "host_compute_metadata", b"host_compute_metadata", "num_cores_per_replica", b"num_cores_per_replica", "num_replicas", b"num_replicas", "per_core_program_shape", b"per_core_program_shape", "program_shape", b"program_shape"]) -> None: ...
+
 global___XLAComputationConfig = XLAComputationConfig
 
+@typing_extensions.final
 class XLAComputation(google.protobuf.message.Message):
     """Options and XLA computation for a compilation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     CONFIG_FIELD_NUMBER: builtins.int
     HLO_SNAPSHOT_FIELD_NUMBER: builtins.int
     @property
     def config(self) -> global___XLAComputationConfig: ...
     @property
     def hlo_snapshot(self) -> tensorflow.compiler.xla.service.hlo_pb2.HloSnapshot: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        config: typing.Optional[global___XLAComputationConfig] = ...,
-        hlo_snapshot: typing.Optional[tensorflow.compiler.xla.service.hlo_pb2.HloSnapshot] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config",b"config","hlo_snapshot",b"hlo_snapshot"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config",b"config","hlo_snapshot",b"hlo_snapshot"]) -> None: ...
+        config: global___XLAComputationConfig | None = ...,
+        hlo_snapshot: tensorflow.compiler.xla.service.hlo_pb2.HloSnapshot | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["config", b"config", "hlo_snapshot", b"hlo_snapshot"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["config", b"config", "hlo_snapshot", b"hlo_snapshot"]) -> None: ...
+
 global___XLAComputation = XLAComputation
 
+@typing_extensions.final
 class XLAAllocation(google.protobuf.message.Message):
     """Literal to allocate space for, and transfer to, device memory."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALUE_FIELD_NUMBER: builtins.int
     @property
     def value(self) -> tensorflow.compiler.xla.xla_data_pb2.LiteralProto: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        value: typing.Optional[tensorflow.compiler.xla.xla_data_pb2.LiteralProto] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+        value: tensorflow.compiler.xla.xla_data_pb2.LiteralProto | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
+
 global___XLAAllocation = XLAAllocation
 
+@typing_extensions.final
 class XLATupleNode(google.protobuf.message.Message):
     """Node in a tree describing a tuple constructed from input handles. A
     node is an internal node if tuples is non-empty, in which case
@@ -220,7 +248,9 @@ class XLATupleNode(google.protobuf.message.Message):
     then the XLATupleNode with structure {1,{0,1}} corresponds to a
     tuple with shape {{2,3},{{},{2,3}}}.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     INPUT_INDEX_FIELD_NUMBER: builtins.int
     RELEASE_INPUT_HANDLE_FIELD_NUMBER: builtins.int
     TUPLES_FIELD_NUMBER: builtins.int
@@ -228,46 +258,52 @@ class XLATupleNode(google.protobuf.message.Message):
     release_input_handle: builtins.bool
     @property
     def tuples(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___XLATupleNode]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         input_index: builtins.int = ...,
         release_input_handle: builtins.bool = ...,
-        tuples: typing.Optional[typing.Iterable[global___XLATupleNode]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_index",b"input_index","release_input_handle",b"release_input_handle","tuples",b"tuples"]) -> None: ...
+        tuples: collections.abc.Iterable[global___XLATupleNode] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_index", b"input_index", "release_input_handle", b"release_input_handle", "tuples", b"tuples"]) -> None: ...
+
 global___XLATupleNode = XLATupleNode
 
+@typing_extensions.final
 class CommonExecutionConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REPLICA_ID_FIELD_NUMBER: builtins.int
     LOCAL_REPLICA_MAPPING_FIELD_NUMBER: builtins.int
     RUN_ID_FIELD_NUMBER: builtins.int
     replica_id: builtins.int
     """The replica index this execute is driving."""
-
     @property
     def local_replica_mapping(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Mapping local device ordinals to global replica IDs.
         local_replica_mapping[LOCAL_DEVICE_ORDINAL] = GLOBAL_REPLICA_ID
         """
-        pass
     run_id: builtins.int
     """The execution run ID used to correlate different XRT execute operations
     happeining in parallel from different threads.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         replica_id: builtins.int = ...,
-        local_replica_mapping: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        local_replica_mapping: collections.abc.Iterable[builtins.int] | None = ...,
         run_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["local_replica_mapping",b"local_replica_mapping","replica_id",b"replica_id","run_id",b"run_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["local_replica_mapping", b"local_replica_mapping", "replica_id", b"replica_id", "run_id", b"run_id"]) -> None: ...
+
 global___CommonExecutionConfig = CommonExecutionConfig
 
+@typing_extensions.final
 class XRTExecutionConfig(google.protobuf.message.Message):
     """Options for an XLA execution."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_ORDINAL_FIELD_NUMBER: builtins.int
     CORE_INDEX_IN_REPLICA_FIELD_NUMBER: builtins.int
     EXECUTION_INSTANCE_KEY_FIELD_NUMBER: builtins.int
@@ -281,117 +317,119 @@ class XRTExecutionConfig(google.protobuf.message.Message):
     may be placed on a device such as CPU or TPU_SYSTEM that
     logically manages multiple cores.
     """
-
     core_index_in_replica: builtins.int
     """Which model-parallel computation to run from the compiled bundle."""
-
-    execution_instance_key: typing.Text
+    execution_instance_key: builtins.str
     """Optional key to disambiguate between executions. This is only
     needed if multiple host send/recvs may be outstanding
     concurrently with executions.
     """
-
     rng_seed: builtins.int
     """If non-zero, rng_seed to reset the core with."""
-
     release_input_handles: builtins.bool
     """If true, release allocation handles on the inputs after running."""
-
     release_compilation_handle: builtins.bool
     """If true, release the handle to the computation after running."""
-
     return_exploded_tuple: builtins.bool
     """If set to true, and the result shape is a tuple, then instead of returning
     a single tuple allocation the execution will return a vector of
     allocations, one for each of the first-level elements of the result tuple.
     """
-
     @property
     def common_config(self) -> global___CommonExecutionConfig:
         """The common configuration for XRT execute operations."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         device_ordinal: builtins.int = ...,
         core_index_in_replica: builtins.int = ...,
-        execution_instance_key: typing.Text = ...,
+        execution_instance_key: builtins.str = ...,
         rng_seed: builtins.int = ...,
         release_input_handles: builtins.bool = ...,
         release_compilation_handle: builtins.bool = ...,
         return_exploded_tuple: builtins.bool = ...,
-        common_config: typing.Optional[global___CommonExecutionConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common_config",b"common_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common_config",b"common_config","core_index_in_replica",b"core_index_in_replica","device_ordinal",b"device_ordinal","execution_instance_key",b"execution_instance_key","release_compilation_handle",b"release_compilation_handle","release_input_handles",b"release_input_handles","return_exploded_tuple",b"return_exploded_tuple","rng_seed",b"rng_seed"]) -> None: ...
+        common_config: global___CommonExecutionConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["common_config", b"common_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["common_config", b"common_config", "core_index_in_replica", b"core_index_in_replica", "device_ordinal", b"device_ordinal", "execution_instance_key", b"execution_instance_key", "release_compilation_handle", b"release_compilation_handle", "release_input_handles", b"release_input_handles", "return_exploded_tuple", b"return_exploded_tuple", "rng_seed", b"rng_seed"]) -> None: ...
+
 global___XRTExecutionConfig = XRTExecutionConfig
 
+@typing_extensions.final
 class XRTChainedExecuteConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     RNG_SEED_FIELD_NUMBER: builtins.int
     CORE_INDEX_IN_REPLICA_FIELD_NUMBER: builtins.int
     EXECUTION_INSTANCE_KEY_FIELD_NUMBER: builtins.int
     COMMON_CONFIG_FIELD_NUMBER: builtins.int
     rng_seed: builtins.int
     """If non-zero, rng_seed to reset the core with."""
-
     core_index_in_replica: builtins.int
     """Which model-parallel computation to run from the compiled bundle."""
-
-    execution_instance_key: typing.Text
+    execution_instance_key: builtins.str
     """Optional key to disambiguate between executions. This is only needed if
     multiple host send/recvs may be outstanding concurrently with executions.
     """
-
     @property
     def common_config(self) -> global___CommonExecutionConfig:
         """The common configuration for XRT execute operations."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         rng_seed: builtins.int = ...,
         core_index_in_replica: builtins.int = ...,
-        execution_instance_key: typing.Text = ...,
-        common_config: typing.Optional[global___CommonExecutionConfig] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["common_config",b"common_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["common_config",b"common_config","core_index_in_replica",b"core_index_in_replica","execution_instance_key",b"execution_instance_key","rng_seed",b"rng_seed"]) -> None: ...
+        execution_instance_key: builtins.str = ...,
+        common_config: global___CommonExecutionConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["common_config", b"common_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["common_config", b"common_config", "core_index_in_replica", b"core_index_in_replica", "execution_instance_key", b"execution_instance_key", "rng_seed", b"rng_seed"]) -> None: ...
+
 global___XRTChainedExecuteConfig = XRTChainedExecuteConfig
 
+@typing_extensions.final
 class XRTChainedExecuteOp(google.protobuf.message.Message):
     """A single chained execute operation. An operation can either be a device data
     load, or an existing (as in, previously compiled and accessible via its int64
     handle) XLA computation execution.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Input(google.protobuf.message.Message):
         """Represents an input for this operation."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         OP_INDEX_FIELD_NUMBER: builtins.int
         OUTPUT_INDEX_FIELD_NUMBER: builtins.int
         op_index: builtins.int
         """The index within the XRTChainedExecutePlan.ops post-order of the source
         operation for this input.
         """
-
         output_index: builtins.int
         """The output index of the value generated by the operation at op_index.
         Zero (default value) means no index ({}) while if an indexing is
         required, output_index needs to be set to index+1.
         Thanks proto3!
         """
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
             op_index: builtins.int = ...,
             output_index: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["op_index",b"op_index","output_index",b"output_index"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["op_index", b"op_index", "output_index", b"output_index"]) -> None: ...
 
+    @typing_extensions.final
     class Output(google.protobuf.message.Message):
         """Represents an output of the XRTChainedExecute operation, which should
         originate by the output of this operation.
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         OUTPUT_INDEX_FIELD_NUMBER: builtins.int
         RESULT_INDEX_FIELD_NUMBER: builtins.int
         output_index: builtins.int
@@ -401,18 +439,17 @@ class XRTChainedExecuteOp(google.protobuf.message.Message):
         output shape is a tuple, the result will be the full tuple. Otherwise the
         real sub-tuple index will be output_index - 1.
         """
-
         result_index: builtins.int
         """The index in the vector of the results returned by the XRTChainedExecute
         operation, where this output should be forwarded.
         """
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
             output_index: builtins.int = ...,
             result_index: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["output_index",b"output_index","result_index",b"result_index"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["output_index", b"output_index", "result_index", b"result_index"]) -> None: ...
 
     DATA_HANDLE_FIELD_NUMBER: builtins.int
     COMPUTATION_HANDLE_FIELD_NUMBER: builtins.int
@@ -420,80 +457,90 @@ class XRTChainedExecuteOp(google.protobuf.message.Message):
     INPUTS_FIELD_NUMBER: builtins.int
     data_handle: builtins.int
     """The handle to an existing XRT device data."""
-
     computation_handle: builtins.int
     """The handle to an existing XRT compiled computation."""
-
     @property
     def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___XRTChainedExecuteOp.Output]:
         """The outputs of this XRTChainedExecuteOp operation."""
-        pass
     @property
     def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___XRTChainedExecuteOp.Input]:
         """The inputs of this XRTChainedExecuteOp operation. If data_handle is set,
         there are no inputs.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         data_handle: builtins.int = ...,
         computation_handle: builtins.int = ...,
-        outputs: typing.Optional[typing.Iterable[global___XRTChainedExecuteOp.Output]] = ...,
-        inputs: typing.Optional[typing.Iterable[global___XRTChainedExecuteOp.Input]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["computation_handle",b"computation_handle","data_handle",b"data_handle","op_oneof",b"op_oneof"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["computation_handle",b"computation_handle","data_handle",b"data_handle","inputs",b"inputs","op_oneof",b"op_oneof","outputs",b"outputs"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["op_oneof",b"op_oneof"]) -> typing.Optional[typing_extensions.Literal["data_handle","computation_handle"]]: ...
+        outputs: collections.abc.Iterable[global___XRTChainedExecuteOp.Output] | None = ...,
+        inputs: collections.abc.Iterable[global___XRTChainedExecuteOp.Input] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["computation_handle", b"computation_handle", "data_handle", b"data_handle", "op_oneof", b"op_oneof"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["computation_handle", b"computation_handle", "data_handle", b"data_handle", "inputs", b"inputs", "op_oneof", b"op_oneof", "outputs", b"outputs"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["op_oneof", b"op_oneof"]) -> typing_extensions.Literal["data_handle", "computation_handle"] | None: ...
+
 global___XRTChainedExecuteOp = XRTChainedExecuteOp
 
+@typing_extensions.final
 class XRTChainedExecutePlan(google.protobuf.message.Message):
     """Execution plan for the XRTChainedExecute operation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     OPS_FIELD_NUMBER: builtins.int
     @property
     def ops(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___XRTChainedExecuteOp]:
         """The post order with the XRT computations to be executed."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        ops: typing.Optional[typing.Iterable[global___XRTChainedExecuteOp]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ops",b"ops"]) -> None: ...
+        ops: collections.abc.Iterable[global___XRTChainedExecuteOp] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ops", b"ops"]) -> None: ...
+
 global___XRTChainedExecutePlan = XRTChainedExecutePlan
 
+@typing_extensions.final
 class XRTMetricsCollect(google.protobuf.message.Message):
     """The message used to encode the options for the XRTMetricsCollect operation."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     METRICS_REGEX_FIELD_NUMBER: builtins.int
     @property
-    def metrics_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def metrics_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """A list of regular expressions to match the metric names. Empty means to
         return all the metrics reported by the collection registry.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        metrics_regex: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metrics_regex",b"metrics_regex"]) -> None: ...
+        metrics_regex: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metrics_regex", b"metrics_regex"]) -> None: ...
+
 global___XRTMetricsCollect = XRTMetricsCollect
 
+@typing_extensions.final
 class Percentiles(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class Point(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         PERCENTILE_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         percentile: builtins.float
         """In the [0, 100] range."""
-
         value: builtins.float
-        def __init__(self,
+        def __init__(
+            self,
             *,
             percentile: builtins.float = ...,
             value: builtins.float = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["percentile",b"percentile","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["percentile", b"percentile", "value", b"value"]) -> None: ...
 
     START_NSTIME_FIELD_NUMBER: builtins.int
     END_NSTIME_FIELD_NUMBER: builtins.int
@@ -507,36 +554,27 @@ class Percentiles(google.protobuf.message.Message):
     POINTS_FIELD_NUMBER: builtins.int
     start_nstime: builtins.int
     """The time (in nanoseconds) of the first sample within the samples buffer."""
-
     end_nstime: builtins.int
     """The time (in nanoseconds) of the last sample within the samples buffer."""
-
     min_value: builtins.float
     """The minimum value of the samples within the samples buffer."""
-
     max_value: builtins.float
     """The maximum value of the samples within the samples buffer."""
-
     mean: builtins.float
     """The mean value of the samples within the samples buffer."""
-
     stddev: builtins.float
     """The stndard deviation of the samples within the samples buffer."""
-
     num_samples: builtins.int
     """The number samples within the samples buffer."""
-
     total_samples: builtins.int
     """The total number of times this metrics has been posted a value to."""
-
     accumulator: builtins.float
     """The sum of all the posted values."""
-
     @property
     def points(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Percentiles.Point]:
         """The percentile points reported by the metric."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         start_nstime: builtins.int = ...,
         end_nstime: builtins.int = ...,
@@ -547,25 +585,28 @@ class Percentiles(google.protobuf.message.Message):
         num_samples: builtins.int = ...,
         total_samples: builtins.int = ...,
         accumulator: builtins.float = ...,
-        points: typing.Optional[typing.Iterable[global___Percentiles.Point]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accumulator",b"accumulator","end_nstime",b"end_nstime","max_value",b"max_value","mean",b"mean","min_value",b"min_value","num_samples",b"num_samples","points",b"points","start_nstime",b"start_nstime","stddev",b"stddev","total_samples",b"total_samples"]) -> None: ...
+        points: collections.abc.Iterable[global___Percentiles.Point] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accumulator", b"accumulator", "end_nstime", b"end_nstime", "max_value", b"max_value", "mean", b"mean", "min_value", b"min_value", "num_samples", b"num_samples", "points", b"points", "start_nstime", b"start_nstime", "stddev", b"stddev", "total_samples", b"total_samples"]) -> None: ...
+
 global___Percentiles = Percentiles
 
+@typing_extensions.final
 class MetricValues(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _UnitOfMeasure:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _UnitOfMeasureEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MetricValues._UnitOfMeasure.ValueType], builtins.type):
+
+    class _UnitOfMeasureEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MetricValues._UnitOfMeasure.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         INVALID: MetricValues._UnitOfMeasure.ValueType  # 0
         NUMBER: MetricValues._UnitOfMeasure.ValueType  # 1
         TIME: MetricValues._UnitOfMeasure.ValueType  # 2
         BYTES: MetricValues._UnitOfMeasure.ValueType  # 3
-    class UnitOfMeasure(_UnitOfMeasure, metaclass=_UnitOfMeasureEnumTypeWrapper):
-        pass
 
+    class UnitOfMeasure(_UnitOfMeasure, metaclass=_UnitOfMeasureEnumTypeWrapper): ...
     INVALID: MetricValues.UnitOfMeasure.ValueType  # 0
     NUMBER: MetricValues.UnitOfMeasure.ValueType  # 1
     TIME: MetricValues.UnitOfMeasure.ValueType  # 2
@@ -575,51 +616,58 @@ class MetricValues(google.protobuf.message.Message):
     PERCENTILES_VALUE_FIELD_NUMBER: builtins.int
     INT64_VALUE_FIELD_NUMBER: builtins.int
     UNIT_OF_MEASURE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """The metric name."""
-
     @property
     def percentiles_value(self) -> global___Percentiles: ...
     int64_value: builtins.int
     unit_of_measure: global___MetricValues.UnitOfMeasure.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        percentiles_value: typing.Optional[global___Percentiles] = ...,
+        name: builtins.str = ...,
+        percentiles_value: global___Percentiles | None = ...,
         int64_value: builtins.int = ...,
         unit_of_measure: global___MetricValues.UnitOfMeasure.ValueType = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["int64_value",b"int64_value","percentiles_value",b"percentiles_value","values_oneof",b"values_oneof"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["int64_value",b"int64_value","name",b"name","percentiles_value",b"percentiles_value","unit_of_measure",b"unit_of_measure","values_oneof",b"values_oneof"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["values_oneof",b"values_oneof"]) -> typing.Optional[typing_extensions.Literal["percentiles_value","int64_value"]]: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["int64_value", b"int64_value", "percentiles_value", b"percentiles_value", "values_oneof", b"values_oneof"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["int64_value", b"int64_value", "name", b"name", "percentiles_value", b"percentiles_value", "unit_of_measure", b"unit_of_measure", "values_oneof", b"values_oneof"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["values_oneof", b"values_oneof"]) -> typing_extensions.Literal["percentiles_value", "int64_value"] | None: ...
+
 global___MetricValues = MetricValues
 
+@typing_extensions.final
 class MetricsReport(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     METRICS_FIELD_NUMBER: builtins.int
     @property
     def metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MetricValues]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        metrics: typing.Optional[typing.Iterable[global___MetricValues]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metrics",b"metrics"]) -> None: ...
+        metrics: collections.abc.Iterable[global___MetricValues] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metrics", b"metrics"]) -> None: ...
+
 global___MetricsReport = MetricsReport
 
+@typing_extensions.final
 class MemoryInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     KB_TOTAL_FIELD_NUMBER: builtins.int
     KB_FREE_FIELD_NUMBER: builtins.int
     kb_total: builtins.int
     """The total memory on a device, in KB."""
-
     kb_free: builtins.int
     """The free memory on a device, in KB."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         kb_total: builtins.int = ...,
         kb_free: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["kb_free",b"kb_free","kb_total",b"kb_total"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["kb_free", b"kb_free", "kb_total", b"kb_total"]) -> None: ...
+
 global___MemoryInfo = MemoryInfo

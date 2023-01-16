@@ -3,38 +3,51 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.attr_value_pb2
-import typing
-import typing_extensions
+import tensorflow.core.framework.full_type_pb2
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class NodeDef(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class AttrEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.attr_value_pb2.AttrValue: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.attr_value_pb2.AttrValue] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.attr_value_pb2.AttrValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class ExperimentalDebugInfo(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         ORIGINAL_NODE_NAMES_FIELD_NUMBER: builtins.int
         ORIGINAL_FUNC_NAMES_FIELD_NUMBER: builtins.int
         @property
-        def original_node_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        def original_node_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """Opaque string inserted into error messages created by the runtime.
 
             This is intended to store the list of names of the nodes from the
@@ -43,9 +56,8 @@ class NodeDef(google.protobuf.message.Message):
             be {A, B}. This information can be used to map errors originating at the
             current node to some top level source code.
             """
-            pass
         @property
-        def original_func_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        def original_func_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """This is intended to store the list of names of the functions from the
             original graph that this node was derived. For example if this node, say
             C, was result of a fusion of node A in function FA and node B in function
@@ -54,13 +66,13 @@ class NodeDef(google.protobuf.message.Message):
             `original_node_names` can be used to map errors originating at the
             current ndoe to some top level source code.
             """
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            original_node_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            original_func_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["original_func_names",b"original_func_names","original_node_names",b"original_node_names"]) -> None: ...
+            original_node_names: collections.abc.Iterable[builtins.str] | None = ...,
+            original_func_names: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["original_func_names", b"original_func_names", "original_node_names", b"original_node_names"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     OP_FIELD_NUMBER: builtins.int
@@ -68,27 +80,25 @@ class NodeDef(google.protobuf.message.Message):
     DEVICE_FIELD_NUMBER: builtins.int
     ATTR_FIELD_NUMBER: builtins.int
     EXPERIMENTAL_DEBUG_INFO_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    EXPERIMENTAL_TYPE_FIELD_NUMBER: builtins.int
+    name: builtins.str
     """The name given to this operator. Used for naming inputs,
     logging, visualization, etc.  Unique within a single GraphDef.
     Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_>./]*".
     """
-
-    op: typing.Text
+    op: builtins.str
     """The operation name.  There may be custom parameters in attrs.
     Op names starting with an underscore are reserved for internal use.
     """
-
     @property
-    def input(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Each input is "node:src_output" with "node" being a string name and
         "src_output" indicating which output tensor to use from "node". If
         "src_output" is 0 the ":0" suffix can be omitted.  Regular inputs
         may optionally be followed by control inputs that have the format
         "^node".
         """
-        pass
-    device: typing.Text
+    device: builtins.str
     """A (possibly partial) specification for the device on which this
     node should be placed.
     The expected syntax for this string is as follows:
@@ -110,9 +120,8 @@ class NodeDef(google.protobuf.message.Message):
     field is empty or not present), the runtime will attempt to
     choose a device automatically.
     """
-
     @property
-    def attr(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]:
+    def attr(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue]:
         """Operation-specific graph-construction-time configuration.
         Note that this should include all attrs defined in the
         corresponding OpDef, including those with a value matching
@@ -126,20 +135,28 @@ class NodeDef(google.protobuf.message.Message):
         attr's type field.
         TODO(josh11b): Add some examples here showing best practices.
         """
-        pass
     @property
     def experimental_debug_info(self) -> global___NodeDef.ExperimentalDebugInfo:
         """This stores debug information associated with the node."""
-        pass
-    def __init__(self,
+    @property
+    def experimental_type(self) -> tensorflow.core.framework.full_type_pb2.FullTypeDef:
+        """The complete type of this node. Experimental and subject to change.
+        Currently, the field only contains the return types of the node. That will
+        extend in the future to contain the entire signature of the node, as a
+        function type.
+        """
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        op: typing.Text = ...,
-        input: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        device: typing.Text = ...,
-        attr: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]] = ...,
-        experimental_debug_info: typing.Optional[global___NodeDef.ExperimentalDebugInfo] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["experimental_debug_info",b"experimental_debug_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["attr",b"attr","device",b"device","experimental_debug_info",b"experimental_debug_info","input",b"input","name",b"name","op",b"op"]) -> None: ...
+        name: builtins.str = ...,
+        op: builtins.str = ...,
+        input: collections.abc.Iterable[builtins.str] | None = ...,
+        device: builtins.str = ...,
+        attr: collections.abc.Mapping[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue] | None = ...,
+        experimental_debug_info: global___NodeDef.ExperimentalDebugInfo | None = ...,
+        experimental_type: tensorflow.core.framework.full_type_pb2.FullTypeDef | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["experimental_debug_info", b"experimental_debug_info", "experimental_type", b"experimental_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["attr", b"attr", "device", b"device", "experimental_debug_info", b"experimental_debug_info", "experimental_type", b"experimental_type", "input", b"input", "name", b"name", "op", b"op"]) -> None: ...
+
 global___NodeDef = NodeDef

@@ -5,36 +5,41 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class SSLConfig(google.protobuf.message.Message):
     """Configuration for a secure gRPC channel"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SERVER_KEY_FIELD_NUMBER: builtins.int
     SERVER_CERT_FIELD_NUMBER: builtins.int
     CUSTOM_CA_FIELD_NUMBER: builtins.int
     CLIENT_VERIFY_FIELD_NUMBER: builtins.int
-    server_key: typing.Text
+    server_key: builtins.str
     """private server key for SSL"""
-
-    server_cert: typing.Text
+    server_cert: builtins.str
     """public server certificate"""
-
-    custom_ca: typing.Text
+    custom_ca: builtins.str
     """ custom certificate authority"""
-
     client_verify: builtins.bool
     """valid client certificate required ?"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        server_key: typing.Text = ...,
-        server_cert: typing.Text = ...,
-        custom_ca: typing.Text = ...,
+        server_key: builtins.str = ...,
+        server_cert: builtins.str = ...,
+        custom_ca: builtins.str = ...,
         client_verify: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["client_verify",b"client_verify","custom_ca",b"custom_ca","server_cert",b"server_cert","server_key",b"server_key"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["client_verify", b"client_verify", "custom_ca", b"custom_ca", "server_cert", b"server_cert", "server_key", b"server_key"]) -> None: ...
+
 global___SSLConfig = SSLConfig

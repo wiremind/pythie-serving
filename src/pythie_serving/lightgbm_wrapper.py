@@ -1,7 +1,6 @@
 import json
 import os
 import pickle
-from typing import Dict
 
 import numpy as np
 from lightgbm import Booster
@@ -75,13 +74,13 @@ class LGBMCountServiceServicer(AbstractPythieServingPredictionServiceServicer):
         }
 
     @staticmethod
-    def _parse_leaf_index(leaf_index_to_count: dict) -> Dict:
+    def _parse_leaf_index(leaf_index_to_count: dict) -> dict:
         """
         Create mapping between the leaf index outputted by lgbm.Booster to its count
         :param leaf_index_to_count: dict mapping lgbm leaf index name to its count
         :return: dict mapping a leaf's position in tree to its count for each tree
         """
-        tree_id_leaf_id_count_map: Dict[int, Dict[int, int]] = {}
+        tree_id_leaf_id_count_map: dict[int, dict[int, int]] = {}
         for leaf_index, leaf_count in leaf_index_to_count.items():
             tree_id, leaf_tree_id = leaf_index.split("-")
             tree_id_leaf_id_count_map.setdefault(int(tree_id), {})
@@ -90,7 +89,7 @@ class LGBMCountServiceServicer(AbstractPythieServingPredictionServiceServicer):
         return tree_id_leaf_id_count_map
 
     def _predict(self, model_specs: ModelSpecs, samples: NDArray) -> NDArray:
-        tree_id_leaf_id_count_map: Dict[int, Dict[int, int]] = model_specs["extra_specs"]
+        tree_id_leaf_id_count_map: dict[int, dict[int, int]] = model_specs["extra_specs"]
 
         leaf_ids_in_trees: NDArray = model_specs["model"].predict(samples, nthread=self.nthread, pred_leaf=True)
         nb_trees = leaf_ids_in_trees.shape[1]

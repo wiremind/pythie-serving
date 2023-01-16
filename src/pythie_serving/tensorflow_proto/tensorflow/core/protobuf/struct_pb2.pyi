@@ -3,18 +3,25 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.tensor_pb2
 import tensorflow.core.framework.tensor_shape_pb2
 import tensorflow.core.framework.types_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class StructuredValue(google.protobuf.message.Message):
     """`StructuredValue` represents a dynamically typed value representing various
     data structures that are inspired by Python data structures typically used in
@@ -41,7 +48,9 @@ class StructuredValue(google.protobuf.message.Message):
     to serialize all possible function signatures. For example we do not expect
     to pickle generic Python objects, and ideally we'd stay language-agnostic.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NONE_VALUE_FIELD_NUMBER: builtins.int
     FLOAT64_VALUE_FIELD_NUMBER: builtins.int
     INT64_VALUE_FIELD_NUMBER: builtins.int
@@ -59,16 +68,13 @@ class StructuredValue(google.protobuf.message.Message):
     @property
     def none_value(self) -> global___NoneValue:
         """Represents None."""
-        pass
     float64_value: builtins.float
     """Represents a double-precision floating-point value (a Python `float`)."""
-
     int64_value: builtins.int
     """Represents a signed integer value, limited to 64 bits.
     Larger values from Python's arbitrary-precision integers are unsupported.
     """
-
-    string_value: typing.Text
+    string_value: builtins.str
     """Represents a string of Unicode characters stored in a Python `str`.
     In Python 3, this is exactly what type `str` is.
     In Python 2, this is the UTF-8 encoding of the characters.
@@ -76,192 +82,224 @@ class StructuredValue(google.protobuf.message.Message):
     there is effectively no difference between the language versions.
     The obsolescent `unicode` type of Python 2 is not supported here.
     """
-
     bool_value: builtins.bool
     """Represents a boolean value."""
-
     @property
     def tensor_shape_value(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto:
         """Represents a TensorShape."""
-        pass
     tensor_dtype_value: tensorflow.core.framework.types_pb2.DataType.ValueType
     """Represents an enum value for dtype."""
-
     @property
     def tensor_spec_value(self) -> global___TensorSpecProto:
         """Represents a value for tf.TensorSpec."""
-        pass
     @property
     def type_spec_value(self) -> global___TypeSpecProto:
         """Represents a value for tf.TypeSpec."""
-        pass
     @property
     def bounded_tensor_spec_value(self) -> global___BoundedTensorSpecProto:
         """Represents a value for tf.BoundedTensorSpec."""
-        pass
     @property
     def list_value(self) -> global___ListValue:
         """Represents a list of `Value`."""
-        pass
     @property
     def tuple_value(self) -> global___TupleValue:
         """Represents a tuple of `Value`."""
-        pass
     @property
     def dict_value(self) -> global___DictValue:
         """Represents a dict `Value`."""
-        pass
     @property
     def named_tuple_value(self) -> global___NamedTupleValue:
         """Represents Python's namedtuple."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        none_value: typing.Optional[global___NoneValue] = ...,
+        none_value: global___NoneValue | None = ...,
         float64_value: builtins.float = ...,
         int64_value: builtins.int = ...,
-        string_value: typing.Text = ...,
+        string_value: builtins.str = ...,
         bool_value: builtins.bool = ...,
-        tensor_shape_value: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
+        tensor_shape_value: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
         tensor_dtype_value: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        tensor_spec_value: typing.Optional[global___TensorSpecProto] = ...,
-        type_spec_value: typing.Optional[global___TypeSpecProto] = ...,
-        bounded_tensor_spec_value: typing.Optional[global___BoundedTensorSpecProto] = ...,
-        list_value: typing.Optional[global___ListValue] = ...,
-        tuple_value: typing.Optional[global___TupleValue] = ...,
-        dict_value: typing.Optional[global___DictValue] = ...,
-        named_tuple_value: typing.Optional[global___NamedTupleValue] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bool_value",b"bool_value","bounded_tensor_spec_value",b"bounded_tensor_spec_value","dict_value",b"dict_value","float64_value",b"float64_value","int64_value",b"int64_value","kind",b"kind","list_value",b"list_value","named_tuple_value",b"named_tuple_value","none_value",b"none_value","string_value",b"string_value","tensor_dtype_value",b"tensor_dtype_value","tensor_shape_value",b"tensor_shape_value","tensor_spec_value",b"tensor_spec_value","tuple_value",b"tuple_value","type_spec_value",b"type_spec_value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bool_value",b"bool_value","bounded_tensor_spec_value",b"bounded_tensor_spec_value","dict_value",b"dict_value","float64_value",b"float64_value","int64_value",b"int64_value","kind",b"kind","list_value",b"list_value","named_tuple_value",b"named_tuple_value","none_value",b"none_value","string_value",b"string_value","tensor_dtype_value",b"tensor_dtype_value","tensor_shape_value",b"tensor_shape_value","tensor_spec_value",b"tensor_spec_value","tuple_value",b"tuple_value","type_spec_value",b"type_spec_value"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["kind",b"kind"]) -> typing.Optional[typing_extensions.Literal["none_value","float64_value","int64_value","string_value","bool_value","tensor_shape_value","tensor_dtype_value","tensor_spec_value","type_spec_value","bounded_tensor_spec_value","list_value","tuple_value","dict_value","named_tuple_value"]]: ...
+        tensor_spec_value: global___TensorSpecProto | None = ...,
+        type_spec_value: global___TypeSpecProto | None = ...,
+        bounded_tensor_spec_value: global___BoundedTensorSpecProto | None = ...,
+        list_value: global___ListValue | None = ...,
+        tuple_value: global___TupleValue | None = ...,
+        dict_value: global___DictValue | None = ...,
+        named_tuple_value: global___NamedTupleValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bool_value", b"bool_value", "bounded_tensor_spec_value", b"bounded_tensor_spec_value", "dict_value", b"dict_value", "float64_value", b"float64_value", "int64_value", b"int64_value", "kind", b"kind", "list_value", b"list_value", "named_tuple_value", b"named_tuple_value", "none_value", b"none_value", "string_value", b"string_value", "tensor_dtype_value", b"tensor_dtype_value", "tensor_shape_value", b"tensor_shape_value", "tensor_spec_value", b"tensor_spec_value", "tuple_value", b"tuple_value", "type_spec_value", b"type_spec_value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bool_value", b"bool_value", "bounded_tensor_spec_value", b"bounded_tensor_spec_value", "dict_value", b"dict_value", "float64_value", b"float64_value", "int64_value", b"int64_value", "kind", b"kind", "list_value", b"list_value", "named_tuple_value", b"named_tuple_value", "none_value", b"none_value", "string_value", b"string_value", "tensor_dtype_value", b"tensor_dtype_value", "tensor_shape_value", b"tensor_shape_value", "tensor_spec_value", b"tensor_spec_value", "tuple_value", b"tuple_value", "type_spec_value", b"type_spec_value"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["kind", b"kind"]) -> typing_extensions.Literal["none_value", "float64_value", "int64_value", "string_value", "bool_value", "tensor_shape_value", "tensor_dtype_value", "tensor_spec_value", "type_spec_value", "bounded_tensor_spec_value", "list_value", "tuple_value", "dict_value", "named_tuple_value"] | None: ...
+
 global___StructuredValue = StructuredValue
 
+@typing_extensions.final
 class NoneValue(google.protobuf.message.Message):
     """Represents None."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___NoneValue = NoneValue
 
+@typing_extensions.final
 class ListValue(google.protobuf.message.Message):
     """Represents a Python list."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALUES_FIELD_NUMBER: builtins.int
     @property
     def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StructuredValue]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        values: typing.Optional[typing.Iterable[global___StructuredValue]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["values",b"values"]) -> None: ...
+        values: collections.abc.Iterable[global___StructuredValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["values", b"values"]) -> None: ...
+
 global___ListValue = ListValue
 
+@typing_extensions.final
 class TupleValue(google.protobuf.message.Message):
     """Represents a Python tuple."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VALUES_FIELD_NUMBER: builtins.int
     @property
     def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___StructuredValue]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        values: typing.Optional[typing.Iterable[global___StructuredValue]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["values",b"values"]) -> None: ...
+        values: collections.abc.Iterable[global___StructuredValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["values", b"values"]) -> None: ...
+
 global___TupleValue = TupleValue
 
+@typing_extensions.final
 class DictValue(google.protobuf.message.Message):
     """Represents a Python dict keyed by `str`.
     The comment on Unicode from Value.string_value applies analogously.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class FieldsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___StructuredValue: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___StructuredValue] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___StructuredValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     FIELDS_FIELD_NUMBER: builtins.int
     @property
-    def fields(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___StructuredValue]: ...
-    def __init__(self,
+    def fields(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___StructuredValue]: ...
+    def __init__(
+        self,
         *,
-        fields: typing.Optional[typing.Mapping[typing.Text, global___StructuredValue]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["fields",b"fields"]) -> None: ...
+        fields: collections.abc.Mapping[builtins.str, global___StructuredValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["fields", b"fields"]) -> None: ...
+
 global___DictValue = DictValue
 
+@typing_extensions.final
 class PairValue(google.protobuf.message.Message):
     """Represents a (key, value) pair."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     KEY_FIELD_NUMBER: builtins.int
     VALUE_FIELD_NUMBER: builtins.int
-    key: typing.Text
+    key: builtins.str
     @property
     def value(self) -> global___StructuredValue: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        key: typing.Text = ...,
-        value: typing.Optional[global___StructuredValue] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        key: builtins.str = ...,
+        value: global___StructuredValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+
 global___PairValue = PairValue
 
+@typing_extensions.final
 class NamedTupleValue(google.protobuf.message.Message):
     """Represents Python's namedtuple."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     VALUES_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     @property
     def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PairValue]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        values: typing.Optional[typing.Iterable[global___PairValue]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name",b"name","values",b"values"]) -> None: ...
+        name: builtins.str = ...,
+        values: collections.abc.Iterable[global___PairValue] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "values", b"values"]) -> None: ...
+
 global___NamedTupleValue = NamedTupleValue
 
+@typing_extensions.final
 class TensorSpecProto(google.protobuf.message.Message):
     """A protobuf to represent tf.TensorSpec."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     SHAPE_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     @property
     def shape(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto: ...
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        shape: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
+        name: builtins.str = ...,
+        shape: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["shape",b"shape"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dtype",b"dtype","name",b"name","shape",b"shape"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["shape", b"shape"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dtype", b"dtype", "name", b"name", "shape", b"shape"]) -> None: ...
+
 global___TensorSpecProto = TensorSpecProto
 
+@typing_extensions.final
 class BoundedTensorSpecProto(google.protobuf.message.Message):
     """A protobuf to represent tf.BoundedTensorSpec."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     SHAPE_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
     MINIMUM_FIELD_NUMBER: builtins.int
     MAXIMUM_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     @property
     def shape(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto: ...
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
@@ -269,129 +307,114 @@ class BoundedTensorSpecProto(google.protobuf.message.Message):
     def minimum(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
     @property
     def maximum(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        shape: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
+        name: builtins.str = ...,
+        shape: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        minimum: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-        maximum: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["maximum",b"maximum","minimum",b"minimum","shape",b"shape"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dtype",b"dtype","maximum",b"maximum","minimum",b"minimum","name",b"name","shape",b"shape"]) -> None: ...
+        minimum: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+        maximum: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["maximum", b"maximum", "minimum", b"minimum", "shape", b"shape"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dtype", b"dtype", "maximum", b"maximum", "minimum", b"minimum", "name", b"name", "shape", b"shape"]) -> None: ...
+
 global___BoundedTensorSpecProto = BoundedTensorSpecProto
 
+@typing_extensions.final
 class TypeSpecProto(google.protobuf.message.Message):
     """Represents a tf.TypeSpec"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _TypeSpecClass:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _TypeSpecClassEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TypeSpecProto._TypeSpecClass.ValueType], builtins.type):
+
+    class _TypeSpecClassEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TypeSpecProto._TypeSpecClass.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNKNOWN: TypeSpecProto._TypeSpecClass.ValueType  # 0
         SPARSE_TENSOR_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 1
         """tf.SparseTensorSpec"""
-
         INDEXED_SLICES_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 2
         """tf.IndexedSlicesSpec"""
-
         RAGGED_TENSOR_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 3
         """tf.RaggedTensorSpec"""
-
         TENSOR_ARRAY_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 4
         """tf.TensorArraySpec"""
-
         DATA_DATASET_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 5
         """tf.data.DatasetSpec"""
-
         DATA_ITERATOR_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 6
         """IteratorSpec from data/ops/iterator_ops.py"""
-
         OPTIONAL_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 7
         """tf.OptionalSpec"""
-
         PER_REPLICA_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 8
         """PerReplicaSpec from distribute/values.py"""
-
         VARIABLE_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 9
         """tf.VariableSpec"""
-
         ROW_PARTITION_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 10
         """RowPartitionSpec from ragged/row_partition.py"""
-
         REGISTERED_TYPE_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 12
         """The type registered as type_spec_class_name."""
-
         EXTENSION_TYPE_SPEC: TypeSpecProto._TypeSpecClass.ValueType  # 13
         """Subclasses of tf.ExtensionType"""
 
-    class TypeSpecClass(_TypeSpecClass, metaclass=_TypeSpecClassEnumTypeWrapper):
-        pass
-
+    class TypeSpecClass(_TypeSpecClass, metaclass=_TypeSpecClassEnumTypeWrapper): ...
     UNKNOWN: TypeSpecProto.TypeSpecClass.ValueType  # 0
     SPARSE_TENSOR_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 1
     """tf.SparseTensorSpec"""
-
     INDEXED_SLICES_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 2
     """tf.IndexedSlicesSpec"""
-
     RAGGED_TENSOR_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 3
     """tf.RaggedTensorSpec"""
-
     TENSOR_ARRAY_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 4
     """tf.TensorArraySpec"""
-
     DATA_DATASET_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 5
     """tf.data.DatasetSpec"""
-
     DATA_ITERATOR_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 6
     """IteratorSpec from data/ops/iterator_ops.py"""
-
     OPTIONAL_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 7
     """tf.OptionalSpec"""
-
     PER_REPLICA_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 8
     """PerReplicaSpec from distribute/values.py"""
-
     VARIABLE_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 9
     """tf.VariableSpec"""
-
     ROW_PARTITION_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 10
     """RowPartitionSpec from ragged/row_partition.py"""
-
     REGISTERED_TYPE_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 12
     """The type registered as type_spec_class_name."""
-
     EXTENSION_TYPE_SPEC: TypeSpecProto.TypeSpecClass.ValueType  # 13
     """Subclasses of tf.ExtensionType"""
-
 
     TYPE_SPEC_CLASS_FIELD_NUMBER: builtins.int
     TYPE_STATE_FIELD_NUMBER: builtins.int
     TYPE_SPEC_CLASS_NAME_FIELD_NUMBER: builtins.int
+    NUM_FLAT_COMPONENTS_FIELD_NUMBER: builtins.int
     type_spec_class: global___TypeSpecProto.TypeSpecClass.ValueType
     @property
     def type_state(self) -> global___StructuredValue:
         """The value returned by TypeSpec._serialize()."""
-        pass
-    type_spec_class_name: typing.Text
+    type_spec_class_name: builtins.str
     """The name of the TypeSpec class.
      * If type_spec_class == REGISTERED_TYPE_SPEC, the TypeSpec class is
        the one registered under this name. For types registered outside
        core TensorFlow by an add-on library, that library must be loaded
-       before this value can be deserialized by StructureCoder.
+       before this value can be deserialized by nested_structure_coder.
      * If type_spec_class specifies a particular TypeSpec class, this field is
        redundant with the type_spec_class enum, and is only used for error
        reporting in older binaries that do not know the tupe_spec_class enum.
     """
-
-    def __init__(self,
+    num_flat_components: builtins.int
+    """The number of flat tensor components required by this TypeSpec."""
+    def __init__(
+        self,
         *,
         type_spec_class: global___TypeSpecProto.TypeSpecClass.ValueType = ...,
-        type_state: typing.Optional[global___StructuredValue] = ...,
-        type_spec_class_name: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["type_state",b"type_state"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["type_spec_class",b"type_spec_class","type_spec_class_name",b"type_spec_class_name","type_state",b"type_state"]) -> None: ...
+        type_state: global___StructuredValue | None = ...,
+        type_spec_class_name: builtins.str = ...,
+        num_flat_components: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["type_state", b"type_state"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["num_flat_components", b"num_flat_components", "type_spec_class", b"type_spec_class", "type_spec_class_name", b"type_spec_class_name", "type_state", b"type_state"]) -> None: ...
+
 global___TypeSpecProto = TypeSpecProto

@@ -3,14 +3,20 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class VersionDef(google.protobuf.message.Message):
     """This file is a copy of the TensorFlow Versions proto.
     Keep this file in sync with the source proto definition at
@@ -31,25 +37,26 @@ class VersionDef(google.protobuf.message.Message):
 
     LINT.IfChange
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PRODUCER_FIELD_NUMBER: builtins.int
     MIN_CONSUMER_FIELD_NUMBER: builtins.int
     BAD_CONSUMERS_FIELD_NUMBER: builtins.int
     producer: builtins.int
     """The version of the code that produced this data."""
-
     min_consumer: builtins.int
     """Any consumer below this version is not allowed to consume this data."""
-
     @property
     def bad_consumers(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Specific consumer versions which are disallowed (e.g. due to bugs)."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         producer: builtins.int = ...,
         min_consumer: builtins.int = ...,
-        bad_consumers: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bad_consumers",b"bad_consumers","min_consumer",b"min_consumer","producer",b"producer"]) -> None: ...
+        bad_consumers: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bad_consumers", b"bad_consumers", "min_consumer", b"min_consumer", "producer", b"producer"]) -> None: ...
+
 global___VersionDef = VersionDef

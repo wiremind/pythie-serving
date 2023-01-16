@@ -35,7 +35,7 @@ class WorkerServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ProcessTask(self, request, context):
-        """Processes an task for a dataset, making elements available to clients.
+        """Processes a task for a dataset, making elements available to clients.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
