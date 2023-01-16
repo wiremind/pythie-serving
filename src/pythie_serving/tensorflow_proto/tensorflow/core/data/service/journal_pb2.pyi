@@ -3,28 +3,39 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.data.service.common_pb2
-import typing
-import typing_extensions
+import tensorflow.core.protobuf.data_service_pb2
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class Update(google.protobuf.message.Message):
     """Message representing journaled dispatcher metadata updates. When we apply
     one of these changes to the dispatcher's in-memory state, we also write an
     Update message to the journal.
-    Next tag: 13
+    Next tag: 15
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     REGISTER_DATASET_FIELD_NUMBER: builtins.int
     REGISTER_WORKER_FIELD_NUMBER: builtins.int
     CREATE_JOB_FIELD_NUMBER: builtins.int
+    CREATE_ITERATION_FIELD_NUMBER: builtins.int
     PRODUCE_SPLIT_FIELD_NUMBER: builtins.int
-    ACQUIRE_JOB_CLIENT_FIELD_NUMBER: builtins.int
-    RELEASE_JOB_CLIENT_FIELD_NUMBER: builtins.int
-    GARBAGE_COLLECT_JOB_FIELD_NUMBER: builtins.int
+    ACQUIRE_ITERATION_CLIENT_FIELD_NUMBER: builtins.int
+    RELEASE_ITERATION_CLIENT_FIELD_NUMBER: builtins.int
+    GARBAGE_COLLECT_ITERATION_FIELD_NUMBER: builtins.int
     REMOVE_TASK_FIELD_NUMBER: builtins.int
     CREATE_PENDING_TASK_FIELD_NUMBER: builtins.int
     CLIENT_HEARTBEAT_FIELD_NUMBER: builtins.int
@@ -37,13 +48,15 @@ class Update(google.protobuf.message.Message):
     @property
     def create_job(self) -> global___CreateJobUpdate: ...
     @property
+    def create_iteration(self) -> global___CreateIterationUpdate: ...
+    @property
     def produce_split(self) -> global___ProduceSplitUpdate: ...
     @property
-    def acquire_job_client(self) -> global___AcquireJobClientUpdate: ...
+    def acquire_iteration_client(self) -> global___AcquireIterationClientUpdate: ...
     @property
-    def release_job_client(self) -> global___ReleaseJobClientUpdate: ...
+    def release_iteration_client(self) -> global___ReleaseIterationClientUpdate: ...
     @property
-    def garbage_collect_job(self) -> global___GarbageCollectJobUpdate: ...
+    def garbage_collect_iteration(self) -> global___GarbageCollectIterationUpdate: ...
     @property
     def remove_task(self) -> global___RemoveTaskUpdate: ...
     @property
@@ -54,275 +67,383 @@ class Update(google.protobuf.message.Message):
     def create_task(self) -> global___CreateTaskUpdate: ...
     @property
     def finish_task(self) -> global___FinishTaskUpdate: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        register_dataset: typing.Optional[global___RegisterDatasetUpdate] = ...,
-        register_worker: typing.Optional[global___RegisterWorkerUpdate] = ...,
-        create_job: typing.Optional[global___CreateJobUpdate] = ...,
-        produce_split: typing.Optional[global___ProduceSplitUpdate] = ...,
-        acquire_job_client: typing.Optional[global___AcquireJobClientUpdate] = ...,
-        release_job_client: typing.Optional[global___ReleaseJobClientUpdate] = ...,
-        garbage_collect_job: typing.Optional[global___GarbageCollectJobUpdate] = ...,
-        remove_task: typing.Optional[global___RemoveTaskUpdate] = ...,
-        create_pending_task: typing.Optional[global___CreatePendingTaskUpdate] = ...,
-        client_heartbeat: typing.Optional[global___ClientHeartbeatUpdate] = ...,
-        create_task: typing.Optional[global___CreateTaskUpdate] = ...,
-        finish_task: typing.Optional[global___FinishTaskUpdate] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["acquire_job_client",b"acquire_job_client","client_heartbeat",b"client_heartbeat","create_job",b"create_job","create_pending_task",b"create_pending_task","create_task",b"create_task","finish_task",b"finish_task","garbage_collect_job",b"garbage_collect_job","produce_split",b"produce_split","register_dataset",b"register_dataset","register_worker",b"register_worker","release_job_client",b"release_job_client","remove_task",b"remove_task","update_type",b"update_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["acquire_job_client",b"acquire_job_client","client_heartbeat",b"client_heartbeat","create_job",b"create_job","create_pending_task",b"create_pending_task","create_task",b"create_task","finish_task",b"finish_task","garbage_collect_job",b"garbage_collect_job","produce_split",b"produce_split","register_dataset",b"register_dataset","register_worker",b"register_worker","release_job_client",b"release_job_client","remove_task",b"remove_task","update_type",b"update_type"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["update_type",b"update_type"]) -> typing.Optional[typing_extensions.Literal["register_dataset","register_worker","create_job","produce_split","acquire_job_client","release_job_client","garbage_collect_job","remove_task","create_pending_task","client_heartbeat","create_task","finish_task"]]: ...
+        register_dataset: global___RegisterDatasetUpdate | None = ...,
+        register_worker: global___RegisterWorkerUpdate | None = ...,
+        create_job: global___CreateJobUpdate | None = ...,
+        create_iteration: global___CreateIterationUpdate | None = ...,
+        produce_split: global___ProduceSplitUpdate | None = ...,
+        acquire_iteration_client: global___AcquireIterationClientUpdate | None = ...,
+        release_iteration_client: global___ReleaseIterationClientUpdate | None = ...,
+        garbage_collect_iteration: global___GarbageCollectIterationUpdate | None = ...,
+        remove_task: global___RemoveTaskUpdate | None = ...,
+        create_pending_task: global___CreatePendingTaskUpdate | None = ...,
+        client_heartbeat: global___ClientHeartbeatUpdate | None = ...,
+        create_task: global___CreateTaskUpdate | None = ...,
+        finish_task: global___FinishTaskUpdate | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["acquire_iteration_client", b"acquire_iteration_client", "client_heartbeat", b"client_heartbeat", "create_iteration", b"create_iteration", "create_job", b"create_job", "create_pending_task", b"create_pending_task", "create_task", b"create_task", "finish_task", b"finish_task", "garbage_collect_iteration", b"garbage_collect_iteration", "produce_split", b"produce_split", "register_dataset", b"register_dataset", "register_worker", b"register_worker", "release_iteration_client", b"release_iteration_client", "remove_task", b"remove_task", "update_type", b"update_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["acquire_iteration_client", b"acquire_iteration_client", "client_heartbeat", b"client_heartbeat", "create_iteration", b"create_iteration", "create_job", b"create_job", "create_pending_task", b"create_pending_task", "create_task", b"create_task", "finish_task", b"finish_task", "garbage_collect_iteration", b"garbage_collect_iteration", "produce_split", b"produce_split", "register_dataset", b"register_dataset", "register_worker", b"register_worker", "release_iteration_client", b"release_iteration_client", "remove_task", b"remove_task", "update_type", b"update_type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["update_type", b"update_type"]) -> typing_extensions.Literal["register_dataset", "register_worker", "create_job", "create_iteration", "produce_split", "acquire_iteration_client", "release_iteration_client", "garbage_collect_iteration", "remove_task", "create_pending_task", "client_heartbeat", "create_task", "finish_task"] | None: ...
+
 global___Update = Update
 
+@typing_extensions.final
 class RegisterDatasetUpdate(google.protobuf.message.Message):
-    """Next tag: 3"""
+    """Next tag: 5"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DATASET_ID_FIELD_NUMBER: builtins.int
     FINGERPRINT_FIELD_NUMBER: builtins.int
-    dataset_id: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    DEDUPE_BY_DATASET_ID_FIELD_NUMBER: builtins.int
+    dataset_id: builtins.str
     fingerprint: builtins.int
-    def __init__(self,
+    @property
+    def metadata(self) -> tensorflow.core.protobuf.data_service_pb2.DataServiceMetadata: ...
+    dedupe_by_dataset_id: builtins.bool
+    def __init__(
+        self,
         *,
-        dataset_id: builtins.int = ...,
+        dataset_id: builtins.str = ...,
         fingerprint: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","fingerprint",b"fingerprint"]) -> None: ...
+        metadata: tensorflow.core.protobuf.data_service_pb2.DataServiceMetadata | None = ...,
+        dedupe_by_dataset_id: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dedupe_by_dataset_id", b"dedupe_by_dataset_id", "fingerprint", b"fingerprint", "metadata", b"metadata"]) -> None: ...
+
 global___RegisterDatasetUpdate = RegisterDatasetUpdate
 
+@typing_extensions.final
 class RegisterWorkerUpdate(google.protobuf.message.Message):
-    """Next tag: 3"""
+    """Next tag: 5"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     WORKER_ADDRESS_FIELD_NUMBER: builtins.int
     TRANSFER_ADDRESS_FIELD_NUMBER: builtins.int
-    worker_address: typing.Text
-    transfer_address: typing.Text
-    def __init__(self,
+    WORKER_TAGS_FIELD_NUMBER: builtins.int
+    WORKER_UID_FIELD_NUMBER: builtins.int
+    worker_address: builtins.str
+    transfer_address: builtins.str
+    @property
+    def worker_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    worker_uid: builtins.int
+    def __init__(
+        self,
         *,
-        worker_address: typing.Text = ...,
-        transfer_address: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["transfer_address",b"transfer_address","worker_address",b"worker_address"]) -> None: ...
+        worker_address: builtins.str = ...,
+        transfer_address: builtins.str = ...,
+        worker_tags: collections.abc.Iterable[builtins.str] | None = ...,
+        worker_uid: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["transfer_address", b"transfer_address", "worker_address", b"worker_address", "worker_tags", b"worker_tags", "worker_uid", b"worker_uid"]) -> None: ...
+
 global___RegisterWorkerUpdate = RegisterWorkerUpdate
 
-class NamedJobKeyDef(google.protobuf.message.Message):
-    """Next tag: 3"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    NAME_FIELD_NUMBER: builtins.int
-    INDEX_FIELD_NUMBER: builtins.int
-    name: typing.Text
-    index: builtins.int
-    def __init__(self,
-        *,
-        name: typing.Text = ...,
-        index: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["index",b"index","name",b"name"]) -> None: ...
-global___NamedJobKeyDef = NamedJobKeyDef
-
+@typing_extensions.final
 class CreateJobUpdate(google.protobuf.message.Message):
     """Next tag: 9"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     JOB_ID_FIELD_NUMBER: builtins.int
+    JOB_NAME_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
-    PROCESSING_MODE_FIELD_NUMBER: builtins.int
-    NUM_SPLIT_PROVIDERS_FIELD_NUMBER: builtins.int
-    NAMED_JOB_KEY_FIELD_NUMBER: builtins.int
+    PROCESSING_MODE_DEF_FIELD_NUMBER: builtins.int
     NUM_CONSUMERS_FIELD_NUMBER: builtins.int
+    TARGET_WORKERS_FIELD_NUMBER: builtins.int
+    USE_CROSS_TRAINER_CACHE_FIELD_NUMBER: builtins.int
     job_id: builtins.int
-    dataset_id: builtins.int
-    processing_mode: tensorflow.core.data.service.common_pb2.ProcessingModeDef.ValueType
-    num_split_providers: builtins.int
+    job_name: builtins.str
+    dataset_id: builtins.str
     @property
-    def named_job_key(self) -> global___NamedJobKeyDef:
-        """Only some jobs have names, so this may be unset."""
-        pass
+    def processing_mode_def(self) -> tensorflow.core.protobuf.data_service_pb2.ProcessingModeDef: ...
     num_consumers: builtins.int
-    def __init__(self,
+    target_workers: tensorflow.core.data.service.common_pb2.TargetWorkers.ValueType
+    """Specifies which workers the client of this iteration reads from."""
+    use_cross_trainer_cache: builtins.bool
+    """True if cross-trainer cache is enabled."""
+    def __init__(
+        self,
         *,
         job_id: builtins.int = ...,
-        dataset_id: builtins.int = ...,
-        processing_mode: tensorflow.core.data.service.common_pb2.ProcessingModeDef.ValueType = ...,
-        num_split_providers: builtins.int = ...,
-        named_job_key: typing.Optional[global___NamedJobKeyDef] = ...,
+        job_name: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        processing_mode_def: tensorflow.core.protobuf.data_service_pb2.ProcessingModeDef | None = ...,
         num_consumers: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["named_job_key",b"named_job_key","num_consumers",b"num_consumers","optional_num_consumers",b"optional_num_consumers"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","job_id",b"job_id","named_job_key",b"named_job_key","num_consumers",b"num_consumers","num_split_providers",b"num_split_providers","optional_num_consumers",b"optional_num_consumers","processing_mode",b"processing_mode"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["optional_num_consumers",b"optional_num_consumers"]) -> typing.Optional[typing_extensions.Literal["num_consumers"]]: ...
+        target_workers: tensorflow.core.data.service.common_pb2.TargetWorkers.ValueType = ...,
+        use_cross_trainer_cache: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["num_consumers", b"num_consumers", "optional_num_consumers", b"optional_num_consumers", "processing_mode_def", b"processing_mode_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "job_id", b"job_id", "job_name", b"job_name", "num_consumers", b"num_consumers", "optional_num_consumers", b"optional_num_consumers", "processing_mode_def", b"processing_mode_def", "target_workers", b"target_workers", "use_cross_trainer_cache", b"use_cross_trainer_cache"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["optional_num_consumers", b"optional_num_consumers"]) -> typing_extensions.Literal["num_consumers"] | None: ...
+
 global___CreateJobUpdate = CreateJobUpdate
 
+@typing_extensions.final
+class CreateIterationUpdate(google.protobuf.message.Message):
+    """Next tag: 5"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ITERATION_ID_FIELD_NUMBER: builtins.int
+    JOB_ID_FIELD_NUMBER: builtins.int
+    REPETITION_FIELD_NUMBER: builtins.int
+    NUM_SPLIT_PROVIDERS_FIELD_NUMBER: builtins.int
+    iteration_id: builtins.int
+    job_id: builtins.int
+    repetition: builtins.int
+    num_split_providers: builtins.int
+    def __init__(
+        self,
+        *,
+        iteration_id: builtins.int = ...,
+        job_id: builtins.int = ...,
+        repetition: builtins.int = ...,
+        num_split_providers: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_id", b"iteration_id", "job_id", b"job_id", "num_split_providers", b"num_split_providers", "repetition", b"repetition"]) -> None: ...
+
+global___CreateIterationUpdate = CreateIterationUpdate
+
+@typing_extensions.final
 class ProduceSplitUpdate(google.protobuf.message.Message):
     """Next tag: 5"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    JOB_ID_FIELD_NUMBER: builtins.int
+
+    ITERATION_ID_FIELD_NUMBER: builtins.int
     REPETITION_FIELD_NUMBER: builtins.int
     SPLIT_PROVIDER_INDEX_FIELD_NUMBER: builtins.int
     FINISHED_FIELD_NUMBER: builtins.int
-    job_id: builtins.int
+    iteration_id: builtins.int
     repetition: builtins.int
     split_provider_index: builtins.int
     finished: builtins.bool
     """Whether the split provider reached its end."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        job_id: builtins.int = ...,
+        iteration_id: builtins.int = ...,
         repetition: builtins.int = ...,
         split_provider_index: builtins.int = ...,
         finished: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["finished",b"finished","job_id",b"job_id","repetition",b"repetition","split_provider_index",b"split_provider_index"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["finished", b"finished", "iteration_id", b"iteration_id", "repetition", b"repetition", "split_provider_index", b"split_provider_index"]) -> None: ...
+
 global___ProduceSplitUpdate = ProduceSplitUpdate
 
-class AcquireJobClientUpdate(google.protobuf.message.Message):
+@typing_extensions.final
+class AcquireIterationClientUpdate(google.protobuf.message.Message):
     """Next tag: 3"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    JOB_ID_FIELD_NUMBER: builtins.int
-    JOB_CLIENT_ID_FIELD_NUMBER: builtins.int
-    job_id: builtins.int
-    job_client_id: builtins.int
-    def __init__(self,
-        *,
-        job_id: builtins.int = ...,
-        job_client_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_client_id",b"job_client_id","job_id",b"job_id"]) -> None: ...
-global___AcquireJobClientUpdate = AcquireJobClientUpdate
 
-class ReleaseJobClientUpdate(google.protobuf.message.Message):
-    """Next tag: 3"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    JOB_CLIENT_ID_FIELD_NUMBER: builtins.int
+
+    ITERATION_ID_FIELD_NUMBER: builtins.int
+    ITERATION_CLIENT_ID_FIELD_NUMBER: builtins.int
+    iteration_id: builtins.int
+    iteration_client_id: builtins.int
+    def __init__(
+        self,
+        *,
+        iteration_id: builtins.int = ...,
+        iteration_client_id: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_client_id", b"iteration_client_id", "iteration_id", b"iteration_id"]) -> None: ...
+
+global___AcquireIterationClientUpdate = AcquireIterationClientUpdate
+
+@typing_extensions.final
+class ReleaseIterationClientUpdate(google.protobuf.message.Message):
+    """Next tag: 3"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ITERATION_CLIENT_ID_FIELD_NUMBER: builtins.int
     TIME_MICROS_FIELD_NUMBER: builtins.int
-    job_client_id: builtins.int
+    iteration_client_id: builtins.int
     time_micros: builtins.int
     """The time when the client was released, measured in microseconds since the
     epoch.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        job_client_id: builtins.int = ...,
+        iteration_client_id: builtins.int = ...,
         time_micros: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_client_id",b"job_client_id","time_micros",b"time_micros"]) -> None: ...
-global___ReleaseJobClientUpdate = ReleaseJobClientUpdate
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_client_id", b"iteration_client_id", "time_micros", b"time_micros"]) -> None: ...
 
-class GarbageCollectJobUpdate(google.protobuf.message.Message):
+global___ReleaseIterationClientUpdate = ReleaseIterationClientUpdate
+
+@typing_extensions.final
+class GarbageCollectIterationUpdate(google.protobuf.message.Message):
     """Next tag: 2"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    JOB_ID_FIELD_NUMBER: builtins.int
-    job_id: builtins.int
-    def __init__(self,
-        *,
-        job_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id",b"job_id"]) -> None: ...
-global___GarbageCollectJobUpdate = GarbageCollectJobUpdate
 
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ITERATION_ID_FIELD_NUMBER: builtins.int
+    iteration_id: builtins.int
+    def __init__(
+        self,
+        *,
+        iteration_id: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_id", b"iteration_id"]) -> None: ...
+
+global___GarbageCollectIterationUpdate = GarbageCollectIterationUpdate
+
+@typing_extensions.final
 class RemoveTaskUpdate(google.protobuf.message.Message):
     """Next tag: 2"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TASK_ID_FIELD_NUMBER: builtins.int
     task_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         task_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id"]) -> None: ...
+
 global___RemoveTaskUpdate = RemoveTaskUpdate
 
+@typing_extensions.final
 class TaskRejected(google.protobuf.message.Message):
     """Indicates that a client failed to block before reaching the target round.
     Next tag: 2
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NEW_TARGET_ROUND_FIELD_NUMBER: builtins.int
     new_target_round: builtins.int
     """A new target round to try adding the task in."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         new_target_round: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["new_target_round",b"new_target_round"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["new_target_round", b"new_target_round"]) -> None: ...
+
 global___TaskRejected = TaskRejected
 
+@typing_extensions.final
 class ClientHeartbeatUpdate(google.protobuf.message.Message):
     """Updates dispatcher state based on a client heartbeat.
     Next tag: 4
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    JOB_CLIENT_ID_FIELD_NUMBER: builtins.int
+
+    ITERATION_CLIENT_ID_FIELD_NUMBER: builtins.int
     TASK_ACCEPTED_FIELD_NUMBER: builtins.int
     TASK_REJECTED_FIELD_NUMBER: builtins.int
-    job_client_id: builtins.int
+    iteration_client_id: builtins.int
     task_accepted: builtins.bool
     @property
     def task_rejected(self) -> global___TaskRejected: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        job_client_id: builtins.int = ...,
+        iteration_client_id: builtins.int = ...,
         task_accepted: builtins.bool = ...,
-        task_rejected: typing.Optional[global___TaskRejected] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["task_rejected",b"task_rejected"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_client_id",b"job_client_id","task_accepted",b"task_accepted","task_rejected",b"task_rejected"]) -> None: ...
+        task_rejected: global___TaskRejected | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["task_rejected", b"task_rejected"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_client_id", b"iteration_client_id", "task_accepted", b"task_accepted", "task_rejected", b"task_rejected"]) -> None: ...
+
 global___ClientHeartbeatUpdate = ClientHeartbeatUpdate
 
+@typing_extensions.final
 class CreatePendingTaskUpdate(google.protobuf.message.Message):
-    """Next tag: 6"""
+    """Next tag: 8"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TASK_ID_FIELD_NUMBER: builtins.int
-    JOB_ID_FIELD_NUMBER: builtins.int
+    ITERATION_ID_FIELD_NUMBER: builtins.int
     WORKER_ADDRESS_FIELD_NUMBER: builtins.int
     TRANSFER_ADDRESS_FIELD_NUMBER: builtins.int
+    WORKER_TAGS_FIELD_NUMBER: builtins.int
+    WORKER_UID_FIELD_NUMBER: builtins.int
     STARTING_ROUND_FIELD_NUMBER: builtins.int
     task_id: builtins.int
-    job_id: builtins.int
-    worker_address: typing.Text
-    transfer_address: typing.Text
+    iteration_id: builtins.int
+    worker_address: builtins.str
+    transfer_address: builtins.str
+    @property
+    def worker_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    worker_uid: builtins.int
     starting_round: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         task_id: builtins.int = ...,
-        job_id: builtins.int = ...,
-        worker_address: typing.Text = ...,
-        transfer_address: typing.Text = ...,
+        iteration_id: builtins.int = ...,
+        worker_address: builtins.str = ...,
+        transfer_address: builtins.str = ...,
+        worker_tags: collections.abc.Iterable[builtins.str] | None = ...,
+        worker_uid: builtins.int = ...,
         starting_round: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id",b"job_id","starting_round",b"starting_round","task_id",b"task_id","transfer_address",b"transfer_address","worker_address",b"worker_address"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_id", b"iteration_id", "starting_round", b"starting_round", "task_id", b"task_id", "transfer_address", b"transfer_address", "worker_address", b"worker_address", "worker_tags", b"worker_tags", "worker_uid", b"worker_uid"]) -> None: ...
+
 global___CreatePendingTaskUpdate = CreatePendingTaskUpdate
 
+@typing_extensions.final
 class CreateTaskUpdate(google.protobuf.message.Message):
-    """Next tag: 7"""
+    """Next tag: 9"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TASK_ID_FIELD_NUMBER: builtins.int
-    JOB_ID_FIELD_NUMBER: builtins.int
+    ITERATION_ID_FIELD_NUMBER: builtins.int
     WORKER_ADDRESS_FIELD_NUMBER: builtins.int
     TRANSFER_ADDRESS_FIELD_NUMBER: builtins.int
+    WORKER_TAGS_FIELD_NUMBER: builtins.int
+    WORKER_UID_FIELD_NUMBER: builtins.int
     task_id: builtins.int
-    job_id: builtins.int
-    worker_address: typing.Text
-    transfer_address: typing.Text
-    def __init__(self,
+    iteration_id: builtins.int
+    worker_address: builtins.str
+    transfer_address: builtins.str
+    @property
+    def worker_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    worker_uid: builtins.int
+    def __init__(
+        self,
         *,
         task_id: builtins.int = ...,
-        job_id: builtins.int = ...,
-        worker_address: typing.Text = ...,
-        transfer_address: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id",b"job_id","task_id",b"task_id","transfer_address",b"transfer_address","worker_address",b"worker_address"]) -> None: ...
+        iteration_id: builtins.int = ...,
+        worker_address: builtins.str = ...,
+        transfer_address: builtins.str = ...,
+        worker_tags: collections.abc.Iterable[builtins.str] | None = ...,
+        worker_uid: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["iteration_id", b"iteration_id", "task_id", b"task_id", "transfer_address", b"transfer_address", "worker_address", b"worker_address", "worker_tags", b"worker_tags", "worker_uid", b"worker_uid"]) -> None: ...
+
 global___CreateTaskUpdate = CreateTaskUpdate
 
+@typing_extensions.final
 class FinishTaskUpdate(google.protobuf.message.Message):
     """Next tag: 2"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TASK_ID_FIELD_NUMBER: builtins.int
     task_id: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         task_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id"]) -> None: ...
+
 global___FinishTaskUpdate = FinishTaskUpdate

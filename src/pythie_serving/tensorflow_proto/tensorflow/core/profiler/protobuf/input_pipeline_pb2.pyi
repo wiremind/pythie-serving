@@ -3,19 +3,27 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.profiler.protobuf.diagnostics_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class BottleneckAnalysis(google.protobuf.message.Message):
     """Generic hardware bottleneck."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     INPUT_PERCENT_FIELD_NUMBER: builtins.int
     OUTPUT_PERCENT_FIELD_NUMBER: builtins.int
     IDLE_PERCENT_FIELD_NUMBER: builtins.int
@@ -30,71 +38,64 @@ class BottleneckAnalysis(google.protobuf.message.Message):
     DEVICE_COLLECTIVES_STATEMENT_FIELD_NUMBER: builtins.int
     input_percent: builtins.float
     """Percentage of step time that is spent on input."""
-
     output_percent: builtins.float
     """Percentage of step time that is spent on output."""
-
     idle_percent: builtins.float
     """Percentage of step time that is idle for non-I/O-related reason."""
-
     compute_percent: builtins.float
     """Percentage of step time that is spent on compute."""
-
-    input_classification: typing.Text
+    input_classification: builtins.str
     """Indicates if input is a bottleneck. Possible values:  "host", "device",
     "both", or "unknown"
     """
-
-    input_statement: typing.Text
+    input_statement: builtins.str
     """A human-readable description of the input bottleneck."""
-
-    kernel_launch_classification: typing.Text
+    kernel_launch_classification: builtins.str
     """Indicates if kernel launching is a bottleneck. Possible values: "no",
     "moderate", "high".
     """
-
-    kernel_launch_statement: typing.Text
+    kernel_launch_statement: builtins.str
     """A human-readable description of the kernel launching overhead."""
-
-    all_other_classification: typing.Text
+    all_other_classification: builtins.str
     """Indicates if all other is a bottleneck. Possible values: "no", "moderate",
     "high".
     """
-
-    all_other_statement: typing.Text
+    all_other_statement: builtins.str
     """A human-readable description of the all other overhead."""
-
-    device_collectives_classification: typing.Text
+    device_collectives_classification: builtins.str
     """Indicates if device collective communication is a bottleneck. Possible
     values: "no", "moderate", "high".
     """
-
-    device_collectives_statement: typing.Text
+    device_collectives_statement: builtins.str
     """A human-readable description of the device collective communication
     overhead.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         input_percent: builtins.float = ...,
         output_percent: builtins.float = ...,
         idle_percent: builtins.float = ...,
         compute_percent: builtins.float = ...,
-        input_classification: typing.Text = ...,
-        input_statement: typing.Text = ...,
-        kernel_launch_classification: typing.Text = ...,
-        kernel_launch_statement: typing.Text = ...,
-        all_other_classification: typing.Text = ...,
-        all_other_statement: typing.Text = ...,
-        device_collectives_classification: typing.Text = ...,
-        device_collectives_statement: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["all_other_classification",b"all_other_classification","all_other_statement",b"all_other_statement","compute_percent",b"compute_percent","device_collectives_classification",b"device_collectives_classification","device_collectives_statement",b"device_collectives_statement","idle_percent",b"idle_percent","input_classification",b"input_classification","input_percent",b"input_percent","input_statement",b"input_statement","kernel_launch_classification",b"kernel_launch_classification","kernel_launch_statement",b"kernel_launch_statement","output_percent",b"output_percent"]) -> None: ...
+        input_classification: builtins.str = ...,
+        input_statement: builtins.str = ...,
+        kernel_launch_classification: builtins.str = ...,
+        kernel_launch_statement: builtins.str = ...,
+        all_other_classification: builtins.str = ...,
+        all_other_statement: builtins.str = ...,
+        device_collectives_classification: builtins.str = ...,
+        device_collectives_statement: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["all_other_classification", b"all_other_classification", "all_other_statement", b"all_other_statement", "compute_percent", b"compute_percent", "device_collectives_classification", b"device_collectives_classification", "device_collectives_statement", b"device_collectives_statement", "idle_percent", b"idle_percent", "input_classification", b"input_classification", "input_percent", b"input_percent", "input_statement", b"input_statement", "kernel_launch_classification", b"kernel_launch_classification", "kernel_launch_statement", b"kernel_launch_statement", "output_percent", b"output_percent"]) -> None: ...
+
 global___BottleneckAnalysis = BottleneckAnalysis
 
+@typing_extensions.final
 class StepSummary(google.protobuf.message.Message):
     """Used for both step duration and Op duration."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     AVERAGE_FIELD_NUMBER: builtins.int
     STANDARD_DEVIATION_FIELD_NUMBER: builtins.int
     MINIMUM_FIELD_NUMBER: builtins.int
@@ -103,19 +104,24 @@ class StepSummary(google.protobuf.message.Message):
     standard_deviation: builtins.float
     minimum: builtins.float
     maximum: builtins.float
-    def __init__(self,
+    def __init__(
+        self,
         *,
         average: builtins.float = ...,
         standard_deviation: builtins.float = ...,
         minimum: builtins.float = ...,
         maximum: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["average",b"average","maximum",b"maximum","minimum",b"minimum","standard_deviation",b"standard_deviation"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["average", b"average", "maximum", b"maximum", "minimum", b"minimum", "standard_deviation", b"standard_deviation"]) -> None: ...
+
 global___StepSummary = StepSummary
 
+@typing_extensions.final
 class PerGenericStepDetails(google.protobuf.message.Message):
     """Per-step details on generic hardware."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STEP_NUMBER_FIELD_NUMBER: builtins.int
     STEP_NAME_FIELD_NUMBER: builtins.int
     STEP_TIME_MS_FIELD_NUMBER: builtins.int
@@ -131,51 +137,39 @@ class PerGenericStepDetails(google.protobuf.message.Message):
     HOST_COMPILE_MS_FIELD_NUMBER: builtins.int
     step_number: builtins.int
     """The step number of a step."""
-
-    step_name: typing.Text
+    step_name: builtins.str
     """The step name."""
-
     step_time_ms: builtins.float
     """The step time (in ms)."""
-
     unknown_time_ms: builtins.float
     """Breakdown of the step time in different event categories.
     The unknown time (in ms).
     """
-
     host_wait_input_ms: builtins.float
     """The time (in ms) in which the host is waiting for input data to be ready."""
-
     host_to_device_ms: builtins.float
     """The time (in ms) in which the host is sending input data to the device.
     Total input time = host_wait_input_ms + host_to_device_ms.
     """
-
     output_ms: builtins.float
     """The output time (in ms)."""
-
     device_compute_ms: builtins.float
     """The device-compute time (in ms)."""
-
     device_to_device_ms: builtins.float
     """The device-to-device communication time (in ms)."""
-
     device_collectives_ms: builtins.float
     """The device time spent on collective communications (in ms)."""
-
     host_compute_ms: builtins.float
     """The host-compute time (in ms)."""
-
     host_prepare_ms: builtins.float
     """The host-prepare time (in ms)."""
-
     host_compile_ms: builtins.float
     """The time spent on compiling (in ms)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         step_number: builtins.int = ...,
-        step_name: typing.Text = ...,
+        step_name: builtins.str = ...,
         step_time_ms: builtins.float = ...,
         unknown_time_ms: builtins.float = ...,
         host_wait_input_ms: builtins.float = ...,
@@ -187,12 +181,15 @@ class PerGenericStepDetails(google.protobuf.message.Message):
         host_compute_ms: builtins.float = ...,
         host_prepare_ms: builtins.float = ...,
         host_compile_ms: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_collectives_ms",b"device_collectives_ms","device_compute_ms",b"device_compute_ms","device_to_device_ms",b"device_to_device_ms","host_compile_ms",b"host_compile_ms","host_compute_ms",b"host_compute_ms","host_prepare_ms",b"host_prepare_ms","host_to_device_ms",b"host_to_device_ms","host_wait_input_ms",b"host_wait_input_ms","output_ms",b"output_ms","step_name",b"step_name","step_number",b"step_number","step_time_ms",b"step_time_ms","unknown_time_ms",b"unknown_time_ms"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_collectives_ms", b"device_collectives_ms", "device_compute_ms", b"device_compute_ms", "device_to_device_ms", b"device_to_device_ms", "host_compile_ms", b"host_compile_ms", "host_compute_ms", b"host_compute_ms", "host_prepare_ms", b"host_prepare_ms", "host_to_device_ms", b"host_to_device_ms", "host_wait_input_ms", b"host_wait_input_ms", "output_ms", b"output_ms", "step_name", b"step_name", "step_number", b"step_number", "step_time_ms", b"step_time_ms", "unknown_time_ms", b"unknown_time_ms"]) -> None: ...
+
 global___PerGenericStepDetails = PerGenericStepDetails
 
+@typing_extensions.final
 class InputTimeBreakdown(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEMANDED_FILE_READ_US_FIELD_NUMBER: builtins.int
     ADVANCED_FILE_READ_US_FIELD_NUMBER: builtins.int
     PREPROCESSING_US_FIELD_NUMBER: builtins.int
@@ -200,35 +197,34 @@ class InputTimeBreakdown(google.protobuf.message.Message):
     UNCLASSIFIED_NON_ENQUEUE_US_FIELD_NUMBER: builtins.int
     demanded_file_read_us: builtins.float
     """Time spent on demanded file read in microseconds."""
-
     advanced_file_read_us: builtins.float
     """Time spent on advanced file read in microseconds."""
-
     preprocessing_us: builtins.float
     """Time spent on data preprocessing in microseconds."""
-
     enqueue_us: builtins.float
     """The infeed enqueue time in microseconds."""
-
     unclassified_non_enqueue_us: builtins.float
     """This entry is for the situtation where we can't further
     break down the non-enqueue input time (because the input pipeline
     is not instrumented).
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         demanded_file_read_us: builtins.float = ...,
         advanced_file_read_us: builtins.float = ...,
         preprocessing_us: builtins.float = ...,
         enqueue_us: builtins.float = ...,
         unclassified_non_enqueue_us: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["advanced_file_read_us",b"advanced_file_read_us","demanded_file_read_us",b"demanded_file_read_us","enqueue_us",b"enqueue_us","preprocessing_us",b"preprocessing_us","unclassified_non_enqueue_us",b"unclassified_non_enqueue_us"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["advanced_file_read_us", b"advanced_file_read_us", "demanded_file_read_us", b"demanded_file_read_us", "enqueue_us", b"enqueue_us", "preprocessing_us", b"preprocessing_us", "unclassified_non_enqueue_us", b"unclassified_non_enqueue_us"]) -> None: ...
+
 global___InputTimeBreakdown = InputTimeBreakdown
 
+@typing_extensions.final
 class InputOpDetails(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     OP_NAME_FIELD_NUMBER: builtins.int
     COUNT_FIELD_NUMBER: builtins.int
     TIME_IN_MS_FIELD_NUMBER: builtins.int
@@ -236,76 +232,74 @@ class InputOpDetails(google.protobuf.message.Message):
     SELF_TIME_IN_MS_FIELD_NUMBER: builtins.int
     SELF_TIME_IN_PERCENT_FIELD_NUMBER: builtins.int
     CATEGORY_FIELD_NUMBER: builtins.int
-    op_name: typing.Text
+    op_name: builtins.str
     """The Op's name."""
-
     count: builtins.int
     """The number of occurrences."""
-
     time_in_ms: builtins.float
     """Time (accumulated over all occurrences) in milliseconds."""
-
     time_in_percent: builtins.float
     """Time (accumulated over all occurrences) in
     percentage of the total input processing time.
     """
-
     self_time_in_ms: builtins.float
     """Self time (accumulated over all occurrences) in milliseconds."""
-
     self_time_in_percent: builtins.float
     """Self time (accumulated over all occurrences) in
     percentage of the total input processing time.
     """
-
-    category: typing.Text
+    category: builtins.str
     """Possible categories: "Enqueue", "Advanced file read",
     "Demanded file read", "Preprocessing", "Unknown".
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        op_name: typing.Text = ...,
+        op_name: builtins.str = ...,
         count: builtins.int = ...,
         time_in_ms: builtins.float = ...,
         time_in_percent: builtins.float = ...,
         self_time_in_ms: builtins.float = ...,
         self_time_in_percent: builtins.float = ...,
-        category: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["category",b"category","count",b"count","op_name",b"op_name","self_time_in_ms",b"self_time_in_ms","self_time_in_percent",b"self_time_in_percent","time_in_ms",b"time_in_ms","time_in_percent",b"time_in_percent"]) -> None: ...
+        category: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["category", b"category", "count", b"count", "op_name", b"op_name", "self_time_in_ms", b"self_time_in_ms", "self_time_in_percent", b"self_time_in_percent", "time_in_ms", b"time_in_ms", "time_in_percent", b"time_in_percent"]) -> None: ...
+
 global___InputOpDetails = InputOpDetails
 
+@typing_extensions.final
 class InputPipelineAnalysisRecommendation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DETAILS_FIELD_NUMBER: builtins.int
     BOTTLENECK_ANALYSIS_FIELD_NUMBER: builtins.int
     SUMMARY_NEXT_STEP_FIELD_NUMBER: builtins.int
     @property
-    def details(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def details(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """A list of detailed recommendations."""
-        pass
     @property
     def bottleneck_analysis(self) -> google.protobuf.any_pb2.Any:
         """An analysis of different types of bottlenecks. Can be unpacked into a
         BottleneckAnalysis.
         """
-        pass
-    summary_next_step: typing.Text
+    summary_next_step: builtins.str
     """A suggested step to take next."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        details: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        bottleneck_analysis: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-        summary_next_step: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bottleneck_analysis",b"bottleneck_analysis"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bottleneck_analysis",b"bottleneck_analysis","details",b"details","summary_next_step",b"summary_next_step"]) -> None: ...
+        details: collections.abc.Iterable[builtins.str] | None = ...,
+        bottleneck_analysis: google.protobuf.any_pb2.Any | None = ...,
+        summary_next_step: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bottleneck_analysis", b"bottleneck_analysis"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bottleneck_analysis", b"bottleneck_analysis", "details", b"details", "summary_next_step", b"summary_next_step"]) -> None: ...
+
 global___InputPipelineAnalysisRecommendation = InputPipelineAnalysisRecommendation
 
+@typing_extensions.final
 class GenericStepTimeBreakdown(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     UNKNOWN_TIME_MS_SUMMARY_FIELD_NUMBER: builtins.int
     HOST_WAIT_INPUT_MS_SUMMARY_FIELD_NUMBER: builtins.int
     HOST_TO_DEVICE_MS_SUMMARY_FIELD_NUMBER: builtins.int
@@ -320,67 +314,60 @@ class GenericStepTimeBreakdown(google.protobuf.message.Message):
     @property
     def unknown_time_ms_summary(self) -> global___StepSummary:
         """Summary of all unknown time as a part of step in ms."""
-        pass
     @property
     def host_wait_input_ms_summary(self) -> global___StepSummary:
         """Summary of all host-wait-input time as a part of step in ms."""
-        pass
     @property
     def host_to_device_ms_summary(self) -> global___StepSummary:
         """Summary of all host-to-device time as a part of step in ms."""
-        pass
     @property
     def input_ms_summary(self) -> global___StepSummary:
         """Summary of all input time as a part of step in ms."""
-        pass
     @property
     def output_ms_summary(self) -> global___StepSummary:
         """Summary of all output time as a part of step in ms."""
-        pass
     @property
     def device_compute_ms_summary(self) -> global___StepSummary:
         """Summary of all device-compute time as a part of step in ms."""
-        pass
     @property
     def device_to_device_ms_summary(self) -> global___StepSummary:
         """Summary of all device-to-device time as a part of step in ms."""
-        pass
     @property
     def device_collectives_ms_summary(self) -> global___StepSummary:
         """Summary of all device-collectives time as a part of step in ms."""
-        pass
     @property
     def host_compute_ms_summary(self) -> global___StepSummary:
         """Summary of all host-compute time as a part of step in ms."""
-        pass
     @property
     def host_prepare_ms_summary(self) -> global___StepSummary:
         """Summary of all host-prepare time as a part of step in ms."""
-        pass
     @property
     def host_compile_ms_summary(self) -> global___StepSummary:
         """Summary of all compilation time as a part of step in ms."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        unknown_time_ms_summary: typing.Optional[global___StepSummary] = ...,
-        host_wait_input_ms_summary: typing.Optional[global___StepSummary] = ...,
-        host_to_device_ms_summary: typing.Optional[global___StepSummary] = ...,
-        input_ms_summary: typing.Optional[global___StepSummary] = ...,
-        output_ms_summary: typing.Optional[global___StepSummary] = ...,
-        device_compute_ms_summary: typing.Optional[global___StepSummary] = ...,
-        device_to_device_ms_summary: typing.Optional[global___StepSummary] = ...,
-        device_collectives_ms_summary: typing.Optional[global___StepSummary] = ...,
-        host_compute_ms_summary: typing.Optional[global___StepSummary] = ...,
-        host_prepare_ms_summary: typing.Optional[global___StepSummary] = ...,
-        host_compile_ms_summary: typing.Optional[global___StepSummary] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["device_collectives_ms_summary",b"device_collectives_ms_summary","device_compute_ms_summary",b"device_compute_ms_summary","device_to_device_ms_summary",b"device_to_device_ms_summary","host_compile_ms_summary",b"host_compile_ms_summary","host_compute_ms_summary",b"host_compute_ms_summary","host_prepare_ms_summary",b"host_prepare_ms_summary","host_to_device_ms_summary",b"host_to_device_ms_summary","host_wait_input_ms_summary",b"host_wait_input_ms_summary","input_ms_summary",b"input_ms_summary","output_ms_summary",b"output_ms_summary","unknown_time_ms_summary",b"unknown_time_ms_summary"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_collectives_ms_summary",b"device_collectives_ms_summary","device_compute_ms_summary",b"device_compute_ms_summary","device_to_device_ms_summary",b"device_to_device_ms_summary","host_compile_ms_summary",b"host_compile_ms_summary","host_compute_ms_summary",b"host_compute_ms_summary","host_prepare_ms_summary",b"host_prepare_ms_summary","host_to_device_ms_summary",b"host_to_device_ms_summary","host_wait_input_ms_summary",b"host_wait_input_ms_summary","input_ms_summary",b"input_ms_summary","output_ms_summary",b"output_ms_summary","unknown_time_ms_summary",b"unknown_time_ms_summary"]) -> None: ...
+        unknown_time_ms_summary: global___StepSummary | None = ...,
+        host_wait_input_ms_summary: global___StepSummary | None = ...,
+        host_to_device_ms_summary: global___StepSummary | None = ...,
+        input_ms_summary: global___StepSummary | None = ...,
+        output_ms_summary: global___StepSummary | None = ...,
+        device_compute_ms_summary: global___StepSummary | None = ...,
+        device_to_device_ms_summary: global___StepSummary | None = ...,
+        device_collectives_ms_summary: global___StepSummary | None = ...,
+        host_compute_ms_summary: global___StepSummary | None = ...,
+        host_prepare_ms_summary: global___StepSummary | None = ...,
+        host_compile_ms_summary: global___StepSummary | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["device_collectives_ms_summary", b"device_collectives_ms_summary", "device_compute_ms_summary", b"device_compute_ms_summary", "device_to_device_ms_summary", b"device_to_device_ms_summary", "host_compile_ms_summary", b"host_compile_ms_summary", "host_compute_ms_summary", b"host_compute_ms_summary", "host_prepare_ms_summary", b"host_prepare_ms_summary", "host_to_device_ms_summary", b"host_to_device_ms_summary", "host_wait_input_ms_summary", b"host_wait_input_ms_summary", "input_ms_summary", b"input_ms_summary", "output_ms_summary", b"output_ms_summary", "unknown_time_ms_summary", b"unknown_time_ms_summary"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_collectives_ms_summary", b"device_collectives_ms_summary", "device_compute_ms_summary", b"device_compute_ms_summary", "device_to_device_ms_summary", b"device_to_device_ms_summary", "host_compile_ms_summary", b"host_compile_ms_summary", "host_compute_ms_summary", b"host_compute_ms_summary", "host_prepare_ms_summary", b"host_prepare_ms_summary", "host_to_device_ms_summary", b"host_to_device_ms_summary", "host_wait_input_ms_summary", b"host_wait_input_ms_summary", "input_ms_summary", b"input_ms_summary", "output_ms_summary", b"output_ms_summary", "unknown_time_ms_summary", b"unknown_time_ms_summary"]) -> None: ...
+
 global___GenericStepTimeBreakdown = GenericStepTimeBreakdown
 
+@typing_extensions.final
 class InputPipelineAnalysisResult(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     HARDWARE_TYPE_FIELD_NUMBER: builtins.int
     STEP_TIME_SUMMARY_FIELD_NUMBER: builtins.int
     INPUT_PERCENT_SUMMARY_FIELD_NUMBER: builtins.int
@@ -394,71 +381,60 @@ class InputPipelineAnalysisResult(google.protobuf.message.Message):
     RECOMMENDATION_FIELD_NUMBER: builtins.int
     STEP_TIME_BREAKDOWN_FIELD_NUMBER: builtins.int
     DIAGNOSTICS_FIELD_NUMBER: builtins.int
-    hardware_type: typing.Text
+    hardware_type: builtins.str
     """Hardware type."""
-
     @property
     def step_time_summary(self) -> global___StepSummary:
         """Summary of all step duration across all cores."""
-        pass
     @property
     def input_percent_summary(self) -> global___StepSummary:
         """Summary of all input-related stall as percentage of step duration."""
-        pass
     input_percent: builtins.float
     """Percentage of step time that is waiting for input."""
-
     output_percent: builtins.float
     """Percentage of step time that is doing output."""
-
     idle_percent: builtins.float
     """Percentage of step time that is idle for non-I/O-related reason."""
-
     compute_percent: builtins.float
     """Percentage of step time that is doing compute."""
-
     @property
     def step_details(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.any_pb2.Any]:
         """Details of each step. Can be unpacked into a PerGenericStepDetails."""
-        pass
     @property
     def input_time_breakdown(self) -> global___InputTimeBreakdown:
         """The breakdown of the input processing time."""
-        pass
     @property
     def input_op_details(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InputOpDetails]:
         """Details of each input Op executed."""
-        pass
     @property
     def recommendation(self) -> global___InputPipelineAnalysisRecommendation:
         """Recommendation for next steps to users."""
-        pass
     @property
     def step_time_breakdown(self) -> google.protobuf.any_pb2.Any:
         """Breakdown of the step time. Can be unpacked into a
         GenericStepTimeBreakdown.
         """
-        pass
     @property
     def diagnostics(self) -> tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics:
         """Error and warning messages for diagnosing profiling issues."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        hardware_type: typing.Text = ...,
-        step_time_summary: typing.Optional[global___StepSummary] = ...,
-        input_percent_summary: typing.Optional[global___StepSummary] = ...,
+        hardware_type: builtins.str = ...,
+        step_time_summary: global___StepSummary | None = ...,
+        input_percent_summary: global___StepSummary | None = ...,
         input_percent: builtins.float = ...,
         output_percent: builtins.float = ...,
         idle_percent: builtins.float = ...,
         compute_percent: builtins.float = ...,
-        step_details: typing.Optional[typing.Iterable[google.protobuf.any_pb2.Any]] = ...,
-        input_time_breakdown: typing.Optional[global___InputTimeBreakdown] = ...,
-        input_op_details: typing.Optional[typing.Iterable[global___InputOpDetails]] = ...,
-        recommendation: typing.Optional[global___InputPipelineAnalysisRecommendation] = ...,
-        step_time_breakdown: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-        diagnostics: typing.Optional[tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["diagnostics",b"diagnostics","input_percent_summary",b"input_percent_summary","input_time_breakdown",b"input_time_breakdown","recommendation",b"recommendation","step_time_breakdown",b"step_time_breakdown","step_time_summary",b"step_time_summary"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_percent",b"compute_percent","diagnostics",b"diagnostics","hardware_type",b"hardware_type","idle_percent",b"idle_percent","input_op_details",b"input_op_details","input_percent",b"input_percent","input_percent_summary",b"input_percent_summary","input_time_breakdown",b"input_time_breakdown","output_percent",b"output_percent","recommendation",b"recommendation","step_details",b"step_details","step_time_breakdown",b"step_time_breakdown","step_time_summary",b"step_time_summary"]) -> None: ...
+        step_details: collections.abc.Iterable[google.protobuf.any_pb2.Any] | None = ...,
+        input_time_breakdown: global___InputTimeBreakdown | None = ...,
+        input_op_details: collections.abc.Iterable[global___InputOpDetails] | None = ...,
+        recommendation: global___InputPipelineAnalysisRecommendation | None = ...,
+        step_time_breakdown: google.protobuf.any_pb2.Any | None = ...,
+        diagnostics: tensorflow.core.profiler.protobuf.diagnostics_pb2.Diagnostics | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["diagnostics", b"diagnostics", "input_percent_summary", b"input_percent_summary", "input_time_breakdown", b"input_time_breakdown", "recommendation", b"recommendation", "step_time_breakdown", b"step_time_breakdown", "step_time_summary", b"step_time_summary"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_percent", b"compute_percent", "diagnostics", b"diagnostics", "hardware_type", b"hardware_type", "idle_percent", b"idle_percent", "input_op_details", b"input_op_details", "input_percent", b"input_percent", "input_percent_summary", b"input_percent_summary", "input_time_breakdown", b"input_time_breakdown", "output_percent", b"output_percent", "recommendation", b"recommendation", "step_details", b"step_details", "step_time_breakdown", b"step_time_breakdown", "step_time_summary", b"step_time_summary"]) -> None: ...
+
 global___InputPipelineAnalysisResult = InputPipelineAnalysisResult

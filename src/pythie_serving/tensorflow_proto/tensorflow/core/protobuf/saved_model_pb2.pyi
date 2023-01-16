@@ -3,20 +3,28 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.protobuf.meta_graph_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class SavedModel(google.protobuf.message.Message):
     """SavedModel is the high level serialization format for TensorFlow Models.
     See [todo: doc links, similar to session_bundle] for more information.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SAVED_MODEL_SCHEMA_VERSION_FIELD_NUMBER: builtins.int
     META_GRAPHS_FIELD_NUMBER: builtins.int
     saved_model_schema_version: builtins.int
@@ -24,15 +32,15 @@ class SavedModel(google.protobuf.message.Message):
     making future changes to the specification/implementation. Initial value
     at release will be 1.
     """
-
     @property
     def meta_graphs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.protobuf.meta_graph_pb2.MetaGraphDef]:
         """One or more MetaGraphs."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         saved_model_schema_version: builtins.int = ...,
-        meta_graphs: typing.Optional[typing.Iterable[tensorflow.core.protobuf.meta_graph_pb2.MetaGraphDef]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["meta_graphs",b"meta_graphs","saved_model_schema_version",b"saved_model_schema_version"]) -> None: ...
+        meta_graphs: collections.abc.Iterable[tensorflow.core.protobuf.meta_graph_pb2.MetaGraphDef] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["meta_graphs", b"meta_graphs", "saved_model_schema_version", b"saved_model_schema_version"]) -> None: ...
+
 global___SavedModel = SavedModel

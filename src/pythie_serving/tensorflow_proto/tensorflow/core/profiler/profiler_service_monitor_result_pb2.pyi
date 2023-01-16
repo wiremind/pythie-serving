@@ -6,27 +6,32 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ProfilerServiceMonitorResult(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _ResponseType:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _ResponseTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ProfilerServiceMonitorResult._ResponseType.ValueType], builtins.type):
+
+    class _ResponseTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ProfilerServiceMonitorResult._ResponseType.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         EMPTY_RESULT: ProfilerServiceMonitorResult._ResponseType.ValueType  # 0
         """No result is returned from the profiling service."""
-
         UTIL_ONLY: ProfilerServiceMonitorResult._ResponseType.ValueType  # 1
         """Only device utilization is available."""
-
         UTIL_IDLE: ProfilerServiceMonitorResult._ResponseType.ValueType  # 2
         """Both device utilization and device idle time are available."""
-
         UTIL_IDLE_STEP: ProfilerServiceMonitorResult._ResponseType.ValueType  # 3
         """Device utilization, device idle time, step time, and infeed percentage
         are all available.
@@ -34,22 +39,17 @@ class ProfilerServiceMonitorResult(google.protobuf.message.Message):
 
     class ResponseType(_ResponseType, metaclass=_ResponseTypeEnumTypeWrapper):
         """Represents the different types of responses from the profiling service."""
-        pass
 
     EMPTY_RESULT: ProfilerServiceMonitorResult.ResponseType.ValueType  # 0
     """No result is returned from the profiling service."""
-
     UTIL_ONLY: ProfilerServiceMonitorResult.ResponseType.ValueType  # 1
     """Only device utilization is available."""
-
     UTIL_IDLE: ProfilerServiceMonitorResult.ResponseType.ValueType  # 2
     """Both device utilization and device idle time are available."""
-
     UTIL_IDLE_STEP: ProfilerServiceMonitorResult.ResponseType.ValueType  # 3
     """Device utilization, device idle time, step time, and infeed percentage
     are all available.
     """
-
 
     RESPONSE_TYPE_FIELD_NUMBER: builtins.int
     DEVICE_IDLE_TIME_PERCENT_FIELD_NUMBER: builtins.int
@@ -62,32 +62,24 @@ class ProfilerServiceMonitorResult(google.protobuf.message.Message):
     INFEED_PERCENT_MAX_FIELD_NUMBER: builtins.int
     response_type: global___ProfilerServiceMonitorResult.ResponseType.ValueType
     """Type of profiling responses."""
-
     device_idle_time_percent: builtins.float
     """Percentage of time when device is idle."""
-
     matrix_unit_utilization_percent: builtins.float
     """TPU matrix unit utilization percentage."""
-
     step_time_ms_avg: builtins.float
     """Average step time in millisecond."""
-
     step_time_ms_min: builtins.float
     """Minimum step time in millisecond."""
-
     step_time_ms_max: builtins.float
     """Maximum step time in millisecond."""
-
     infeed_percent_avg: builtins.float
     """Average infeed percentage."""
-
     infeed_percent_min: builtins.float
     """Minimum infeed percentage."""
-
     infeed_percent_max: builtins.float
     """Maximum infeed percentage."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         response_type: global___ProfilerServiceMonitorResult.ResponseType.ValueType = ...,
         device_idle_time_percent: builtins.float = ...,
@@ -98,6 +90,7 @@ class ProfilerServiceMonitorResult(google.protobuf.message.Message):
         infeed_percent_avg: builtins.float = ...,
         infeed_percent_min: builtins.float = ...,
         infeed_percent_max: builtins.float = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_idle_time_percent",b"device_idle_time_percent","infeed_percent_avg",b"infeed_percent_avg","infeed_percent_max",b"infeed_percent_max","infeed_percent_min",b"infeed_percent_min","matrix_unit_utilization_percent",b"matrix_unit_utilization_percent","response_type",b"response_type","step_time_ms_avg",b"step_time_ms_avg","step_time_ms_max",b"step_time_ms_max","step_time_ms_min",b"step_time_ms_min"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_idle_time_percent", b"device_idle_time_percent", "infeed_percent_avg", b"infeed_percent_avg", "infeed_percent_max", b"infeed_percent_max", "infeed_percent_min", b"infeed_percent_min", "matrix_unit_utilization_percent", b"matrix_unit_utilization_percent", "response_type", b"response_type", "step_time_ms_avg", b"step_time_ms_avg", "step_time_ms_max", b"step_time_ms_max", "step_time_ms_min", b"step_time_ms_min"]) -> None: ...
+
 global___ProfilerServiceMonitorResult = ProfilerServiceMonitorResult

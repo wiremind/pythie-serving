@@ -3,19 +3,27 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class OptionsProto(google.protobuf.message.Message):
     """Refers to tfprof_options.h/cc for documentation.
     Only used to pass tfprof options from Python to C++.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     MAX_DEPTH_FIELD_NUMBER: builtins.int
     MIN_BYTES_FIELD_NUMBER: builtins.int
     MIN_PEAK_BYTES_FIELD_NUMBER: builtins.int
@@ -50,23 +58,24 @@ class OptionsProto(google.protobuf.message.Message):
     min_float_ops: builtins.int
     min_occurrence: builtins.int
     step: builtins.int
-    order_by: typing.Text
+    order_by: builtins.str
     @property
-    def account_type_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def account_type_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def start_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def start_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def trim_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def trim_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def show_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def show_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def hide_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def hide_name_regexes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     account_displayed_op_only: builtins.bool
     @property
-    def select(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    output: typing.Text
-    dump_to_file: typing.Text
-    def __init__(self,
+    def select(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    output: builtins.str
+    dump_to_file: builtins.str
+    def __init__(
+        self,
         *,
         max_depth: builtins.int = ...,
         min_bytes: builtins.int = ...,
@@ -80,69 +89,82 @@ class OptionsProto(google.protobuf.message.Message):
         min_float_ops: builtins.int = ...,
         min_occurrence: builtins.int = ...,
         step: builtins.int = ...,
-        order_by: typing.Text = ...,
-        account_type_regexes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        start_name_regexes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        trim_name_regexes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        show_name_regexes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        hide_name_regexes: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        order_by: builtins.str = ...,
+        account_type_regexes: collections.abc.Iterable[builtins.str] | None = ...,
+        start_name_regexes: collections.abc.Iterable[builtins.str] | None = ...,
+        trim_name_regexes: collections.abc.Iterable[builtins.str] | None = ...,
+        show_name_regexes: collections.abc.Iterable[builtins.str] | None = ...,
+        hide_name_regexes: collections.abc.Iterable[builtins.str] | None = ...,
         account_displayed_op_only: builtins.bool = ...,
-        select: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        output: typing.Text = ...,
-        dump_to_file: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_displayed_op_only",b"account_displayed_op_only","account_type_regexes",b"account_type_regexes","dump_to_file",b"dump_to_file","hide_name_regexes",b"hide_name_regexes","max_depth",b"max_depth","min_accelerator_micros",b"min_accelerator_micros","min_bytes",b"min_bytes","min_cpu_micros",b"min_cpu_micros","min_float_ops",b"min_float_ops","min_micros",b"min_micros","min_occurrence",b"min_occurrence","min_output_bytes",b"min_output_bytes","min_params",b"min_params","min_peak_bytes",b"min_peak_bytes","min_residual_bytes",b"min_residual_bytes","order_by",b"order_by","output",b"output","select",b"select","show_name_regexes",b"show_name_regexes","start_name_regexes",b"start_name_regexes","step",b"step","trim_name_regexes",b"trim_name_regexes"]) -> None: ...
+        select: collections.abc.Iterable[builtins.str] | None = ...,
+        output: builtins.str = ...,
+        dump_to_file: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_displayed_op_only", b"account_displayed_op_only", "account_type_regexes", b"account_type_regexes", "dump_to_file", b"dump_to_file", "hide_name_regexes", b"hide_name_regexes", "max_depth", b"max_depth", "min_accelerator_micros", b"min_accelerator_micros", "min_bytes", b"min_bytes", "min_cpu_micros", b"min_cpu_micros", "min_float_ops", b"min_float_ops", "min_micros", b"min_micros", "min_occurrence", b"min_occurrence", "min_output_bytes", b"min_output_bytes", "min_params", b"min_params", "min_peak_bytes", b"min_peak_bytes", "min_residual_bytes", b"min_residual_bytes", "order_by", b"order_by", "output", b"output", "select", b"select", "show_name_regexes", b"show_name_regexes", "start_name_regexes", b"start_name_regexes", "step", b"step", "trim_name_regexes", b"trim_name_regexes"]) -> None: ...
+
 global___OptionsProto = OptionsProto
 
+@typing_extensions.final
 class AdvisorOptionsProto(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class CheckersEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___AdvisorOptionsProto.CheckerOption: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___AdvisorOptionsProto.CheckerOption] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___AdvisorOptionsProto.CheckerOption | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class CheckerOption(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class OptionsEntry(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             KEY_FIELD_NUMBER: builtins.int
             VALUE_FIELD_NUMBER: builtins.int
-            key: typing.Text
-            value: typing.Text
-            def __init__(self,
+            key: builtins.str
+            value: builtins.str
+            def __init__(
+                self,
                 *,
-                key: typing.Text = ...,
-                value: typing.Text = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+                key: builtins.str = ...,
+                value: builtins.str = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
         OPTIONS_FIELD_NUMBER: builtins.int
         @property
-        def options(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]: ...
-        def __init__(self,
+        def options(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]: ...
+        def __init__(
+            self,
             *,
-            options: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["options",b"options"]) -> None: ...
+            options: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["options", b"options"]) -> None: ...
 
     CHECKERS_FIELD_NUMBER: builtins.int
     @property
-    def checkers(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___AdvisorOptionsProto.CheckerOption]:
+    def checkers(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___AdvisorOptionsProto.CheckerOption]:
         """checker name -> a dict of key-value options."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        checkers: typing.Optional[typing.Mapping[typing.Text, global___AdvisorOptionsProto.CheckerOption]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["checkers",b"checkers"]) -> None: ...
+        checkers: collections.abc.Mapping[builtins.str, global___AdvisorOptionsProto.CheckerOption] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["checkers", b"checkers"]) -> None: ...
+
 global___AdvisorOptionsProto = AdvisorOptionsProto

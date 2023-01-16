@@ -3,20 +3,27 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.tensor_pb2
 import tensorflow.core.protobuf.graph_debug_info_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _TensorDebugMode:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _TensorDebugModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TensorDebugMode.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     UNSPECIFIED: _TensorDebugMode.ValueType  # 0
@@ -24,21 +31,18 @@ class _TensorDebugModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """Only records what tensors are computed, eagerly or in graphs.
     No information regarding the value of the tensor is available.
     """
-
     CURT_HEALTH: _TensorDebugMode.ValueType  # 2
     """A minimalist health summary for float-type tensors.
     Contains information only about the presence/absence of pathological
     values including Infinity and NaN.
     Applicable only to float dtypes.
     """
-
     CONCISE_HEALTH: _TensorDebugMode.ValueType  # 3
     """A concise health summary for float-type tensors.
     Contains more information that CURT_HEALTH.
     Infinity and NaN are treated differently.
     Applicable only to float and integer dtypes.
     """
-
     FULL_HEALTH: _TensorDebugMode.ValueType  # 4
     """A detailed health summary.
     Contains further detailed information than `CONCISE_HEALTH`.
@@ -47,12 +51,10 @@ class _TensorDebugModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     positive) are included.
     Applicable to float, integer and boolean dtypes.
     """
-
     SHAPE: _TensorDebugMode.ValueType  # 5
     """Provides full runtime shape information, up to a maximum rank, beyond
     which the dimension sizes are truncated.
     """
-
     FULL_NUMERICS: _TensorDebugMode.ValueType  # 6
     """Full numeric summary.
     Including device, dtype, shape, counts of various types of values
@@ -60,10 +62,8 @@ class _TensorDebugModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     (minimum, maximum, mean and variance).
     Applicable to float, integer and boolean dtypes.
     """
-
     FULL_TENSOR: _TensorDebugMode.ValueType  # 7
     """Full tensor value."""
-
     REDUCE_INF_NAN_THREE_SLOTS: _TensorDebugMode.ValueType  # 8
     """Reduce the elements of a tensor to a rank-1 tensor of shape [3], in which
     - the 1st element is -inf if any element of the tensor is -inf,
@@ -79,28 +79,24 @@ class TensorDebugMode(_TensorDebugMode, metaclass=_TensorDebugModeEnumTypeWrappe
     TODO(cais): Document the detailed column names and semantics in a separate
     markdown file once the implementation settles.
     """
-    pass
 
 UNSPECIFIED: TensorDebugMode.ValueType  # 0
 NO_TENSOR: TensorDebugMode.ValueType  # 1
 """Only records what tensors are computed, eagerly or in graphs.
 No information regarding the value of the tensor is available.
 """
-
 CURT_HEALTH: TensorDebugMode.ValueType  # 2
 """A minimalist health summary for float-type tensors.
 Contains information only about the presence/absence of pathological
 values including Infinity and NaN.
 Applicable only to float dtypes.
 """
-
 CONCISE_HEALTH: TensorDebugMode.ValueType  # 3
 """A concise health summary for float-type tensors.
 Contains more information that CURT_HEALTH.
 Infinity and NaN are treated differently.
 Applicable only to float and integer dtypes.
 """
-
 FULL_HEALTH: TensorDebugMode.ValueType  # 4
 """A detailed health summary.
 Contains further detailed information than `CONCISE_HEALTH`.
@@ -109,12 +105,10 @@ Counts for various types of values (Infinity, NaN, negative, zero,
 positive) are included.
 Applicable to float, integer and boolean dtypes.
 """
-
 SHAPE: TensorDebugMode.ValueType  # 5
 """Provides full runtime shape information, up to a maximum rank, beyond
 which the dimension sizes are truncated.
 """
-
 FULL_NUMERICS: TensorDebugMode.ValueType  # 6
 """Full numeric summary.
 Including device, dtype, shape, counts of various types of values
@@ -122,10 +116,8 @@ Including device, dtype, shape, counts of various types of values
 (minimum, maximum, mean and variance).
 Applicable to float, integer and boolean dtypes.
 """
-
 FULL_TENSOR: TensorDebugMode.ValueType  # 7
 """Full tensor value."""
-
 REDUCE_INF_NAN_THREE_SLOTS: TensorDebugMode.ValueType  # 8
 """Reduce the elements of a tensor to a rank-1 tensor of shape [3], in which
 - the 1st element is -inf if any element of the tensor is -inf,
@@ -135,13 +127,14 @@ REDUCE_INF_NAN_THREE_SLOTS: TensorDebugMode.ValueType  # 8
 - the 3rd element is nan if any element of the tensor is nan, or zero
   otherwise.
 """
-
 global___TensorDebugMode = TensorDebugMode
 
-
+@typing_extensions.final
 class DebugEvent(google.protobuf.message.Message):
     """An Event related to the debugging of a TensorFlow program."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     WALL_TIME_FIELD_NUMBER: builtins.int
     STEP_FIELD_NUMBER: builtins.int
     DEBUG_METADATA_FIELD_NUMBER: builtins.int
@@ -155,182 +148,186 @@ class DebugEvent(google.protobuf.message.Message):
     DEBUGGED_DEVICE_FIELD_NUMBER: builtins.int
     wall_time: builtins.float
     """Timestamp in seconds (with microsecond precision)."""
-
     step: builtins.int
     """Step of training (if available)."""
-
     @property
     def debug_metadata(self) -> global___DebugMetadata:
         """Metadata related to this debugging data."""
-        pass
     @property
     def source_file(self) -> global___SourceFile:
         """The content of a source file."""
-        pass
     @property
     def stack_frame_with_id(self) -> global___StackFrameWithId:
         """A stack frame (filename, line number and column number, function name and
         code string) with ID.
         """
-        pass
     @property
     def graph_op_creation(self) -> global___GraphOpCreation:
         """The creation of an op within a graph (e.g., a FuncGraph compiled from
         a Python function).
         """
-        pass
     @property
     def debugged_graph(self) -> global___DebuggedGraph:
         """Information about a debugged graph."""
-        pass
     @property
     def execution(self) -> global___Execution:
         """Execution of an op or a Graph (e.g., a tf.function)."""
-        pass
     @property
     def graph_execution_trace(self) -> global___GraphExecutionTrace:
         """A graph execution trace: Contains information about the intermediate
         tensors computed during the graph execution.
         """
-        pass
-    graph_id: typing.Text
+    graph_id: builtins.str
     """The ID of the graph (i.e., FuncGraph) executed here: applicable only
     to the execution of a FuncGraph.
     """
-
     @property
     def debugged_device(self) -> global___DebuggedDevice:
         """A device on which debugger-instrumented ops and/or tensors reside."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         wall_time: builtins.float = ...,
         step: builtins.int = ...,
-        debug_metadata: typing.Optional[global___DebugMetadata] = ...,
-        source_file: typing.Optional[global___SourceFile] = ...,
-        stack_frame_with_id: typing.Optional[global___StackFrameWithId] = ...,
-        graph_op_creation: typing.Optional[global___GraphOpCreation] = ...,
-        debugged_graph: typing.Optional[global___DebuggedGraph] = ...,
-        execution: typing.Optional[global___Execution] = ...,
-        graph_execution_trace: typing.Optional[global___GraphExecutionTrace] = ...,
-        graph_id: typing.Text = ...,
-        debugged_device: typing.Optional[global___DebuggedDevice] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["debug_metadata",b"debug_metadata","debugged_device",b"debugged_device","debugged_graph",b"debugged_graph","execution",b"execution","graph_execution_trace",b"graph_execution_trace","graph_id",b"graph_id","graph_op_creation",b"graph_op_creation","source_file",b"source_file","stack_frame_with_id",b"stack_frame_with_id","what",b"what"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["debug_metadata",b"debug_metadata","debugged_device",b"debugged_device","debugged_graph",b"debugged_graph","execution",b"execution","graph_execution_trace",b"graph_execution_trace","graph_id",b"graph_id","graph_op_creation",b"graph_op_creation","source_file",b"source_file","stack_frame_with_id",b"stack_frame_with_id","step",b"step","wall_time",b"wall_time","what",b"what"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["what",b"what"]) -> typing.Optional[typing_extensions.Literal["debug_metadata","source_file","stack_frame_with_id","graph_op_creation","debugged_graph","execution","graph_execution_trace","graph_id","debugged_device"]]: ...
+        debug_metadata: global___DebugMetadata | None = ...,
+        source_file: global___SourceFile | None = ...,
+        stack_frame_with_id: global___StackFrameWithId | None = ...,
+        graph_op_creation: global___GraphOpCreation | None = ...,
+        debugged_graph: global___DebuggedGraph | None = ...,
+        execution: global___Execution | None = ...,
+        graph_execution_trace: global___GraphExecutionTrace | None = ...,
+        graph_id: builtins.str = ...,
+        debugged_device: global___DebuggedDevice | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["debug_metadata", b"debug_metadata", "debugged_device", b"debugged_device", "debugged_graph", b"debugged_graph", "execution", b"execution", "graph_execution_trace", b"graph_execution_trace", "graph_id", b"graph_id", "graph_op_creation", b"graph_op_creation", "source_file", b"source_file", "stack_frame_with_id", b"stack_frame_with_id", "what", b"what"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["debug_metadata", b"debug_metadata", "debugged_device", b"debugged_device", "debugged_graph", b"debugged_graph", "execution", b"execution", "graph_execution_trace", b"graph_execution_trace", "graph_id", b"graph_id", "graph_op_creation", b"graph_op_creation", "source_file", b"source_file", "stack_frame_with_id", b"stack_frame_with_id", "step", b"step", "wall_time", b"wall_time", "what", b"what"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["what", b"what"]) -> typing_extensions.Literal["debug_metadata", "source_file", "stack_frame_with_id", "graph_op_creation", "debugged_graph", "execution", "graph_execution_trace", "graph_id", "debugged_device"] | None: ...
+
 global___DebugEvent = DebugEvent
 
+@typing_extensions.final
 class DebugMetadata(google.protobuf.message.Message):
     """Metadata about the debugger and the debugged TensorFlow program."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TENSORFLOW_VERSION_FIELD_NUMBER: builtins.int
     FILE_VERSION_FIELD_NUMBER: builtins.int
     TFDBG_RUN_ID_FIELD_NUMBER: builtins.int
-    tensorflow_version: typing.Text
+    tensorflow_version: builtins.str
     """Version of TensorFlow."""
-
-    file_version: typing.Text
+    file_version: builtins.str
     """Version of the DebugEvent file format.
     Has a format of "debug.Event:<number>", e.g., "debug.Event:1".
     """
-
-    tfdbg_run_id: typing.Text
+    tfdbg_run_id: builtins.str
     """A unique ID for the current run of tfdbg.
     A run of tfdbg is defined as a TensorFlow job instrumented by tfdbg.
     Multiple hosts in a distributed TensorFlow job instrumented by tfdbg
     have the same ID.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        tensorflow_version: typing.Text = ...,
-        file_version: typing.Text = ...,
-        tfdbg_run_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["file_version",b"file_version","tensorflow_version",b"tensorflow_version","tfdbg_run_id",b"tfdbg_run_id"]) -> None: ...
+        tensorflow_version: builtins.str = ...,
+        file_version: builtins.str = ...,
+        tfdbg_run_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["file_version", b"file_version", "tensorflow_version", b"tensorflow_version", "tfdbg_run_id", b"tfdbg_run_id"]) -> None: ...
+
 global___DebugMetadata = DebugMetadata
 
+@typing_extensions.final
 class SourceFile(google.protobuf.message.Message):
     """Content of a source file involved in the execution of the debugged TensorFlow
     program.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FILE_PATH_FIELD_NUMBER: builtins.int
     HOST_NAME_FIELD_NUMBER: builtins.int
     LINES_FIELD_NUMBER: builtins.int
-    file_path: typing.Text
+    file_path: builtins.str
     """Path to the file."""
-
-    host_name: typing.Text
+    host_name: builtins.str
     """Name of the host on which the file is located."""
-
     @property
-    def lines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def lines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Line-by-line content of the file."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        file_path: typing.Text = ...,
-        host_name: typing.Text = ...,
-        lines: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["file_path",b"file_path","host_name",b"host_name","lines",b"lines"]) -> None: ...
+        file_path: builtins.str = ...,
+        host_name: builtins.str = ...,
+        lines: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["file_path", b"file_path", "host_name", b"host_name", "lines", b"lines"]) -> None: ...
+
 global___SourceFile = SourceFile
 
+@typing_extensions.final
 class StackFrameWithId(google.protobuf.message.Message):
     """A stack frame with ID."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ID_FIELD_NUMBER: builtins.int
     FILE_LINE_COL_FIELD_NUMBER: builtins.int
-    id: typing.Text
+    id: builtins.str
     """A unique ID for the stack frame: A UUID-like string."""
-
     @property
     def file_line_col(self) -> tensorflow.core.protobuf.graph_debug_info_pb2.GraphDebugInfo.FileLineCol:
         """Stack frame, i.e., a frame of a stack trace, containing information
         regarding the file name, line number, function name, code content
         of the line, and column number (if available).
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        id: typing.Text = ...,
-        file_line_col: typing.Optional[tensorflow.core.protobuf.graph_debug_info_pb2.GraphDebugInfo.FileLineCol] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["file_line_col",b"file_line_col"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["file_line_col",b"file_line_col","id",b"id"]) -> None: ...
+        id: builtins.str = ...,
+        file_line_col: tensorflow.core.protobuf.graph_debug_info_pb2.GraphDebugInfo.FileLineCol | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["file_line_col", b"file_line_col"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["file_line_col", b"file_line_col", "id", b"id"]) -> None: ...
+
 global___StackFrameWithId = StackFrameWithId
 
+@typing_extensions.final
 class CodeLocation(google.protobuf.message.Message):
     """Code location information: A stack trace with host-name information.
     Instead of encoding the detailed stack trace, this proto refers to IDs of
     stack frames stored as `StackFrameWithId` protos.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     HOST_NAME_FIELD_NUMBER: builtins.int
     STACK_FRAME_IDS_FIELD_NUMBER: builtins.int
-    host_name: typing.Text
+    host_name: builtins.str
     """Host name on which the source files are located."""
-
     @property
-    def stack_frame_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def stack_frame_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """ID to a stack frame, each of which is pointed to
         by a unique ID. The ordering of the frames is consistent with Python's
         `traceback.extract_tb()`.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        host_name: typing.Text = ...,
-        stack_frame_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["host_name",b"host_name","stack_frame_ids",b"stack_frame_ids"]) -> None: ...
+        host_name: builtins.str = ...,
+        stack_frame_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["host_name", b"host_name", "stack_frame_ids", b"stack_frame_ids"]) -> None: ...
+
 global___CodeLocation = CodeLocation
 
+@typing_extensions.final
 class GraphOpCreation(google.protobuf.message.Message):
     """The creation of an op in a TensorFlow Graph (e.g., FuncGraph in TF2)."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     OP_TYPE_FIELD_NUMBER: builtins.int
     OP_NAME_FIELD_NUMBER: builtins.int
     GRAPH_NAME_FIELD_NUMBER: builtins.int
@@ -340,129 +337,127 @@ class GraphOpCreation(google.protobuf.message.Message):
     NUM_OUTPUTS_FIELD_NUMBER: builtins.int
     CODE_LOCATION_FIELD_NUMBER: builtins.int
     OUTPUT_TENSOR_IDS_FIELD_NUMBER: builtins.int
-    op_type: typing.Text
+    op_type: builtins.str
     """Type of the op (e.g., "MatMul")."""
-
-    op_name: typing.Text
+    op_name: builtins.str
     """Name of the op (e.g., "Dense/MatMul_1")."""
-
-    graph_name: typing.Text
+    graph_name: builtins.str
     """Name of the graph that the op is a part of (if available)."""
-
-    graph_id: typing.Text
+    graph_id: builtins.str
     """Unique ID of the graph (generated by debugger).
     This is the ID of the immediately-enclosing graph.
     """
-
-    device_name: typing.Text
+    device_name: builtins.str
     """Name of the device that the op is assigned to (if available)."""
-
     @property
-    def input_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of the input tensors to the op."""
-        pass
     num_outputs: builtins.int
     """Number of output tensors emitted by the op."""
-
     @property
     def code_location(self) -> global___CodeLocation:
         """The unique ID for code location (stack trace) of the op's creation."""
-        pass
     @property
     def output_tensor_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Unique IDs for the output tensors of this op."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        op_type: typing.Text = ...,
-        op_name: typing.Text = ...,
-        graph_name: typing.Text = ...,
-        graph_id: typing.Text = ...,
-        device_name: typing.Text = ...,
-        input_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        op_type: builtins.str = ...,
+        op_name: builtins.str = ...,
+        graph_name: builtins.str = ...,
+        graph_id: builtins.str = ...,
+        device_name: builtins.str = ...,
+        input_names: collections.abc.Iterable[builtins.str] | None = ...,
         num_outputs: builtins.int = ...,
-        code_location: typing.Optional[global___CodeLocation] = ...,
-        output_tensor_ids: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["code_location",b"code_location"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["code_location",b"code_location","device_name",b"device_name","graph_id",b"graph_id","graph_name",b"graph_name","input_names",b"input_names","num_outputs",b"num_outputs","op_name",b"op_name","op_type",b"op_type","output_tensor_ids",b"output_tensor_ids"]) -> None: ...
+        code_location: global___CodeLocation | None = ...,
+        output_tensor_ids: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["code_location", b"code_location"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code_location", b"code_location", "device_name", b"device_name", "graph_id", b"graph_id", "graph_name", b"graph_name", "input_names", b"input_names", "num_outputs", b"num_outputs", "op_name", b"op_name", "op_type", b"op_type", "output_tensor_ids", b"output_tensor_ids"]) -> None: ...
+
 global___GraphOpCreation = GraphOpCreation
 
+@typing_extensions.final
 class DebuggedGraph(google.protobuf.message.Message):
     """A debugger-instrumented graph."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     GRAPH_ID_FIELD_NUMBER: builtins.int
     GRAPH_NAME_FIELD_NUMBER: builtins.int
     INSTRUMENTED_OPS_FIELD_NUMBER: builtins.int
     ORIGINAL_GRAPH_DEF_FIELD_NUMBER: builtins.int
     INSTRUMENTED_GRAPH_DEF_FIELD_NUMBER: builtins.int
     OUTER_CONTEXT_ID_FIELD_NUMBER: builtins.int
-    graph_id: typing.Text
+    graph_id: builtins.str
     """An ID for the graph.
     This can be used up to look up graph names. Generated by the debugger.
     """
-
-    graph_name: typing.Text
+    graph_name: builtins.str
     """Name of the graph (if available)."""
-
     @property
-    def instrumented_ops(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def instrumented_ops(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of the instrumented ops. This can be used to look up op name
         based on the numeric-summary tensors (2nd column).
         """
-        pass
     original_graph_def: builtins.bytes
     """Original (uninstrumented) GraphDef (if available)."""
-
     instrumented_graph_def: builtins.bytes
     """An encoded version of a GraphDef.
     This graph may include the debugger-inserted ops.
     """
-
-    outer_context_id: typing.Text
+    outer_context_id: builtins.str
     """IDs of the immediate enclosing context (graph), if any."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        graph_id: typing.Text = ...,
-        graph_name: typing.Text = ...,
-        instrumented_ops: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        graph_id: builtins.str = ...,
+        graph_name: builtins.str = ...,
+        instrumented_ops: collections.abc.Iterable[builtins.str] | None = ...,
         original_graph_def: builtins.bytes = ...,
         instrumented_graph_def: builtins.bytes = ...,
-        outer_context_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["graph_id",b"graph_id","graph_name",b"graph_name","instrumented_graph_def",b"instrumented_graph_def","instrumented_ops",b"instrumented_ops","original_graph_def",b"original_graph_def","outer_context_id",b"outer_context_id"]) -> None: ...
+        outer_context_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["graph_id", b"graph_id", "graph_name", b"graph_name", "instrumented_graph_def", b"instrumented_graph_def", "instrumented_ops", b"instrumented_ops", "original_graph_def", b"original_graph_def", "outer_context_id", b"outer_context_id"]) -> None: ...
+
 global___DebuggedGraph = DebuggedGraph
 
+@typing_extensions.final
 class DebuggedDevice(google.protobuf.message.Message):
     """A device on which ops and/or tensors are instrumented by the debugger."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DEVICE_NAME_FIELD_NUMBER: builtins.int
     DEVICE_ID_FIELD_NUMBER: builtins.int
-    device_name: typing.Text
+    device_name: builtins.str
     """Name of the device."""
-
     device_id: builtins.int
     """A debugger-generated ID for the device. Guaranteed to be unique within
     the scope of the debugged TensorFlow program, including single-host and
     multi-host settings.
     TODO(cais): Test the uniqueness guarantee in multi-host settings.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        device_name: typing.Text = ...,
+        device_name: builtins.str = ...,
         device_id: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_id",b"device_id","device_name",b"device_name"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_id", b"device_id", "device_name", b"device_name"]) -> None: ...
+
 global___DebuggedDevice = DebuggedDevice
 
+@typing_extensions.final
 class Execution(google.protobuf.message.Message):
     """Data relating to the eager execution of an op or a Graph.
     For a op that generates N output tensors (N >= 0), only one
     Execution proto will be used to describe the execution event.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     OP_TYPE_FIELD_NUMBER: builtins.int
     NUM_OUTPUTS_FIELD_NUMBER: builtins.int
     GRAPH_ID_FIELD_NUMBER: builtins.int
@@ -472,65 +467,59 @@ class Execution(google.protobuf.message.Message):
     TENSOR_PROTOS_FIELD_NUMBER: builtins.int
     CODE_LOCATION_FIELD_NUMBER: builtins.int
     OUTPUT_TENSOR_DEVICE_IDS_FIELD_NUMBER: builtins.int
-    op_type: typing.Text
+    op_type: builtins.str
     """Op type (e.g., "MatMul").
     In the case of a Graph, this is the name of the Graph.
     """
-
     num_outputs: builtins.int
     """Number of output tensors."""
-
-    graph_id: typing.Text
+    graph_id: builtins.str
     """The graph that's executed: applicable only to the eager
     execution of a FuncGraph.
     """
-
     @property
     def input_tensor_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """IDs of the input tensors (if available)."""
-        pass
     @property
     def output_tensor_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """IDs of the output tensors (if availbable).
         If specified, must have the same length as tensor_protos.
         """
-        pass
     tensor_debug_mode: global___TensorDebugMode.ValueType
     """Type of the tensor value encapsulated in this proto."""
-
     @property
     def tensor_protos(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.tensor_pb2.TensorProto]:
         """Output Tensor values in the type described by `tensor_value_type`.
         The length of this should match `num_outputs`.
         """
-        pass
     @property
     def code_location(self) -> global___CodeLocation:
         """Stack trace of the eager execution."""
-        pass
     @property
     def output_tensor_device_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Debugged-generated IDs of the devices on which the output tensors reside.
         To look up details about the device (e.g., name), cross-reference this
         field with the DebuggedDevice messages.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        op_type: typing.Text = ...,
+        op_type: builtins.str = ...,
         num_outputs: builtins.int = ...,
-        graph_id: typing.Text = ...,
-        input_tensor_ids: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        output_tensor_ids: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        graph_id: builtins.str = ...,
+        input_tensor_ids: collections.abc.Iterable[builtins.int] | None = ...,
+        output_tensor_ids: collections.abc.Iterable[builtins.int] | None = ...,
         tensor_debug_mode: global___TensorDebugMode.ValueType = ...,
-        tensor_protos: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        code_location: typing.Optional[global___CodeLocation] = ...,
-        output_tensor_device_ids: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["code_location",b"code_location"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["code_location",b"code_location","graph_id",b"graph_id","input_tensor_ids",b"input_tensor_ids","num_outputs",b"num_outputs","op_type",b"op_type","output_tensor_device_ids",b"output_tensor_device_ids","output_tensor_ids",b"output_tensor_ids","tensor_debug_mode",b"tensor_debug_mode","tensor_protos",b"tensor_protos"]) -> None: ...
+        tensor_protos: collections.abc.Iterable[tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+        code_location: global___CodeLocation | None = ...,
+        output_tensor_device_ids: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["code_location", b"code_location"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code_location", b"code_location", "graph_id", b"graph_id", "input_tensor_ids", b"input_tensor_ids", "num_outputs", b"num_outputs", "op_type", b"op_type", "output_tensor_device_ids", b"output_tensor_device_ids", "output_tensor_ids", b"output_tensor_ids", "tensor_debug_mode", b"tensor_debug_mode", "tensor_protos", b"tensor_protos"]) -> None: ...
+
 global___Execution = Execution
 
+@typing_extensions.final
 class GraphExecutionTrace(google.protobuf.message.Message):
     """Data relating to an execution of a Graph (e.g., an eager execution of a
     FuncGraph).
@@ -539,50 +528,48 @@ class GraphExecutionTrace(google.protobuf.message.Message):
     `GraphExecutionTrace`, depending on whether the instrumented tensor values
     are summarized in an aggregated or separate fashion.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TFDBG_CONTEXT_ID_FIELD_NUMBER: builtins.int
     OP_NAME_FIELD_NUMBER: builtins.int
     OUTPUT_SLOT_FIELD_NUMBER: builtins.int
     TENSOR_DEBUG_MODE_FIELD_NUMBER: builtins.int
     TENSOR_PROTO_FIELD_NUMBER: builtins.int
     DEVICE_NAME_FIELD_NUMBER: builtins.int
-    tfdbg_context_id: typing.Text
+    tfdbg_context_id: builtins.str
     """Unique ID of the context that the executed op(s) belong to (e.g., a
     compiled concrete tf.function).
     """
-
-    op_name: typing.Text
+    op_name: builtins.str
     """Name of the op (applicable only in the case of the `FULL_TENSOR` trace
     level).
     """
-
     output_slot: builtins.int
     """Output slot of the tensor (applicable only in the case of the `FULL_TENSOR`
     trace level).
     """
-
     tensor_debug_mode: global___TensorDebugMode.ValueType
     """Type of the tensor value encapsulated in this proto."""
-
     @property
     def tensor_proto(self) -> tensorflow.core.framework.tensor_pb2.TensorProto:
         """Tensor value in the type described by `tensor_value_type`.
         This tensor may summarize the value of a single intermediate op of the
         graph, or those of multiple intermediate tensors.
         """
-        pass
-    device_name: typing.Text
+    device_name: builtins.str
     """Name of the device that the op belongs to."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        tfdbg_context_id: typing.Text = ...,
-        op_name: typing.Text = ...,
+        tfdbg_context_id: builtins.str = ...,
+        op_name: builtins.str = ...,
         output_slot: builtins.int = ...,
         tensor_debug_mode: global___TensorDebugMode.ValueType = ...,
-        tensor_proto: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-        device_name: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["tensor_proto",b"tensor_proto"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_name",b"device_name","op_name",b"op_name","output_slot",b"output_slot","tensor_debug_mode",b"tensor_debug_mode","tensor_proto",b"tensor_proto","tfdbg_context_id",b"tfdbg_context_id"]) -> None: ...
+        tensor_proto: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+        device_name: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["tensor_proto", b"tensor_proto"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_name", b"device_name", "op_name", b"op_name", "output_slot", b"output_slot", "tensor_debug_mode", b"tensor_debug_mode", "tensor_proto", b"tensor_proto", "tfdbg_context_id", b"tfdbg_context_id"]) -> None: ...
+
 global___GraphExecutionTrace = GraphExecutionTrace

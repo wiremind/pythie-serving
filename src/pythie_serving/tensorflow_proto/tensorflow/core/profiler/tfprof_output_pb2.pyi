@@ -3,18 +3,25 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.tensor_shape_pb2
 import tensorflow.core.framework.types_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class TFProfTensorProto(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     DTYPE_FIELD_NUMBER: builtins.int
     VALUE_DOUBLE_FIELD_NUMBER: builtins.int
     VALUE_INT64_FIELD_NUMBER: builtins.int
@@ -25,38 +32,45 @@ class TFProfTensorProto(google.protobuf.message.Message):
         """Flatten tensor in row-major.
         Only one of the following array is set.
         """
-        pass
     @property
     def value_int64(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     @property
-    def value_str(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def value_str(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        value_double: typing.Optional[typing.Iterable[builtins.float]] = ...,
-        value_int64: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        value_str: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dtype",b"dtype","value_double",b"value_double","value_int64",b"value_int64","value_str",b"value_str"]) -> None: ...
+        value_double: collections.abc.Iterable[builtins.float] | None = ...,
+        value_int64: collections.abc.Iterable[builtins.int] | None = ...,
+        value_str: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dtype", b"dtype", "value_double", b"value_double", "value_int64", b"value_int64", "value_str", b"value_str"]) -> None: ...
+
 global___TFProfTensorProto = TFProfTensorProto
 
+@typing_extensions.final
 class GraphNodeProto(google.protobuf.message.Message):
     """A node in TensorFlow graph. Used by scope/graph view."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class InputShapesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     TENSOR_VALUE_FIELD_NUMBER: builtins.int
@@ -85,53 +99,42 @@ class GraphNodeProto(google.protobuf.message.Message):
     SHAPES_FIELD_NUMBER: builtins.int
     INPUT_SHAPES_FIELD_NUMBER: builtins.int
     CHILDREN_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """op name."""
-
     @property
     def tensor_value(self) -> global___TFProfTensorProto:
         """tensor value restored from checkpoint."""
-        pass
     run_count: builtins.int
     """op execution time.
     A node can be defined once but run multiple times in tf.while_loop.
     the times sum up all different runs.
     """
-
     exec_micros: builtins.int
     accelerator_exec_micros: builtins.int
     cpu_exec_micros: builtins.int
     requested_bytes: builtins.int
     """Total bytes requested by the op."""
-
     peak_bytes: builtins.int
     """Max bytes allocated and being used by the op at a point."""
-
     residual_bytes: builtins.int
     """Total bytes requested by the op and not released before end."""
-
     output_bytes: builtins.int
     """Total bytes output by the op (not necessarily allocated by the op)."""
-
     parameters: builtins.int
     """Number of parameters if available."""
-
     float_ops: builtins.int
     """Number of float operations."""
-
     @property
-    def devices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def devices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Device the op is assigned to.
         Since an op can fire multiple kernel calls, there can be multiple devices.
         """
-        pass
     total_definition_count: builtins.int
     """The following are the aggregated stats from all *accounted* children and
     the node itself. The actual children depend on the data structure used.
     In graph view, children are inputs recursively.
     In scope view, children are nodes under the name scope.
     """
-
     total_run_count: builtins.int
     total_exec_micros: builtins.int
     total_accelerator_exec_micros: builtins.int
@@ -147,7 +150,6 @@ class GraphNodeProto(google.protobuf.message.Message):
         """shape information, if available.
         TODO(xpan): Why is this repeated?
         """
-        pass
     @property
     def input_shapes(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]: ...
     @property
@@ -155,11 +157,11 @@ class GraphNodeProto(google.protobuf.message.Message):
         """Descendants of the graph. The actual descendants depend on the data
         structure used (scope, graph).
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        tensor_value: typing.Optional[global___TFProfTensorProto] = ...,
+        name: builtins.str = ...,
+        tensor_value: global___TFProfTensorProto | None = ...,
         run_count: builtins.int = ...,
         exec_micros: builtins.int = ...,
         accelerator_exec_micros: builtins.int = ...,
@@ -170,7 +172,7 @@ class GraphNodeProto(google.protobuf.message.Message):
         output_bytes: builtins.int = ...,
         parameters: builtins.int = ...,
         float_ops: builtins.int = ...,
-        devices: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        devices: collections.abc.Iterable[builtins.str] | None = ...,
         total_definition_count: builtins.int = ...,
         total_run_count: builtins.int = ...,
         total_exec_micros: builtins.int = ...,
@@ -182,14 +184,16 @@ class GraphNodeProto(google.protobuf.message.Message):
         total_output_bytes: builtins.int = ...,
         total_parameters: builtins.int = ...,
         total_float_ops: builtins.int = ...,
-        shapes: typing.Optional[typing.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]] = ...,
-        input_shapes: typing.Optional[typing.Mapping[builtins.int, tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto]] = ...,
-        children: typing.Optional[typing.Iterable[global___GraphNodeProto]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["tensor_value",b"tensor_value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accelerator_exec_micros",b"accelerator_exec_micros","children",b"children","cpu_exec_micros",b"cpu_exec_micros","devices",b"devices","exec_micros",b"exec_micros","float_ops",b"float_ops","input_shapes",b"input_shapes","name",b"name","output_bytes",b"output_bytes","parameters",b"parameters","peak_bytes",b"peak_bytes","requested_bytes",b"requested_bytes","residual_bytes",b"residual_bytes","run_count",b"run_count","shapes",b"shapes","tensor_value",b"tensor_value","total_accelerator_exec_micros",b"total_accelerator_exec_micros","total_cpu_exec_micros",b"total_cpu_exec_micros","total_definition_count",b"total_definition_count","total_exec_micros",b"total_exec_micros","total_float_ops",b"total_float_ops","total_output_bytes",b"total_output_bytes","total_parameters",b"total_parameters","total_peak_bytes",b"total_peak_bytes","total_requested_bytes",b"total_requested_bytes","total_residual_bytes",b"total_residual_bytes","total_run_count",b"total_run_count"]) -> None: ...
+        shapes: collections.abc.Iterable[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] | None = ...,
+        input_shapes: collections.abc.Mapping[builtins.int, tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] | None = ...,
+        children: collections.abc.Iterable[global___GraphNodeProto] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["tensor_value", b"tensor_value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_exec_micros", b"accelerator_exec_micros", "children", b"children", "cpu_exec_micros", b"cpu_exec_micros", "devices", b"devices", "exec_micros", b"exec_micros", "float_ops", b"float_ops", "input_shapes", b"input_shapes", "name", b"name", "output_bytes", b"output_bytes", "parameters", b"parameters", "peak_bytes", b"peak_bytes", "requested_bytes", b"requested_bytes", "residual_bytes", b"residual_bytes", "run_count", b"run_count", "shapes", b"shapes", "tensor_value", b"tensor_value", "total_accelerator_exec_micros", b"total_accelerator_exec_micros", "total_cpu_exec_micros", b"total_cpu_exec_micros", "total_definition_count", b"total_definition_count", "total_exec_micros", b"total_exec_micros", "total_float_ops", b"total_float_ops", "total_output_bytes", b"total_output_bytes", "total_parameters", b"total_parameters", "total_peak_bytes", b"total_peak_bytes", "total_requested_bytes", b"total_requested_bytes", "total_residual_bytes", b"total_residual_bytes", "total_run_count", b"total_run_count"]) -> None: ...
+
 global___GraphNodeProto = GraphNodeProto
 
+@typing_extensions.final
 class MultiGraphNodeProto(google.protobuf.message.Message):
     """A node that groups multiple GraphNodeProto.
     Depending on the 'view', the semantics of the TFmultiGraphNodeProto
@@ -199,7 +203,9 @@ class MultiGraphNodeProto(google.protobuf.message.Message):
     op view:   A node groups all TensorFlow graph nodes that are of type
                of the op (e.g. MatMul, Conv2D).
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     EXEC_MICROS_FIELD_NUMBER: builtins.int
     ACCELERATOR_EXEC_MICROS_FIELD_NUMBER: builtins.int
@@ -221,37 +227,28 @@ class MultiGraphNodeProto(google.protobuf.message.Message):
     TOTAL_FLOAT_OPS_FIELD_NUMBER: builtins.int
     GRAPH_NODES_FIELD_NUMBER: builtins.int
     CHILDREN_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """Name of the node."""
-
     exec_micros: builtins.int
     """code execution time."""
-
     accelerator_exec_micros: builtins.int
     cpu_exec_micros: builtins.int
     requested_bytes: builtins.int
     """Total requested bytes by the code."""
-
     peak_bytes: builtins.int
     """Max bytes allocated and being used by the op at a point."""
-
     residual_bytes: builtins.int
     """Total bytes requested by the op and not released before end."""
-
     output_bytes: builtins.int
     """Total bytes output by the op (not necessarily allocated by the op)."""
-
     parameters: builtins.int
     """Number of parameters if available."""
-
     float_ops: builtins.int
     """Number of float operations."""
-
     total_exec_micros: builtins.int
     """The following are the aggregated stats from descendants.
     The actual descendants depend on the data structure used.
     """
-
     total_accelerator_exec_micros: builtins.int
     total_cpu_exec_micros: builtins.int
     total_requested_bytes: builtins.int
@@ -263,16 +260,15 @@ class MultiGraphNodeProto(google.protobuf.message.Message):
     @property
     def graph_nodes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GraphNodeProto]:
         """TensorFlow graph nodes contained by the MultiGraphNodeProto."""
-        pass
     @property
     def children(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MultiGraphNodeProto]:
         """Descendants of the node. The actual descendants depend on the data
         structure used.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         exec_micros: builtins.int = ...,
         accelerator_exec_micros: builtins.int = ...,
         cpu_exec_micros: builtins.int = ...,
@@ -291,48 +287,58 @@ class MultiGraphNodeProto(google.protobuf.message.Message):
         total_output_bytes: builtins.int = ...,
         total_parameters: builtins.int = ...,
         total_float_ops: builtins.int = ...,
-        graph_nodes: typing.Optional[typing.Iterable[global___GraphNodeProto]] = ...,
-        children: typing.Optional[typing.Iterable[global___MultiGraphNodeProto]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accelerator_exec_micros",b"accelerator_exec_micros","children",b"children","cpu_exec_micros",b"cpu_exec_micros","exec_micros",b"exec_micros","float_ops",b"float_ops","graph_nodes",b"graph_nodes","name",b"name","output_bytes",b"output_bytes","parameters",b"parameters","peak_bytes",b"peak_bytes","requested_bytes",b"requested_bytes","residual_bytes",b"residual_bytes","total_accelerator_exec_micros",b"total_accelerator_exec_micros","total_cpu_exec_micros",b"total_cpu_exec_micros","total_exec_micros",b"total_exec_micros","total_float_ops",b"total_float_ops","total_output_bytes",b"total_output_bytes","total_parameters",b"total_parameters","total_peak_bytes",b"total_peak_bytes","total_requested_bytes",b"total_requested_bytes","total_residual_bytes",b"total_residual_bytes"]) -> None: ...
+        graph_nodes: collections.abc.Iterable[global___GraphNodeProto] | None = ...,
+        children: collections.abc.Iterable[global___MultiGraphNodeProto] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_exec_micros", b"accelerator_exec_micros", "children", b"children", "cpu_exec_micros", b"cpu_exec_micros", "exec_micros", b"exec_micros", "float_ops", b"float_ops", "graph_nodes", b"graph_nodes", "name", b"name", "output_bytes", b"output_bytes", "parameters", b"parameters", "peak_bytes", b"peak_bytes", "requested_bytes", b"requested_bytes", "residual_bytes", b"residual_bytes", "total_accelerator_exec_micros", b"total_accelerator_exec_micros", "total_cpu_exec_micros", b"total_cpu_exec_micros", "total_exec_micros", b"total_exec_micros", "total_float_ops", b"total_float_ops", "total_output_bytes", b"total_output_bytes", "total_parameters", b"total_parameters", "total_peak_bytes", b"total_peak_bytes", "total_requested_bytes", b"total_requested_bytes", "total_residual_bytes", b"total_residual_bytes"]) -> None: ...
+
 global___MultiGraphNodeProto = MultiGraphNodeProto
 
+@typing_extensions.final
 class AdviceProto(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class CheckersEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___AdviceProto.Checker: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___AdviceProto.Checker] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___AdviceProto.Checker | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class Checker(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         REPORTS_FIELD_NUMBER: builtins.int
         @property
-        def reports(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-        def __init__(self,
+        def reports(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def __init__(
+            self,
             *,
-            reports: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["reports",b"reports"]) -> None: ...
+            reports: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["reports", b"reports"]) -> None: ...
 
     CHECKERS_FIELD_NUMBER: builtins.int
     @property
-    def checkers(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___AdviceProto.Checker]:
+    def checkers(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___AdviceProto.Checker]:
         """checker name -> a list of reports from the checker."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        checkers: typing.Optional[typing.Mapping[typing.Text, global___AdviceProto.Checker]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["checkers",b"checkers"]) -> None: ...
+        checkers: collections.abc.Mapping[builtins.str, global___AdviceProto.Checker] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["checkers", b"checkers"]) -> None: ...
+
 global___AdviceProto = AdviceProto

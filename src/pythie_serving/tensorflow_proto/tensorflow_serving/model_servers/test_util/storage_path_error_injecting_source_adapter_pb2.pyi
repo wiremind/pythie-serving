@@ -5,21 +5,29 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class StoragePathErrorInjectingSourceAdapterConfig(google.protobuf.message.Message):
     """Config proto for StoragePathErrorInjectingSourceAdapter."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_message: typing.Text
-    """The error message the adapter emits."""
 
-    def __init__(self,
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    error_message: builtins.str
+    """The error message the adapter emits."""
+    def __init__(
+        self,
         *,
-        error_message: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_message",b"error_message"]) -> None: ...
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message"]) -> None: ...
+
 global___StoragePathErrorInjectingSourceAdapterConfig = StoragePathErrorInjectingSourceAdapterConfig

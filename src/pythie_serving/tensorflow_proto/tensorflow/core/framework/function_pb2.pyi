@@ -3,20 +3,28 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.attr_value_pb2
 import tensorflow.core.framework.node_def_pb2
 import tensorflow.core.framework.op_def_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class FunctionDefLibrary(google.protobuf.message.Message):
     """A library is a set of named functions."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FUNCTION_FIELD_NUMBER: builtins.int
     GRADIENT_FIELD_NUMBER: builtins.int
     REGISTERED_GRADIENTS_FIELD_NUMBER: builtins.int
@@ -26,15 +34,18 @@ class FunctionDefLibrary(google.protobuf.message.Message):
     def gradient(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GradientDef]: ...
     @property
     def registered_gradients(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RegisteredGradient]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        function: typing.Optional[typing.Iterable[global___FunctionDef]] = ...,
-        gradient: typing.Optional[typing.Iterable[global___GradientDef]] = ...,
-        registered_gradients: typing.Optional[typing.Iterable[global___RegisteredGradient]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["function",b"function","gradient",b"gradient","registered_gradients",b"registered_gradients"]) -> None: ...
+        function: collections.abc.Iterable[global___FunctionDef] | None = ...,
+        gradient: collections.abc.Iterable[global___GradientDef] | None = ...,
+        registered_gradients: collections.abc.Iterable[global___RegisteredGradient] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["function", b"function", "gradient", b"gradient", "registered_gradients", b"registered_gradients"]) -> None: ...
+
 global___FunctionDefLibrary = FunctionDefLibrary
 
+@typing_extensions.final
 class FunctionDef(google.protobuf.message.Message):
     """A function can be instantiated when the runtime can bind every attr
     with a value. When a GraphDef has a call to a function, it must
@@ -43,104 +54,128 @@ class FunctionDef(google.protobuf.message.Message):
     TODO(zhifengc):
       * device spec, etc.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class AttrEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.attr_value_pb2.AttrValue: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.attr_value_pb2.AttrValue] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.attr_value_pb2.AttrValue | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class ArgAttrs(google.protobuf.message.Message):
         """Attributes for function arguments. These attributes are the same set of
         valid attributes as to _Arg nodes.
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class AttrEntry(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             KEY_FIELD_NUMBER: builtins.int
             VALUE_FIELD_NUMBER: builtins.int
-            key: typing.Text
+            key: builtins.str
             @property
             def value(self) -> tensorflow.core.framework.attr_value_pb2.AttrValue: ...
-            def __init__(self,
+            def __init__(
+                self,
                 *,
-                key: typing.Text = ...,
-                value: typing.Optional[tensorflow.core.framework.attr_value_pb2.AttrValue] = ...,
-                ) -> None: ...
-            def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+                key: builtins.str = ...,
+                value: tensorflow.core.framework.attr_value_pb2.AttrValue | None = ...,
+            ) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
         ATTR_FIELD_NUMBER: builtins.int
         @property
-        def attr(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
-        def __init__(self,
+        def attr(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue]: ...
+        def __init__(
+            self,
             *,
-            attr: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["attr",b"attr"]) -> None: ...
+            attr: collections.abc.Mapping[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["attr", b"attr"]) -> None: ...
 
+    @typing_extensions.final
     class ArgAttrEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___FunctionDef.ArgAttrs: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___FunctionDef.ArgAttrs] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___FunctionDef.ArgAttrs | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class ResourceArgUniqueIdEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         value: builtins.int
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
             value: builtins.int = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class RetEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class ControlRetEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     SIGNATURE_FIELD_NUMBER: builtins.int
     ATTR_FIELD_NUMBER: builtins.int
@@ -154,11 +189,9 @@ class FunctionDef(google.protobuf.message.Message):
         """The definition of the function's name, arguments, return values,
         attrs etc.
         """
-        pass
     @property
-    def attr(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]:
+    def attr(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue]:
         """Attributes specific to this function definition."""
-        pass
     @property
     def arg_attr(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___FunctionDef.ArgAttrs]: ...
     @property
@@ -173,41 +206,9 @@ class FunctionDef(google.protobuf.message.Message):
         When instantiated, the unique IDs will be attached to the _Arg nodes'
         "_resource_arg_unique_id" attribute.
         """
-        pass
     @property
     def node_def(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.framework.node_def_pb2.NodeDef]:
-        """In both of the following fields, there is the need to specify an
-        output that is used as either the input to another node (in
-        `node_def`) or as a return value of the function (in `ret`).
-        Unlike the NodeDefs in GraphDef, we need to be able to specify a
-        list in some cases (instead of just single outputs).  Also, we
-        need to be able to deal with lists of unknown length (so the
-        output index may not be known at function definition time).  So
-        we use the following format instead:
-        * "fun_in" where "fun_in" is the name of a function input arg in
-          the `signature` field above.  This represents that input, whether
-          it is a single tensor or a list.
-        * "fun_in:0" gives the first element of a function input arg (a
-          non-list input is considered a list of length 1 for these
-          purposes).
-        * "node:out" where "node" is the name of a node in `node_def` and
-          "out" is the name one of its op's output arguments (the name
-          comes from the OpDef of the node's op). This represents that
-          node's output, whether it is a single tensor or a list.
-          Note: We enforce that an op's output arguments are never
-          renamed in the backwards-compatibility test.
-        * "node:out:0" gives the first element of a node output arg (a
-          non-list output is considered a list of length 1 for these
-          purposes).
-
-        NOT CURRENTLY SUPPORTED (but may be in the future):
-        * "node:out:-1" gives last element in a node output list
-        * "node:out:1:" gives a list with all but the first element in a
-          node output list
-        * "node:out::-1" gives a list with all but the last element in a
-          node output list
-
-        The body of the function.  Unlike the NodeDefs in a GraphDef, attrs
+        """The body of the function.  Unlike the NodeDefs in a GraphDef, attrs
         may have values of type `placeholder` and the `input` field uses
         the "output" format above.
 
@@ -215,33 +216,33 @@ class FunctionDef(google.protobuf.message.Message):
         user-defined library first. If not resolved, "func" is assumed to
         be a builtin op.
         """
-        pass
     @property
-    def ret(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def ret(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """A mapping from the output arg names from `signature` to the
         outputs from `node_def` that should be returned by the function.
         """
-        pass
     @property
-    def control_ret(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def control_ret(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """A mapping from control output names from `signature` to node names in
         `node_def` which should be control outputs of this function.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        signature: typing.Optional[tensorflow.core.framework.op_def_pb2.OpDef] = ...,
-        attr: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.attr_value_pb2.AttrValue]] = ...,
-        arg_attr: typing.Optional[typing.Mapping[builtins.int, global___FunctionDef.ArgAttrs]] = ...,
-        resource_arg_unique_id: typing.Optional[typing.Mapping[builtins.int, builtins.int]] = ...,
-        node_def: typing.Optional[typing.Iterable[tensorflow.core.framework.node_def_pb2.NodeDef]] = ...,
-        ret: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-        control_ret: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["signature",b"signature"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["arg_attr",b"arg_attr","attr",b"attr","control_ret",b"control_ret","node_def",b"node_def","resource_arg_unique_id",b"resource_arg_unique_id","ret",b"ret","signature",b"signature"]) -> None: ...
+        signature: tensorflow.core.framework.op_def_pb2.OpDef | None = ...,
+        attr: collections.abc.Mapping[builtins.str, tensorflow.core.framework.attr_value_pb2.AttrValue] | None = ...,
+        arg_attr: collections.abc.Mapping[builtins.int, global___FunctionDef.ArgAttrs] | None = ...,
+        resource_arg_unique_id: collections.abc.Mapping[builtins.int, builtins.int] | None = ...,
+        node_def: collections.abc.Iterable[tensorflow.core.framework.node_def_pb2.NodeDef] | None = ...,
+        ret: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+        control_ret: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["signature", b"signature"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["arg_attr", b"arg_attr", "attr", b"attr", "control_ret", b"control_ret", "node_def", b"node_def", "resource_arg_unique_id", b"resource_arg_unique_id", "ret", b"ret", "signature", b"signature"]) -> None: ...
+
 global___FunctionDef = FunctionDef
 
+@typing_extensions.final
 class GradientDef(google.protobuf.message.Message):
     """GradientDef defines the gradient function of a function defined in
     a function library.
@@ -262,42 +263,47 @@ class GradientDef(google.protobuf.message.Message):
     loss function). dL/dx_i is the partial derivative of L with respect
     to x_i.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FUNCTION_NAME_FIELD_NUMBER: builtins.int
     GRADIENT_FUNC_FIELD_NUMBER: builtins.int
-    function_name: typing.Text
+    function_name: builtins.str
     """The function name."""
-
-    gradient_func: typing.Text
+    gradient_func: builtins.str
     """The gradient function's name."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        function_name: typing.Text = ...,
-        gradient_func: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["function_name",b"function_name","gradient_func",b"gradient_func"]) -> None: ...
+        function_name: builtins.str = ...,
+        gradient_func: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["function_name", b"function_name", "gradient_func", b"gradient_func"]) -> None: ...
+
 global___GradientDef = GradientDef
 
+@typing_extensions.final
 class RegisteredGradient(google.protobuf.message.Message):
     """RegisteredGradient stores a gradient function that is registered in the
     gradients library and used in the ops of a function in the function library.
     Unlike GradientDef, these gradients are identified by op type, and not
     directly linked to any function.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     GRADIENT_FUNC_FIELD_NUMBER: builtins.int
     REGISTERED_OP_TYPE_FIELD_NUMBER: builtins.int
-    gradient_func: typing.Text
+    gradient_func: builtins.str
     """The gradient function's name."""
-
-    registered_op_type: typing.Text
+    registered_op_type: builtins.str
     """The gradient function's registered op type."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        gradient_func: typing.Text = ...,
-        registered_op_type: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["gradient_func",b"gradient_func","registered_op_type",b"registered_op_type"]) -> None: ...
+        gradient_func: builtins.str = ...,
+        registered_op_type: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["gradient_func", b"gradient_func", "registered_op_type", b"registered_op_type"]) -> None: ...
+
 global___RegisteredGradient = RegisteredGradient

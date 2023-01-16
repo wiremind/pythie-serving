@@ -3,32 +3,44 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.types_pb2
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class GraphTransferNodeInput(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NODE_ID_FIELD_NUMBER: builtins.int
     OUTPUT_PORT_FIELD_NUMBER: builtins.int
     node_id: builtins.int
     output_port: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
         node_id: builtins.int = ...,
         output_port: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["node_id",b"node_id","output_port",b"output_port"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["node_id", b"node_id", "output_port", b"output_port"]) -> None: ...
+
 global___GraphTransferNodeInput = GraphTransferNodeInput
 
+@typing_extensions.final
 class GraphTransferNodeInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     NODE_ID_FIELD_NUMBER: builtins.int
     TYPE_NAME_FIELD_NUMBER: builtins.int
@@ -36,132 +48,157 @@ class GraphTransferNodeInfo(google.protobuf.message.Message):
     PADDING_ID_FIELD_NUMBER: builtins.int
     INPUT_COUNT_FIELD_NUMBER: builtins.int
     OUTPUT_COUNT_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     node_id: builtins.int
-    type_name: typing.Text
+    type_name: builtins.str
     soc_op_id: builtins.int
     padding_id: builtins.int
     input_count: builtins.int
     output_count: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         node_id: builtins.int = ...,
-        type_name: typing.Text = ...,
+        type_name: builtins.str = ...,
         soc_op_id: builtins.int = ...,
         padding_id: builtins.int = ...,
         input_count: builtins.int = ...,
         output_count: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_count",b"input_count","name",b"name","node_id",b"node_id","output_count",b"output_count","padding_id",b"padding_id","soc_op_id",b"soc_op_id","type_name",b"type_name"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_count", b"input_count", "name", b"name", "node_id", b"node_id", "output_count", b"output_count", "padding_id", b"padding_id", "soc_op_id", b"soc_op_id", "type_name", b"type_name"]) -> None: ...
+
 global___GraphTransferNodeInfo = GraphTransferNodeInfo
 
+@typing_extensions.final
 class GraphTransferConstNodeInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     NODE_ID_FIELD_NUMBER: builtins.int
     SHAPE_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     node_id: builtins.int
     @property
     def shape(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     data: builtins.bytes
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         node_id: builtins.int = ...,
-        shape: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        shape: collections.abc.Iterable[builtins.int] | None = ...,
         data: builtins.bytes = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data",b"data","dtype",b"dtype","name",b"name","node_id",b"node_id","shape",b"shape"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "dtype", b"dtype", "name", b"name", "node_id", b"node_id", "shape", b"shape"]) -> None: ...
+
 global___GraphTransferConstNodeInfo = GraphTransferConstNodeInfo
 
+@typing_extensions.final
 class GraphTransferNodeInputInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NODE_ID_FIELD_NUMBER: builtins.int
     NODE_INPUT_FIELD_NUMBER: builtins.int
     node_id: builtins.int
     @property
     def node_input(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GraphTransferNodeInput]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         node_id: builtins.int = ...,
-        node_input: typing.Optional[typing.Iterable[global___GraphTransferNodeInput]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["node_id",b"node_id","node_input",b"node_input"]) -> None: ...
+        node_input: collections.abc.Iterable[global___GraphTransferNodeInput] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["node_id", b"node_id", "node_input", b"node_input"]) -> None: ...
+
 global___GraphTransferNodeInputInfo = GraphTransferNodeInputInfo
 
+@typing_extensions.final
 class GraphTransferNodeOutputInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NODE_ID_FIELD_NUMBER: builtins.int
     MAX_BYTE_SIZE_FIELD_NUMBER: builtins.int
     node_id: builtins.int
     @property
     def max_byte_size(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
         node_id: builtins.int = ...,
-        max_byte_size: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["max_byte_size",b"max_byte_size","node_id",b"node_id"]) -> None: ...
+        max_byte_size: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["max_byte_size", b"max_byte_size", "node_id", b"node_id"]) -> None: ...
+
 global___GraphTransferNodeOutputInfo = GraphTransferNodeOutputInfo
 
+@typing_extensions.final
 class GraphTransferGraphInputNodeInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     SHAPE_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     @property
     def shape(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        shape: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        name: builtins.str = ...,
+        shape: collections.abc.Iterable[builtins.int] | None = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dtype",b"dtype","name",b"name","shape",b"shape"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dtype", b"dtype", "name", b"name", "shape", b"shape"]) -> None: ...
+
 global___GraphTransferGraphInputNodeInfo = GraphTransferGraphInputNodeInfo
 
+@typing_extensions.final
 class GraphTransferGraphOutputNodeInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     SHAPE_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     @property
     def shape(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        shape: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        name: builtins.str = ...,
+        shape: collections.abc.Iterable[builtins.int] | None = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dtype",b"dtype","name",b"name","shape",b"shape"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dtype", b"dtype", "name", b"name", "shape", b"shape"]) -> None: ...
+
 global___GraphTransferGraphOutputNodeInfo = GraphTransferGraphOutputNodeInfo
 
+@typing_extensions.final
 class GraphTransferInfo(google.protobuf.message.Message):
     """Protocol buffer representing a handle to a tensorflow resource. Handles are
     not valid across executions, but can be serialized back and forth from within
     a single run.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     class _Destination:
-        ValueType = typing.NewType('ValueType', builtins.int)
+        ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
-    class _DestinationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GraphTransferInfo._Destination.ValueType], builtins.type):
+
+    class _DestinationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GraphTransferInfo._Destination.ValueType], builtins.type):  # noqa: F821
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NOP: GraphTransferInfo._Destination.ValueType  # 0
         HEXAGON: GraphTransferInfo._Destination.ValueType  # 1
-    class Destination(_Destination, metaclass=_DestinationEnumTypeWrapper):
-        pass
 
+    class Destination(_Destination, metaclass=_DestinationEnumTypeWrapper): ...
     NOP: GraphTransferInfo.Destination.ValueType  # 0
     HEXAGON: GraphTransferInfo.Destination.ValueType  # 1
 
@@ -183,21 +220,21 @@ class GraphTransferInfo(google.protobuf.message.Message):
     @property
     def graph_input_node_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GraphTransferGraphInputNodeInfo]:
         """Input Node parameters of transferred graph"""
-        pass
     @property
     def graph_output_node_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GraphTransferGraphOutputNodeInfo]: ...
     destination: global___GraphTransferInfo.Destination.ValueType
     """Destination of graph transfer"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        node_info: typing.Optional[typing.Iterable[global___GraphTransferNodeInfo]] = ...,
-        const_node_info: typing.Optional[typing.Iterable[global___GraphTransferConstNodeInfo]] = ...,
-        node_input_info: typing.Optional[typing.Iterable[global___GraphTransferNodeInputInfo]] = ...,
-        node_output_info: typing.Optional[typing.Iterable[global___GraphTransferNodeOutputInfo]] = ...,
-        graph_input_node_info: typing.Optional[typing.Iterable[global___GraphTransferGraphInputNodeInfo]] = ...,
-        graph_output_node_info: typing.Optional[typing.Iterable[global___GraphTransferGraphOutputNodeInfo]] = ...,
+        node_info: collections.abc.Iterable[global___GraphTransferNodeInfo] | None = ...,
+        const_node_info: collections.abc.Iterable[global___GraphTransferConstNodeInfo] | None = ...,
+        node_input_info: collections.abc.Iterable[global___GraphTransferNodeInputInfo] | None = ...,
+        node_output_info: collections.abc.Iterable[global___GraphTransferNodeOutputInfo] | None = ...,
+        graph_input_node_info: collections.abc.Iterable[global___GraphTransferGraphInputNodeInfo] | None = ...,
+        graph_output_node_info: collections.abc.Iterable[global___GraphTransferGraphOutputNodeInfo] | None = ...,
         destination: global___GraphTransferInfo.Destination.ValueType = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["const_node_info",b"const_node_info","destination",b"destination","graph_input_node_info",b"graph_input_node_info","graph_output_node_info",b"graph_output_node_info","node_info",b"node_info","node_input_info",b"node_input_info","node_output_info",b"node_output_info"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["const_node_info", b"const_node_info", "destination", b"destination", "graph_input_node_info", b"graph_input_node_info", "graph_output_node_info", b"graph_output_node_info", "node_info", b"node_info", "node_input_info", b"node_input_info", "node_output_info", b"node_output_info"]) -> None: ...
+
 global___GraphTransferInfo = GraphTransferInfo

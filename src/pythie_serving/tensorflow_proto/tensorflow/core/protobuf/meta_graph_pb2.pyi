@@ -3,10 +3,12 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.graph_pb2
 import tensorflow.core.framework.op_def_pb2
 import tensorflow.core.framework.tensor_shape_pb2
@@ -14,16 +16,17 @@ import tensorflow.core.framework.types_pb2
 import tensorflow.core.protobuf.saved_object_graph_pb2
 import tensorflow.core.protobuf.saver_pb2
 import tensorflow.core.protobuf.struct_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class MetaGraphDef(google.protobuf.message.Message):
-    """NOTE: This protocol buffer is evolving, and will go through revisions in the
-    coming months.
-
-    Protocol buffer containing the following which are necessary to restart
+    """Protocol buffer containing the following which are necessary to restart
     training, run inference. It can be used to serialize/de-serialize memory
     objects necessary for running computation in a graph when crossing the
     process boundary. It can be used for long term storage of graphs,
@@ -35,24 +38,32 @@ class MetaGraphDef(google.protobuf.message.Message):
       TensorInfo
       SignatureDef
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class MetaInfoDef(google.protobuf.message.Message):
         """Meta information regarding the graph to be exported.  To be used by users
         of this protocol buffer to encode information regarding their meta graph.
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
         class FunctionAliasesEntry(google.protobuf.message.Message):
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
             KEY_FIELD_NUMBER: builtins.int
             VALUE_FIELD_NUMBER: builtins.int
-            key: typing.Text
-            value: typing.Text
-            def __init__(self,
+            key: builtins.str
+            value: builtins.str
+            def __init__(
+                self,
                 *,
-                key: typing.Text = ...,
-                value: typing.Text = ...,
-                ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+                key: builtins.str = ...,
+                value: builtins.str = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
         META_GRAPH_VERSION_FIELD_NUMBER: builtins.int
         STRIPPED_OP_LIST_FIELD_NUMBER: builtins.int
@@ -62,25 +73,22 @@ class MetaGraphDef(google.protobuf.message.Message):
         TENSORFLOW_GIT_VERSION_FIELD_NUMBER: builtins.int
         STRIPPED_DEFAULT_ATTRS_FIELD_NUMBER: builtins.int
         FUNCTION_ALIASES_FIELD_NUMBER: builtins.int
-        meta_graph_version: typing.Text
+        meta_graph_version: builtins.str
         """User specified Version string. Can be the name of the model and revision,
         steps this model has been trained to, etc.
         """
-
         @property
         def stripped_op_list(self) -> tensorflow.core.framework.op_def_pb2.OpList:
             """A copy of the OpDefs used by the producer of this graph_def.
             Descriptions and Ops not used in graph_def are stripped out.
             """
-            pass
         @property
         def any_info(self) -> google.protobuf.any_pb2.Any:
             """A serialized protobuf. Can be the time this meta graph is created, or
             modified, or name of the model.
             """
-            pass
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """User supplied tag(s) on the meta_graph and included graph_def.
 
             MetaGraphDefs should be tagged with their capabilities or use-cases.
@@ -88,71 +96,73 @@ class MetaGraphDef(google.protobuf.message.Message):
             These tags enable loaders to access the MetaGraph(s) appropriate for a
             specific use-case or runtime environment.
             """
-            pass
-        tensorflow_version: typing.Text
+        tensorflow_version: builtins.str
         """The __version__ string of the tensorflow build used to write this graph.
         This will be populated by the framework, which will overwrite any user
         supplied value.
         """
-
-        tensorflow_git_version: typing.Text
+        tensorflow_git_version: builtins.str
         """The __git_version__ string of the tensorflow build used to write this
         graph. This will be populated by the framework, which will overwrite any
         user supplied value.
         """
-
         stripped_default_attrs: builtins.bool
         """A flag to denote whether default-valued attrs have been stripped from
         the nodes in this graph_def.
         """
-
         @property
-        def function_aliases(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+        def function_aliases(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
             """FunctionDef name to aliases mapping."""
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            meta_graph_version: typing.Text = ...,
-            stripped_op_list: typing.Optional[tensorflow.core.framework.op_def_pb2.OpList] = ...,
-            any_info: typing.Optional[google.protobuf.any_pb2.Any] = ...,
-            tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            tensorflow_version: typing.Text = ...,
-            tensorflow_git_version: typing.Text = ...,
+            meta_graph_version: builtins.str = ...,
+            stripped_op_list: tensorflow.core.framework.op_def_pb2.OpList | None = ...,
+            any_info: google.protobuf.any_pb2.Any | None = ...,
+            tags: collections.abc.Iterable[builtins.str] | None = ...,
+            tensorflow_version: builtins.str = ...,
+            tensorflow_git_version: builtins.str = ...,
             stripped_default_attrs: builtins.bool = ...,
-            function_aliases: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["any_info",b"any_info","stripped_op_list",b"stripped_op_list"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["any_info",b"any_info","function_aliases",b"function_aliases","meta_graph_version",b"meta_graph_version","stripped_default_attrs",b"stripped_default_attrs","stripped_op_list",b"stripped_op_list","tags",b"tags","tensorflow_git_version",b"tensorflow_git_version","tensorflow_version",b"tensorflow_version"]) -> None: ...
+            function_aliases: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["any_info", b"any_info", "stripped_op_list", b"stripped_op_list"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["any_info", b"any_info", "function_aliases", b"function_aliases", "meta_graph_version", b"meta_graph_version", "stripped_default_attrs", b"stripped_default_attrs", "stripped_op_list", b"stripped_op_list", "tags", b"tags", "tensorflow_git_version", b"tensorflow_git_version", "tensorflow_version", b"tensorflow_version"]) -> None: ...
 
+    @typing_extensions.final
     class CollectionDefEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___CollectionDef: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___CollectionDef] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___CollectionDef | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class SignatureDefEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___SignatureDef: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___SignatureDef] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___SignatureDef | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     META_INFO_DEF_FIELD_NUMBER: builtins.int
     GRAPH_DEF_FIELD_NUMBER: builtins.int
@@ -166,45 +176,42 @@ class MetaGraphDef(google.protobuf.message.Message):
     @property
     def graph_def(self) -> tensorflow.core.framework.graph_pb2.GraphDef:
         """GraphDef."""
-        pass
     @property
     def saver_def(self) -> tensorflow.core.protobuf.saver_pb2.SaverDef:
         """SaverDef."""
-        pass
     @property
-    def collection_def(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___CollectionDef]:
+    def collection_def(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___CollectionDef]:
         """collection_def: Map from collection name to collections.
         See CollectionDef section for details.
         """
-        pass
     @property
-    def signature_def(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___SignatureDef]:
+    def signature_def(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___SignatureDef]:
         """signature_def: Map from user supplied key for a signature to a single
         SignatureDef.
         """
-        pass
     @property
     def asset_file_def(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AssetFileDef]:
         """Asset file def to be used with the defined graph."""
-        pass
     @property
     def object_graph_def(self) -> tensorflow.core.protobuf.saved_object_graph_pb2.SavedObjectGraph:
         """Extra information about the structure of functions and stateful objects."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        meta_info_def: typing.Optional[global___MetaGraphDef.MetaInfoDef] = ...,
-        graph_def: typing.Optional[tensorflow.core.framework.graph_pb2.GraphDef] = ...,
-        saver_def: typing.Optional[tensorflow.core.protobuf.saver_pb2.SaverDef] = ...,
-        collection_def: typing.Optional[typing.Mapping[typing.Text, global___CollectionDef]] = ...,
-        signature_def: typing.Optional[typing.Mapping[typing.Text, global___SignatureDef]] = ...,
-        asset_file_def: typing.Optional[typing.Iterable[global___AssetFileDef]] = ...,
-        object_graph_def: typing.Optional[tensorflow.core.protobuf.saved_object_graph_pb2.SavedObjectGraph] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["graph_def",b"graph_def","meta_info_def",b"meta_info_def","object_graph_def",b"object_graph_def","saver_def",b"saver_def"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["asset_file_def",b"asset_file_def","collection_def",b"collection_def","graph_def",b"graph_def","meta_info_def",b"meta_info_def","object_graph_def",b"object_graph_def","saver_def",b"saver_def","signature_def",b"signature_def"]) -> None: ...
+        meta_info_def: global___MetaGraphDef.MetaInfoDef | None = ...,
+        graph_def: tensorflow.core.framework.graph_pb2.GraphDef | None = ...,
+        saver_def: tensorflow.core.protobuf.saver_pb2.SaverDef | None = ...,
+        collection_def: collections.abc.Mapping[builtins.str, global___CollectionDef] | None = ...,
+        signature_def: collections.abc.Mapping[builtins.str, global___SignatureDef] | None = ...,
+        asset_file_def: collections.abc.Iterable[global___AssetFileDef] | None = ...,
+        object_graph_def: tensorflow.core.protobuf.saved_object_graph_pb2.SavedObjectGraph | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["graph_def", b"graph_def", "meta_info_def", b"meta_info_def", "object_graph_def", b"object_graph_def", "saver_def", b"saver_def"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["asset_file_def", b"asset_file_def", "collection_def", b"collection_def", "graph_def", b"graph_def", "meta_info_def", b"meta_info_def", "object_graph_def", b"object_graph_def", "saver_def", b"saver_def", "signature_def", b"signature_def"]) -> None: ...
+
 global___MetaGraphDef = MetaGraphDef
 
+@typing_extensions.final
 class CollectionDef(google.protobuf.message.Message):
     """CollectionDef should cover most collections.
     To add a user-defined collection, do one of the following:
@@ -269,7 +276,10 @@ class CollectionDef(google.protobuf.message.Message):
                                    to_proto=Variable.to_proto,
                                    from_proto=Variable.from_proto)
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class NodeList(google.protobuf.message.Message):
         """NodeList is used for collecting nodes in graph. For example
         collection_def {
@@ -282,16 +292,20 @@ class CollectionDef(google.protobuf.message.Message):
             }
           }
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUE_FIELD_NUMBER: builtins.int
         @property
-        def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-        def __init__(self,
+        def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def __init__(
+            self,
             *,
-            value: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+            value: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class BytesList(google.protobuf.message.Message):
         """BytesList is used for collecting strings and serialized protobufs. For
         example:
@@ -307,51 +321,66 @@ class CollectionDef(google.protobuf.message.Message):
           }
         }
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUE_FIELD_NUMBER: builtins.int
         @property
         def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            value: typing.Optional[typing.Iterable[builtins.bytes]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+            value: collections.abc.Iterable[builtins.bytes] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class Int64List(google.protobuf.message.Message):
         """Int64List is used for collecting int, int64 and long values."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUE_FIELD_NUMBER: builtins.int
         @property
         def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            value: typing.Optional[typing.Iterable[builtins.int]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+            value: collections.abc.Iterable[builtins.int] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class FloatList(google.protobuf.message.Message):
         """FloatList is used for collecting float values."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUE_FIELD_NUMBER: builtins.int
         @property
         def value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            value: typing.Optional[typing.Iterable[builtins.float]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+            value: collections.abc.Iterable[builtins.float] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class AnyList(google.protobuf.message.Message):
         """AnyList is used for collecting Any protos."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUE_FIELD_NUMBER: builtins.int
         @property
         def value(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.any_pb2.Any]: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            value: typing.Optional[typing.Iterable[google.protobuf.any_pb2.Any]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
+            value: collections.abc.Iterable[google.protobuf.any_pb2.Any] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
 
     NODE_LIST_FIELD_NUMBER: builtins.int
     BYTES_LIST_FIELD_NUMBER: builtins.int
@@ -368,80 +397,87 @@ class CollectionDef(google.protobuf.message.Message):
     def float_list(self) -> global___CollectionDef.FloatList: ...
     @property
     def any_list(self) -> global___CollectionDef.AnyList: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        node_list: typing.Optional[global___CollectionDef.NodeList] = ...,
-        bytes_list: typing.Optional[global___CollectionDef.BytesList] = ...,
-        int64_list: typing.Optional[global___CollectionDef.Int64List] = ...,
-        float_list: typing.Optional[global___CollectionDef.FloatList] = ...,
-        any_list: typing.Optional[global___CollectionDef.AnyList] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["any_list",b"any_list","bytes_list",b"bytes_list","float_list",b"float_list","int64_list",b"int64_list","kind",b"kind","node_list",b"node_list"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["any_list",b"any_list","bytes_list",b"bytes_list","float_list",b"float_list","int64_list",b"int64_list","kind",b"kind","node_list",b"node_list"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["kind",b"kind"]) -> typing.Optional[typing_extensions.Literal["node_list","bytes_list","int64_list","float_list","any_list"]]: ...
+        node_list: global___CollectionDef.NodeList | None = ...,
+        bytes_list: global___CollectionDef.BytesList | None = ...,
+        int64_list: global___CollectionDef.Int64List | None = ...,
+        float_list: global___CollectionDef.FloatList | None = ...,
+        any_list: global___CollectionDef.AnyList | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["any_list", b"any_list", "bytes_list", b"bytes_list", "float_list", b"float_list", "int64_list", b"int64_list", "kind", b"kind", "node_list", b"node_list"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["any_list", b"any_list", "bytes_list", b"bytes_list", "float_list", b"float_list", "int64_list", b"int64_list", "kind", b"kind", "node_list", b"node_list"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["kind", b"kind"]) -> typing_extensions.Literal["node_list", "bytes_list", "int64_list", "float_list", "any_list"] | None: ...
+
 global___CollectionDef = CollectionDef
 
+@typing_extensions.final
 class TensorInfo(google.protobuf.message.Message):
     """Information about a Tensor necessary for feeding or retrieval."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class CooSparse(google.protobuf.message.Message):
         """For sparse tensors, The COO encoding stores a triple of values, indices,
         and shape.
         """
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VALUES_TENSOR_NAME_FIELD_NUMBER: builtins.int
         INDICES_TENSOR_NAME_FIELD_NUMBER: builtins.int
         DENSE_SHAPE_TENSOR_NAME_FIELD_NUMBER: builtins.int
-        values_tensor_name: typing.Text
+        values_tensor_name: builtins.str
         """The shape of the values Tensor is [?].  Its dtype must be the dtype of
         the SparseTensor as a whole, given in the enclosing TensorInfo.
         """
-
-        indices_tensor_name: typing.Text
+        indices_tensor_name: builtins.str
         """The indices Tensor must have dtype int64 and shape [?, ?]."""
-
-        dense_shape_tensor_name: typing.Text
+        dense_shape_tensor_name: builtins.str
         """The dynamic logical shape represented by the SparseTensor is recorded in
         the Tensor referenced here.  It must have dtype int64 and shape [?].
         """
-
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            values_tensor_name: typing.Text = ...,
-            indices_tensor_name: typing.Text = ...,
-            dense_shape_tensor_name: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["dense_shape_tensor_name",b"dense_shape_tensor_name","indices_tensor_name",b"indices_tensor_name","values_tensor_name",b"values_tensor_name"]) -> None: ...
+            values_tensor_name: builtins.str = ...,
+            indices_tensor_name: builtins.str = ...,
+            dense_shape_tensor_name: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["dense_shape_tensor_name", b"dense_shape_tensor_name", "indices_tensor_name", b"indices_tensor_name", "values_tensor_name", b"values_tensor_name"]) -> None: ...
 
+    @typing_extensions.final
     class CompositeTensor(google.protobuf.message.Message):
         """Generic encoding for composite tensors."""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         TYPE_SPEC_FIELD_NUMBER: builtins.int
         COMPONENTS_FIELD_NUMBER: builtins.int
         @property
         def type_spec(self) -> tensorflow.core.protobuf.struct_pb2.TypeSpecProto:
             """The serialized TypeSpec for the composite tensor."""
-            pass
         @property
         def components(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TensorInfo]:
             """A TensorInfo for each flattened component tensor."""
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            type_spec: typing.Optional[tensorflow.core.protobuf.struct_pb2.TypeSpecProto] = ...,
-            components: typing.Optional[typing.Iterable[global___TensorInfo]] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["type_spec",b"type_spec"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["components",b"components","type_spec",b"type_spec"]) -> None: ...
+            type_spec: tensorflow.core.protobuf.struct_pb2.TypeSpecProto | None = ...,
+            components: collections.abc.Iterable[global___TensorInfo] | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["type_spec", b"type_spec"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["components", b"components", "type_spec", b"type_spec"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     COO_SPARSE_FIELD_NUMBER: builtins.int
     COMPOSITE_TENSOR_FIELD_NUMBER: builtins.int
     DTYPE_FIELD_NUMBER: builtins.int
     TENSOR_SHAPE_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """For dense `Tensor`s, the name of the tensor in the graph."""
-
     @property
     def coo_sparse(self) -> global___TensorInfo.CooSparse:
         """There are many possible encodings of sparse matrices
@@ -449,11 +485,9 @@ class TensorInfo(google.protobuf.message.Message):
         uses only the COO encoding.  This is supported and documented in the
         SparseTensor Python class.
         """
-        pass
     @property
     def composite_tensor(self) -> global___TensorInfo.CompositeTensor:
         """Generic encoding for CompositeTensors."""
-        pass
     dtype: tensorflow.core.framework.types_pb2.DataType.ValueType
     @property
     def tensor_shape(self) -> tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto:
@@ -461,20 +495,22 @@ class TensorInfo(google.protobuf.message.Message):
         be known in advance.  In the case of a SparseTensor, this field describes
         the logical shape of the represented tensor (aka dense_shape).
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
-        coo_sparse: typing.Optional[global___TensorInfo.CooSparse] = ...,
-        composite_tensor: typing.Optional[global___TensorInfo.CompositeTensor] = ...,
+        name: builtins.str = ...,
+        coo_sparse: global___TensorInfo.CooSparse | None = ...,
+        composite_tensor: global___TensorInfo.CompositeTensor | None = ...,
         dtype: tensorflow.core.framework.types_pb2.DataType.ValueType = ...,
-        tensor_shape: typing.Optional[tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["composite_tensor",b"composite_tensor","coo_sparse",b"coo_sparse","encoding",b"encoding","name",b"name","tensor_shape",b"tensor_shape"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["composite_tensor",b"composite_tensor","coo_sparse",b"coo_sparse","dtype",b"dtype","encoding",b"encoding","name",b"name","tensor_shape",b"tensor_shape"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["encoding",b"encoding"]) -> typing.Optional[typing_extensions.Literal["name","coo_sparse","composite_tensor"]]: ...
+        tensor_shape: tensorflow.core.framework.tensor_shape_pb2.TensorShapeProto | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["composite_tensor", b"composite_tensor", "coo_sparse", b"coo_sparse", "encoding", b"encoding", "name", b"name", "tensor_shape", b"tensor_shape"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["composite_tensor", b"composite_tensor", "coo_sparse", b"coo_sparse", "dtype", b"dtype", "encoding", b"encoding", "name", b"name", "tensor_shape", b"tensor_shape"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["encoding", b"encoding"]) -> typing_extensions.Literal["name", "coo_sparse", "composite_tensor"] | None: ...
+
 global___TensorInfo = TensorInfo
 
+@typing_extensions.final
 class SignatureDef(google.protobuf.message.Message):
     """SignatureDef defines the signature of a computation supported by a TensorFlow
     graph.
@@ -534,49 +570,55 @@ class SignatureDef(google.protobuf.message.Message):
       ...
     }
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class InputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___TensorInfo: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___TensorInfo] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___TensorInfo | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class OutputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___TensorInfo: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___TensorInfo] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___TensorInfo | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     INPUTS_FIELD_NUMBER: builtins.int
     OUTPUTS_FIELD_NUMBER: builtins.int
     METHOD_NAME_FIELD_NUMBER: builtins.int
     @property
-    def inputs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___TensorInfo]:
+    def inputs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___TensorInfo]:
         """Named input parameters."""
-        pass
     @property
-    def outputs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___TensorInfo]:
+    def outputs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___TensorInfo]:
         """Named output parameters."""
-        pass
-    method_name: typing.Text
+    method_name: builtins.str
     """Extensible method_name information enabling third-party users to mark a
     SignatureDef as supporting a particular method. This enables producers and
     consumers of SignatureDefs, e.g. a model definition library and a serving
@@ -586,38 +628,42 @@ class SignatureDef(google.protobuf.message.Message):
     method_name. This is commonly used to support multi-headed computation,
     where a single graph computation may return multiple results.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        inputs: typing.Optional[typing.Mapping[typing.Text, global___TensorInfo]] = ...,
-        outputs: typing.Optional[typing.Mapping[typing.Text, global___TensorInfo]] = ...,
-        method_name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs",b"inputs","method_name",b"method_name","outputs",b"outputs"]) -> None: ...
+        inputs: collections.abc.Mapping[builtins.str, global___TensorInfo] | None = ...,
+        outputs: collections.abc.Mapping[builtins.str, global___TensorInfo] | None = ...,
+        method_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "method_name", b"method_name", "outputs", b"outputs"]) -> None: ...
+
 global___SignatureDef = SignatureDef
 
+@typing_extensions.final
 class AssetFileDef(google.protobuf.message.Message):
     """An asset file def for a single file or a set of sharded files with the same
     name.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     TENSOR_INFO_FIELD_NUMBER: builtins.int
     FILENAME_FIELD_NUMBER: builtins.int
     @property
     def tensor_info(self) -> global___TensorInfo:
         """The tensor to bind the asset filename to."""
-        pass
-    filename: typing.Text
+    filename: builtins.str
     """The filename within an assets directory. Note: does not include the path
     prefix, i.e. directories. For an asset at /tmp/path/vocab.txt, the filename
     would be "vocab.txt".
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        tensor_info: typing.Optional[global___TensorInfo] = ...,
-        filename: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["tensor_info",b"tensor_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filename",b"filename","tensor_info",b"tensor_info"]) -> None: ...
+        tensor_info: global___TensorInfo | None = ...,
+        filename: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["tensor_info", b"tensor_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["filename", b"filename", "tensor_info", b"tensor_info"]) -> None: ...
+
 global___AssetFileDef = AssetFileDef

@@ -5,42 +5,53 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class CriticalSectionDef(google.protobuf.message.Message):
     """Protocol buffer representing a CriticalSection."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    CRITICAL_SECTION_NAME_FIELD_NUMBER: builtins.int
-    critical_section_name: typing.Text
-    """Name of the critical section handle."""
 
-    def __init__(self,
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRITICAL_SECTION_NAME_FIELD_NUMBER: builtins.int
+    critical_section_name: builtins.str
+    """Name of the critical section handle."""
+    def __init__(
+        self,
         *,
-        critical_section_name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["critical_section_name",b"critical_section_name"]) -> None: ...
+        critical_section_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["critical_section_name", b"critical_section_name"]) -> None: ...
+
 global___CriticalSectionDef = CriticalSectionDef
 
+@typing_extensions.final
 class CriticalSectionExecutionDef(google.protobuf.message.Message):
     """Protocol buffer representing a CriticalSection execution."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     EXECUTE_IN_CRITICAL_SECTION_NAME_FIELD_NUMBER: builtins.int
     EXCLUSIVE_RESOURCE_ACCESS_FIELD_NUMBER: builtins.int
-    execute_in_critical_section_name: typing.Text
+    execute_in_critical_section_name: builtins.str
     """Name of the critical section handle."""
-
     exclusive_resource_access: builtins.bool
     """Whether this operation requires exclusive access to its resources,
     (i.e., no other CriticalSections may request the same resources).
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        execute_in_critical_section_name: typing.Text = ...,
+        execute_in_critical_section_name: builtins.str = ...,
         exclusive_resource_access: builtins.bool = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["exclusive_resource_access",b"exclusive_resource_access","execute_in_critical_section_name",b"execute_in_critical_section_name"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["exclusive_resource_access", b"exclusive_resource_access", "execute_in_critical_section_name", b"execute_in_critical_section_name"]) -> None: ...
+
 global___CriticalSectionExecutionDef = CriticalSectionExecutionDef

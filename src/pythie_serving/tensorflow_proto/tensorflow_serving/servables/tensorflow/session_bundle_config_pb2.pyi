@@ -3,36 +3,53 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
 import google.protobuf.wrappers_pb2
+import sys
 import tensorflow.core.protobuf.config_pb2
 import tensorflow.core.protobuf.named_tensor_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class ModelWarmupOptions(google.protobuf.message.Message):
     """Options related to model-warmup."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NUM_REQUEST_ITERATIONS_FIELD_NUMBER: builtins.int
+    NUM_MODEL_WARMUP_THREADS_FIELD_NUMBER: builtins.int
     @property
     def num_request_iterations(self) -> google.protobuf.wrappers_pb2.Int32Value:
         """Number of times a request is iterated during warmup replay. By default 1."""
-        pass
-    def __init__(self,
+    @property
+    def num_model_warmup_threads(self) -> google.protobuf.wrappers_pb2.Int32Value:
+        """The number of threads to parallel execute warm up queries. By default 1."""
+    def __init__(
+        self,
         *,
-        num_request_iterations: typing.Optional[google.protobuf.wrappers_pb2.Int32Value] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["num_request_iterations",b"num_request_iterations"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["num_request_iterations",b"num_request_iterations"]) -> None: ...
+        num_request_iterations: google.protobuf.wrappers_pb2.Int32Value | None = ...,
+        num_model_warmup_threads: google.protobuf.wrappers_pb2.Int32Value | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["num_model_warmup_threads", b"num_model_warmup_threads", "num_request_iterations", b"num_request_iterations"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["num_model_warmup_threads", b"num_model_warmup_threads", "num_request_iterations", b"num_request_iterations"]) -> None: ...
+
 global___ModelWarmupOptions = ModelWarmupOptions
 
+@typing_extensions.final
 class SessionBundleConfig(google.protobuf.message.Message):
     """Configuration parameters for a SessionBundle, with optional batching."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     SESSION_TARGET_FIELD_NUMBER: builtins.int
     SESSION_CONFIG_FIELD_NUMBER: builtins.int
     BATCHING_PARAMETERS_FIELD_NUMBER: builtins.int
@@ -49,7 +66,9 @@ class SessionBundleConfig(google.protobuf.message.Message):
     NUM_TFLITE_INTERPRETERS_FIELD_NUMBER: builtins.int
     NUM_TFLITE_INTERPRETERS_PER_POOL_FIELD_NUMBER: builtins.int
     NUM_TFLITE_POOLS_FIELD_NUMBER: builtins.int
-    session_target: typing.Text
+    WRAP_SESSION_WITH_NO_THREADING_PARAMS_FIELD_NUMBER: builtins.int
+    ENABLE_PER_MODEL_BATCHING_PARAMS_FIELD_NUMBER: builtins.int
+    session_target: builtins.str
     """The TensorFlow runtime to connect to.
     See full documentation in tensorflow/core/public/session_options.h.
 
@@ -57,13 +76,11 @@ class SessionBundleConfig(google.protobuf.message.Message):
     will configure the local TensorFlow runtime implementation. This provides
     the best isolation currently available across multiple Session servables.
     """
-
     @property
     def session_config(self) -> tensorflow.core.protobuf.config_pb2.ConfigProto:
         """TensorFlow Session configuration options.
         See details at tensorflow/core/protobuf/config.proto.
         """
-        pass
     @property
     def batching_parameters(self) -> global___BatchingParameters:
         """If set, each emitted session is wrapped with a layer that schedules Run()
@@ -80,7 +97,6 @@ class SessionBundleConfig(google.protobuf.message.Message):
         across multiple session servables emitted by this source adapter. A
         BatchSchedulerRetrier is added on top of each batching session.
         """
-        pass
     @property
     def session_run_load_threadpool_index(self) -> google.protobuf.wrappers_pb2.Int32Value:
         """If set, session run calls use a separate threadpool for restore and init
@@ -88,7 +104,6 @@ class SessionBundleConfig(google.protobuf.message.Message):
         correspond to the index of the tensorflow::ThreadPoolOptionProto defined as
         part of `session_config.session_inter_op_thread_pool`.
         """
-        pass
     experimental_transient_ram_bytes_during_load: builtins.int
     """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
@@ -99,23 +114,19 @@ class SessionBundleConfig(google.protobuf.message.Message):
     TODO(b/38376838): This is a temporary hack, and it applies to all models.
     Remove it once resource estimates are moved inside SavedModel.
     """
-
     @property
-    def saved_model_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def saved_model_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Set of SavedModel tags identifying the specific meta graph def to be
         loaded.
         """
-        pass
     @property
     def experimental_fixed_input_tensors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[tensorflow.core.protobuf.named_tensor_pb2.NamedTensorProto]:
         """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
         Input tensors to append to every Session::Run() call.
         """
-        pass
     enable_model_warmup: builtins.bool
     """Enables model warmup."""
-
     @property
     def model_warmup_options(self) -> global___ModelWarmupOptions: ...
     enable_session_metadata: builtins.bool
@@ -125,7 +136,6 @@ class SessionBundleConfig(google.protobuf.message.Message):
     consists of information like the model name, version, which can then be
     used by the TensorFlow runtime appropriately (for debugging, logging, etc).
     """
-
     remove_unused_fields_from_bundle_metagraph: builtins.bool
     """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
@@ -133,7 +143,6 @@ class SessionBundleConfig(google.protobuf.message.Message):
     This message is stored alongside the `Session` object. Removing unwanted
     fields helps reduce memory footprint.
     """
-
     prefer_tflite_model: builtins.bool
     """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
@@ -141,34 +150,46 @@ class SessionBundleConfig(google.protobuf.message.Message):
     directory, instead of the TensorFlow model from `saved_model.pb` file.
     If no TensorFlow Lite model found, fallback to TensorFlow model.
     """
-
     resource_estimation_uses_validation_result: builtins.bool
     """Tries to use infra validation result to estimate resource usage."""
-
     num_tflite_interpreters: builtins.int
     num_tflite_interpreters_per_pool: builtins.int
     """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
     Number of TFLite interpreters in an interpreter pool of TfLiteSession.
     """
-
     num_tflite_pools: builtins.int
     """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
     Number of TFLite interpreter pools in a TfLiteSession.
     """
+    wrap_session_with_no_threading_params: builtins.bool
+    """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
 
-    def __init__(self,
+    Use SessionWrapperIgnoreThreadPoolOptions instead.
+    """
+    enable_per_model_batching_params: builtins.bool
+    """EXPERIMENTAL. THIS FIELD MAY CHANGE OR GO AWAY. USE WITH CAUTION.
+
+    Enable per-model batching parameters (present in SavedModel). If this
+    option is enabled, model specific batching params (e.g. timeout, batch
+    sizes etc.) from `batching_parameters` field above are *ignored* and
+    instead the one in SavedModel directory are used. This field is only
+    used if batching is enabled (i.e. `batching_parameters` message above
+    is set).
+    """
+    def __init__(
+        self,
         *,
-        session_target: typing.Text = ...,
-        session_config: typing.Optional[tensorflow.core.protobuf.config_pb2.ConfigProto] = ...,
-        batching_parameters: typing.Optional[global___BatchingParameters] = ...,
-        session_run_load_threadpool_index: typing.Optional[google.protobuf.wrappers_pb2.Int32Value] = ...,
+        session_target: builtins.str = ...,
+        session_config: tensorflow.core.protobuf.config_pb2.ConfigProto | None = ...,
+        batching_parameters: global___BatchingParameters | None = ...,
+        session_run_load_threadpool_index: google.protobuf.wrappers_pb2.Int32Value | None = ...,
         experimental_transient_ram_bytes_during_load: builtins.int = ...,
-        saved_model_tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        experimental_fixed_input_tensors: typing.Optional[typing.Iterable[tensorflow.core.protobuf.named_tensor_pb2.NamedTensorProto]] = ...,
+        saved_model_tags: collections.abc.Iterable[builtins.str] | None = ...,
+        experimental_fixed_input_tensors: collections.abc.Iterable[tensorflow.core.protobuf.named_tensor_pb2.NamedTensorProto] | None = ...,
         enable_model_warmup: builtins.bool = ...,
-        model_warmup_options: typing.Optional[global___ModelWarmupOptions] = ...,
+        model_warmup_options: global___ModelWarmupOptions | None = ...,
         enable_session_metadata: builtins.bool = ...,
         remove_unused_fields_from_bundle_metagraph: builtins.bool = ...,
         prefer_tflite_model: builtins.bool = ...,
@@ -176,11 +197,15 @@ class SessionBundleConfig(google.protobuf.message.Message):
         num_tflite_interpreters: builtins.int = ...,
         num_tflite_interpreters_per_pool: builtins.int = ...,
         num_tflite_pools: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["batching_parameters",b"batching_parameters","model_warmup_options",b"model_warmup_options","session_config",b"session_config","session_run_load_threadpool_index",b"session_run_load_threadpool_index"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["batching_parameters",b"batching_parameters","enable_model_warmup",b"enable_model_warmup","enable_session_metadata",b"enable_session_metadata","experimental_fixed_input_tensors",b"experimental_fixed_input_tensors","experimental_transient_ram_bytes_during_load",b"experimental_transient_ram_bytes_during_load","model_warmup_options",b"model_warmup_options","num_tflite_interpreters",b"num_tflite_interpreters","num_tflite_interpreters_per_pool",b"num_tflite_interpreters_per_pool","num_tflite_pools",b"num_tflite_pools","prefer_tflite_model",b"prefer_tflite_model","remove_unused_fields_from_bundle_metagraph",b"remove_unused_fields_from_bundle_metagraph","resource_estimation_uses_validation_result",b"resource_estimation_uses_validation_result","saved_model_tags",b"saved_model_tags","session_config",b"session_config","session_run_load_threadpool_index",b"session_run_load_threadpool_index","session_target",b"session_target"]) -> None: ...
+        wrap_session_with_no_threading_params: builtins.bool = ...,
+        enable_per_model_batching_params: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["batching_parameters", b"batching_parameters", "model_warmup_options", b"model_warmup_options", "session_config", b"session_config", "session_run_load_threadpool_index", b"session_run_load_threadpool_index"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["batching_parameters", b"batching_parameters", "enable_model_warmup", b"enable_model_warmup", "enable_per_model_batching_params", b"enable_per_model_batching_params", "enable_session_metadata", b"enable_session_metadata", "experimental_fixed_input_tensors", b"experimental_fixed_input_tensors", "experimental_transient_ram_bytes_during_load", b"experimental_transient_ram_bytes_during_load", "model_warmup_options", b"model_warmup_options", "num_tflite_interpreters", b"num_tflite_interpreters", "num_tflite_interpreters_per_pool", b"num_tflite_interpreters_per_pool", "num_tflite_pools", b"num_tflite_pools", "prefer_tflite_model", b"prefer_tflite_model", "remove_unused_fields_from_bundle_metagraph", b"remove_unused_fields_from_bundle_metagraph", "resource_estimation_uses_validation_result", b"resource_estimation_uses_validation_result", "saved_model_tags", b"saved_model_tags", "session_config", b"session_config", "session_run_load_threadpool_index", b"session_run_load_threadpool_index", "session_target", b"session_target", "wrap_session_with_no_threading_params", b"wrap_session_with_no_threading_params"]) -> None: ...
+
 global___SessionBundleConfig = SessionBundleConfig
 
+@typing_extensions.final
 class BatchingParameters(google.protobuf.message.Message):
     """Batching parameters. Each individual parameter is optional. If omitted, the
     default value from the relevant batching config struct (SharedBatchScheduler
@@ -188,7 +213,9 @@ class BatchingParameters(google.protobuf.message.Message):
     SharedBatchScheduler options (see shared_batch_scheduler.h for more details
     about what each field means):
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     MAX_BATCH_SIZE_FIELD_NUMBER: builtins.int
     BATCH_TIMEOUT_MICROS_FIELD_NUMBER: builtins.int
     MAX_ENQUEUED_BATCHES_FIELD_NUMBER: builtins.int
@@ -205,7 +232,6 @@ class BatchingParameters(google.protobuf.message.Message):
         IMPORTANT: As discussed above, use 'max_batch_size * 2' client threads to
         achieve high throughput with batching.
         """
-        pass
     @property
     def batch_timeout_micros(self) -> google.protobuf.wrappers_pb2.Int64Value:
         """If a task has been enqueued for this amount of time (in microseconds), and
@@ -213,31 +239,26 @@ class BatchingParameters(google.protobuf.message.Message):
         enqueued tasks and assign the batch to the thread for processing, even if
         the batch's size is below 'max_batch_size'.
         """
-        pass
     @property
     def max_enqueued_batches(self) -> google.protobuf.wrappers_pb2.Int64Value:
         """The maximum length of the queue, in terms of the number of batches. (A
         batch that has been scheduled on a thread is considered to have been
         removed from the queue.)
         """
-        pass
     @property
     def num_batch_threads(self) -> google.protobuf.wrappers_pb2.Int64Value:
         """The number of threads to use to process batches.
         Must be >= 1, and should be tuned carefully.
         """
-        pass
     @property
     def thread_pool_name(self) -> google.protobuf.wrappers_pb2.StringValue:
         """The name to use for the pool of batch threads."""
-        pass
     @property
     def enable_large_batch_splitting(self) -> google.protobuf.wrappers_pb2.BoolValue:
         """If true, queue implementation would split one input batch task into
         subtasks (as specified by `split_input_task_func` below) and fit subtasks
         into different batches.
         """
-        pass
     @property
     def max_execution_batch_size(self) -> google.protobuf.wrappers_pb2.Int64Value:
         """The maximum size of each enqueued batch to be processed (i.e., in
@@ -248,7 +269,6 @@ class BatchingParameters(google.protobuf.message.Message):
         The scheduler may form batches of any size between 1 and this number
         (inclusive).
         """
-        pass
     @property
     def allowed_batch_sizes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """BatchingSession options (see batching_session.h):
@@ -258,22 +278,22 @@ class BatchingParameters(google.protobuf.message.Message):
          - The entries must be in increasing order.
          - The final entry must equal 'max_batch_size'.
         """
-        pass
     pad_variable_length_inputs: builtins.bool
     """Whether to pad variable-length inputs when a batch is formed."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        max_batch_size: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        batch_timeout_micros: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        max_enqueued_batches: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        num_batch_threads: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        thread_pool_name: typing.Optional[google.protobuf.wrappers_pb2.StringValue] = ...,
-        enable_large_batch_splitting: typing.Optional[google.protobuf.wrappers_pb2.BoolValue] = ...,
-        max_execution_batch_size: typing.Optional[google.protobuf.wrappers_pb2.Int64Value] = ...,
-        allowed_batch_sizes: typing.Optional[typing.Iterable[builtins.int]] = ...,
+        max_batch_size: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        batch_timeout_micros: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        max_enqueued_batches: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        num_batch_threads: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        thread_pool_name: google.protobuf.wrappers_pb2.StringValue | None = ...,
+        enable_large_batch_splitting: google.protobuf.wrappers_pb2.BoolValue | None = ...,
+        max_execution_batch_size: google.protobuf.wrappers_pb2.Int64Value | None = ...,
+        allowed_batch_sizes: collections.abc.Iterable[builtins.int] | None = ...,
         pad_variable_length_inputs: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["batch_timeout_micros",b"batch_timeout_micros","enable_large_batch_splitting",b"enable_large_batch_splitting","max_batch_size",b"max_batch_size","max_enqueued_batches",b"max_enqueued_batches","max_execution_batch_size",b"max_execution_batch_size","num_batch_threads",b"num_batch_threads","thread_pool_name",b"thread_pool_name"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allowed_batch_sizes",b"allowed_batch_sizes","batch_timeout_micros",b"batch_timeout_micros","enable_large_batch_splitting",b"enable_large_batch_splitting","max_batch_size",b"max_batch_size","max_enqueued_batches",b"max_enqueued_batches","max_execution_batch_size",b"max_execution_batch_size","num_batch_threads",b"num_batch_threads","pad_variable_length_inputs",b"pad_variable_length_inputs","thread_pool_name",b"thread_pool_name"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["batch_timeout_micros", b"batch_timeout_micros", "enable_large_batch_splitting", b"enable_large_batch_splitting", "max_batch_size", b"max_batch_size", "max_enqueued_batches", b"max_enqueued_batches", "max_execution_batch_size", b"max_execution_batch_size", "num_batch_threads", b"num_batch_threads", "thread_pool_name", b"thread_pool_name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["allowed_batch_sizes", b"allowed_batch_sizes", "batch_timeout_micros", b"batch_timeout_micros", "enable_large_batch_splitting", b"enable_large_batch_splitting", "max_batch_size", b"max_batch_size", "max_enqueued_batches", b"max_enqueued_batches", "max_execution_batch_size", b"max_execution_batch_size", "num_batch_threads", b"num_batch_threads", "pad_variable_length_inputs", b"pad_variable_length_inputs", "thread_pool_name", b"thread_pool_name"]) -> None: ...
+
 global___BatchingParameters = BatchingParameters

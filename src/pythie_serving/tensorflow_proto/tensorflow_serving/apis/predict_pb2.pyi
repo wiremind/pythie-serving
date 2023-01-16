@@ -3,36 +3,47 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.tensor_pb2
 import tensorflow_serving.apis.model_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class PredictRequest(google.protobuf.message.Message):
     """PredictRequest specifies which TensorFlow model to run, as well as
     how inputs are mapped to tensors and how outputs are filtered before
     returning to user.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class InputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     MODEL_SPEC_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
@@ -42,17 +53,15 @@ class PredictRequest(google.protobuf.message.Message):
         """Model Specification. If version is not specified, will use the latest
         (numerical) version.
         """
-        pass
     @property
-    def inputs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.tensor_pb2.TensorProto]:
+    def inputs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.tensor_pb2.TensorProto]:
         """Input tensors.
         Names of input tensor are alias names. The mapping from aliases to real
         input tensor names is stored in the SavedModel export as a prediction
         SignatureDef under the 'inputs' field.
         """
-        pass
     @property
-    def output_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def output_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Output filter.
         Names specified are alias names. The mapping from aliases to real output
         tensor names is stored in the SavedModel export as a prediction
@@ -61,50 +70,57 @@ class PredictRequest(google.protobuf.message.Message):
         exception that when none is specified, all tensors specified in the
         named signature will be run/fetched and returned.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        model_spec: typing.Optional[tensorflow_serving.apis.model_pb2.ModelSpec] = ...,
-        inputs: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        output_filter: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_spec",b"model_spec"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs",b"inputs","model_spec",b"model_spec","output_filter",b"output_filter"]) -> None: ...
+        model_spec: tensorflow_serving.apis.model_pb2.ModelSpec | None = ...,
+        inputs: collections.abc.Mapping[builtins.str, tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+        output_filter: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_spec", b"model_spec"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model_spec", b"model_spec", "output_filter", b"output_filter"]) -> None: ...
+
 global___PredictRequest = PredictRequest
 
+@typing_extensions.final
 class PredictResponse(google.protobuf.message.Message):
     """Response for PredictRequest on successful run."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class OutputsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> tensorflow.core.framework.tensor_pb2.TensorProto: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[tensorflow.core.framework.tensor_pb2.TensorProto] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: tensorflow.core.framework.tensor_pb2.TensorProto | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     MODEL_SPEC_FIELD_NUMBER: builtins.int
     OUTPUTS_FIELD_NUMBER: builtins.int
     @property
     def model_spec(self) -> tensorflow_serving.apis.model_pb2.ModelSpec:
         """Effective Model Specification used to process PredictRequest."""
-        pass
     @property
-    def outputs(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, tensorflow.core.framework.tensor_pb2.TensorProto]:
+    def outputs(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, tensorflow.core.framework.tensor_pb2.TensorProto]:
         """Output tensors."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        model_spec: typing.Optional[tensorflow_serving.apis.model_pb2.ModelSpec] = ...,
-        outputs: typing.Optional[typing.Mapping[typing.Text, tensorflow.core.framework.tensor_pb2.TensorProto]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_spec",b"model_spec"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_spec",b"model_spec","outputs",b"outputs"]) -> None: ...
+        model_spec: tensorflow_serving.apis.model_pb2.ModelSpec | None = ...,
+        outputs: collections.abc.Mapping[builtins.str, tensorflow.core.framework.tensor_pb2.TensorProto] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_spec", b"model_spec"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_spec", b"model_spec", "outputs", b"outputs"]) -> None: ...
+
 global___PredictResponse = PredictResponse

@@ -3,31 +3,42 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class Trace(google.protobuf.message.Message):
     """A 'Trace' contains metadata for the individual traces of a system."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class DevicesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___Device: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___Device] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___Device | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     DEVICES_FIELD_NUMBER: builtins.int
     TRACE_EVENTS_FIELD_NUMBER: builtins.int
@@ -36,104 +47,116 @@ class Trace(google.protobuf.message.Message):
         """The devices that this trace has information about. Maps from device_id to
         more data about the specific device.
         """
-        pass
     @property
     def trace_events(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TraceEvent]:
         """All trace events capturing in the profiling period."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        devices: typing.Optional[typing.Mapping[builtins.int, global___Device]] = ...,
-        trace_events: typing.Optional[typing.Iterable[global___TraceEvent]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["devices",b"devices","trace_events",b"trace_events"]) -> None: ...
+        devices: collections.abc.Mapping[builtins.int, global___Device] | None = ...,
+        trace_events: collections.abc.Iterable[global___TraceEvent] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["devices", b"devices", "trace_events", b"trace_events"]) -> None: ...
+
 global___Trace = Trace
 
+@typing_extensions.final
 class Device(google.protobuf.message.Message):
     """A 'device' is a physical entity in the system and is comprised of several
     resources.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class ResourcesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.int
         @property
         def value(self) -> global___Resource: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
             key: builtins.int = ...,
-            value: typing.Optional[global___Resource] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            value: global___Resource | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     DEVICE_ID_FIELD_NUMBER: builtins.int
     RESOURCES_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """The name of the device."""
-
     device_id: builtins.int
     """The id of this device, unique in a single trace."""
-
     @property
     def resources(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___Resource]:
         """The resources on this device, keyed by resource_id;"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         device_id: builtins.int = ...,
-        resources: typing.Optional[typing.Mapping[builtins.int, global___Resource]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["device_id",b"device_id","name",b"name","resources",b"resources"]) -> None: ...
+        resources: collections.abc.Mapping[builtins.int, global___Resource] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_id", b"device_id", "name", b"name", "resources", b"resources"]) -> None: ...
+
 global___Device = Device
 
+@typing_extensions.final
 class Resource(google.protobuf.message.Message):
     """A 'resource' generally is a specific computation component on a device. These
     can range from threads on CPUs to specific arithmetic units on hardware
     devices.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     NAME_FIELD_NUMBER: builtins.int
     RESOURCE_ID_FIELD_NUMBER: builtins.int
     SORT_INDEX_FIELD_NUMBER: builtins.int
-    name: typing.Text
+    name: builtins.str
     """The name of the resource."""
-
     resource_id: builtins.int
     """The id of the resource. Unique within a device."""
-
     sort_index: builtins.int
     """The sort index of the resource. Resources within a device are ordered by
     this value. if absent, use resource id as sort index.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         resource_id: builtins.int = ...,
         sort_index: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name",b"name","resource_id",b"resource_id","sort_index",b"sort_index"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "resource_id", b"resource_id", "sort_index", b"sort_index"]) -> None: ...
+
 global___Resource = Resource
 
+@typing_extensions.final
 class TraceEvent(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class ArgsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     DEVICE_ID_FIELD_NUMBER: builtins.int
     RESOURCE_ID_FIELD_NUMBER: builtins.int
@@ -145,37 +168,33 @@ class TraceEvent(google.protobuf.message.Message):
     """The id of the device that this event occurred on. The full dataset should
     have this device present in the Trace object.
     """
-
     resource_id: builtins.int
     """The id of the resource that this event occurred on. The full dataset should
     have this resource present in the Device object of the Trace object. A
     resource_id is unique on a specific device, but not necessarily within the
     trace.
     """
-
-    name: typing.Text
+    name: builtins.str
     """The name of this trace event."""
-
     timestamp_ps: builtins.int
     """The timestamp that this event occurred at (in picos since tracing started)."""
-
     duration_ps: builtins.int
     """The duration of the event in picoseconds if applicable.
     Events without duration are called instant events.
     """
-
     @property
-    def args(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def args(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
         """Extra arguments that will be displayed in trace view."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         device_id: builtins.int = ...,
         resource_id: builtins.int = ...,
-        name: typing.Text = ...,
+        name: builtins.str = ...,
         timestamp_ps: builtins.int = ...,
         duration_ps: builtins.int = ...,
-        args: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["args",b"args","device_id",b"device_id","duration_ps",b"duration_ps","name",b"name","resource_id",b"resource_id","timestamp_ps",b"timestamp_ps"]) -> None: ...
+        args: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["args", b"args", "device_id", b"device_id", "duration_ps", b"duration_ps", "name", b"name", "resource_id", b"resource_id", "timestamp_ps", b"timestamp_ps"]) -> None: ...
+
 global___TraceEvent = TraceEvent

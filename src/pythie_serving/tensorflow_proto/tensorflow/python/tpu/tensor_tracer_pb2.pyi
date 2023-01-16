@@ -3,15 +3,21 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
+import sys
 import tensorflow.core.framework.graph_pb2
-import typing
-import typing_extensions
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class TensorTracerReport(google.protobuf.message.Message):
     """Tensor Tracer Report proto gives information about the trace including:
     - TensorTracerConfig: version, device, num replicas, trace mode.
@@ -22,24 +28,31 @@ class TensorTracerReport(google.protobuf.message.Message):
        * Index of the tensor in the compact cache if traced.
        * Explanation for why the tensor is traced or not.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
     class TensordefEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         KEY_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
+        key: builtins.str
         @property
         def value(self) -> global___TensorTracerReport.TracedTensorDef: ...
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[global___TensorTracerReport.TracedTensorDef] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+            key: builtins.str = ...,
+            value: global___TensorTracerReport.TracedTensorDef | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
+    @typing_extensions.final
     class TensorTracerConfig(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
         VERSION_FIELD_NUMBER: builtins.int
         DEVICE_FIELD_NUMBER: builtins.int
         TRACE_MODE_FIELD_NUMBER: builtins.int
@@ -49,63 +62,129 @@ class TensorTracerReport(google.protobuf.message.Message):
         NUM_CORES_PER_HOST_FIELD_NUMBER: builtins.int
         INCLUDED_CORES_FIELD_NUMBER: builtins.int
         SIGNATURES_FIELD_NUMBER: builtins.int
-        version: typing.Text
+        version: builtins.str
         """Tensor tracer version, e.g. hostcall, outside compilation."""
-
-        device: typing.Text
+        device: builtins.str
         """Traced device, CPU, TPU..."""
-
-        trace_mode: typing.Text
+        trace_mode: builtins.str
         """Trace mode, norm, summary, full-trace."""
-
         num_cores: builtins.int
         """Number of cores, e.g. TPU cores, in the system."""
-
         num_hosts: builtins.int
         """Number of hosts, e.g. compute nodes in the system."""
-
-        submode: typing.Text
+        submode: builtins.str
         """Keep submode as string for backward compatibility."""
-
         num_cores_per_host: builtins.int
         """Keep num cores per host for backward compatibility."""
-
         @property
         def included_cores(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
             """Id of the included cores, if a subset of cores are traced."""
-            pass
         @property
-        def signatures(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        def signatures(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """The names of the signatures corresponding to the cache indices."""
-            pass
-        def __init__(self,
+        def __init__(
+            self,
             *,
-            version: typing.Text = ...,
-            device: typing.Text = ...,
-            trace_mode: typing.Text = ...,
+            version: builtins.str = ...,
+            device: builtins.str = ...,
+            trace_mode: builtins.str = ...,
             num_cores: builtins.int = ...,
             num_hosts: builtins.int = ...,
-            submode: typing.Text = ...,
+            submode: builtins.str = ...,
             num_cores_per_host: builtins.int = ...,
-            included_cores: typing.Optional[typing.Iterable[builtins.int]] = ...,
-            signatures: typing.Optional[typing.Iterable[typing.Text]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["device",b"device","included_cores",b"included_cores","num_cores",b"num_cores","num_cores_per_host",b"num_cores_per_host","num_hosts",b"num_hosts","signatures",b"signatures","submode",b"submode","trace_mode",b"trace_mode","version",b"version"]) -> None: ...
+            included_cores: collections.abc.Iterable[builtins.int] | None = ...,
+            signatures: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["device", b"device", "included_cores", b"included_cores", "num_cores", b"num_cores", "num_cores_per_host", b"num_cores_per_host", "num_hosts", b"num_hosts", "signatures", b"signatures", "submode", b"submode", "trace_mode", b"trace_mode", "version", b"version"]) -> None: ...
 
+    @typing_extensions.final
+    class TracingStats(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
+        class TracedTensorTypesEntry(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            KEY_FIELD_NUMBER: builtins.int
+            VALUE_FIELD_NUMBER: builtins.int
+            key: builtins.str
+            value: builtins.int
+            def __init__(
+                self,
+                *,
+                key: builtins.str = ...,
+                value: builtins.int = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+        TOTAL_TENSORS_FIELD_NUMBER: builtins.int
+        TRACED_TENSORS_FIELD_NUMBER: builtins.int
+        TRACED_TENSOR_TYPES_FIELD_NUMBER: builtins.int
+        ADDED_TENSORS_FIELD_NUMBER: builtins.int
+        total_tensors: builtins.int
+        """The total number of tensors in the function."""
+        traced_tensors: builtins.int
+        """The number of traced tensors in the function."""
+        @property
+        def traced_tensor_types(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.int]:
+            """Counts of traced tensors by op type."""
+        added_tensors: builtins.int
+        """The number of tensors added by Tensor Tracer."""
+        def __init__(
+            self,
+            *,
+            total_tensors: builtins.int = ...,
+            traced_tensors: builtins.int = ...,
+            traced_tensor_types: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
+            added_tensors: builtins.int = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["added_tensors", b"added_tensors", "total_tensors", b"total_tensors", "traced_tensor_types", b"traced_tensor_types", "traced_tensors", b"traced_tensors"]) -> None: ...
+
+    @typing_extensions.final
     class TracedTensorDef(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
+        class Stack(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            STACK_FN_NAMES_FIELD_NUMBER: builtins.int
+            STACK_LINES_FIELD_NUMBER: builtins.int
+            STACK_FILENAMES_FIELD_NUMBER: builtins.int
+            STACK_LINENOS_FIELD_NUMBER: builtins.int
+            @property
+            def stack_fn_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+                """Function names from stack"""
+            @property
+            def stack_lines(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+                """Line in stack"""
+            @property
+            def stack_filenames(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+                """Filenames from stack"""
+            @property
+            def stack_linenos(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+                """Line number in file from stack"""
+            def __init__(
+                self,
+                *,
+                stack_fn_names: collections.abc.Iterable[builtins.str] | None = ...,
+                stack_lines: collections.abc.Iterable[builtins.str] | None = ...,
+                stack_filenames: collections.abc.Iterable[builtins.str] | None = ...,
+                stack_linenos: collections.abc.Iterable[builtins.int] | None = ...,
+            ) -> None: ...
+            def ClearField(self, field_name: typing_extensions.Literal["stack_filenames", b"stack_filenames", "stack_fn_names", b"stack_fn_names", "stack_linenos", b"stack_linenos", "stack_lines", b"stack_lines"]) -> None: ...
+
         NAME_FIELD_NUMBER: builtins.int
         CACHE_INDEX_FIELD_NUMBER: builtins.int
         TRACE_POINT_NAME_FIELD_NUMBER: builtins.int
         IS_TRACED_FIELD_NUMBER: builtins.int
         EXPLANATION_FIELD_NUMBER: builtins.int
-        name: typing.Text
+        OP_STACK_INFO_FIELD_NUMBER: builtins.int
+        name: builtins.str
         """Name of the tensor as appears in tf graph."""
-
         cache_index: builtins.int
         """Cache index of the tensor. This may be different than topological index."""
-
-        trace_point_name: typing.Text
+        trace_point_name: builtins.str
         """If trace points are provided, corresponding tracepoint name of the
         tensor. Trace points are placed on the edges (tensors) in the tensorflow
         graph, and they force tensor tracer to trace the corresponding tensor.
@@ -118,49 +197,73 @@ class TensorTracerReport(google.protobuf.message.Message):
         arbitrary tensor names by providing the same trace point name for the
         tensors that are comparable.
         """
-
         is_traced: builtins.bool
         """Whether the tensor is traced or not."""
-
-        explanation: typing.Text
+        explanation: builtins.str
         """Detailed explanation why the tensor is traced or not."""
-
-        def __init__(self,
+        @property
+        def op_stack_info(self) -> global___TensorTracerReport.TracedTensorDef.Stack:
+            """Detailed stack of operation"""
+        def __init__(
+            self,
             *,
-            name: typing.Text = ...,
+            name: builtins.str = ...,
             cache_index: builtins.int = ...,
-            trace_point_name: typing.Text = ...,
+            trace_point_name: builtins.str = ...,
             is_traced: builtins.bool = ...,
-            explanation: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["cache_index",b"cache_index","explanation",b"explanation","is_traced",b"is_traced","name",b"name","trace_point_name",b"trace_point_name"]) -> None: ...
+            explanation: builtins.str = ...,
+            op_stack_info: global___TensorTracerReport.TracedTensorDef.Stack | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["op_stack_info", b"op_stack_info"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["cache_index", b"cache_index", "explanation", b"explanation", "is_traced", b"is_traced", "name", b"name", "op_stack_info", b"op_stack_info", "trace_point_name", b"trace_point_name"]) -> None: ...
 
     CONFIG_FIELD_NUMBER: builtins.int
     GRAPHDEF_FIELD_NUMBER: builtins.int
     TENSORDEF_FIELD_NUMBER: builtins.int
     FINGERPRINT_FIELD_NUMBER: builtins.int
+    CONCRETE_FUNCTION_NAME_FIELD_NUMBER: builtins.int
+    LAST_COMMON_FRAME_NO_FIELD_NUMBER: builtins.int
+    OUTPUTS_FIELD_NUMBER: builtins.int
+    TRACING_STATS_FIELD_NUMBER: builtins.int
     @property
     def config(self) -> global___TensorTracerReport.TensorTracerConfig: ...
     @property
     def graphdef(self) -> tensorflow.core.framework.graph_pb2.GraphDef:
         """Tensorflow graph."""
-        pass
     @property
-    def tensordef(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___TensorTracerReport.TracedTensorDef]:
+    def tensordef(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___TensorTracerReport.TracedTensorDef]:
         """A map from tensor name to its TracedTensorDef."""
-        pass
-    fingerprint: typing.Text
+    fingerprint: builtins.str
     """The fingerprint of the TensorTracerReport (fingerprint calculation excludes
     this field and graphdef).
     """
-
-    def __init__(self,
+    concrete_function_name: builtins.str
+    """The function_name passed to the function_callback
+    that produced this TensorTracerReport
+    """
+    last_common_frame_no: builtins.int
+    """The index of the last stack frame where the stack traces for all output
+    operations in the graph have the same value.
+    """
+    @property
+    def outputs(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of names of output tensors of the function being traced."""
+    @property
+    def tracing_stats(self) -> global___TensorTracerReport.TracingStats:
+        """Information about the number of tensors traced and skipped."""
+    def __init__(
+        self,
         *,
-        config: typing.Optional[global___TensorTracerReport.TensorTracerConfig] = ...,
-        graphdef: typing.Optional[tensorflow.core.framework.graph_pb2.GraphDef] = ...,
-        tensordef: typing.Optional[typing.Mapping[typing.Text, global___TensorTracerReport.TracedTensorDef]] = ...,
-        fingerprint: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config",b"config","graphdef",b"graphdef"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config",b"config","fingerprint",b"fingerprint","graphdef",b"graphdef","tensordef",b"tensordef"]) -> None: ...
+        config: global___TensorTracerReport.TensorTracerConfig | None = ...,
+        graphdef: tensorflow.core.framework.graph_pb2.GraphDef | None = ...,
+        tensordef: collections.abc.Mapping[builtins.str, global___TensorTracerReport.TracedTensorDef] | None = ...,
+        fingerprint: builtins.str = ...,
+        concrete_function_name: builtins.str = ...,
+        last_common_frame_no: builtins.int = ...,
+        outputs: collections.abc.Iterable[builtins.str] | None = ...,
+        tracing_stats: global___TensorTracerReport.TracingStats | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["config", b"config", "graphdef", b"graphdef", "tracing_stats", b"tracing_stats"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concrete_function_name", b"concrete_function_name", "config", b"config", "fingerprint", b"fingerprint", "graphdef", b"graphdef", "last_common_frame_no", b"last_common_frame_no", "outputs", b"outputs", "tensordef", b"tensordef", "tracing_stats", b"tracing_stats"]) -> None: ...
+
 global___TensorTracerReport = TensorTracerReport
