@@ -57,6 +57,7 @@ For a treelite served model:
 * `TREELINTE_BIND_THREADS`: Set to `0` to deactivate thread pinning. See https://treelite.readthedocs.io/en/latest/treelite-runtime-api.html
 For an LGBM served model:
 * `LGBM_NTHREAD`: Number of threads to use to compute predictions
+* `GRPC_SERVER_TIMEOUT`: Timeout at which server will stop and the pod will shut down in seconds.
 
 ### Docker
 

@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 from argparse import ArgumentParser
@@ -85,8 +86,16 @@ def run():
         maximum_concurrent_rpcs=maximum_concurrent_rpcs,
         port=ns.port,
     )
+
+    logger = logging.getLogger("pythie_serving")
+
     server.start()
-    server.wait_for_termination()
+
+    timeout = os.environ.get("GRPC_SERVER_TIMEOUT", None)
+    # wait _for_termination() returns True if a timeout was supplied and it was reached. False otherwise.
+    timeout_reached = server.wait_for_termination(timeout=float(timeout) if timeout is not None else None)
+    if timeout_reached:
+        logger.warning(f"Server shut down after timeout of {timeout}s was reached")
 
 
 if __name__ == "__main__":
