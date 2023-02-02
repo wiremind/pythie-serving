@@ -1,5 +1,9 @@
 # Pythie serving
 
+## 3.2.0
+## Change
+* Add a default value from metadata for table models
+
 ## 3.1.0
 ## Change
 * Add GRPC server timeout (in seconds) in var env `GRPC_SERVER_TIMEOUT`. Default to None. 

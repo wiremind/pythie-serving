@@ -1,5 +1,6 @@
 import csv
 import json
+from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
@@ -18,6 +19,18 @@ from .utils import get_csv_type
 
 class TablePredictionServiceServicer(AbstractPythieServingPredictionServiceServicer):
     model_file_extension = ".csv"
+
+    def _parse_extra_specs(self, metadata: dict[str, Any], table_type_mapping: dict[str, Any]) -> dict[str, Any] | None:
+        extra_specs = None
+        if "default_value" in metadata:
+            default_value = metadata["default_value"]
+            if type(default_value) != table_type_mapping[metadata["target_name"]]:
+                raise PythieServingException(
+                    f"Can't assign default_value {default_value} because it's type {type(default_value)} is "
+                    f"different from target type {table_type_mapping[metadata['target_name']]}"
+                )
+            extra_specs = {"default_value": default_value}
+        return extra_specs
 
     def _create_model_specs(self, model_config: ModelConfig) -> ModelSpecs:
 
@@ -44,13 +57,15 @@ class TablePredictionServiceServicer(AbstractPythieServingPredictionServiceServi
                 value = table_type_mapping[metadata["target_name"]](row[metadata["target_name"]])
                 table[key] = value
 
-        return {
-            "model": table,
-            "feature_names": metadata["feature_names"],
-            "nb_features": len(metadata["feature_names"]),
-            "samples_dtype": object,
-            "extra_specs": None,
-        }
+        extra_specs = self._parse_extra_specs(metadata, table_type_mapping)
+
+        return ModelSpecs(
+            model=table,
+            feature_names=metadata["feature_names"],
+            nb_features=len(metadata["feature_names"]),
+            samples_dtype=object,
+            extra_specs=extra_specs,
+        )
 
     def _predict(self, model_specs: ModelSpecs, samples: NDArray) -> NDArray:
 
@@ -59,10 +74,13 @@ class TablePredictionServiceServicer(AbstractPythieServingPredictionServiceServi
             try:
                 pred = model_specs["model"][tuple(feature_value for feature_value in sample)]
             except KeyError:
-                raise PythieServingException(
-                    f"No prediction found in table for given features: " f"{model_specs['feature_names']} = {sample}."
-                )
+                if model_specs["extra_specs"] is not None and "default_value" in model_specs["extra_specs"]:
+                    pred = model_specs["extra_specs"]["default_value"]
+                else:
+                    raise PythieServingException(
+                        f"No prediction found in table for given features: "
+                        f"{model_specs['feature_names']} = {sample}."
+                    )
 
             output[idx] = pred
-
         return output
