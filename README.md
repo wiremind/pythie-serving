@@ -15,11 +15,11 @@ https://github.com/tensorflow/serving/tree/master/tensorflow_serving/apis
 
 To do this,
 
-run "sh generate_pbs.sh X.Y.Z" (you should have an already created pew virtualenv using python3.10 called 'grpc-build'),
+run "sh generate_pbs.sh X.Y.Z" (you should have an already created pew virtualenv using python3.11 called 'grpc-build'),
 this will generate a working python package in ./tensorflow_proto from the tag version X.Y.Z of tensorflow repo
 you can then copy/paste this package inside src/pythie-serving/ and import it as you need.
 
-This will generate the necessary stubs for type-checking
+This will also generate the necessary stubs for type-checking
 
 > For Mac users: replace `sed` command in `generate_pbs.sh` by GNU sed (in order to prevent the creation of back files): `brew install gnu-sed` and replace `sed` by `gsed` in `generate_pbs.sh`.
 

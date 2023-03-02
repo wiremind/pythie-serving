@@ -24,6 +24,10 @@ mv /tmp/scratch/serving/tensorflow_serving /tmp/workspace/
 
 # Install prerequisite packages
 . ~/.virtualenvs/grpc-build/bin/activate
+# UNCOMMENT TO USE PYENV-VIRTUALENV
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# pyenv activate grpc-build
 pip install --upgrade pip protobuf grpcio grpcio-tools mypy-protobuf
 
 # Create the python package of pb2 interfaces
