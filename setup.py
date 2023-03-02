@@ -18,7 +18,7 @@ extras_require_test = [
     "flake8~=4.0.1",
     "flake8-mutable~=1.2.0",
     "mypy==0.991",
-    "mypy-protobuf~=3.2.0",
+    "mypy-protobuf~=3.4.0",
     "types-protobuf",
     "pyupgrade~=3.3.1",
 ]
@@ -26,6 +26,7 @@ extras_require_dev = [
     *extras_require_test,
     "treelite~=2.4",
     "pre-commit~=2.20.0",
+    "pip-tools~=6.12.3",
 ]
 
 setup(
@@ -42,8 +43,8 @@ setup(
     python_requires=">=3.10",
     install_requires=[
         "numpy~=1.23.0",
-        "grpcio~=1.30",
-        "protobuf~=3.12",
+        "grpcio~=1.51",
+        "protobuf~=4.22.0",
     ],
     # pip-compile setup.py --no-emit-index-url --upgrade --rebuild
     # pip-compile setup.py --no-emit-index-url --upgrade --extra serving -o pythie-serving-requirements.txt
