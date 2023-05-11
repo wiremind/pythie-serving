@@ -1,5 +1,6 @@
 import abc
 import logging
+import os
 import time
 from pathlib import Path
 from typing import Any, ClassVar, TypedDict
@@ -33,6 +34,7 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
 
     def __init__(self, *, model_server_config: ModelServerConfig):
         self.logger = logging.getLogger("pythie_serving")
+        self.verbose = bool(os.environ.get("VERBOSE", True))
 
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
@@ -78,11 +80,12 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
             self.logger.error(f"Failed to serve because: {e}")
             raise
         else:
-            duration = time.time() - start
-            self.logger.info(
-                f"Served model {request.model_spec.name}/{request.model_spec.signature_name}: "
-                f"{len(pred)} predictions in {duration:.2f} seconds ({len(pred) / duration:.2f} pred/sec) "
-            )
+            if self.verbose:
+                duration = time.time() - start
+                self.logger.info(
+                    f"Served model {request.model_spec.name}/{request.model_spec.signature_name}: "
+                    f"{len(pred)} predictions in {duration:.2f} seconds ({len(pred) / duration:.2f} pred/sec) "
+                )
             return predict_response
 
     @staticmethod
@@ -102,7 +105,6 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
         samples = np.empty((nb_samples, nb_features), model_specs["samples_dtype"])
 
         for i, feature_name in enumerate(features_names):
-
             if request_inputs[feature_name].tensor_shape.dim[0].size != nb_samples:
                 raise PythieServingException(f"{feature_name} has invalid length.")
 

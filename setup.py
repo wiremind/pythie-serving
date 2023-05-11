@@ -40,7 +40,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=True,
-    python_requires=">=3.10",
+    python_requires=">=3.11",
     install_requires=[
         "numpy~=1.23.0",
         "grpcio~=1.51",
@@ -60,7 +60,7 @@ setup(
         ]
     },
     classifiers=[
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3 :: Only",
         "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
     ],
