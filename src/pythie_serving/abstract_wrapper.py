@@ -34,7 +34,7 @@ class AbstractPythieServingPredictionServiceServicer(prediction_service_pb2_grpc
 
     def __init__(self, *, model_server_config: ModelServerConfig):
         self.logger = logging.getLogger("pythie_serving")
-        self.verbose = bool(os.environ.get("VERBOSITY_LEVEL", 1)) > 0
+        self.verbose = int(os.environ.get("VERBOSITY_LEVEL", 1)) > 0
 
         self.model_map = {}
         for model_config in model_server_config.model_config_list.config:
