@@ -4,9 +4,9 @@
 #
 #    pip-compile --no-emit-index-url setup.py
 #
-grpcio==1.51.1
+grpcio==1.57.0
     # via pythie-serving (setup.py)
 numpy==1.23.5
     # via pythie-serving (setup.py)
-protobuf==4.22.0
+protobuf==4.24.2
     # via pythie-serving (setup.py)
