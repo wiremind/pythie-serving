@@ -44,7 +44,7 @@ setup(
     install_requires=[
         "numpy~=1.23.0",
         "grpcio~=1.51",
-        "protobuf~=4.22.0",
+        "protobuf~=4.22",
     ],
     # pip-compile setup.py --no-emit-index-url --upgrade --rebuild
     # pip-compile setup.py --no-emit-index-url --upgrade --extra serving -o pythie-serving-requirements.txt
