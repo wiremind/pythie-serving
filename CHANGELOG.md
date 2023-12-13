@@ -1,34 +1,38 @@
 # Pythie serving
 
+## 3.4.4
+### Fix
+* Loosen `numpy` requirement
+
 ## 3.2.0
-## Change
+### Change
 * Add a default value from metadata for table models
 
 ## 3.1.0
-## Change
+### Change
 * Add GRPC server timeout (in seconds) in var env `GRPC_SERVER_TIMEOUT`. Default to None. 
 
 ## 3.0.0
-## Change
+### Change
 * Upgrade sklearn version to 1.2.0
 
 ### Breaking changes
 * Minimal python version required is now `3.10`
 
 ## 2.6.0
-## Change
+### Change
 * add new servicer for lgbm model outputting count per leaf instead of its target. The final value is an average of all counts from each tree
 
 ## 2.3.1
 
-## Change
+### Change
 * Sklearn wrapper: unpickle models using cloudpickle library to support models pickled with their module
 * Upgrade sklearn version to 1.1.0
 * Add black + isort to CI and pre-commit configuration.
 
 ## 2.3.0
 
-## Change
+### Change
 * Add support of CSV table, served as models
 * Refactor parsing + checks of PredictRequest content
 
