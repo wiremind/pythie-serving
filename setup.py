@@ -9,6 +9,10 @@ extras_require_serving = [
     "treelite_runtime~=2.2.2",
     "scikit-learn~=1.2.0",
     "cloudpickle~=2.1.0",
+    "opentelemetry-instrumentation-grpc~=0.38b0",
+    "opentelemetry-api>=1.17.0, <2.0",
+    "opentelemetry-sdk>=1.17.0, <2.0",
+    "opentelemetry-exporter-otlp>=1.17.0, <2.0",
 ]
 extras_require_test = [
     *extras_require_serving,

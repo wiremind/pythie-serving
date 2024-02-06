@@ -52,6 +52,7 @@ The following models can be served by pythie-serving:
    * `--port`: Port number to listen to.
 
 #### Environment variables
+* `OPENTELEMETRY_COLLECTOR_HOST`: OpenTelemetry Collector receiver endpoint. If not defined OpenTelemetry will not be activated. See https://opentelemetry.io/docs/what-is-opentelemetry for more details.
 For a treelite served model:
 * `TREELITE_NTHREAD`: Number of threads to use to compute predictions
 * `TREELINTE_BIND_THREADS`: Set to `0` to deactivate thread pinning. See https://treelite.readthedocs.io/en/latest/treelite-runtime-api.html
