@@ -4,10 +4,34 @@
 #
 #    pip-compile --extra=serving --no-emit-index-url --output-file=pythie-serving-requirements.txt setup.py
 #
+backoff==2.2.1
+    # via
+    #   opentelemetry-exporter-otlp-proto-common
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+certifi==2024.2.2
+    # via requests
+charset-normalizer==3.3.2
+    # via requests
 cloudpickle==2.1.0
     # via pythie-serving (setup.py)
+deprecated==1.2.14
+    # via
+    #   opentelemetry-api
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+googleapis-common-protos==1.62.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
 grpcio==1.51.1
-    # via pythie-serving (setup.py)
+    # via
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   pythie-serving (setup.py)
+idna==3.6
+    # via requests
+importlib-metadata==6.11.0
+    # via opentelemetry-api
 joblib==1.2.0
     # via scikit-learn
 lightgbm==3.3.4
@@ -20,8 +44,50 @@ numpy==1.23.5
     #   scipy
     #   treelite-runtime
     #   xgboost
-protobuf==4.22.0
+opentelemetry-api==1.22.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-instrumentation
+    #   opentelemetry-instrumentation-grpc
+    #   opentelemetry-sdk
+    #   pythie-serving (setup.py)
+opentelemetry-exporter-otlp==1.22.0
     # via pythie-serving (setup.py)
+opentelemetry-exporter-otlp-proto-common==1.22.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-grpc==1.22.0
+    # via opentelemetry-exporter-otlp
+opentelemetry-exporter-otlp-proto-http==1.22.0
+    # via opentelemetry-exporter-otlp
+opentelemetry-instrumentation==0.43b0
+    # via opentelemetry-instrumentation-grpc
+opentelemetry-instrumentation-grpc==0.43b0
+    # via pythie-serving (setup.py)
+opentelemetry-proto==1.22.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-common
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-sdk==1.22.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-grpc
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-instrumentation-grpc
+    #   pythie-serving (setup.py)
+opentelemetry-semantic-conventions==0.43b0
+    # via
+    #   opentelemetry-instrumentation-grpc
+    #   opentelemetry-sdk
+protobuf==4.22.0
+    # via
+    #   googleapis-common-protos
+    #   opentelemetry-proto
+    #   pythie-serving (setup.py)
+requests==2.31.0
+    # via opentelemetry-exporter-otlp-proto-http
 scikit-learn==1.2.0
     # via
     #   lightgbm
@@ -36,7 +102,21 @@ threadpoolctl==3.1.0
     # via scikit-learn
 treelite-runtime==2.2.2
     # via pythie-serving (setup.py)
+typing-extensions==4.9.0
+    # via opentelemetry-sdk
+urllib3==2.2.0
+    # via requests
 wheel==0.38.4
     # via lightgbm
+wrapt==1.16.0
+    # via
+    #   deprecated
+    #   opentelemetry-instrumentation
+    #   opentelemetry-instrumentation-grpc
 xgboost==0.90
     # via pythie-serving (setup.py)
+zipp==3.17.0
+    # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

@@ -5,11 +5,25 @@ from argparse import ArgumentParser
 from logging.config import dictConfig
 
 from google.protobuf import text_format
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
 from pythie_serving import create_grpc_server
 from pythie_serving.tensorflow_proto.tensorflow_serving.config import (
     model_server_config_pb2,
 )
+
+
+def initialize_opentelemetry():
+    otel_collector_host = str(os.environ.get("OPENTELEMETRY_COLLECTOR_HOST"))
+    if otel_collector_host is not None:
+        trace.set_tracer_provider(TracerProvider())
+        otlp_exporter = OTLPSpanExporter(endpoint=otel_collector_host, insecure=True)
+        trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(otlp_exporter))
+        GrpcInstrumentorServer().instrument()
 
 
 def run():
@@ -75,6 +89,8 @@ def run():
     model_server_config = model_server_config_pb2.ModelServerConfig()
     with open(ns.model_config_file_path) as opened_config_file:
         text_format.Parse(opened_config_file.read(), model_server_config)
+
+    initialize_opentelemetry()
 
     maximum_concurrent_rpcs = ns.maximum_concurrent_rpcs
     if maximum_concurrent_rpcs < 0:
