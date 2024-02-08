@@ -8,6 +8,7 @@ from google.protobuf import text_format
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
+from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
@@ -20,7 +21,7 @@ from pythie_serving.tensorflow_proto.tensorflow_serving.config import (
 def initialize_opentelemetry():
     otel_collector_host = str(os.environ.get("OPENTELEMETRY_COLLECTOR_HOST"))
     if otel_collector_host is not None:
-        trace.set_tracer_provider(TracerProvider())
+        trace.set_tracer_provider(TracerProvider(resource=Resource(attributes={"service.name": "pythie-serving"})))
         otlp_exporter = OTLPSpanExporter(endpoint=otel_collector_host, insecure=True)
         trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(otlp_exporter))
         GrpcInstrumentorServer().instrument()
