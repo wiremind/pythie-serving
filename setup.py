@@ -46,7 +46,7 @@ setup(
     zip_safe=True,
     python_requires=">=3.11",
     install_requires=[
-        "numpy~=1.23.0",
+        "numpy~=1.26.0",
         "grpcio~=1.51",
         "protobuf~=4.22",
     ],
