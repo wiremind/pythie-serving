@@ -1,3 +1,5 @@
+import os
+
 from setuptools import find_packages, setup
 
 with open("VERSION") as version_file:
@@ -33,10 +35,20 @@ extras_require_dev = [
     "pip-tools~=6.12.3",
 ]
 
+
+def rel(*xs):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *xs)
+
+
+with open(rel("README.md")) as f:
+    long_description = f.read()
+
 setup(
     name="pythie-serving",
     version=version,
     description="A GRPC server to serve model types using tensorflow-serving .proto services",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="wiremind data science team",
     author_email="data-science@wiremind.io",
     url="https://gitlab.cayzn.com/wiremind/data-science/pythie-neos.git",
