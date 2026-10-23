@@ -9,7 +9,7 @@ backoff==2.2.1
     #   opentelemetry-exporter-otlp-proto-common
     #   opentelemetry-exporter-otlp-proto-grpc
     #   opentelemetry-exporter-otlp-proto-http
-certifi==2024.2.2
+certifi==2026.10.19
     # via requests
 charset-normalizer==3.3.2
     # via requests
